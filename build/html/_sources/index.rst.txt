@@ -15,6 +15,7 @@ Welcome to Poseidon's documentation!!
    
 
    read/index
+   read/chapter3
 
 
 
