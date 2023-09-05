@@ -7,6 +7,7 @@
   <title>Welcome to Poseidon’s documentation!! &mdash; Poseidon 1 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/styles.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -32,6 +33,7 @@
           
           <a href="#" class="icon icon-home">
             Poseidon
+              <img src="_static/logop.png" class="logo" alt="Logo"/>
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
@@ -45,11 +47,6 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="Overview/introduction.html">Introduction to Features</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Overview/wide.html">Wide and universal privacy computing application scenarios</a></li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">Product parameters</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Productparameters/Port.html">Port Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Productparameters/Register.html">Register Configuration</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Poseidon, the Homomorphic Computing Library of &quot;Zhangjiang No.1&quot;</span></p>
 <ul>
@@ -91,23 +88,87 @@
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Product parameters</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="Productparameters/Port.html">Port Description</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Productparameters/Register.html">Register Configuration</a></li>
-</ul>
-</div>
-<div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Poseidon, the Homomorphic Computing Library of &quot;Zhangjiang No.1&quot;</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="HPU/CKKS.html">CKKS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="HPU/C/PA.html">Parameter Data Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HPU/C/API.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HPU/CKKS.html#parameter-data-structure">Parameter Data Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#memory-address-management-memorypool">1. Memory address management : MemoryPool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#parameter-class-of-the-ckks-encryption-scheme-ckksparametersliteraldefault">2. Parameter class of the CKKS encryption scheme : CKKSParametersLiteralDefault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#context-information-management-class-poseidoncontext">3. Context information management class : PoseidonContext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#generate-pseudo-random-numbers-class-blake2xbprngfactory">4. Generate pseudo-random numbers class : Blake2xbPRNGFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#plaintext-class-plaintext">5. Plaintext class : Plaintext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#ciphertext-class-ciphertext">6. Ciphertext class : Ciphertext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#public-key-class-publickey">7. Public key class : PublicKey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#relinearize-key-class-relinkeys">8. Relinearize key class : RelinKeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#galois-key-class-galoiskeys">9.   Galois key class : GaloisKeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#ckks-encryption-scheme-class-ckksencoder">10. CKKS encryption scheme  class : CKKSEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#plaintext-matrix-matrixplain">11. Plaintext matrix : MatrixPlain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#key-generation-class-keygenerator">12. Key generation class : KeyGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#encryption-class-encryptor">13. Encryption class : Encryptor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#decryption-class-decryptor">14. Decryption class : Decryptor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#envaluator-factory-class-envaluatorfactory">15.  Envaluator Factory  class : EnvaluatorFactory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="HPU/CKKS.html#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#addition-between-ciphertexts-add">1. Addition between ciphertexts : add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#addition-of-ciphertext-and-plaintext-add-plain">2. Addition of ciphertext and plaintext : add_plain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#subtraction-between-ciphertexts-sub">3. Subtraction between ciphertexts : sub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#multiplication-between-ciphertexts-multiply">4. Multiplication between ciphertexts : multiply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#multiplication-of-ciphertext-and-plaintext-multiply-plain">5. Multiplication of ciphertext and plaintext : multiply_plain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#rescale-rescale">6. Rescale : rescale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#ciphertext-rotation-rotate">7. Ciphertext rotation : rotate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#take-conjugate-conjugate">8. Take conjugate : conjugate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#matrix-multiplication-of-ciphertext-and-plaintext-multiplybydiagmatrixbsgs">9. Matrix multiplication of ciphertext and plaintext : multiplyByDiagMatrixBSGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#coefficient-to-plaintext-slot-coeff-to-slot">10. Coefficient to plaintext slot : coeff_to_slot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#plaintext-slot-to-coefficient-slot-to-coeff">11. Plaintext slot to coefficient : slot_to_coeff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#fast-fourier-transform-forward-ftt-fwd">12. Fast Fourier Transform (forward) : ftt_fwd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#fast-fourier-transform-inverse-ftt-inv">13. Fast Fourier Transform (inverse) : ftt_inv</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#read-ciphertext-information-from-accelerator-card-read">14. Read ciphertext information from accelerator card : read</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#multiplication-of-ciphertext-and-complex-constant-multiply-const">15. Multiplication of ciphertext and complex constant : multiply_const</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#addition-of-ciphertext-and-complex-constant-add-const">16. Addition of ciphertext and complex constant : add_const</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#discrete-fourier-transform-on-ciphertext-dft">17. Discrete Fourier Transform on ciphertext : dft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#dynamic-rescale-rescale-dynamic">18. Dynamic rescale : rescale_dynamic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#polynomial-evaluation-evaluatepolyvector">19. Polynomial evaluation : evaluatePolyVector</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#evaluate-modulo-on-ciphertext-vector-eval-mod">20. Evaluate modulo on ciphertext vector : eval_mod</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#bootstrap-bootstrap">21. Bootstrap : bootstrap</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/CKKS.html#key-switch-switch-key">22. Key switch : switch_key</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="HPU/BFV.html">BFV</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="HPU/B/PA.html">Parameter Data Structure</a></li>
-<li class="toctree-l2"><a class="reference internal" href="HPU/B/API.html">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="HPU/BFV.html#parameter-data-structure">Parameter Data Structure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#memory-address-management-memorypool">1. Memory address management : MemoryPool</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#parameter-class-of-the-bfv-encryption-scheme-bfvparametersliteraldefault">2. Parameter class of the BFV encryption scheme : BFVParametersLiteralDefault</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#context-information-management-class-poseidoncontext">3. Context information management class : PoseidonContext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#generate-pseudo-random-numbers-class-blake2xbprngfactory">4. Generate pseudo-random numbers class : Blake2xbPRNGFactory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#plaintext-class-plaintext">5. Plaintext class : Plaintext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-class-ciphertext">6. Ciphertext class : Ciphertext</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#public-key-class-publickey">7. Public key class : PublicKey</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#relinearize-key-class-relinkeys">8. Relinearize key class : RelinKeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#galois-key-class-galoiskeys">9. Galois key class : GaloisKeys</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#bfv-encryption-scheme-class-batchencoder">10. BFV encryption scheme  class : BatchEncoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#plaintext-matrix-matrixplain">11. Plaintext matrix : MatrixPlain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#key-generation-class-keygenerator">12. Key generation class : KeyGenerator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#encryption-class-encryptor">13. Encryption class : Encryptor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#decryption-class-decryptor">14. Decryption class ：Decryptor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#envaluator-factory-class-envaluatorfactory">15. Envaluator Factory  class ：EnvaluatorFactory</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="HPU/BFV.html#api">API</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-and-ciphertext-addition-add">1. Ciphertext and ciphertext addition : add</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-and-plaintext-addition-add-plain">2. Ciphertext and plaintext addition : add_plain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-and-ciphertext-subtraction-sub">3. Ciphertext and ciphertext subtraction : sub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-and-ciphertext-multiplication-multiply">4. Ciphertext and ciphertext multiplication : multiply</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-and-plaintext-multiplication-multiply-plain">5. Ciphertext and plaintext multiplication : multiply_plain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#rescaling-rescale">6. Rescaling : rescale</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-row-rotation-rotate-row">7. Ciphertext row rotation : rotate_row</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-column-rotation-rotate-col">8. Ciphertext column rotation : rotate_col</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#key-switching-switch-key">9. Key switching : switch_key</a></li>
+<li class="toctree-l3"><a class="reference internal" href="HPU/BFV.html#ciphertext-and-plaintext-matrix-multiplication-multiplybydiagmatrixbsgs">10. Ciphertext and plaintext matrix multiplication : multiplyByDiagMatrixBSGS</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="HPU/BFV.html#version">Version</a></li>
 </ul>
 </li>
 </ul>
