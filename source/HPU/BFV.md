@@ -10,49 +10,265 @@ Poseidon Supported parameter data structures：
 
 
 ### 1. Memory address management : MemoryPool
-**<font color='red'>MemoryPool</font>** (**DegreeType** degree_type);
+**<font color='red'><span id="MemoryPool">MemoryPool</span> </font>** (**DegreeType** degree_type)
 
 **Description**：MemoryPool is a class for managing addresses and memory space.
 
-**Parameter**：degree_type: DegreeType indicates the degree of a polynomial. 
+**Parameter**：
+- **degree_type**: DegreeType indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
 
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+**Member function**： 
+- **getInstance**(DegreeType degree_type) : The class used to create Memorypool.
 
-**Member function**： getInstance(DegreeType degree_type) : The class used to create Memorypool.
+
+
 
 ### 2. Parameter class of the BFV encryption scheme : BFVParametersLiteralDefault
 **<font color='red'>BFVParametersLiteralDefault</font>** (**DegreeType** degree_type);
 
 **Description**：BFVParametersLiteralDefault is a class used for initializing encryption parameters.
 
-**Parameter**：**degreeType**: Of type DegreeType, representing the degree of the polynomial.
+**Parameter**：
+- **degreeType**: Of type DegreeType, representing the degree of the polynomial.
 
 **Member function**： The member functions consist only of the constructor.
 
 ### 3. Context information management class : PoseidonContext
+**<font color='red'>PoseidonContext</font>** (const **ParametersLiteral**& paramLiteral)
+
+
+**Description**：PoseidonContext is a class used to generate and manage context information.
+
+
+**Parameter**：
+- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+
+**Member function**：
+- **paramLiteral**: ParametersLiteral,indicates the encryption parameter used to calculate context information.
+- const uint32_t **poly_degree**() : returns the degree of a polynomial.
+- const mpf_class **scaling_factor**(): const scaling_factor is returned.
+- void **set_random_generator**
+(std::shared_ptr< UniformRandomGeneratorFactory > random_generator) : Used to set up a random number generator.
+
+
+
+
 ### 4. Generate pseudo-random numbers class : Blake2xbPRNGFactory
+**<font color='red'>Blake2xbPRNGFactory </font>**();
+
+
+
+**Description**：Blake2xbPRNGFactory is a class for generating pseudorandom numbers.
+
+**Parameter**：null.
+
+**Member function**：Only constructors.
+
+
+
+
 ### 5. Plaintext class : Plaintext      
+**<font color='red'><span id="Plaintext">Plaintext</span> </font>**();
+
+**Description**：Plaintext is a class for storing plaintext information.
+
+**Parameter**：null.
+
+**Member function**：
+
+- **RNSPolynomial\* poly()**:const  Used to get a polynomial pointer.
+
+- **MetaData\* metaData()**: const A function that gets Pointers to metadata.
+
+- int **newMetaData**(const mpf\_class &scaling\_factor,bool isNTT,int level,int poly\_degree) : A function to create new metadata.
+
+- int **newPoly**(const PoseidonContext& context,int level): A function for creating a new polynomial.
+     
+
+
+
 ### 6. Ciphertext class : Ciphertext
+**<font color='red'><span id="Ciphertext">Ciphertext</span> </font>**();
+
+**Description**：Ciphertext is a class for storing ciphertext information.
+
+**Parameter**：null.
+
+**Member function**：
+
+- void **newPoly**(const PoseidonContext& context, int rns\_num\_q, int rns\_num\_p): A function for creating a new polynomial.
+
+- void **newMetaData**(const mpf\_class &scaling\_factor, bool isNTT, int level, int poly\_degree): A function to create new metadata.
+
+- bool **isValid()** const: Used to check whether the ciphertext polynomial is valid.
+
+- RNSPolynomial\* **c0()** const:The function used to get the first part of the polynomial pointer. 
+
+- RNSPolynomial\* **c1()** const: A function to get a pointer to the second part polynomial.
+
+- MetaData\* **metaData()** const: A function that gets Pointers to metadata.
+
+
+
+
 ### 7. Public key class : PublicKey
+**<font color='red'><span id="PublicKey">PublicKey</span> </font>**();
+
+**Description**：PublicKey is a class for storing public key information.
+
+**Parameter**：null.
+
+**Member function**：
+
+- inline Ciphertext **data()** const noexcept: The function used to get the key.
+
+
+
+
 ### 8. Relinearize key class : RelinKeys
+**<font color='red'><span id="RelinKeys">RelinKeys</span> </font>**();
+
+**Description**：RelinKeys is a class for storing relinearized key information.
+ ();
+
+**Parameter**：null.
+
+**Member function**：
+- inline std::size\_t **size()** const noexcept: The function used to get the number of keys.
+
+- inline auto **&data()** noexcept：A function used to get the address of the key data.
+
+
+
+
 ### 9. Galois key class : GaloisKeys
+**<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**();
+
+**Description**：GaloisKeys is a class for storing Galoiskeys information.
+
+**Parameter**：null.
+
+**Member function**： 
+
+- static inline std::**size\_t get\_index**(std::uint32\_t galois\_elt):A function used to obtain the corresponding index of a Galois element.
+
+- inline bool **has\_key**(std::uint32\_t galois\_elt) const:
+
+
+
+
 ### 10. BFV encryption scheme  class : BatchEncoder
 **<font color='red'>BatchEncoder</font>** (const **PoseidonContext**& params);
 
 **Description**：BatchEncoder is a class used for encoding and decoding in the BFV encryption scheme.<br>
 
-**Parameter**：**paramLiteral**: Of type ParametersLiteral, representing the encryption parameters used for computing context information.<br>
+**Parameter**：
+- **paramLiteral**: Of type ParametersLiteral, representing the encryption parameters used for computing context information.<br>
 
-**Member function**： int **encode**(vector<complex<double>> vec, Plaintext &plain, const mpf_class scaling_factor):
-A function used to encode a complex number vector into a plaintext polynomial.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8195;​&#8195;​&#8195;​&#8195;​​&#8194;​​&#8194;&#8201; int **decode**(const Plaintext &plain, vector<complex<double>>& vec): 
+**Member function**： 
+- int **encode**(vector<complex<double>> vec, Plaintext &plain, const mpf_class scaling_factor):
+A function used to encode a complex number vector into a plaintext polynomial.
+- int **decode**(const Plaintext &plain, vector<complex<double>>& vec): 
 A function used to decode a plaintext polynomial into a complex number vector.
 
 ### 11. Plaintext matrix : MatrixPlain
+**<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**();
+
+**Description**：MatrixPlain is a class for storing plaintext matrix information.
+
+**Parameter**：null.
+
+**Member function**： 
+
+- **LogSlots**: Indicates the logarithm to 2 of the number of matrix elements.
+
+- **N1**: Indicates the number of rows in a matrix.
+
+- **level**: Indicates the level of the ciphertext module chain in which the matrix resides.
+
+- **scale**: Indicates the scaling factor of the matrix.
+
+- **rot\_index**:Indicates the rotation index of a matrix element in a polynomial.
+
+- **plain\_vec**:Indicates the polynomial corresponding to the matrix elements.
+
+
+
+
+
 ### 12. Key generation class : KeyGenerator
+**<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**(const PoseidonContext& params);
+
+**Description**：KeyGenerator is a class for generating keys.
+
+**Parameter**：
+- **paramLiteral**: ParametersLiteral, which indicates the encryption parameter used to calculate context information.
+
+**Member function**：
+
+- inline void **create\_public\_key**(PublicKey &destination) const:A function for creating a public key. 
+
+- inline void **create\_relin\_keys**(RelinKeys &destination):A function to create a relinearized key.
+
+- inline void **create\_galois\_keys**(const std::vector<int> &steps, GaloisKeys&destination):A function used to create a rotation key based on a given rotation step vector.
+
+- inline void **create\_conj\_keys**(GaloisKeys &destination): A function used to create a conjugate rotation key.
+
+
+
+
+
 ### 13. Encryption class : Encryptor
+**<font color='red'><span id="Encryptor">Encryptor</span> </font>**(const PoseidonContext &context, const SecretKey &secret\_key);
+
+**Description**：Encryptor is a class used to encrypt plaintext.
+
+**Parameter**：
+
+- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+
+- **secret\_key**：SecretKey，Indicates the key involved in the encryption operation.
+
+**Member function**：
+- void **encrypt**(const Plaintext &plain, Ciphertext &destination) const：A function used to encrypt plaintext.
+
+
+
+
+
 ### 14. Decryption class ：Decryptor
+**<font color='red'><span id="Decryptor">Decryptor</span> </font>**(const PoseidonContext &context, const SecretKey &secret\_key);
+
+**Description**：Decryptor is a class for decrypting plaintext.
+
+**Parameter**：
+
+- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+
+- **secret\_key**：SecretKey，Indicates the key involved in the encryption operation.
+
+**Member function**：
+
+- void **decrypt** (const Plaintext &plain, Ciphertext &destination) const：A function used to decrypt the plaintext.
+
+
+
+
 ### 15. Envaluator Factory  class ：EnvaluatorFactory
+**<font color='red'><span id="EnvaluatorFactory">EnvaluatorFactory</span> </font>**();
+
+**Description**：EnvaluatorFactory is a class used to create the Poseidon algorithm library.
+
+**Parameter**：null.
+
+**Member function**： 
+
+- auto **create**(const PoseidonContext &context) ->std::shared\_ptr< Envaluator >: A function used to create an Envaluator object based on the given PoseidonContext object can select the adopted full-homomorphic encryption algorithms such as BFV, CKKS, and their corresponding hardware or software libraries. The specific algorithm support is detailed in the next section.  
+
+
+
+
+
 
 ## API
 ### 1. Ciphertext and ciphertext addition : add
@@ -60,9 +276,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function performs homomorphic addition on two ciphertexts.<br>
 
-**Parameter**：**ciph1**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **ciph2**: A reference to a **Ciphertext** object, representing another ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.
+**Parameter**：
+- **ciph1**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **ciph2**: A reference to a **Ciphertext** object, representing another ciphertext.<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -71,9 +288,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function performs homomorphic addition between a ciphertext and a plaintext.<br>
 
-**Parameter**：**ciph1**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **plain**: A reference to a **Plaintext** object, representing a plaintext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.
+**Parameter**：
+- **ciph1**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain**: A reference to a **Plaintext** object, representing a plaintext.<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -82,9 +300,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function performs homomorphic subtraction between two ciphertexts.<br>
 
-**Parameter**：**ciph1**:  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **ciph2**: A reference to a **Ciphertext** object, representing the subtrahend (the number to be subtracted).<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.
+**Parameter**：
+- **ciph1**:  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).<br>
+- **ciph2**: A reference to a **Ciphertext** object, representing the subtrahend (the number to be subtracted).<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -93,10 +312,11 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
 
-**Parameter**：**ciph1**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **ciph2**: A reference to a **Ciphertext** object, representing another ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **relin_key**: A constant reference to a **RelinKeys** object, representing the relinearization key.
+**Parameter**：
+- **ciph1**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **ciph2**: A reference to a **Ciphertext** object, representing another ciphertext.<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **relin_key**: A constant reference to a **RelinKeys** object, representing the relinearization key.
 
 
 
@@ -105,10 +325,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
 
-**Parameter**：**ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **plain**: A reference to a **Plaintext** object, representing a plaintext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-
+**Parameter**：
+- **ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain**: A reference to a **Plaintext** object, representing a plaintext.<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
 
 
 
@@ -117,7 +337,8 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function performs a rescaling operation on a ciphertext.<br>
 
-**Parameter**：**ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+**Parameter**：
+- **ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
 
 
 
@@ -126,9 +347,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function is used to perform a column rotation operation on a ciphertext.<br>
 
-**Parameter**：**encrypted**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **galois_keys**: A constant reference to a **GaloisKeys** object, representing the encryption keys used for row rotation.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **destination**: A reference to a **Ciphertext** object, used to store the ciphertext after rotation.
+**Parameter**：
+- **encrypted**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **galois_keys**: A constant reference to a **GaloisKeys** object, representing the encryption keys used for row rotation.<br>
+- **destination**: A reference to a **Ciphertext** object, used to store the ciphertext after rotation.
 
 
 
@@ -137,8 +359,9 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function is used to perform a row rotation operation on a ciphertext.<br>
 
-**Parameter**：**encrypted**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **rot_step**: An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.<br>
+**Parameter**：
+- **encrypted**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **rot_step**: An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.<br>
 
 
 
@@ -147,9 +370,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function switches the key of a ciphertext.<br>
 
-**Parameter**：**encrypted**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **switch_key**:  A constant reference to a vector of **PublicKey** objects, representing a given set of public keys.
+**Parameter**：
+- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **switch_key**:  A constant reference to a vector of **PublicKey** objects, representing a given set of public keys.
 
 
 
@@ -158,32 +382,10 @@ A function used to decode a plaintext polynomial into a complex number vector.
 
 **Description**：This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
 
-**Parameter**：**encrypted**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **plain_mat**:  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-​&#8195;​&#8195; ​&#8195; ​&#8195; ​&#8195; ​&#8194; **rot_key**:   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
+**Parameter**：
+- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain_mat**:  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
+- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **rot_key**:   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
 
-
-## Version
-<table>
-    <tr>
-        <th colspan="2" style=" text-align:center; vertical-align:middle;height:40px;">Version Update History:</th>
-    </tr>
-    <tr>
-        <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;">2022.12.01</td>
-        <td style="width:1300px; text-align:center; vertical-align:middle;">First version created</td>
-    </tr>
-        <tr>
-        <td style="text-align:center; vertical-align:middle; height:40px;">2023.04.01</td>
-        <td style="text-align:center; vertical-align:middle;">Updated CKKS API</td>
-    </tr>
-    <tr>
-        <td style="text-align:center; vertical-align:middle; height:40px;">2023.06.01 </td>
-        <td style="text-align:center; vertical-align:middle;">Second version created</td>
-    </tr>
-    <tr>
-        <td style="text-align:center; vertical-align:middle; height:40px;">2023.07.01 </td>
-        <td style="text-align:center; vertical-align:middle;">Updated BFV API</td>
-    </tr>
-</table>
 

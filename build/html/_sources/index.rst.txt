@@ -20,6 +20,7 @@ Welcome to Poseidon's documentation!!
 
    HPU/CKKS
    HPU/BFV
+   HPU/VER
 
 
 
