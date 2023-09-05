@@ -15,19 +15,7 @@ Welcome to Poseidon's documentation!!
    Overview/wide
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Product parameters
-
-   Productparameters/Port
-   Productparameters/Register
-
-
-
-
-
-
-.. toctree::
-   :maxdepth: 2
+   :maxdepth: 4
    :caption: Poseidon, the Homomorphic Computing Library of "Zhangjiang No.1"
 
    HPU/CKKS
@@ -35,18 +23,5 @@ Welcome to Poseidon's documentation!!
 
 
 
-.. Poseidon, the Homomorphic Computing Library of "Zhangjiang No.1"
-.. -----------------------------------------------------------------
-
-.. This is the additional sentence you want to add without a link.
-
-
-..    :hidden:
-
-..    Productparameters/Port
-..    Productparameters/Register
-
-.. .. include:: Productparameters/Port.rst
-.. .. include:: Productparameters/Register.rst
 
 
