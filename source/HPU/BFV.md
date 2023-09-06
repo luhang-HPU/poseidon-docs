@@ -198,7 +198,7 @@ static inline std::size_t get_index(std::uint32_t galois_elt);
 : A function used to obtain the corresponding index of a Galois element.
 
 ```c++
-inline bool has_key(std::uint32_t galois\_elt) const;
+inline bool has_key(std::uint32_t galois_elt) const;
 ```
 : A function used to determine whether a given Galois element exists.
 
