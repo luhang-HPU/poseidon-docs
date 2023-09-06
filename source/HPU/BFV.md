@@ -15,7 +15,7 @@ Poseidon Supported parameter data structures：
 **Description**：MemoryPool is a class for managing addresses and memory space.
 
 **Parameters**：
-- **degree_type**: DegreeType indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+- **degree_type**: Indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
 
 **Functions**： 
 ```c++
@@ -31,7 +31,7 @@ getInstance(DegreeType degree_type);
 **Description**：BFVParametersLiteralDefault is a class used for initializing encryption parameters.
 
 **Parameters**：
-- **degreeType**: Of type DegreeType, representing the degree of the polynomial.
+- **degreeType**: Represents the degree of the polynomial.
 
 **Functions**： The functions consist only of the constructor.
 
@@ -43,7 +43,7 @@ getInstance(DegreeType degree_type);
 
 
 **Parameters**：
-- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -210,7 +210,7 @@ inline bool has_key(std::uint32_t galois_elt) const;
 **Description**：BatchEncoder is a class used for encoding and decoding in the BFV encryption scheme.<br>
 
 **Parameters**：
-- **paramLiteral**: Of type ParametersLiteral, representing the encryption parameters used for computing context information.<br>
+- **paramLiteral**: Represents the encryption parameters used for computing context information.<br>
 
 **Functions**：
 ```c++
@@ -251,7 +251,7 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 **Description**：KeyGenerator is a class for generating keys.
 
 **Parameters**：
-- **paramLiteral**: ParametersLiteral, which indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -285,9 +285,9 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 **Parameters**：
 
-- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key**：SecretKey，Indicates the key involved in the encryption operation.
+- **secret\_key**：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
@@ -306,9 +306,9 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 **Parameters**：
 
-- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key**：SecretKey，Indicates the key involved in the encryption operation.
+- **secret\_key**：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
