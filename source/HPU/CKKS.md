@@ -14,7 +14,7 @@ Poseidon Supported parameter data structures：
 **Description**： MemoryPool is a class for managing addresses and memory space.
 
 **Parameters**：
-- **degree_type**: DegreeType indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+- **degree_type**: Indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
 
 **Functions**： 
 ```c++
@@ -29,15 +29,15 @@ getInstance(DegreeType degree_type);
 
 **Parameters**：
 - **degreeType**: Indicates the degree of a polynomial.
-- **Type**: SchemeType indicates the type of the encryption scheme.
-- **LogN**: uint32_t  indicates the logarithm of the ring degree. 
-- **LogSlots**: uint32_t  indicates the logarithm of slots. 
-- **LogQ**: vector<uint32_t>  indicates the logarithm of the modulus of the ciphertext prime number. 
-- **LogP**: vector<uint32_t>  indicates the logarithm of the modulus of the key switching auxiliary prime. 
-- **LogScale**: The value is uint32_t, which indicates the logarithm of the scaling factor. 
-- **H**: uint32_t, which indicates the weight of Hamming. 
-- **T**: The value is uint32_t, which indicates the plaintext modulus
-- **q0_level**: int indicates the level of q0.
+- **Type**: Indicates the type of the encryption scheme.
+- **LogN**: Indicates the logarithm of the ring degree. 
+- **LogSlots**: Indicates the logarithm of slots. 
+- **LogQ**: Indicates the logarithm of the modulus of the ciphertext prime number. 
+- **LogP**: Indicates the logarithm of the modulus of the key switching auxiliary prime. 
+- **LogScale**: Indicates the logarithm of the scaling factor. 
+- **H**: Indicates the weight of Hamming. 
+- **T**: Indicates the plaintext modulus
+- **q0_level**: Indicates the level of q0.
 
 **Functions**：Only constructors.
 
@@ -51,7 +51,7 @@ getInstance(DegreeType degree_type);
 
 
 **Parameters**：
-- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -186,12 +186,12 @@ inline std::size_t size() const noexcept;
 
 ```c++
 inline auto &data() noexcept;
-```
+``` add
 : The function is used to get the address of the key data.
 
 
 
-### 9.   Galois key class : GaloisKeys
+### 9. Galois key class : GaloisKeys
 **<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**();
 
 **Description**：GaloisKeys is a class for storing Galoiskeys information.
@@ -216,7 +216,7 @@ inline bool has_key(std::uint32_t galois_elt) const;
 **Description**： CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
 **Parameters**：
-- **paramLiteral**: ParametersLiteral,indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -257,7 +257,7 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 **Description**： KeyGenerator is a class for generating keys.
 
 **Parameters**：
-- **paramLiteral**: ParametersLiteral, which indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -290,9 +290,9 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 **Parameters**：
 
-- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key**：SecretKey，Indicates the key involved in the encryption operation.
+- **secret\_key**：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
@@ -309,9 +309,9 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 **Parameters**：
 
-- **paramLiteral**: ParametersLiteral, indicates the encryption parameter used to calculate context information.
+- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key**：SecretKey，Indicates the key involved in the encryption operation.
+- **secret\_key**：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
