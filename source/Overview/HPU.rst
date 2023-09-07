@@ -7,3 +7,6 @@ The performance of ZJ-1 is listed in the following table. It is evaluated using 
 
 
 Currently, ZJ-1 serves as the FPGA-based accelerator card. We believe that the performance is supposed to be boosted up to 1 magnitude if the subsequent ASIC is successfully taped out. 
+
+
+SHIC
