@@ -1,8 +1,3 @@
-.. Poseidon documentation master file, created by
-   sphinx-quickstart on Mon Sep  4 13:45:22 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-   
 =====================================
 Welcome to Poseidon's documentation!!
 =====================================
@@ -11,18 +6,15 @@ Welcome to Poseidon's documentation!!
    :maxdepth: 1
    :caption: Overview
 
-   Overview/introduction
-   Overview/wide
+   Overview/Poseidon_Basics
+   Overview/HPU
 
 .. toctree::
    :maxdepth: 4
-   :caption: Poseidon, the Homomorphic Computing Library of "Zhangjiang No.1"
+   :caption: Getting Started
 
-   HPU/CKKS
-   HPU/BFV
-   HPU/VER
-
-
-
+   Getting_Started/CKKS
+   Getting_Started/BFV
+.. Getting_Started/VER
 
 
