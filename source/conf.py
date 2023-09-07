@@ -31,4 +31,4 @@ html_css_files = [
     'styles.css',
 ]
 
-html_logo = '_static/logoR.png'
+html_logo = '_static/LogoR.png'
