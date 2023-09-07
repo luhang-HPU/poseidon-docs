@@ -7,4 +7,3 @@
 Wide and universal privacy computing application scenarios
 ==========================================================
 
-SHIC
