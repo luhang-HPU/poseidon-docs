@@ -13,8 +13,8 @@ Poseidon Supported parameter data structures：
 
 **Description**：MemoryPool is a class for managing addresses and memory space.
 
-**Parameters**：
-- **degree_type (DegreeType)**: Indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+**Members**：
+- **degree_type (DegreeType)**: Indicates the degree of a polynomial. Default: degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
 
 **Functions**： 
 ```c++
@@ -29,7 +29,7 @@ getInstance(DegreeType degree_type);
 
 **Description**：BFVParametersLiteralDefault is a class used for initializing encryption parameters.
 
-**Parameters**：
+**Members**：
 - **degreeType (DegreeType)**: Represents the degree of the polynomial.
 
 **Functions**： The functions consist only of the constructor.
@@ -40,7 +40,7 @@ getInstance(DegreeType degree_type);
 **Description**：PoseidonContext is a class used to generate and manage context information.
 
 
-**Parameters**：
+**Members**：
 - **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
@@ -66,7 +66,7 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 
 **Description**：Blake2xbPRNGFactory is a class for generating pseudorandom numbers.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：Only constructors.
 
@@ -77,7 +77,7 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 
 **Description**：Plaintext is a class for storing plaintext information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -106,7 +106,7 @@ int newPoly(const PoseidonContext& context,int level);
 
 **Description**：Ciphertext is a class for storing ciphertext information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -146,7 +146,7 @@ MetaData* metaData() const;
 
 **Description**：PublicKey is a class for storing public key information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -162,7 +162,7 @@ inline Ciphertext data() const noexcept;
 **Description**：RelinKeys is a class for storing relinearized key information.
  ();
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -180,7 +180,7 @@ inline auto &data() noexcept;
 
 **Description**：GaloisKeys is a class for storing Galoiskeys information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**： 
 ```c++
@@ -200,7 +200,7 @@ inline bool has_key(std::uint32_t galois_elt) const;
 
 **Description**：BatchEncoder is a class used for encoding and decoding in the BFV encryption scheme.<br>
 
-**Parameters**：
+**Members**：
 - **paramLiteral (const ParametersLiteral)**: Represents the encryption parameters used for computing context information.<br>
 
 **Functions**：
@@ -218,18 +218,19 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 
 **Description**：MatrixPlain is a class for storing plaintext matrix information.
 
-**Parameters**：
-- **LogSlots**: Indicates the logarithm to 2 of the number of matrix elements.
+**Members**：
+- **LogSlots (uint32_t)**: Indicates the logarithm to 2 of the number of matrix elements.
 
-- **N1**: Indicates the number of rows in a matrix.
+- **N1 (uint32_t)**: Indicates the number of rows in a matrix.
 
-- **level**: Indicates the level of the ciphertext module chain in which the matrix resides.
+- **level (int)**: Indicates the level of the ciphertext module chain in which the matrix resides.
 
-- **scale**: Indicates the scaling factor of the matrix.
+- **scale (mpf_class)**: Indicates the scaling factor of the matrix.
 
-- **rot\_index**:Indicates the rotation index of a matrix element in a polynomial.
+- **rot\_index (vector<int>)**:Indicates the rotation index of a matrix element in a polynomial.
 
-- **plain\_vec**:Indicates the polynomial corresponding to the matrix elements.
+- **plain\_vec (map<int,Plaintext>)**:Indicates the polynomial corresponding to the matrix elements.
+
 
 
 
@@ -239,7 +240,7 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 
 **Description**：KeyGenerator is a class for generating keys.
 
-**Parameters**：
+**Members**：
 - **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
@@ -271,7 +272,7 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 **Description**：Encryptor is a class used to encrypt plaintext.
 
-**Parameters**：
+**Members**：
 
 - **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
@@ -291,7 +292,7 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 **Description**：Decryptor is a class for decrypting plaintext.
 
-**Parameters**：
+**Members**：
 
 - **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
@@ -311,7 +312,7 @@ void decrypt(const Plaintext &plain, Ciphertext &destination) const;
 
 **Description**：EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**： 
 ```c++

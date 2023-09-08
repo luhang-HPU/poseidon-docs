@@ -14,7 +14,7 @@ Poseidon Supported parameter data structures：
 **Description**： MemoryPool is a class for managing addresses and memory space.
 
 **Members**：
-- **degree_type (DegreeType)**: Indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+- **degree_type (DegreeType)**: Indicates the degree of a polynomial. Default: degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
 
 **Functions**： 
 ```c++
