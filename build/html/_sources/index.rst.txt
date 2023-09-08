@@ -1,6 +1,8 @@
 =====================================
 Welcome to Poseidon's documentation!!
 =====================================
+.. image:: hw1.png
+   :class: top-right-image
 
 .. toctree::
    :maxdepth: 1
@@ -18,3 +20,8 @@ Welcome to Poseidon's documentation!!
 .. Getting_Started/VER
 
 
+.. toctree::
+   :maxdepth: 3
+   :caption: Benchmark
+
+   Benchmark/index
