@@ -15,4 +15,6 @@ code, pre {
     top: 105px;  /* Adjust as needed */
     left: 890px;  /* Adjust as needed */
     z-index: 10;  /* Make sure the image appears on top */
+    width: 201px;
+    height: 151px;
 }

@@ -1,8 +1,10 @@
 =====================================
 Welcome to Poseidon's documentation!!
 =====================================
-.. image:: hw1.png
+.. image:: kingimage.png
    :class: top-right-image
+
+
 
 .. toctree::
    :maxdepth: 1
