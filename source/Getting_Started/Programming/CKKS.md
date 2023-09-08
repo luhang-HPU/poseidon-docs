@@ -8,8 +8,8 @@
 Poseidon Supported parameter data structures：
 
 
-### 1. Memory address management : MemoryPool
-**<font color='red'><span id="MemoryPool">MemoryPool</span> </font>** (DegreeType **degree_type**)
+### 1. Memory address management : **<font color='red'><span id="MemoryPool">MemoryPool</span> </font>** 
+
 
 **Description**： MemoryPool is a class for managing addresses and memory space.
 
@@ -22,8 +22,7 @@ getInstance(DegreeType degree_type);
 ```
 : Used to create Memorypool.
 
-### 2. Parameter class of the CKKS encryption scheme : CKKSParametersLiteralDefault
-**<font color='red'>CKKSParametersLiteralDefault</font>**  (SchemeType **Type**, uint32_t **LogN**, uint32_t **LogSlots**,  const vector<uint32_t>& **LogQ**,  const vector<uint32_t>& **LogP**, uint32_t **LogScale**, uint32_t **H**, uint32_t **T = 0**, int **q0_level = 0**);
+### 2. Parameter class of the CKKS encryption scheme : **<font color='red'>CKKSParametersLiteralDefault</font>** 
 
 **Description**： CKKSParametersLiteralDefault is a class for initialization encryption parameters.
 
@@ -43,12 +42,9 @@ getInstance(DegreeType degree_type);
 
 
 
-### 3. Context information management class : PoseidonContext
-**<font color='red'>PoseidonContext</font>** (const ParametersLiteral **&paramLiteral**)
-
+### 3. Context information management class : **<font color='red'>PoseidonContext</font>** 
 
 **Description**： PoseidonContext is a class used to generate and manage context information.
-
 
 **Parameters**：
 - **paramLiteral**: Indicates the encryption parameter used to calculate context information.
@@ -71,10 +67,7 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 
 
 
-### 4. Generate pseudo-random numbers class : Blake2xbPRNGFactory
-**<font color='red'>Blake2xbPRNGFactory </font>**();
-
-
+### 4. Generate pseudo-random numbers class : **<font color='red'>Blake2xbPRNGFactory </font>**
 
 **Description**： Blake2xbPRNGFactory is a class for generating pseudorandom numbers.
 
@@ -85,8 +78,8 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 
 
 
-### 5. Plaintext class : Plaintext
-**<font color='red'><span id="Plaintext">Plaintext</span> </font>**();
+### 5. Plaintext class : **<font color='red'><span id="Plaintext">Plaintext</span> </font>**
+
 
 **Description**： Plaintext is a class for storing plaintext information.
 
@@ -115,8 +108,8 @@ int newPoly(const PoseidonContext& context,int level);
      
 
 
-### 6. Ciphertext class : Ciphertext
-**<font color='red'><span id="Ciphertext">Ciphertext</span> </font>**();
+### 6. Ciphertext class : **<font color='red'><span id="Ciphertext">Ciphertext</span> </font>**
+
 
 **Description**： Ciphertext is a class for storing ciphertext information.
 
@@ -155,8 +148,8 @@ MetaData* metaData() const;
 
 
 
-### 7. Public key class : PublicKey
-**<font color='red'><span id="PublicKey">PublicKey</span> </font>**();
+### 7. Public key class : **<font color='red'><span id="PublicKey">PublicKey</span> </font>**
+
 
 **Description**： PublicKey is a class for storing public key information.
 
@@ -170,8 +163,8 @@ inline Ciphertext data() const noexcept;
 
 
 
-### 8. Relinearize key class : RelinKeys
-**<font color='red'><span id="RelinKeys">RelinKeys</span> </font>**();
+### 8. Relinearize key class : **<font color='red'><span id="RelinKeys">RelinKeys</span> </font>**
+
 
 **Description**：RelinKeys is a class for storing relinearized key information.
 
@@ -191,8 +184,7 @@ inline auto &data() noexcept;
 
 
 
-### 9. Galois key class : GaloisKeys
-**<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**();
+### 9. Galois key class : **<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**
 
 **Description**：GaloisKeys is a class for storing Galoiskeys information.
 
@@ -210,8 +202,7 @@ inline bool has_key(std::uint32_t galois_elt) const;
 : A function used to determine whether a given Galois element exists.
 
 
-### 10. CKKS encryption scheme  class : CKKSEncoder
-**<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>**(const PoseidonContext& **params**);
+### 10. CKKS encryption scheme  class : **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>**
 
 **Description**： CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
@@ -231,8 +222,8 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 
 
 
-### 11. Plaintext matrix : MatrixPlain
-**<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**();
+### 11. Plaintext matrix : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
+
 
 **Description**： MatrixPlain is a class for storing plaintext matrix information.
  
@@ -251,8 +242,8 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 
 
 
-### 12. Key generation class : KeyGenerator
-**<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**(const PoseidonContext& **params**);
+### 12. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
+
 
 **Description**： KeyGenerator is a class for generating keys.
 
@@ -283,8 +274,7 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 
 
-### 13. Encryption class : Encryptor
-**<font color='red'><span id="Encryptor">Encryptor</span> </font>**(const PoseidonContext **&context**, const SecretKey **&secret\_key**);
+### 13. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
 
 **Description**： Encryptor is a class used to encrypt plaintext.
 
@@ -302,8 +292,7 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 
 
-### 14. Decryption class : Decryptor
-**<font color='red'><span id="Decryptor">Decryptor</span> </font>**(const PoseidonContext **&context**, const SecretKey **&secret\_key**);
+### 14. Decryption class : **<font color='red'><span id="Decryptor">Decryptor</span> </font>**
 
 **Description**： Decryptor is a class for decrypting plaintext.
 
@@ -321,10 +310,9 @@ void decrypt(const Plaintext &plain, Ciphertext &destination) const;
 
 
 
-### 15.  Envaluator Factory  class : EnvaluatorFactory
-**<font color='red'><span id="EnvaluatorFactory">EnvaluatorFactory</span> </font>**();
+### 15.  Evaluator Factory  class : **<font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font>**
 
-**Description**： EnvaluatorFactory is a class used to create the Poseidon algorithm library.
+**Description**： EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
 **Parameters**：null.
 

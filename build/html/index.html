@@ -50,8 +50,9 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Getting_Started/CKKS.html">CKKS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Getting_Started/BFV.html">BFV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_Started/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_Started/index.html#programming">Programming</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_Started/index.html#examples">Examples</a></li>
 </ul>
 
         </div>
@@ -90,84 +91,95 @@
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="Getting_Started/CKKS.html">CKKS</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Getting_Started/CKKS.html#parameter-data-structure">Parameter Data Structure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#memory-address-management-memorypool">1. Memory address management : MemoryPool</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#parameter-class-of-the-ckks-encryption-scheme-ckksparametersliteraldefault">2. Parameter class of the CKKS encryption scheme : CKKSParametersLiteralDefault</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#context-information-management-class-poseidoncontext">3. Context information management class : PoseidonContext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#generate-pseudo-random-numbers-class-blake2xbprngfactory">4. Generate pseudo-random numbers class : Blake2xbPRNGFactory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#plaintext-class-plaintext">5. Plaintext class : Plaintext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#ciphertext-class-ciphertext">6. Ciphertext class : Ciphertext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#public-key-class-publickey">7. Public key class : PublicKey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#relinearize-key-class-relinkeys">8. Relinearize key class : RelinKeys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#galois-key-class-galoiskeys">9. Galois key class : GaloisKeys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#ckks-encryption-scheme-class-ckksencoder">10. CKKS encryption scheme  class : CKKSEncoder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#plaintext-matrix-matrixplain">11. Plaintext matrix : MatrixPlain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#key-generation-class-keygenerator">12. Key generation class : KeyGenerator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#encryption-class-encryptor">13. Encryption class : Encryptor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#decryption-class-decryptor">14. Decryption class : Decryptor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#envaluator-factory-class-envaluatorfactory">15.  Envaluator Factory  class : EnvaluatorFactory</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_Started/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Getting_Started/Installation/Installation.html">Hello</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Getting_Started/CKKS.html#api">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#addition-between-ciphertexts-add">1. Addition between ciphertexts : add</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#addition-of-ciphertext-and-plaintext-add-plain">2. Addition of ciphertext and plaintext : add_plain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#subtraction-between-ciphertexts-sub">3. Subtraction between ciphertexts : sub</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#multiplication-between-ciphertexts-multiply">4. Multiplication between ciphertexts : multiply</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#multiplication-of-ciphertext-and-plaintext-multiply-plain">5. Multiplication of ciphertext and plaintext : multiply_plain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#rescale-rescale">6. Rescale : rescale</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#ciphertext-rotation-rotate">7. Ciphertext rotation : rotate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#take-conjugate-conjugate">8. Take conjugate : conjugate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#matrix-multiplication-of-ciphertext-and-plaintext-multiplybydiagmatrixbsgs">9. Matrix multiplication of ciphertext and plaintext : multiplyByDiagMatrixBSGS</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#coefficient-to-plaintext-slot-coeff-to-slot">10. Coefficient to plaintext slot : coeff_to_slot</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#plaintext-slot-to-coefficient-slot-to-coeff">11. Plaintext slot to coefficient : slot_to_coeff</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#fast-fourier-transform-forward-ftt-fwd">12. Fast Fourier Transform (forward) : ftt_fwd</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#fast-fourier-transform-inverse-ftt-inv">13. Fast Fourier Transform (inverse) : ftt_inv</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#read-ciphertext-information-from-accelerator-card-read">14. Read ciphertext information from accelerator card : read</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#multiplication-of-ciphertext-and-complex-constant-multiply-const">15. Multiplication of ciphertext and complex constant : multiply_const</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#addition-of-ciphertext-and-complex-constant-add-const">16. Addition of ciphertext and complex constant : add_const</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#discrete-fourier-transform-on-ciphertext-dft">17. Discrete Fourier Transform on ciphertext : dft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#dynamic-rescale-rescale-dynamic">18. Dynamic rescale : rescale_dynamic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#polynomial-evaluation-evaluatepolyvector">19. Polynomial evaluation : evaluatePolyVector</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#evaluate-modulo-on-ciphertext-vector-eval-mod">20. Evaluate modulo on ciphertext vector : eval_mod</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#bootstrap-bootstrap">21. Bootstrap : bootstrap</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/CKKS.html#key-switch-switch-key">22. Key switch : switch_key</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_Started/index.html#programming">Programming</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Getting_Started/Programming/CKKS.html">CKKS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#parameter-data-structure">Parameter Data Structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#memory-address-management-font-color-red-span-id-memorypool-memorypool-span-font">1. Memory address management : <strong><font color='red'><span id="MemoryPool">MemoryPool</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#parameter-class-of-the-ckks-encryption-scheme-font-color-red-ckksparametersliteraldefault-font">2. Parameter class of the CKKS encryption scheme : <strong><font color='red'>CKKSParametersLiteralDefault</font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#context-information-management-class-font-color-red-poseidoncontext-font">3. Context information management class : <strong><font color='red'>PoseidonContext</font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#generate-pseudo-random-numbers-class-font-color-red-blake2xbprngfactory-font">4. Generate pseudo-random numbers class : <strong><font color='red'>Blake2xbPRNGFactory </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#plaintext-class-font-color-red-span-id-plaintext-plaintext-span-font">5. Plaintext class : <strong><font color='red'><span id="Plaintext">Plaintext</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#ciphertext-class-font-color-red-span-id-ciphertext-ciphertext-span-font">6. Ciphertext class : <strong><font color='red'><span id="Ciphertext">Ciphertext</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#public-key-class-font-color-red-span-id-publickey-publickey-span-font">7. Public key class : <strong><font color='red'><span id="PublicKey">PublicKey</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#relinearize-key-class-font-color-red-span-id-relinkeys-relinkeys-span-font">8. Relinearize key class : <strong><font color='red'><span id="RelinKeys">RelinKeys</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#galois-key-class-font-color-red-span-id-galoiskeys-galoiskeys-span-font">9. Galois key class : <strong><font color='red'><span id="GaloisKeys">GaloisKeys</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#ckks-encryption-scheme-class-font-color-red-span-id-ckksencoder-ckksencoder-span-font">10. CKKS encryption scheme  class : <strong><font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#plaintext-matrix-font-color-red-span-id-matrixplain-matrixplain-span-font">11. Plaintext matrix : <strong><font color='red'><span id="MatrixPlain">MatrixPlain</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#key-generation-class-font-color-red-span-id-keygenerator-keygenerator-span-font">12. Key generation class : <strong><font color='red'><span id="KeyGenerator">KeyGenerator</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#encryption-class-font-color-red-span-id-encryptor-encryptor-span-font">13. Encryption class : <strong><font color='red'><span id="Encryptor">Encryptor</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#decryption-class-font-color-red-span-id-decryptor-decryptor-span-font">14. Decryption class : <strong><font color='red'><span id="Decryptor">Decryptor</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#evaluator-factory-class-font-color-red-span-id-evaluatorfactory-evaluatorfactory-span-font">15.  Evaluator Factory  class : <strong><font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font></strong></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#addition-between-ciphertexts-add">1. Addition between ciphertexts : add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#addition-of-ciphertext-and-plaintext-add-plain">2. Addition of ciphertext and plaintext : add_plain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#subtraction-between-ciphertexts-sub">3. Subtraction between ciphertexts : sub</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#multiplication-between-ciphertexts-multiply">4. Multiplication between ciphertexts : multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#multiplication-of-ciphertext-and-plaintext-multiply-plain">5. Multiplication of ciphertext and plaintext : multiply_plain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#rescale-rescale">6. Rescale : rescale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#ciphertext-rotation-rotate">7. Ciphertext rotation : rotate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#take-conjugate-conjugate">8. Take conjugate : conjugate</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#matrix-multiplication-of-ciphertext-and-plaintext-multiplybydiagmatrixbsgs">9. Matrix multiplication of ciphertext and plaintext : multiplyByDiagMatrixBSGS</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#coefficient-to-plaintext-slot-coeff-to-slot">10. Coefficient to plaintext slot : coeff_to_slot</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#plaintext-slot-to-coefficient-slot-to-coeff">11. Plaintext slot to coefficient : slot_to_coeff</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#fast-fourier-transform-forward-ftt-fwd">12. Fast Fourier Transform (forward) : ftt_fwd</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#fast-fourier-transform-inverse-ftt-inv">13. Fast Fourier Transform (inverse) : ftt_inv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#read-ciphertext-information-from-accelerator-card-read">14. Read ciphertext information from accelerator card : read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#multiplication-of-ciphertext-and-complex-constant-multiply-const">15. Multiplication of ciphertext and complex constant : multiply_const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#addition-of-ciphertext-and-complex-constant-add-const">16. Addition of ciphertext and complex constant : add_const</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#discrete-fourier-transform-on-ciphertext-dft">17. Discrete Fourier Transform on ciphertext : dft</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#dynamic-rescale-rescale-dynamic">18. Dynamic rescale : rescale_dynamic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#polynomial-evaluation-evaluatepolyvector">19. Polynomial evaluation : evaluatePolyVector</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#evaluate-modulo-on-ciphertext-vector-eval-mod">20. Evaluate modulo on ciphertext vector : eval_mod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#bootstrap-bootstrap">21. Bootstrap : bootstrap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/CKKS.html#key-switch-switch-key">22. Key switch : switch_key</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="Getting_Started/BFV.html">BFV</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="Getting_Started/BFV.html#parameter-data-structure">Parameter Data Structure</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#memory-address-management-memorypool">1. Memory address management : MemoryPool</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#parameter-class-of-the-bfv-encryption-scheme-bfvparametersliteraldefault">2. Parameter class of the BFV encryption scheme : BFVParametersLiteralDefault</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#context-information-management-class-poseidoncontext">3. Context information management class : PoseidonContext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#generate-pseudo-random-numbers-class-blake2xbprngfactory">4. Generate pseudo-random numbers class : Blake2xbPRNGFactory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#plaintext-class-plaintext">5. Plaintext class : Plaintext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-class-ciphertext">6. Ciphertext class : Ciphertext</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#public-key-class-publickey">7. Public key class : PublicKey</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#relinearize-key-class-relinkeys">8. Relinearize key class : RelinKeys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#galois-key-class-galoiskeys">9. Galois key class : GaloisKeys</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#bfv-encryption-scheme-class-batchencoder">10. BFV encryption scheme  class : BatchEncoder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#plaintext-matrix-matrixplain">11. Plaintext matrix : MatrixPlain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#key-generation-class-keygenerator">12. Key generation class : KeyGenerator</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#encryption-class-encryptor">13. Encryption class : Encryptor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#decryption-class-decryptor">14. Decryption class ：Decryptor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#envaluator-factory-class-envaluatorfactory">15. Envaluator Factory  class ：EnvaluatorFactory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Getting_Started/Programming/BFV.html">BFV</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="Getting_Started/Programming/BFV.html#parameter-data-structure">Parameter Data Structure</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#memory-address-management-font-color-red-span-id-memorypool-memorypool-span-font">1. Memory address management : <strong><font color='red'><span id="MemoryPool">MemoryPool</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#parameter-class-of-the-bfv-encryption-scheme-font-color-red-bfvparametersliteraldefault-font">2. Parameter class of the BFV encryption scheme : <strong><font color='red'>BFVParametersLiteralDefault</font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#context-information-management-class-font-color-red-poseidoncontext-font">3. Context information management class : <strong><font color='red'>PoseidonContext</font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#generate-pseudo-random-numbers-class-font-color-red-blake2xbprngfactory-font">4. Generate pseudo-random numbers class : <strong><font color='red'>Blake2xbPRNGFactory </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#plaintext-class-font-color-red-span-id-plaintext-plaintext-span-font">5. Plaintext class : <strong><font color='red'><span id="Plaintext">Plaintext</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-class-font-color-red-span-id-ciphertext-ciphertext-span-font">6. Ciphertext class : <strong><font color='red'><span id="Ciphertext">Ciphertext</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#public-key-class-font-color-red-span-id-publickey-publickey-span-font">7. Public key class : <strong><font color='red'><span id="PublicKey">PublicKey</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#relinearize-key-class-font-color-red-span-id-relinkeys-relinkeys-span-font">8. Relinearize key class : <strong><font color='red'><span id="RelinKeys">RelinKeys</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#galois-key-class-font-color-red-span-id-galoiskeys-galoiskeys-span-font">9. Galois key class : <strong><font color='red'><span id="GaloisKeys">GaloisKeys</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#bfv-encryption-scheme-class-font-color-red-batchencoder-font">10. BFV encryption scheme  class : <strong><font color='red'>BatchEncoder</font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#plaintext-matrix-font-color-red-span-id-matrixplain-matrixplain-span-font">11. Plaintext matrix : <strong><font color='red'><span id="MatrixPlain">MatrixPlain</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#key-generation-class-font-color-red-span-id-keygenerator-keygenerator-span-font">12. Key generation class : <strong><font color='red'><span id="KeyGenerator">KeyGenerator</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#encryption-class-font-color-red-span-id-encryptor-encryptor-span-font">13. Encryption class : <strong><font color='red'><span id="Encryptor">Encryptor</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#decryption-class-font-color-red-span-id-decryptor-decryptor-span-font">14. Decryption class ：<strong><font color='red'><span id="Decryptor">Decryptor</span> </font></strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#evaluator-factory-class-font-color-red-span-id-evaluatorfactory-evaluatorfactory-span-font">15. Evaluator Factory  class ：<strong><font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font></strong></a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Getting_Started/BFV.html#api">API</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-and-ciphertext-addition-add">1. Ciphertext and ciphertext addition : add</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-and-plaintext-addition-add-plain">2. Ciphertext and plaintext addition : add_plain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-and-ciphertext-subtraction-sub">3. Ciphertext and ciphertext subtraction : sub</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-and-ciphertext-multiplication-multiply">4. Ciphertext and ciphertext multiplication : multiply</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-and-plaintext-multiplication-multiply-plain">5. Ciphertext and plaintext multiplication : multiply_plain</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#rescaling-rescale">6. Rescaling : rescale</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-row-rotation-rotate-row">7. Ciphertext row rotation : rotate_row</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-column-rotation-rotate-col">8. Ciphertext column rotation : rotate_col</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#key-switching-switch-key">9. Key switching : switch_key</a></li>
-<li class="toctree-l3"><a class="reference internal" href="Getting_Started/BFV.html#ciphertext-and-plaintext-matrix-multiplication-multiplybydiagmatrixbsgs">10. Ciphertext and plaintext matrix multiplication : multiplyByDiagMatrixBSGS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="Getting_Started/Programming/BFV.html#api">API</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-and-ciphertext-addition-add">1. Ciphertext and ciphertext addition : add</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-and-plaintext-addition-add-plain">2. Ciphertext and plaintext addition : add_plain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-and-ciphertext-subtraction-sub">3. Ciphertext and ciphertext subtraction : sub</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-and-ciphertext-multiplication-multiply">4. Ciphertext and ciphertext multiplication : multiply</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-and-plaintext-multiplication-multiply-plain">5. Ciphertext and plaintext multiplication : multiply_plain</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#rescaling-rescale">6. Rescaling : rescale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-row-rotation-rotate-row">7. Ciphertext row rotation : rotate_row</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-column-rotation-rotate-col">8. Ciphertext column rotation : rotate_col</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#key-switching-switch-key">9. Key switching : switch_key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="Getting_Started/Programming/BFV.html#ciphertext-and-plaintext-matrix-multiplication-multiplybydiagmatrixbsgs">10. Ciphertext and plaintext matrix multiplication : multiplyByDiagMatrixBSGS</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Getting_Started/index.html#examples">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="Getting_Started/Examples/Examples.html">Hello</a></li>
 </ul>
 </li>
 </ul>
