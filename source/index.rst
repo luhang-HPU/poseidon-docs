@@ -17,8 +17,3 @@ Welcome to Poseidon's documentation!!
    Getting_Started/BFV
 .. Getting_Started/VER
 
-.. toctree::
-   :maxdepth: 1
-   :caption: benchmarks
-
-   benchmarks/benchmark
