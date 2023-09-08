@@ -14,7 +14,7 @@ Poseidon Supported parameter data structures：
 **Description**： MemoryPool is a class for managing addresses and memory space.
 
 **Members**：
-- **degree_type (DegreeType)**: Indicates the degree of a polynomial. Default: degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+- **degree_type (DegreeType)**: Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768" (default) .
 
 **Functions**： 
 ```c++
@@ -34,8 +34,8 @@ getInstance(DegreeType degree_type);
 - **LogP (const vector<uint32_t>)**: Indicates the logarithm of the modulus of the key switching auxiliary prime. 
 - **LogScale (uint32_t)**: Indicates the logarithm of the scaling factor. 
 - **H (uint32_t)**: Indicates the weight of Hamming. 
-- **T (uint32_t)**: Indicates the plaintext modulus. Default:0
-- **q0_level (int)**: Indicates the level of q0. Default:0
+- **T (uint32_t)**: Indicates the plaintext modulus. The optional values is 0 (default).
+- **q0_level (int)**: Indicates the level of q0. The optional values is 0 (default).
 
 **Functions**：Only constructors.
 
