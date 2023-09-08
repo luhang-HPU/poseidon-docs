@@ -9,3 +9,8 @@ table, th, td {
 code, pre {
     background-color: #EEFFCC; /* 这是淡绿色 */
 }
+
+div.document .contents p, div.document div.body p, div.document div.body li, div.document .contents li {
+    text-align: justify;
+    text-justify: inter-word;
+}
