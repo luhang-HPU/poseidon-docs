@@ -13,12 +13,8 @@ Welcome to Poseidon's documentation!!
    :maxdepth: 4
    :caption: Getting Started
 
-   Getting_Started/CKKS
-   Getting_Started/BFV
+   Getting_Started/index
+
 .. Getting_Started/VER
 
-.. toctree::
-   :maxdepth: 1
-   :caption: benchmarks
 
-   benchmarks/benchmark
