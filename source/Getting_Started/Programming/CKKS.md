@@ -13,8 +13,8 @@ Poseidon Supported parameter data structures：
 
 **Description**： MemoryPool is a class for managing addresses and memory space.
 
-**Parameters**：
-- **degree_type**: Indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
+**Members**：
+- **degree_type (DegreeType)**: Indicates the degree of a polynomial. <br>The optional value can be degree_2048,degree_4096, degree_8192, degree_16384, or degree_32768.
 
 **Functions**： 
 ```c++
@@ -26,17 +26,16 @@ getInstance(DegreeType degree_type);
 
 **Description**： CKKSParametersLiteralDefault is a class for initialization encryption parameters.
 
-**Parameters**：
-- **degreeType**: Indicates the degree of a polynomial.
-- **Type**: Indicates the type of the encryption scheme.
-- **LogN**: Indicates the logarithm of the ring degree. 
-- **LogSlots**: Indicates the logarithm of slots. 
-- **LogQ**: Indicates the logarithm of the modulus of the ciphertext prime number. 
-- **LogP**: Indicates the logarithm of the modulus of the key switching auxiliary prime. 
-- **LogScale**: Indicates the logarithm of the scaling factor. 
-- **H**: Indicates the weight of Hamming. 
-- **T**: Indicates the plaintext modulus
-- **q0_level**: Indicates the level of q0.
+**Members**：
+- **Type (SchemeType)**: Indicates the type of the encryption scheme.
+- **LogN (uint32_t)**: Indicates the logarithm of the ring degree. 
+- **LogSlots (uint32_t)**: Indicates the logarithm of slots. 
+- **LogQ (const vector<uint32_t>)**: Indicates the logarithm of the modulus of the ciphertext prime number. 
+- **LogP (const vector<uint32_t>)**: Indicates the logarithm of the modulus of the key switching auxiliary prime. 
+- **LogScale (uint32_t)**: Indicates the logarithm of the scaling factor. 
+- **H (uint32_t)**: Indicates the weight of Hamming. 
+- **T (uint32_t)**: Indicates the plaintext modulus. Default:0
+- **q0_level (int)**: Indicates the level of q0. Default:0
 
 **Functions**：Only constructors.
 
@@ -46,8 +45,8 @@ getInstance(DegreeType degree_type);
 
 **Description**： PoseidonContext is a class used to generate and manage context information.
 
-**Parameters**：
-- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
+**Members**：
+- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -71,7 +70,7 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 
 **Description**： Blake2xbPRNGFactory is a class for generating pseudorandom numbers.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：Only constructors.
 
@@ -83,7 +82,7 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 
 **Description**： Plaintext is a class for storing plaintext information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -113,7 +112,7 @@ int newPoly(const PoseidonContext& context,int level);
 
 **Description**： Ciphertext is a class for storing ciphertext information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -153,7 +152,7 @@ MetaData* metaData() const;
 
 **Description**： PublicKey is a class for storing public key information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -169,7 +168,7 @@ inline Ciphertext data() const noexcept;
 **Description**：RelinKeys is a class for storing relinearized key information.
 
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**：
 ```c++
@@ -188,7 +187,7 @@ inline auto &data() noexcept;
 
 **Description**：GaloisKeys is a class for storing Galoiskeys information.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**： 
 ```c++
@@ -206,8 +205,8 @@ inline bool has_key(std::uint32_t galois_elt) const;
 
 **Description**： CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
-**Parameters**：
-- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
+**Members**：
+- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -227,18 +226,18 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 
 **Description**： MatrixPlain is a class for storing plaintext matrix information.
  
-**Parameters**：
-- **LogSlots**: Indicates the logarithm to 2 of the number of matrix elements.
+**Members**：
+- **LogSlots (uint32_t)**: Indicates the logarithm to 2 of the number of matrix elements.
 
-- **N1**: Indicates the number of rows in a matrix.
+- **N1 (uint32_t)**: Indicates the number of rows in a matrix.
 
-- **level**: Indicates the level of the ciphertext module chain in which the matrix resides.
+- **level (int)**: Indicates the level of the ciphertext module chain in which the matrix resides.
 
-- **scale**: Indicates the scaling factor of the matrix.
+- **scale (mpf_class)**: Indicates the scaling factor of the matrix.
 
-- **rot\_index**:Indicates the rotation index of a matrix element in a polynomial.
+- **rot\_index (vector<int>)**:Indicates the rotation index of a matrix element in a polynomial.
 
-- **plain\_vec**:Indicates the polynomial corresponding to the matrix elements.
+- **plain\_vec (map<int,Plaintext>)**:Indicates the polynomial corresponding to the matrix elements.
 
 
 
@@ -247,8 +246,8 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 
 **Description**： KeyGenerator is a class for generating keys.
 
-**Parameters**：
-- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
+**Members**：
+- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -278,11 +277,11 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 **Description**： Encryptor is a class used to encrypt plaintext.
 
-**Parameters**：
+**Members**：
 
-- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key**：Indicates the key involved in the encryption operation.
+- **secret\_key (const SecretKey)**：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
@@ -296,11 +295,11 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 **Description**： Decryptor is a class for decrypting plaintext.
 
-**Parameters**：
+**Members**：
 
-- **paramLiteral**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key**：Indicates the key involved in the encryption operation.
+- **secret\_key (const SecretKey)**：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
@@ -314,7 +313,7 @@ void decrypt(const Plaintext &plain, Ciphertext &destination) const;
 
 **Description**： EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
-**Parameters**：null.
+**Members**：null.
 
 **Functions**： 
 ```c++
