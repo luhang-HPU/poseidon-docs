@@ -10,7 +10,9 @@ code, pre {
     background-color: #EEFFCC; /* 这是淡绿色 */
 }
 
-div.document .contents p, div.document div.body p, div.document div.body li, div.document .contents li {
-    text-align: justify;
-    text-justify: inter-word;
+.top-right-image {
+    position: absolute;
+    top: 105px;  /* Adjust as needed */
+    left: 890px;  /* Adjust as needed */
+    z-index: 10;  /* Make sure the image appears on top */
 }
