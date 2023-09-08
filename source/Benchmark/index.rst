@@ -1,9 +1,9 @@
-Bootstrap
-=============
+Private Information Retrival
+============================
 .. toctree::
    :maxdepth: 4
 
-   Bootstrap/Bootstrap
+   Private Information Retrival/Private
 
 
 Framingham Heart Study
@@ -16,9 +16,9 @@ Framingham Heart Study
    Framingham/Framingham
 
 
-Private Information Retrival
-============================
+Bootstrap
+=============
 .. toctree::
    :maxdepth: 4
 
-   Private Information Retrival/Private
+   Bootstrap/Bootstrap
