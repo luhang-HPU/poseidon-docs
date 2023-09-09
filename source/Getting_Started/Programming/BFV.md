@@ -14,7 +14,7 @@ Poseidon Supported parameter data structures：
 **Description**：MemoryPool is a class for managing addresses and memory space.
 
 **Members**：
-- **degree_type (DegreeType)**: Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768" (default) .
+- **degree_type** (DegreeType): Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768" (default) .
 
 **Functions**： 
 ```c++
@@ -30,7 +30,7 @@ getInstance(DegreeType degree_type);
 **Description**：BFVParametersLiteralDefault is a class used for initializing encryption parameters.
 
 **Members**：
-- **degreeType (DegreeType)**: Represents the degree of the polynomial.
+- **degreeType** (DegreeType): Represents the degree of the polynomial.
 
 **Functions**： The functions consist only of the constructor.
 
@@ -41,7 +41,7 @@ getInstance(DegreeType degree_type);
 
 
 **Members**：
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -201,7 +201,7 @@ inline bool has_key(std::uint32_t galois_elt) const;
 **Description**：BatchEncoder is a class used for encoding and decoding in the BFV encryption scheme.<br>
 
 **Members**：
-- **paramLiteral (const ParametersLiteral)**: Represents the encryption parameters used for computing context information.<br>
+- **paramLiteral** (const ParametersLiteral): Represents the encryption parameters used for computing context information.<br>
 
 **Functions**：
 ```c++
@@ -219,17 +219,17 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 **Description**：MatrixPlain is a class for storing plaintext matrix information.
 
 **Members**：
-- **LogSlots (uint32_t)**: Indicates the logarithm to 2 of the number of matrix elements.
+- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
 
-- **N1 (uint32_t)**: Indicates the number of rows in a matrix.
+- **N1** (uint32_t): Indicates the number of rows in a matrix.
 
-- **level (int)**: Indicates the level of the ciphertext module chain in which the matrix resides.
+- **level** (int): Indicates the level of the ciphertext module chain in which the matrix resides.
 
-- **scale (mpf_class)**: Indicates the scaling factor of the matrix.
+- **scale** (mpf_class): Indicates the scaling factor of the matrix.
 
-- **rot\_index (vector<int>)**:Indicates the rotation index of a matrix element in a polynomial.
+- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
 
-- **plain\_vec (map<int,Plaintext>)**:Indicates the polynomial corresponding to the matrix elements.
+- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
 
 
 
@@ -274,9 +274,9 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 **Members**：
 
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key (const SecretKey)**：Indicates the key involved in the encryption operation.
+- **secret\_key** (const SecretKey)：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
@@ -294,9 +294,9 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 **Members**：
 
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key (const SecretKey)**：Indicates the key involved in the encryption operation.
+- **secret\_key** (const SecretKey)：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
