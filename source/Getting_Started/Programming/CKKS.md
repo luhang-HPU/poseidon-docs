@@ -334,9 +334,9 @@ void **<font color='red'> add</font>** (Ciphertext **&ciph1**, Ciphertext **&cip
 **Description**： This function performs homomorphic addition on two ciphertexts.<br>
 
 **Parameters**：
-- **ciph1**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **ciph2**: A reference to a **Ciphertext** object, representing another ciphertext.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.
+- **ciph1** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -346,9 +346,9 @@ void **<font color='red'> add_plain</font>** (Ciphertext **&ciph**, Plaintext **
 **Description**：This function performs homomorphic addition between a ciphertext and a plaintext.<br>
 
 **Parameters**：
-- **ciph1**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain**: A reference to a **Plaintext** object, representing a plaintext.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.
+- **ciph1** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -358,9 +358,9 @@ void **<font color='red'> sub</font>** (Ciphertext **&ciph1**, Ciphertext **&cip
 **Description**： This function performs homomorphic subtraction between two ciphertexts.<br>
 
 **Parameters**：
-- **ciph1**:  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).<br>
-- **ciph2**: A reference to a **Ciphertext** object, representing the subtrahend (the number to be subtracted).<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.
+- **ciph1** (Ciphertext):  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).<br>
+- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing the subtrahend (the number to be subtracted).<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -370,10 +370,10 @@ void **<font color='red'> multiply</font>** (Ciphertext **&ciph0**, Ciphertext *
 **Description**：This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
 
 **Parameters**：
-- **ciph1**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **ciph2**: A reference to a **Ciphertext** object, representing another ciphertext.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **relin_key**: A constant reference to a **RelinKeys** object, representing the relinearization key.
+- **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the relinearization key.
 
 
 
@@ -383,9 +383,9 @@ void **<font color='red'> multiply_plain</font>** (Ciphertext **&ciph**, Plainte
 **Description**： This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
 
 **Parameters**：
-- **ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain**: A reference to a **Plaintext** object, representing a plaintext.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
 
 
 
@@ -395,7 +395,7 @@ void **<font color='red'> rescale</font>** (Ciphertext **&ciph**) override;
 **Description**： This function performs a rescaling operation on a ciphertext.<br>
 
 **Parameters**：
-- **ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
 
 
 
@@ -405,10 +405,10 @@ void **<font color='red'> rotate</font>** (Ciphertext **&ciph**, Ciphertext **&r
 **Description**： This function is used to rotate a ciphertext.<br>
 
 **Parameters**：
-- **ciph**:   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **result**: A reference to a **Ciphertext** object, used to store  the rotated ciphertext.<br>
-- **rot_key**:   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.<br>
-- **k**:  An integer, indicating the rotation step length. A positive number represents a rotation to the right, and a negative number represents a rotation to the left.
+- **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store  the rotated ciphertext.<br>
+- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.<br>
+- **k** (int):  An integer, indicating the rotation step length. A positive number represents a rotation to the right, and a negative number represents a rotation to the left.
 
 
 
@@ -419,9 +419,9 @@ void **<font color='red'> conjugate</font>** (Ciphertext **&ciph**, Ciphertext *
 **Description**： This function  is used to conjugate a ciphertext, that is, to transform each of its elements into its complex conjugate.<br>
 
 **Parameters**：
-- **ciph**:    A reference to a **Ciphertext** object, representing the ciphertext to be conjugated.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the resulting ciphertext after the conjugation.<br>
-- **conj_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.<br>
+- **ciph** (Ciphertext):    A reference to a **Ciphertext** object, representing the ciphertext to be conjugated.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the resulting ciphertext after the conjugation.<br>
+- **conj_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.<br>
 
 
 
@@ -432,10 +432,10 @@ void **<font color='red'> multiplyByDiagMatrixBSGS</font>** (Ciphertext **&ciph*
 **Description**： This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
 
 **Parameters**：
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain_mat**:  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **rot_key**:   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
 
 
 
@@ -445,13 +445,13 @@ void **<font color='red'> coeff_to_slot</font>** (Ciphertext **&ciph**, LinearMa
 **Description**：  This function is used to transform a ciphertext from the coefficient domain to the slot domain.
 
 **Parameters**:  
-- **ciph**: A reference to a **Ciphertext** object, representing the ciphertext to be transformed.
-- **matrix_group**: A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the transformation.
-- **result_real**: A reference to a **Ciphertext** object, used to store the real part of the transformed ciphertext.
-- **result_imag**: A reference to a **Ciphertext** object, used to store the imaginary part of the transformed ciphertext.
-- **rot_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
-- **conj_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.
-- **encoder**: A reference to a **CKKSEncoder** object, representing the encoder and decoder used in the transformation process.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing the ciphertext to be transformed.
+- **matrix_group** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the transformation.
+- **result_real** (Ciphertext): A reference to a **Ciphertext** object, used to store the real part of the transformed ciphertext.
+- **result_imag** (Ciphertext): A reference to a **Ciphertext** object, used to store the imaginary part of the transformed ciphertext.
+- **rot_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
+- **conj_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.
+- **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder used in the transformation process.
 
 
 
@@ -461,13 +461,13 @@ void **<font color='red'> coeff_to_slot</font>** (Ciphertext **&ciph**, LinearMa
 **Description**： This function is used to transform a ciphertext from the slot domain to the coefficient domain.
 
 **Parameters**: 
-- **ciph_real**: A reference to a **Ciphertext** object, representing the real part of the ciphertext to be transformed.
-- **ciph_imag**: A reference to a **Ciphertext** object, representing the imaginary part of the ciphertext to be transformed.
-- **matrix_group**: A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the transformation.
-- **result**: A reference to a **Ciphertext** object, used to store the transformed ciphertext.
-- **rot_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
-- **conj_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.
-- **encoder**: A reference to a **CKKSEncoder** object, representing the encoder and decoder used in the transformation process.
+- **ciph_real** (Ciphertext): A reference to a **Ciphertext** object, representing the real part of the ciphertext to be transformed.
+- **ciph_imag** (Ciphertext): A reference to a **Ciphertext** object, representing the imaginary part of the ciphertext to be transformed.
+- **matrix_group** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the transformation.
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the transformed ciphertext.
+- **rot_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
+- **conj_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.
+- **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder used in the transformation process.
 
 
 
@@ -479,9 +479,9 @@ void **<font color='red'> ftt_fwd</font>** (Ciphertext **&ciph**, Ciphertext **&
 **Description**： This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
 
 **Parameters**: 
-- **plain**: A reference to a **Plaintext** object, representing a plaintext.
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **result**: A reference to either a **Plaintext** or **Ciphertext** object, used to store the transformed plaintext or ciphertext.
+- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the transformed plaintext or ciphertext.
 
 
 
@@ -492,9 +492,9 @@ void **<font color='red'> ftt_inv</font>** (Ciphertext **&ciph** ,Ciphertext **&
 **Description**： This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
 
 **Parameters**: 
-- **plain**: A reference to a **Plaintext** object, representing a plaintext.
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **result**: A reference to either a **Plaintext** or **Ciphertext** object, used to store the inverse transformed ciphertext or plaintext.
+- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the inverse transformed ciphertext or plaintext.
 
 
 
@@ -505,7 +505,7 @@ void **<font color='red'> read</font>** (Ciphertext **&ciph**) override;
 **Description**： This function is used to read data from the acceleration card in the ciphertext.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing the ciphertext to be read.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing the ciphertext to be read.
 
 
 
@@ -515,11 +515,11 @@ void **<font color='red'> multiply_const</font>** (Ciphertext **&ciph**, complex
 **Description**： This function is used for the homomorphic multiplication of a ciphertext and a complex constant.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **constData**: A complex<double> object, representing a complex constant.
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.
-- **encoder**: A reference to a **CKKSEncoder** object, representing the encoder and decoder.
-- **isDirect**: A boolean indicating whether to directly multiply the ciphertext, instead of first encoding the constant to plaintext and then multiplying.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **constData** (complex < double> ): A complex<double> object, representing a complex constant.
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
+- **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder.
+- **isDirect** (bool): A boolean indicating whether to directly multiply the ciphertext, instead of first encoding the constant to plaintext and then multiplying.
 
 
 
@@ -529,9 +529,9 @@ void **<font color='red'> add_const</font>** (Ciphertext **&ciph**, double **con
 **Description**： This function is used for the homomorphic addition of a ciphertext and a real constant.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **constData**: A value of type double, representing a real constant.
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **constData** (double): A value of type double, representing a real constant.
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 
 
 
@@ -541,10 +541,10 @@ void **<font color='red'> dft</font>** (Ciphertext **&ciph**, LinearMatrixGroup 
 **Description**： This function is used for the Discrete Fourier Transform (DFT) of a ciphertext.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **matrix_group**: A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the DFT.
-- **result**: A reference to a **Ciphertext** object, used to store the transformed ciphertext.
-- **rot_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **matrix_group** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the DFT.
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the transformed ciphertext.
+- **rot_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
 
 
 
@@ -554,8 +554,8 @@ void **<font color='red'> rescale_dynamic</font>** (Ciphertext **&ciph**, mpf_cl
 **Description**： This function is used for dynamic rescaling of a ciphertext.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **scale**: An mpf_class object, representing the given scaling factor.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **scale** (mpf_class): An mpf_class object, representing the given scaling factor.
 
 
 ### 19. Polynomial evaluation : **<font color='red'> evaluatePolyVector</font>**
@@ -565,13 +565,13 @@ void **<font color='red'> evaluatePolyVector</font>** (Ciphertext **&ciph**, Cip
 **Description**： This function is used to evaluate a polynomial. The coefficients of Chebyshev or Taylor polynomials are pre-calculated, and then the polynomial calculation is performed.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **destination**: A reference to a **Ciphertext** object, used to store the evaluated ciphertext.
-- **polys**: A constant reference to a **PolynomialVector** object, representing the given polynomial vector.
-- **scalingfactor**: An **mpf_class** object, representing the given scaling factor.
-- **relin_key**: A constant reference to a **RelinKeys** object, representing the encryption key used for relinearization.
-- **encoder**: A reference to a **CKKSEncoder** object, representing the encoder and decoder.
-- **dec** (optional): A reference to a **Decryptor** object, representing the decryptor.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **destination** (Ciphertext): A reference to a **Ciphertext** object, used to store the evaluated ciphertext.
+- **polys** (PolynomialVector): A constant reference to a **PolynomialVector** object, representing the given polynomial vector.
+- **scalingfactor** (mpf_class): An **mpf_class** object, representing the given scaling factor.
+- **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the encryption key used for relinearization.
+- **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder.
+- **dec** (Decryptor) (optional): A reference to a **Decryptor** object, representing the decryptor.
 
 
 
@@ -581,11 +581,11 @@ void **<font color='red'> eval_mod</font>** (Ciphertext **&ciph**, Ciphertext **
 **Description**： This function is used to perform modular arithmetic on a ciphertext.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **result**: A reference to a **Ciphertext** object, used to store the ciphertext after the modular arithmetic.
-- **eva_poly**: A constant reference to an **EvalModPoly** object, representing the given modular polynomial.
-- **relin_key**: A constant reference to a **RelinKeys** object, representing the encryption key used for relinearization.
-- **encoder**: A reference to a **CKKSEncoder** object, representing the encoder and decoder.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the ciphertext after the modular arithmetic.
+- **eva_poly** (EvalModPoly): A constant reference to an **EvalModPoly** object, representing the given modular polynomial.
+- **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the encryption key used for relinearization.
+- **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder.
 
 
 ### 21. Bootstrap : **<font color='red'> bootstrap</font>**
@@ -594,15 +594,15 @@ void **<font color='red'> bootstrap</font>** (Ciphertext **&ciph**, Ciphertext *
 **Description**： This function is used to bootstrap a ciphertext.
 
 **Parameters**: 
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.
-- **result**: A reference to a **Ciphertext** object, used to store the bootstrapped ciphertext.
-- **eva_poly**: A constant reference to an **EvalModPoly** object, representing the given modular polynomial.
-- **matrix_group0**: A reference to a **LinearMatrixGroup** object, representing the first group of linear matrices used for bootstrapping.
-- **matrix_group1**: A reference to a **LinearMatrixGroup** object, representing the second group of linear matrices used for bootstrapping.
-- **relin_key**: A constant reference to a **RelinKeys** object, representing the encryption key used for relinearization.
-- **rot_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
-- **conj_key**: A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation operations.
-- **encoder**: A reference to a **CKKSEncoder** object, representing the encoder and decoder.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the bootstrapped ciphertext.
+- **eva_poly** (EvalModPoly): A constant reference to an **EvalModPoly** object, representing the given modular polynomial.
+- **matrix_group0** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the first group of linear matrices used for bootstrapping.
+- **matrix_group1** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the second group of linear matrices used for bootstrapping.
+- **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the encryption key used for relinearization.
+- **rot_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for rotation operations.
+- **conj_key** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation operations.
+- **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder.
 
 
 
@@ -612,9 +612,9 @@ void **<font color='red'> switch_key</font>** (Ciphertext **&ciph**, Ciphertext 
 **Description**： This function switches the key of a ciphertext.<br>
 
 **Parameters**：
-- **ciph**: A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **result**: A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **switch_key**:  A constant reference to a vector of **PublicKey** objects, representing a given set of public keys.
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **switch_key** (PublicKey):  A constant reference to a vector of **PublicKey** objects, representing a given set of public keys.
 
 
 
