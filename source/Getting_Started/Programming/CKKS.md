@@ -14,7 +14,7 @@ Poseidon Supported parameter data structures：
 **Description**： MemoryPool is a class for managing addresses and memory space.
 
 **Members**：
-- **degree_type (DegreeType)**: Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768" (default) .
+- **degree_type** (DegreeType): Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768" (default) .
 
 **Functions**： 
 ```c++
@@ -27,15 +27,15 @@ getInstance(DegreeType degree_type);
 **Description**： CKKSParametersLiteralDefault is a class for initialization encryption parameters.
 
 **Members**：
-- **Type (SchemeType)**: Indicates the type of the encryption scheme.
-- **LogN (uint32_t)**: Indicates the logarithm of the ring degree. 
-- **LogSlots (uint32_t)**: Indicates the logarithm of slots. 
-- **LogQ (const vector<uint32_t>)**: Indicates the logarithm of the modulus of the ciphertext prime number. 
-- **LogP (const vector<uint32_t>)**: Indicates the logarithm of the modulus of the key switching auxiliary prime. 
-- **LogScale (uint32_t)**: Indicates the logarithm of the scaling factor. 
-- **H (uint32_t)**: Indicates the weight of Hamming. 
-- **T (uint32_t)**: Indicates the plaintext modulus. The optional values is 0 (default).
-- **q0_level (int)**: Indicates the level of q0. The optional values is 0 (default).
+- **Type** (SchemeType): Indicates the type of the encryption scheme.
+- **LogN** (uint32_t): Indicates the logarithm of the ring degree. 
+- **LogSlots** (uint32_t): Indicates the logarithm of slots. 
+- **LogQ** (const vector<uint32_t>): Indicates the logarithm of the modulus of the ciphertext prime number. 
+- **LogP** (const vector<uint32_t>): Indicates the logarithm of the modulus of the key switching auxiliary prime. 
+- **LogScale** (uint32_t): Indicates the logarithm of the scaling factor. 
+- **H** (uint32_t): Indicates the weight of Hamming. 
+- **T** (uint32_t): Indicates the plaintext modulus. The optional values is 0 (default).
+- **q0_level** (int): Indicates the level of q0. The optional values is 0 (default).
 
 **Functions**：Only constructors.
 
@@ -46,7 +46,7 @@ getInstance(DegreeType degree_type);
 **Description**： PoseidonContext is a class used to generate and manage context information.
 
 **Members**：
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -206,7 +206,7 @@ inline bool has_key(std::uint32_t galois_elt) const;
 **Description**： CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
 **Members**：
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -227,17 +227,17 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 **Description**： MatrixPlain is a class for storing plaintext matrix information.
  
 **Members**：
-- **LogSlots (uint32_t)**: Indicates the logarithm to 2 of the number of matrix elements.
+- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
 
-- **N1 (uint32_t)**: Indicates the number of rows in a matrix.
+- **N1** (uint32_t): Indicates the number of rows in a matrix.
 
-- **level (int)**: Indicates the level of the ciphertext module chain in which the matrix resides.
+- **level** (int): Indicates the level of the ciphertext module chain in which the matrix resides.
 
-- **scale (mpf_class)**: Indicates the scaling factor of the matrix.
+- **scale** (mpf_class): Indicates the scaling factor of the matrix.
 
-- **rot\_index (vector<int>)**:Indicates the rotation index of a matrix element in a polynomial.
+- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
 
-- **plain\_vec (map<int,Plaintext>)**:Indicates the polynomial corresponding to the matrix elements.
+- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
 
 
 
@@ -247,7 +247,7 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 **Description**： KeyGenerator is a class for generating keys.
 
 **Members**：
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
 ```c++
@@ -279,9 +279,9 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 **Members**：
 
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key (const SecretKey)**：Indicates the key involved in the encryption operation.
+- **secret\_key** (const SecretKey)：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
@@ -297,9 +297,9 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 
 **Members**：
 
-- **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
+- **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
-- **secret\_key (const SecretKey)**：Indicates the key involved in the encryption operation.
+- **secret\_key** (const SecretKey)：Indicates the key involved in the encryption operation.
 
 **Functions**：
 ```c++
