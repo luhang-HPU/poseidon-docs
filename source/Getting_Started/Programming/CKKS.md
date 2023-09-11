@@ -317,7 +317,7 @@ void decrypt(const Plaintext &plain, Ciphertext &destination) const;
 
 **Functions**： 
 ```c++
-auto create(const PoseidonContext &context) ->std::shared_ptr< Envaluator >;
+auto create(const PoseidonContext &context)->std::shared_ptr< Envaluator >;
 ```
 : A function used to create an Envaluator object based on the given PoseidonContext object can select the adopted full-homomorphic encryption algorithms such as BFV, CKKS, and their corresponding hardware or software libraries. The specific algorithm support is detailed in the next section.  
 
@@ -329,7 +329,10 @@ auto create(const PoseidonContext &context) ->std::shared_ptr< Envaluator >;
 
 ## Evaluation Functions
 ### 1. Addition between ciphertexts : **<font color='red'> add</font>**
-void **<font color='red'> add</font>** (Ciphertext **&ciph1**, Ciphertext **&ciph2**, Ciphertext **&result**) override;
+
+```c
+void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
+```
 
 **Description**： This function performs homomorphic addition on two ciphertexts.<br>
 
@@ -341,7 +344,10 @@ void **<font color='red'> add</font>** (Ciphertext **&ciph1**, Ciphertext **&cip
 
 
 ### 2. Addition of ciphertext and plaintext : **<font color='red'> add_plain</font>**
-void **<font color='red'> add_plain</font>** (Ciphertext **&ciph**, Plaintext **&plain**,Ciphertext **&result**) override;
+
+```c
+void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
+```
 
 **Description**：This function performs homomorphic addition between a ciphertext and a plaintext.<br>
 
@@ -353,7 +359,10 @@ void **<font color='red'> add_plain</font>** (Ciphertext **&ciph**, Plaintext **
 
 
 ### 3. Subtraction between ciphertexts : **<font color='red'> sub</font>**
-void **<font color='red'> sub</font>** (Ciphertext **&ciph1**, Ciphertext **&ciph2**, Ciphertext **&result**) override;
+
+```c
+void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
+```
 
 **Description**： This function performs homomorphic subtraction between two ciphertexts.<br>
 
@@ -365,7 +374,10 @@ void **<font color='red'> sub</font>** (Ciphertext **&ciph1**, Ciphertext **&cip
 
 
 ### 4. Multiplication between ciphertexts : **<font color='red'> multiply</font>**
-void **<font color='red'> multiply</font>** (Ciphertext **&ciph0**, Ciphertext **&ciph1**, Ciphertext **&result**, const RelinKeys **&relin_key**) override;
+
+```c
+void multiply(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, const RelinKeys &relin_key) override;
+```
 
 **Description**：This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
 
@@ -378,7 +390,10 @@ void **<font color='red'> multiply</font>** (Ciphertext **&ciph0**, Ciphertext *
 
 
 ### 5. Multiplication of ciphertext and plaintext : **<font color='red'> multiply_plain</font>**
-void **<font color='red'> multiply_plain</font>** (Ciphertext **&ciph**, Plaintext **&plain**,Ciphertext **&result**) override;
+
+```c
+void multiply_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
+```
 
 **Description**： This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
 
@@ -390,7 +405,10 @@ void **<font color='red'> multiply_plain</font>** (Ciphertext **&ciph**, Plainte
 
 
 ### 6. Rescale : **<font color='red'> rescale</font>**
-void **<font color='red'> rescale</font>** (Ciphertext **&ciph**) override;
+
+```c
+void rescale(Ciphertext &ciph) override;
+```
 
 **Description**： This function performs a rescaling operation on a ciphertext.<br>
 
@@ -400,7 +418,10 @@ void **<font color='red'> rescale</font>** (Ciphertext **&ciph**) override;
 
 
 ### 7. Ciphertext rotation : **<font color='red'> rotate</font>**
-void **<font color='red'> rotate</font>** (Ciphertext **&ciph**, Ciphertext **&result**, const GaloisKeys **&rot_key**,  int **k**) override;
+
+```c
+void rotate(Ciphertext &ciph, Ciphertext &result, const GaloisKeys &rot_key,  int k) override;
+```
 
 **Description**： This function is used to rotate a ciphertext.<br>
 
@@ -414,7 +435,10 @@ void **<font color='red'> rotate</font>** (Ciphertext **&ciph**, Ciphertext **&r
 
 
 ### 8. Take conjugate : **<font color='red'> conjugate</font>**
-void **<font color='red'> conjugate</font>** (Ciphertext **&ciph**, Ciphertext **&result**, const GaloisKeys **&conj_key**) override;
+
+```c
+void conjugate(Ciphertext &ciph, Ciphertext &result, const GaloisKeys &conj_key) override;
+```
 
 **Description**： This function  is used to conjugate a ciphertext, that is, to transform each of its elements into its complex conjugate.<br>
 
@@ -427,7 +451,10 @@ void **<font color='red'> conjugate</font>** (Ciphertext **&ciph**, Ciphertext *
 
 
 ### 9. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
-void **<font color='red'> multiplyByDiagMatrixBSGS</font>** (Ciphertext **&ciph**, MatrixPlain **&plain_mat**, Ciphertext **&result**, const GaloisKeys **&rot_key**) override;
+
+```c
+void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
+```
 
 **Description**： This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
 
@@ -440,7 +467,10 @@ void **<font color='red'> multiplyByDiagMatrixBSGS</font>** (Ciphertext **&ciph*
 
 
 ### 10. Coefficient to plaintext slot : **<font color='red'> coeff_to_slot</font>**
-void **<font color='red'> coeff_to_slot</font>** (Ciphertext **&ciph**, LinearMatrixGroup **&matrix_group**, Ciphertext **&result_real**, Ciphertext **&result_imag**, const GaloisKeys **&rot_key**, const GaloisKeys **&conj_key**, CKKSEncoder **&encoder**) override;
+
+```c
+void coeff_to_slot(Ciphertext &ciph, LinearMatrixGroup &matrix_group, Ciphertext &result_real, Ciphertext &result_imag, const GaloisKeys &rot_key, const GaloisKeys &conj_key, CKKSEncoder &encoder) override;
+```
 
 **Description**：  This function is used to transform a ciphertext from the coefficient domain to the slot domain.
 
@@ -456,7 +486,10 @@ void **<font color='red'> coeff_to_slot</font>** (Ciphertext **&ciph**, LinearMa
 
 
 ### 11. Plaintext slot to coefficient : **<font color='red'> slot_to_coeff</font>**
-**void** **<font color='red'> slot_to_coeff</font>** (**Ciphertext** &ciph_real, **Ciphertext** &ciph_imag, **LinearMatrixGroup** &matrix_group, **Ciphertext** &result, **const GaloisKeys** &rot_key, **const GaloisKeys** &conj_key, **CKKSEncoder** &encoder) override;
+
+```c
+void slot_to_coeff(Ciphertext &ciph_real, Ciphertext &ciph_imag, LinearMatrixGroup &matrix_group, Ciphertext &result, const GaloisKeys &rot_key, const GaloisKeys &conj_key, CKKSEncoder &encoder) override;
+```
 
 **Description**： This function is used to transform a ciphertext from the slot domain to the coefficient domain.
 
@@ -473,8 +506,11 @@ void **<font color='red'> coeff_to_slot</font>** (Ciphertext **&ciph**, LinearMa
 
 
 ### 12. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
-void **<font color='red'> ftt_fwd</font>** (Plaintext **&plain** ,Plaintext **&result**)<br>
-void **<font color='red'> ftt_fwd</font>** (Ciphertext **&ciph**, Ciphertext **&result**) override;
+
+```c
+void ftt_fwd(Plaintext &plain ,Plaintext &result)
+void ftt_fwd(Ciphertext &ciph, Ciphertext &result) override;
+```
 
 **Description**： This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
 
@@ -486,8 +522,11 @@ void **<font color='red'> ftt_fwd</font>** (Ciphertext **&ciph**, Ciphertext **&
 
 
 ### 13. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
-void **<font color='red'> ftt_inv</font>** (Plaintext **&plain** ,Plaintext **&result**) override;<br>
-void **<font color='red'> ftt_inv</font>** (Ciphertext **&ciph** ,Ciphertext **&result**) override;
+
+```c
+void ftt_inv(Plaintext &plain ,Plaintext &result) override;
+void ftt_inv(Ciphertext &ciph ,Ciphertext &result) override;
+```
 
 **Description**： This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
 
@@ -500,7 +539,10 @@ void **<font color='red'> ftt_inv</font>** (Ciphertext **&ciph** ,Ciphertext **&
 
 
 ### 14. Read ciphertext information from accelerator card : **<font color='red'> read</font>**
-void **<font color='red'> read</font>** (Ciphertext **&ciph**) override;
+
+```c
+void read(Ciphertext &ciph) override;
+```
 
 **Description**： This function is used to read data from the acceleration card in the ciphertext.
 
@@ -510,7 +552,10 @@ void **<font color='red'> read</font>** (Ciphertext **&ciph**) override;
 
 
 ### 15. Multiplication of ciphertext and complex constant : **<font color='red'> multiply_const</font>**
-void **<font color='red'> multiply_const</font>** (Ciphertext **&ciph**, complex<double> **constData**, Ciphertext **&result**, CKKSEncoder **&encoder**, bool **isDirect** = false) override;
+
+```c
+void multiply_const(Ciphertext &ciph, complex<double> constData, Ciphertext &result, CKKSEncoder &encoder, bool isDirect = false) override;
+```
 
 **Description**： This function is used for the homomorphic multiplication of a ciphertext and a complex constant.
 
@@ -524,7 +569,10 @@ void **<font color='red'> multiply_const</font>** (Ciphertext **&ciph**, complex
 
 
 ### 16. Addition of ciphertext and complex constant : **<font color='red'> add_const</font>**
-void **<font color='red'> add_const</font>** (Ciphertext **&ciph**, double **constData**, Ciphertext **&result**) override;
+
+```c
+void add_const(Ciphertext &ciph, double constData, Ciphertext &result) override;
+```
 
 **Description**： This function is used for the homomorphic addition of a ciphertext and a real constant.
 
@@ -536,7 +584,10 @@ void **<font color='red'> add_const</font>** (Ciphertext **&ciph**, double **con
 
 
 ### 17. Discrete Fourier Transform on ciphertext : **<font color='red'> dft</font>**
-void **<font color='red'> dft</font>** (Ciphertext **&ciph**, LinearMatrixGroup **&matrix_group**, Ciphertext **&result**, const GaloisKeys **&rot_key**) override;
+
+```c
+void dft(Ciphertext &ciph, LinearMatrixGroup &matrix_group, Ciphertext &result, const GaloisKeys &rot_key) override;
+```
 
 **Description**： This function is used for the Discrete Fourier Transform (DFT) of a ciphertext.
 
@@ -549,7 +600,10 @@ void **<font color='red'> dft</font>** (Ciphertext **&ciph**, LinearMatrixGroup 
 
 
 ### 18. Dynamic rescale : **<font color='red'> rescale_dynamic</font>**
-void **<font color='red'> rescale_dynamic</font>** (Ciphertext **&ciph**, mpf_class **scale**);
+
+```c
+void rescale_dynamic(Ciphertext &ciph, mpf_class scale);
+```
 
 **Description**： This function is used for dynamic rescaling of a ciphertext.
 
@@ -559,8 +613,11 @@ void **<font color='red'> rescale_dynamic</font>** (Ciphertext **&ciph**, mpf_cl
 
 
 ### 19. Polynomial evaluation : **<font color='red'> evaluatePolyVector</font>**
-void **<font color='red'> evaluatePolyVector</font>** (Ciphertext **&ciph**, Ciphertext **&destination**, const PolynomialVector **&polys**, mpf_class **scalingfactor**, const RelinKeys **&relin_key**, CKKSEncoder **&encoder**) override;<br>
-void **<font color='red'> evaluatePolyVector</font>** (Ciphertext **&ciph**, Ciphertext **&destination**, const *PolynomialVector **&polys**, mpf_class **scalingfactor**, const RelinKeys &**relin_key**, CKKSEncoder **&encoder**, Decryptor **&dec**);
+
+```c
+void evaluatePolyVector(Ciphertext &ciph, Ciphertext &destination, const PolynomialVector &polys, mpf_class scalingfactor, const RelinKeys &relin_key, CKKSEncoder &encoder**) override;
+void evaluatePolyVector(Ciphertext &ciph, Ciphertext &destination, const PolynomialVector &polys, mpf_class scalingfactor, const RelinKeys &relin_key, CKKSEncoder &encoder, Decryptor &dec);
+```
 
 **Description**： This function is used to evaluate a polynomial. The coefficients of Chebyshev or Taylor polynomials are pre-calculated, and then the polynomial calculation is performed.
 
@@ -576,7 +633,10 @@ void **<font color='red'> evaluatePolyVector</font>** (Ciphertext **&ciph**, Cip
 
 
 ### 20. Evaluate modulo on ciphertext vector : **<font color='red'> eval_mod</font>**
-void **<font color='red'> eval_mod</font>** (Ciphertext **&ciph**, Ciphertext **&result**, const EvalModPoly **&eva_poly**, const RelinKeys **&relin_key**, CKKSEncoder **&encoder**) override;
+
+```c
+void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const RelinKeys &relin_key, CKKSEncoder &encoder) override;
+```
 
 **Description**： This function is used to perform modular arithmetic on a ciphertext.
 
@@ -589,7 +649,10 @@ void **<font color='red'> eval_mod</font>** (Ciphertext **&ciph**, Ciphertext **
 
 
 ### 21. Bootstrap : **<font color='red'> bootstrap</font>**
-void **<font color='red'> bootstrap</font>** (Ciphertext **&ciph**, Ciphertext **&result**, const EvalModPoly **&eva_poly**, LinearMatrixGroup **& matrix_group0**, LinearMatrixGroup **&matrix_group1**, const RelinKeys **&relin_key**, const GaloisKeys **&rot_key**, const GaloisKeys **&conj_key**, CKKSEncoder **&encoder**) override;
+
+```c
+void bootstrap(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, LinearMatrixGroup & matrix_group0, LinearMatrixGroup &matrix_group1, const RelinKeys &relin_key, const GaloisKeys &rot_key, const GaloisKeys &conj_key, CKKSEncoder &encoder) override;
+```
 
 **Description**： This function is used to bootstrap a ciphertext.
 
@@ -607,7 +670,10 @@ void **<font color='red'> bootstrap</font>** (Ciphertext **&ciph**, Ciphertext *
 
 
 ### 22. Key switch : **<font color='red'> switch_key</font>**
-void **<font color='red'> switch_key</font>** (Ciphertext **&ciph**, Ciphertext **&result**, const vector<PublicKey> **&switch_key**);
+
+```c
+void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &switch_key);
+```
 
 **Description**： This function switches the key of a ciphertext.<br>
 

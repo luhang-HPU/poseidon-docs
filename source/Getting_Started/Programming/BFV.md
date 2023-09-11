@@ -328,7 +328,10 @@ auto create(const PoseidonContext &context) ->std::shared_ptr< Envaluator >;
 
 ## Evaluation Functions
 ### 1. Ciphertext and ciphertext addition : **<font color='red'> add</font>**
-void **<font color='red'> add</font>** (**Ciphertext** &ciph1, Ciphertext **&ciph2**, Ciphertext **&result**) override;
+
+```c
+void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
+```
 
 **Description**：This function performs homomorphic addition on two ciphertexts.<br>
 
@@ -340,7 +343,10 @@ void **<font color='red'> add</font>** (**Ciphertext** &ciph1, Ciphertext **&cip
 
 
 ### 2. Ciphertext and plaintext addition : **<font color='red'> add_plain</font>**
-void **<font color='red'> add_plain</font>** (Ciphertext **&ciph**, Plaintext **&plain**,Ciphertext **&result**) override;
+
+```c
+void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
+```
 
 **Description**：This function performs homomorphic addition between a ciphertext and a plaintext.<br>
 
@@ -352,7 +358,10 @@ void **<font color='red'> add_plain</font>** (Ciphertext **&ciph**, Plaintext **
 
 
 ### 3. Ciphertext and ciphertext subtraction : **<font color='red'> sub</font>**
-void **<font color='red'> sub</font>** (Ciphertext **&ciph1**, Ciphertext **&ciph2**, Ciphertext **&result**) override;
+
+```c
+void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
+```
 
 **Description**：This function performs homomorphic subtraction between two ciphertexts.<br>
 
@@ -364,7 +373,10 @@ void **<font color='red'> sub</font>** (Ciphertext **&ciph1**, Ciphertext **&cip
 
 
 ### 4. Ciphertext and ciphertext multiplication : **<font color='red'> multiply</font>**
-void **<font color='red'> multiply</font>** (Ciphertext **&ciph0**, Ciphertext **&ciph1**, Ciphertext **&result**, const RelinKeys **&relin_key**) override;
+
+```c
+void multiply(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, const RelinKeys &relin_key) override;
+```
 
 **Description**：This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
 
@@ -377,7 +389,10 @@ void **<font color='red'> multiply</font>** (Ciphertext **&ciph0**, Ciphertext *
 
 
 ### 5. Ciphertext and plaintext multiplication : **<font color='red'> **multiply_plain**</font>**
-void **<font color='red'> **multiply_plain**</font>** (Ciphertext &**ciph**, Plaintext **&plain**, Ciphertext **&result**) override;
+
+```c
+void multiply_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
+```
 
 **Description**：This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
 
@@ -389,7 +404,10 @@ void **<font color='red'> **multiply_plain**</font>** (Ciphertext &**ciph**, Pla
 
 
 ### 6. Rescaling : **<font color='red'> rescale</font>**
-void **<font color='red'> rescale</font>** (Ciphertext **&ciph**) override;
+
+```c
+void rescale(Ciphertext &ciph) override;
+```
 
 **Description**：This function performs a rescaling operation on a ciphertext.<br>
 
@@ -399,7 +417,10 @@ void **<font color='red'> rescale</font>** (Ciphertext **&ciph**) override;
 
 
 ### 7. Ciphertext row rotation : **<font color='red'> rotate_col</font>**
-void **<font color='red'> rotate_col</font>** (Ciphertext **&encrypted**, const GaloisKeys **&galois_keys**, Ciphertext **&destination**);
+
+```c
+void rotate_col(Ciphertext &encrypted, const GaloisKeys &galois_keys, Ciphertext &destination);
+```
 
 **Description**：This function is used to perform a column rotation operation on a ciphertext.<br>
 
@@ -411,7 +432,10 @@ void **<font color='red'> rotate_col</font>** (Ciphertext **&encrypted**, const 
 
 
 ### 8. Ciphertext column rotation : **<font color='red'> rotate_row</font>**
-void **<font color='red'> rotate_row</font>** (Ciphertext **&encrypted**, int **rot_step**, const GaloisKeys **&galois_keys**, Ciphertext **&destination**);
+
+```c
+void rotate_row(Ciphertext &encrypted, int rot_step, const GaloisKeys &galois_keys, Ciphertext &destination);
+```
 
 **Description**：This function is used to perform a row rotation operation on a ciphertext.<br>
 
@@ -422,7 +446,10 @@ void **<font color='red'> rotate_row</font>** (Ciphertext **&encrypted**, int **
 
 
 ### 9. Key switching : **<font color='red'> switch_key</font>**
-void **<font color='red'> switch_key</font>** (Ciphertext **&ciph**, Ciphertext **&result**, const vector<PublicKey> **&switch_key**);
+
+```c
+void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &switch_key);
+```
 
 **Description**：This function switches the key of a ciphertext.<br>
 
@@ -434,7 +461,11 @@ void **<font color='red'> switch_key</font>** (Ciphertext **&ciph**, Ciphertext 
 
 
 ### 10. Ciphertext and plaintext matrix multiplication : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
-void **<font color='red'> multiplyByDiagMatrixBSGS</font>** (Ciphertext **&ciph**, MatrixPlain **&plain_mat**, Ciphertext **&result**, const GaloisKeys **&rot_key**) override;
+
+```c
+void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
+```
+
 
 **Description**：This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
 
