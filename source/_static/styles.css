@@ -6,7 +6,7 @@ table, th, td {
     border: 1px solid rgb(0, 0, 0);
 }
 
-code, pre {
+div.highlight-cpp div.highlight pre {
     background-color: #EEFFCC; /* 这是淡绿色 */
 }
 
@@ -14,9 +14,8 @@ div.highlight-c div.highlight pre {
     background-color: rgb(226, 250, 250);
 }
 
-div.highlight-cmake div.highlight pre,
-div.highlight-cmake div.highlight pre span {
-    color: black;
+code ,pre {
+
     background-color: rgb(247, 246, 246);
 }
 
