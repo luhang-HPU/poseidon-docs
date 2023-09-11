@@ -10,6 +10,11 @@ code, pre {
     background-color: #EEFFCC; /* 这是淡绿色 */
 }
 
+div.highlight-c div.highlight pre {
+    background-color: rgb(226, 250, 250);
+}
+
+
 .top-right-image {
     position: absolute;
     top: 105px;  /* Adjust as needed */
