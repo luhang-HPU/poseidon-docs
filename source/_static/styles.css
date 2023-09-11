@@ -14,6 +14,14 @@ div.highlight-c div.highlight pre {
     background-color: rgb(226, 250, 250);
 }
 
+div.highlight-cmake div.highlight pre,
+div.highlight-cmake div.highlight pre span {
+    color: black;
+    background-color: rgb(240, 240, 240);
+}
+
+
+
 
 .top-right-image {
     position: absolute;
