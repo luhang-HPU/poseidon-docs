@@ -17,7 +17,7 @@ Poseidon Supported parameter data structures：
 - **degree_type** (DegreeType): Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768" (default) .
 
 **Functions**： 
-```c++
+```cpp
 getInstance(DegreeType degree_type);
 ```
 : Used to create Memorypool.
@@ -44,17 +44,17 @@ getInstance(DegreeType degree_type);
 - **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
-```c++
+```cpp
 void const uint32_t poly_degree(); 
 ```
 : The degree of a polynomial is returned.
 
-```c++
+```cpp
 const mpf_class scaling_factor() const;
 ```
 : The scaling_factor is returned.
 
-```c++
+```cpp
 void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > random_generator);
 ```
 : Used to set up a random number generator.
@@ -80,22 +80,22 @@ void set_random_generator(std::shared_ptr< UniformRandomGeneratorFactory > rando
 **Members**：null.
 
 **Functions**：
-```c++
+```cpp
 const RNSPolynomial* poly() const;
 ```
 : Used to get a polynomial pointer.
 
-```c++
+```cpp
 MetaData* metaData() const;
 ```
 : A function that gets Pointers to metadata.
 
-```c++
+```cpp
 int newMetaData(const mpf_class &scaling_factor,bool isNTT,int level,int poly_degree);
 ```
 : A function to create new metadata.
 
-```c++
+```cpp
 int newPoly(const PoseidonContext& context,int level);
 ```
 : A function for creating a new polynomial.
@@ -109,32 +109,32 @@ int newPoly(const PoseidonContext& context,int level);
 **Members**：null.
 
 **Functions**：
-```c++
+```cpp
 void newPoly(const PoseidonContext& context, int rns_num_q, int rns_num_p);
 ```
 : A function for creating a new polynomial.
 
-```c++
+```cpp
 void newMetaData(const mpf_class &scaling_factor, bool isNTT, int level, int poly_degree);
 ```
 : A function to create new metadata.
 
-```c++
+```cpp
 bool isValid();
 ```
 : Used to check whether the ciphertext polynomial is valid.
 
-```c++
+```cpp
 RNSPolynomial* c0() const;
 ```
 : The function used to get the first part of the polynomial pointer. 
 
-```c++
+```cpp
 RNSPolynomial* **c1() const;
 ```
 : A function to get a pointer to the second part polynomial.
 
-```c++
+```cpp
 MetaData* metaData() const;
 ```
 : A function that gets Pointers to metadata.
@@ -149,7 +149,7 @@ MetaData* metaData() const;
 **Members**：null.
 
 **Functions**：
-```c++
+```cpp
 inline Ciphertext data() const noexcept;
 ```
 : The function is used to get the key.
@@ -165,12 +165,12 @@ inline Ciphertext data() const noexcept;
 **Members**：null.
 
 **Functions**：
-```c++
+```cpp
 inline std::size_t size() const noexcept;
 ```
 : The function is used to get the number of keys.
 
-```c++
+```cpp
 inline auto &data() noexcept;
 ```
 : The function is used to get the address of the key data.
@@ -183,12 +183,12 @@ inline auto &data() noexcept;
 **Members**：null.
 
 **Functions**： 
-```c++
+```cpp
 static inline std::size_t get_index(std::uint32_t galois_elt);
 ```
 : A function used to obtain the corresponding index of a Galois element.
 
-```c++
+```cpp
 inline bool has_key(std::uint32_t galois_elt) const;
 ```
 : A function used to determine whether a given Galois element exists.
@@ -204,12 +204,12 @@ inline bool has_key(std::uint32_t galois_elt) const;
 - **paramLiteral** (const ParametersLiteral): Represents the encryption parameters used for computing context information.<br>
 
 **Functions**：
-```c++
+```cpp
 int encode(vector<complex<double>> vec, Plaintext &plain, const mpf_class scaling_factor);
 ```
 : A function used to encode a complex number vector into a plaintext polynomial.
 
-```c++
+```cpp
 int decode(const Plaintext &plain, vector<complex<double>>& vec);
 ```
 : A function used to decode a plaintext polynomial into a complex number vector.
@@ -244,22 +244,22 @@ int decode(const Plaintext &plain, vector<complex<double>>& vec);
 - **paramLiteral (const ParametersLiteral)**: Indicates the encryption parameter used to calculate context information.
 
 **Functions**：
-```c++
+```cpp
 inline void create_public_key(PublicKey &destination) const;
 ```
 : A function for creating a public key. 
 
-```c++
+```cpp
 inline void create_relin_keys(RelinKeys &destination);
 ```
 : A function to create a relinearized key.
 
-```c++
+```cpp
 inline void create_galois_keys(const std::vector<int> &steps, GaloisKeys &destination);
 ```
 : A function used to create a rotation key based on a given rotation step vector.
 
-```c++
+```cpp
 inline void create_conj_keys(GaloisKeys &destination);
 ```
 : A function used to create a conjugate rotation key.
@@ -279,7 +279,7 @@ inline void create_conj_keys(GaloisKeys &destination);
 - **secret\_key** (const SecretKey)：Indicates the key involved in the encryption operation.
 
 **Functions**：
-```c++
+```cpp
 void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 ```
 : A function used to encrypt plaintext.
@@ -299,7 +299,7 @@ void encrypt(const Plaintext &plain, Ciphertext &destination)const;
 - **secret\_key** (const SecretKey)：Indicates the key involved in the encryption operation.
 
 **Functions**：
-```c++
+```cpp
 void decrypt(const Plaintext &plain, Ciphertext &destination) const;
 ```
 : A function used to decrypt the plaintext.
@@ -315,7 +315,7 @@ void decrypt(const Plaintext &plain, Ciphertext &destination) const;
 **Members**：null.
 
 **Functions**： 
-```c++
+```cpp
 auto create(const PoseidonContext &context) ->std::shared_ptr< Envaluator >;
 ```
 : A function used to create an Envaluator object based on the given PoseidonContext object can select the adopted full-homomorphic encryption algorithms such as BFV, CKKS, and their corresponding hardware or software libraries. The specific algorithm support is detailed in the next section.  

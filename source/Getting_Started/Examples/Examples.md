@@ -2,7 +2,7 @@
 
 
 **main.cpp**
-```c++
+```cpp
 #include <poseidon/Release/ParametersLiteral.h>
 #include <poseidon/Release/PoseidonContext.h>
 #include <poseidon/Release/define.h>
@@ -63,7 +63,7 @@ int main() {
 ```
 
 **CMakeLists.txt**
-```cmake
+```
 cmake_minimum_required(VERSION 3.10)
 project(example)
 find_package(Threads REQUIRED)
