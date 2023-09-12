@@ -1,7 +1,8 @@
 
-#  Example of Encode, Encrypt, Decrypt and Decode
+#  Encode/Decode, Encrypt/Decrypt  
 **main.cpp**
 ```cpp
+// Include necessary Poseidon library headers for different functionalities.
 #include <poseidon/Release/ParametersLiteral.h>
 #include <poseidon/Release/PoseidonContext.h>
 #include <poseidon/Release/define.h>
@@ -13,59 +14,89 @@
 
 using namespace std;
 
+// Make use of the Poseidon namespace for easier access to its classes and methods.
 using namespace poseidon;
+
 int main() {
 
+    // Initialize CKKS parameters using default literal and given degree (8192).
     CKKSParametersLiteralDefault param_literal(degree_8192);
     PoseidonContext context(param_literal);
+
+    // Calculate the degree based on the logarithmic value provided by param_literal.
     auto degree = 1 << param_literal.LogN;
-    
+
+    // Declare public key, plaintexts and ciphertext variables.
     PublicKey public_key;
-    Plaintext plainA,plainRes;
+    Plaintext plainA, plainRes;
     Ciphertext ciphA;
-    //KeyGenerator kgen1(context,aa);
+
+    // Initialize the key generator with the given context.
     KeyGenerator kgen(context);
+
+    // Generate the public key.
     kgen.create_public_key(public_key);
-    Encryptor enc1(context,public_key,kgen.secret_key());
-    Decryptor dec1(context,kgen.secret_key());
 
+    // Initialize the encryptor and decryptor using the public and secret keys respectively.
+    Encryptor enc1(context, public_key, kgen.secret_key());
+    Decryptor dec1(context, kgen.secret_key());
 
+    // Random engine for generating random values.
     default_random_engine e;
-    //=====================init random data ============================
+
+    //===================== Initialize random data ============================
+    
+    // Vector to store complex double values.
     std::vector<std::complex<double>> vec;
     std::vector<std::complex<double>> vec_result;
+
+    // Matrix to store vectors of complex double values.
     std::vector<vector<std::complex<double>>> mat;
+
+    // Determine the size of the vector based on logarithmic slot values.
     int vec_size = 1 << param_literal.LogSlots;
     mat.resize(vec_size);
-    //create message
+
+    // Message vectors to store complex double values.
     vector<complex<double>> message;
     vector<complex<double>> message1(vec_size);
+
+    // Populate the message vector with random complex values of determined size.
     sample_random_complex_vector(message, vec_size);
 
-
+    // Initialize the CKKS encoder with the provided context.
     CKKSEncoder ckksenc(context);
-    ckksenc.encode(message,plainA,context.scaling_factor());
 
-    enc1.encrypt(plainA,ciphA);
-    dec1.decrypt(ciphA,plainRes);
-    ckksenc.decode(plainRes,message1);
+    // Encode the message into a plaintext using the scaling factor from the context.
+    ckksenc.encode(message, plainA, context.scaling_factor());
+
+    // Encrypt the plaintext and store the result in a ciphertext.
+    enc1.encrypt(plainA, ciphA);
+
+    // Decrypt the ciphertext and store the result back into a plaintext.
+    dec1.decrypt(ciphA, plainRes);
+
+    // Decode the plaintext back into the message vector.
+    ckksenc.decode(plainRes, message1);
+
+    // Display the first 10 values of the source and result vectors for comparison.
     for(int i = 0; i < 10; i++){
-        //printf("source vec[%d] : %0.10f + %0.10f I \n",i,real(messageReal2[i].real()),imag(messageReal2[i].real()));
-        printf("source vec[%d] : %.10lf \n",i,message[i]);
-        printf("result vec[%d] : %.10lf \n",i,message1[i]);
+        printf("source vec[%d] : %.10lf \n", i, message[i]);
+        printf("result vec[%d] : %.10lf \n", i, message1[i]);
     }
-
+    
     return 0;
-
 }
+
 
 ```
 
 
 
-#  Example of Bootstrap
+#  Bootstraping
 **main.cpp**
 ```cpp
+// Include necessary Poseidon library headers for different functionalities.
 #include <iostream>
 #include <fstream>   
 #include "poseidon/Release/define.h"
@@ -103,13 +134,13 @@ using  namespace  poseidon;
 
 //===================== boostrap ======================================
 int main(){
-
+    
+    //Define constants for the bootstrap process
     uint32_t q0_bit = 63;
     auto q_def = 31;
     vector<uint32_t> logQTmp{31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31}; 
     vector<uint32_t> logPTmp{31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31};
     ParametersLiteral ckks_param_literal(CKKS, 11, 10, logQTmp, logPTmp, q_def, 30,0,1);
-
 
     //=====================config======================================
     PoseidonContext context(ckks_param_literal);
@@ -120,6 +151,7 @@ int main(){
     std::vector<vector<std::complex<double>>> mat;
     int mat_size = 1 << ckks_param_literal.LogSlots;
     mat.resize(mat_size);
+
     //create message
     vector<complex<double>> message;
     vector<complex<double>> message1;
@@ -178,7 +210,6 @@ int main(){
 
 
     auto ckks_eva = EvaluatorFactory::SoftFactory()->create(context);
-    //auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);//for hardware
 
 
     auto start = chrono::high_resolution_clock::now();
@@ -205,12 +236,13 @@ int main(){
 }
 ```
 
-# Example of Using Chebyshev Polynomial Evaluation in Heart Disease Prediction
+# Using Chebyshev Polynomial Evaluation in Heart Disease Prediction
 **main.cpp**
 ```cpp
+// Include necessary Poseidon library headers for different functionalities.
 
 #include <iostream>
-#include <fstream>   //头文件包含
+#include <fstream>   
 #include <cstdlib>
 #include <vector>
 #include <cmath>
@@ -296,7 +328,7 @@ int main()
     message_height.resize(vec_size);
     message_weight.resize(vec_size);
 
-    //message下标为0的地址存储对应身体数据的原始值
+    //The address with a message index of 0 stores the original value of the corresponding body data
     message_age[0] = age;
     message_sbp[0] = sbp;
     message_dbp[0] = dbp;
@@ -304,7 +336,7 @@ int main()
     message_height[0] = height;
     message_weight[0] = weight;
 
-    //coef存储对应系数
+    //Coef storage corresponding coefficient
     double coef_age = 0.072;
     double coef_sbp = 0.013;
     double coef_dbp = -0.029;
@@ -312,7 +344,7 @@ int main()
     double coef_height = -0.053;
     double coef_weight = 0.021;
 
-    //taylor展开的系数
+    //The coefficients of Taylor expansion
     double taylor_coef_0 = 1.0 / 2;
     double taylor_coef_1 = 1.0 / 4;
     double taylor_coef_3 = -1.0 / 48;
@@ -374,12 +406,12 @@ int main()
     enc.encrypt(plain_weight,cipher_weight);
 
     //-------------------------calculate----------------------------------
-    //创建CKKS Evaluator
+    //Create CKKS Evaluator
     auto ckks_eva = EvaluatorFactory::SoftFactory()->create(context);
 
     auto start = chrono::high_resolution_clock::now();
 
-    //计算 x = 0.072∙Age+0.013∙SBP-0.029∙DBP+0.008∙CHL-0.053∙height+0.021∙weight
+    //Compute x = 0.072∙Age+0.013∙SBP-0.029∙DBP+0.008∙CHL-0.053∙height+0.021∙weight
 
     ckks_eva->multiply_const(cipher_age, coef_age, cipher_age);
     ckks_eva->multiply_const(cipher_sbp, coef_sbp, cipher_sbp);
@@ -395,7 +427,7 @@ int main()
     ckks_eva->add(cipher_x, cipher_weight, cipher_x);
     ckks_eva->rescale(cipher_x);
 
-    //计算e^x/(e^x+1)
+    //Compute e^x/(e^x+1)
     ckks_eva->multiply_const(cipher_x,(2.0/(double)(b-a)),cipher_x);
     ckks_eva->rescale(cipher_x);
     ckks_eva->evaluatePolyVector(cipher_x,cipher_result,polys,cipher_x.metaData()->getScalingFactor(),relinKeys,ckks_encoder);
@@ -420,21 +452,21 @@ int main()
 
 ```
 
-#  Example of PIR
+#  PIR
 ```cpp
-
+// Standard libraries for input/output and mathematical operations
 #include <iostream>
-#include <fstream>   //头文件包含
-#include "poseidon/Release/define.h"
-#include "poseidon/Release/homomorphic_DFT.h"
-#include "poseidon/Release/linear_transform.h"
-
+#include <fstream>
 #include <cstdlib>
 #include <vector>
 #include <cmath>
 #include <complex>
+#include <gmpxx.h>
 
-
+// Poseidon library headers for Fully Homomorphic Encryption operations and utilities
+#include "poseidon/Release/define.h"
+#include "poseidon/Release/homomorphic_DFT.h"
+#include "poseidon/Release/linear_transform.h"
 #include "poseidon/Release/util/number_theory.h"
 #include "poseidon/Release/hardware/ConfigGen.h"
 #include <gmpxx.h>
@@ -459,88 +491,91 @@ int main()
 #define RNS_C 2
 #include "poseidon/Release/linear_transform.h"
 #include "poseidon/Release/util/matrix_operation.h"
-using  namespace  poseidon;
 
+// Using the Poseidon namespace for clarity
+using namespace poseidon;
 
-int main(){
-    //=====================config======================================
+int main() {
+    //===================== Configuration ============================
+    // Initialize CKKS parameters with a default degree of 2048
     CKKSParametersLiteralDefault ckks_param_literal(degree_2048);
     PoseidonContext context(ckks_param_literal);
 
-    //=====================init random data ============================
-    std::vector<std::complex<double>> vec;
-    std::vector<std::complex<double>> vec_result,vec_result1;
-    int mat_size = 1 << ckks_param_literal.LogSlots;
-    std::vector<vector<std::complex<double>>> mat(mat_size,vector<complex<double>>(mat_size,0));
-    std::vector<vector<std::complex<double>>> mat_T(mat_size);//(mat_size,vector<complex<double>>(mat_size));
+    //===================== Initialize Random Data ===================
+    // Create vectors to hold complex numbers and results
+    std::vector<std::complex<double>> vec, vec_result, vec_result1;
+    int mat_size = 1 << ckks_param_literal.LogSlots; // Determine matrix size based on log slots
+    std::vector<vector<std::complex<double>>> mat(mat_size, vector<complex<double>>(mat_size, 0));
+    std::vector<vector<std::complex<double>>> mat_T(mat_size);
     std::vector<vector<std::complex<double>>> mat_T1;
-    //create message
-    vector<complex<double>> message(mat_size,0);
-
-    message[1] = 1;
+    
+    // Create a message vector initialized with zeros
+    vector<complex<double>> message(mat_size, 0);
+    message[1] = 1;  // Set the second element to 1
 
     vector<complex<double>> message_tmp(mat_size);
-    vector<complex<double>> message_sum(mat_size << 1,0.0);
+    vector<complex<double>> message_sum(mat_size << 1, 0.0);
 
-    //=====================init  Plain & Ciph =========================
-    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
-    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
+    //===================== Initialize Plaintext & Ciphertext ========
+    Plaintext plainA, plainB, plainRes, plainRes1, plainT;
+    Ciphertext cipherA, cipherB, cipherRes, cipherRes1, cipherRes2, cipherRes3;
     PublicKey public_key;
     RelinKeys relinKeys;
     GaloisKeys rotKeys;
     GaloisKeys conjKeys;
     CKKSEncoder ckks_encoder(context);
-    //=====================GenMatrices  ========================
+
+    //===================== Generate Matrices ========================
     MatrixPlain matrixPlain;
-
-    for(int i = 0; i < mat_size; i++){
-        sample_random_complex_vector2(mat[i],mat_size);
+    // Populate the matrix with random complex numbers
+    for (int i = 0; i < mat_size; i++) {
+        sample_random_complex_vector2(mat[i], mat_size);
     }
+
+    // Matrix operations
     auto level = context.crt_context()->maxLevel();
-    matrix_operations::transpose_matrix(mat,mat_T1);
-    for(int i = 0; i < mat.size(); i++){
-        matrix_operations::diagonal(mat_T1, i,mat_T[i]);
+    matrix_operations::transpose_matrix(mat, mat_T1); // Transpose the matrix
+    for (int i = 0; i < mat.size(); i++) {
+        matrix_operations::diagonal(mat_T1, i, mat_T[i]);
     }
-    GenMatrixformBSGS(matrixPlain,matrixPlain.rot_index, ckks_encoder, mat_T,
-                      level ,context.crt_context()->primes_q()[level], 1, ckks_param_literal.LogSlots);
+    GenMatrixformBSGS(matrixPlain, matrixPlain.rot_index, ckks_encoder, mat_T, level, context.crt_context()->primes_q()[level], 1, ckks_param_literal.LogSlots);
 
-    //=====================keys  =========================
-    //
+    //===================== Generate Keys ============================
     KeyGenerator kgen(context);
     kgen.create_public_key(public_key);
-
     kgen.create_relin_keys(relinKeys);
-    kgen.create_galois_keys(matrixPlain.rot_index,rotKeys);
+    kgen.create_galois_keys(matrixPlain.rot_index, rotKeys);
     kgen.create_conj_keys(conjKeys);
 
-    Encryptor enc(context,public_key,kgen.secret_key());
-    Decryptor dec(context,kgen.secret_key());
-    //===================== Doing ==============================
-    //encode
+    Encryptor enc(context, public_key, kgen.secret_key());
+    Decryptor dec(context, kgen.secret_key());
 
-    ckks_encoder.encode(message,plainA,context.scaling_factor());
-    //encrypt
+    //===================== Operations ===============================
+    // Encode the message
+    ckks_encoder.encode(message, plainA, context.scaling_factor());
 
-    enc.encrypt(plainA,cipherA);
-    //evaluate
+    // Encrypt the plaintext
+    enc.encrypt(plainA, cipherA);
+
+    // Evaluation operations on the ciphertext
     auto ckks_eva = EvaluatorFactory::SoftFactory()->create(context);
     auto start = chrono::high_resolution_clock::now();
-    ckks_eva->multiplyByDiagMatrixBSGS(cipherA,matrixPlain,cipherRes,rotKeys);
+    ckks_eva->multiplyByDiagMatrixBSGS(cipherA, matrixPlain, cipherRes, rotKeys);
     ckks_eva->read(cipherRes);
 
-    //decode & decrypt
-    dec.decrypt(cipherRes,plainRes);
-    ckks_encoder.decode(plainRes,vec_result);
+    // Decrypt and decode the resulting ciphertext
+    dec.decrypt(cipherRes, plainRes);
+    ckks_encoder.decode(plainRes, vec_result);
 
-
-    for(int i = 0; i < 8; i++){
-        printf("result vec[%d] : %0.10f + %0.10f I \n",i,real(mat[1][i]), imag(mat[1][i]));
-        printf("result vec[%d] : %0.10f + %0.10f I \n",i,real(vec_result[i]), imag(vec_result[i]));
+    // Display results
+    for (int i = 0; i < 8; i++) {
+        printf("result vec[%d] : %0.10f + %0.10f I \n", i, real(mat[1][i]), imag(mat[1][i]));
+        printf("result vec[%d] : %0.10f + %0.10f I \n", i, real(vec_result[i]), imag(vec_result[i]));
     }
 
     return 0;
-
 }
+
 ```
 
 **CMakeLists.txt**

@@ -18,7 +18,7 @@ Poseidon Supported parameter data structures：
 
 **Functions**： 
 ```cpp
-getInstance(DegreeType degree_type);
+void getInstance(DegreeType degree_type);
 ```
 : Used to create Memorypool.
 
