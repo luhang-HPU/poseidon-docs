@@ -3,7 +3,7 @@ Private Information Retrival (PIR)
 .. toctree::
    :maxdepth: 4
 
-   Private Information Retrival/Private
+   Private Information Retrival/PIR
 
 Private Set Intersection (PSI)
 ==============================
