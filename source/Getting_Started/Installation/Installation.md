@@ -1,6 +1,8 @@
 # Poseidon Library Installation Guide
 Thank you for choosing the Poseidon library. Here, you'll find the steps to download and install it.
 
+**Requirements:** Ubuntu(18.04 and so on)
+
 ## Download the Installation Package
 There are three sources to download the Poseidon installation package:
 
