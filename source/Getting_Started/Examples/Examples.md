@@ -361,7 +361,7 @@ int main(){
 
 
 
-# Matrix Multiply
+# Matrix Multiplication
 ```cpp
 // Include necessary Poseidon library headers for different functionalities.
 #include <iostream>
