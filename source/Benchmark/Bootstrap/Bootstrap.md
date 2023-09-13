@@ -165,7 +165,7 @@ int main(){
     enc.encrypt(plainA,cipherA);
 
 
-    auto ckks_eva = EvaluatorFactory::SoftFactory()->create(context);
+    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
 
 
     auto start = chrono::high_resolution_clock::now();
