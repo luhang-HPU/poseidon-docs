@@ -82,7 +82,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 <br>
 <br>
 
-## DEMO used by the system
+<!-- ## DEMO used by the system
 <br>
 
 **Integration with PrimiHub to complete PIR**
@@ -95,6 +95,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 </style>
 <br>
 <br>
+-->
 
 ## Code
 <br>
@@ -205,7 +206,7 @@ int main() {
     enc.encrypt(plainA, cipherA);
 
     // Evaluation operations on the ciphertext
-    auto ckks_eva = EvaluatorFactory::SoftFactory()->create(context);
+    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
     auto start = chrono::high_resolution_clock::now();
     ckks_eva->multiplyByDiagMatrixBSGS(cipherA, matrixPlain, cipherRes, rotKeys);
     ckks_eva->read(cipherRes);

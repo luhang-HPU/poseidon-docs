@@ -9,11 +9,10 @@ Poseidon Supported parameter data structures：
 
 <br>
 
-
 ### 1. Memory address management : **<font color='red'><span id="MemoryManager">MemoryManager</span> </font>**
 
 
-**Description**： MemoryPool is a class used to manage addresses and memory space in hardware mode. It is not recommended for users to it directly.
+**Description**： MemoryManager is a class used to manage addresses and memory space in hardware mode. It is not recommended for users to it directly.
 
 
 <br>
@@ -502,7 +501,7 @@ inline bool has_key(uint32_t galois_elt) const;
 
 
 
-### 9. **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>** : CKKS encryption scheme  class  
+### 9. **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>** : CKKS encryption scheme  class  
 
 **Description**： CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
@@ -521,40 +520,17 @@ void encode(vector<complex<double>> src, Plaintext &plain, const mpf_class scali
 
 
 ```cpp
-void decode(const Plaintext &plain, vector<complex<double>> &rec);
+void decode(const Plaintext &plain, vector<complex<double>> &res);
 ```
 - **plain** (Plaintext &): The plaintext.
-- **rec** (const mpf_class): The result of message.
+- **res** (const mpf_class): The result of message.
 
 : A function used to decode plaintext polynomials into complex vectors. 
 
 <br>
 
 
-
-
-### 10. Plaintext matrix : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
-
-
-**Description**： MatrixPlain is a class for storing plaintext matrix information.
- 
-**Members**：
-- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
-
-- **N1** (uint32_t): Indicates the number of rows in a matrix.
-
-- **level** (int): Indicates the level of the ciphertext module chain in which the matrix resides.
-
-- **scale** (mpf_class): Indicates the scaling factor of the matrix.
-
-- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
-
-- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
-
-
-<br>
-
-### 11. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
+### 10. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
 
 **Description**： KeyGenerator is a class for generating keys.
 
@@ -621,7 +597,7 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 
 
-### 12. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
+### 11. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
 
 **Description**： Encryptor is a class used to encrypt plaintext.
 
@@ -701,7 +677,7 @@ void set_public_key(const PublicKey &public_key)
 <br>
 
 
-### 13. Decryption class : **<font color='red'><span id="Decryptor">Decryptor</span> </font>**
+### 12. Decryption class : **<font color='red'><span id="Decryptor">Decryptor</span> </font>**
 
 **Description**： Decryptor is a class for decrypting plaintext.
 
@@ -729,7 +705,256 @@ void decrypt(const Ciphertext &encrypted, Plaintext &destination);
 
 
 
-### 14.  Evaluator Factory  class : **<font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font>**
+### 13. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
+
+
+**Description**： MatrixPlain is a class for storing plaintext matrix information.
+ 
+**Members**：
+- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
+
+- **N1** (uint32_t): Indicates the number of rows in a matrix.
+
+- **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
+
+- **scale** (mpf_class): Indicates the scaling factor of the matrix.
+
+- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+
+- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
+
+
+<br>
+
+
+
+### 14. Group of Plaintext matrix in linear transform : **<font color='red'><span id="LinearMatrixGroup">LinearMatrixGroup</span> </font>**
+
+**Description**： LinearMatrixGroup is a class for storing a group of plaintext matrix information.
+
+**Functions**：
+```cpp
+LinearMatrixGroup() = default;
+```
+: Creates an LinearMatrixGroup instance initialized.
+
+```cpp
+vector<MatrixPlain> &data();
+```
+: The function is used to get the vector of MatrixPlain.
+
+<br>
+
+
+```cpp
+vector<int> &rot_index();
+```
+: The function is used to get all rotate index.
+
+<br>
+
+
+```cpp
+void set_step(uint32_t step) 
+```
+- **step** (uint32_t): The number of modulus used during encoding matrix message to plaintext.
+
+: The function is used to set the scaling factor of Matrix Plain. When step is 1, the  scaling factor is one modulus.
+
+<br>
+
+
+
+```cpp
+const int step() const;
+```
+: The function get the step.
+
+<br>
+
+
+### 15. Homomorphic DFT Parameter class  : **<font color='red'><span id="HomomorphicDFTMatrixLiteral">HomomorphicDFTMatrixLiteral</span> </font>**
+
+**Description**： Parameter config class for homomorphic DFT.
+
+**Functions**:
+```cpp
+HomomorphicDFTMatrixLiteral(DFTType type, uint32_t logN, uint32_t logSlots,uint32_t levelStart, vector<uint32_t> levels,
+                            bool repackImag2Real,double scaling,bool bitReversed,uint32_t logBSGSRatio);
+```
+- **type** (DFTType): DFT or IDFT.
+- **logN** (uint32_t): The logarithm of polynomial degree.
+- **logSlots** (uint32_t): The logarithm of plaintext slots.
+- **levelStart** (uint32_t): The start level in modulus chain.
+- **levels** (vector<uint32_t>): The levels of DFT process not the level in modulus chain. 
+- **repackImag2Real** (uint32_t): Allow repackage image message to real message ciphertext.
+- **scaling** (uint32_t): The scaling factor of HomomorphicDFT process.
+- **bitReversed** (uint32_t): Allow bit reversed(only support false).
+- **logBSGSRatio** (uint32_t): The ratio of BSGS matrix, 1 is recommend.
+
+: Constructs  homomorphic DFT parameters.
+
+<br>
+
+```cpp
+ void create(LinearMatrixGroup &mat_group, CKKSEncoder &encoder,uint32_t step);
+```
+- **mat_group** (LinearMatrixGroup &): The LinearMatrixGroup.
+- **encoder** (CKKSEncoder &): The CKKSEncoder.
+- **step** (uint32_t): The number of modulus used during encoding matrix message to plaintext.
+
+: Create the LinearMatrixGroup according to the HomomorphicDFTMatrixLiteral.
+
+<br>
+
+
+
+### 16.  Polynomial  class : **<font color='red'><span id="Polynomial">Polynomial</span> </font>**
+
+**Description**：The polynomial coefficients class in homomorphic poly evaluator.
+
+**Functions**: 
+```cpp
+Polynomial();
+```
+: C empty polynomial,and the type is Monomial.
+
+<br>
+
+```cpp
+Polynomial(const Polynomial &copy) = default;
+```
+- **copy** (const Polynomial &): The  Polynomial.
+
+: Copy constructor.
+
+<br>
+
+```cpp
+Polynomial(Polynomial &&source) = default;
+```
+- **source** (Polynomial &&): The  Polynomial.
+
+: Move constructor.
+
+<br>
+
+```cpp
+vector<complex<double>> &data();
+```    
+: Get the Polynomial coefficient data.
+
+<br>
+
+
+
+### 17.  PolynomialVector  class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
+
+**Description**：A vector of polynomials  class in homomorphic poly evaluator.
+
+**Functions**: 
+```cpp
+PolynomialVector() = default;
+```
+: Construct an empty polynomial vector.
+
+<br>
+
+```cpp
+PolynomialVector(const vector<Polynomial> &polys, const vector<vector<int>> &indexs,bool lead = true);
+```
+- **polys** (const vector<Polynomial> &): The  Polynomials.
+- **indexs** (const vector<vector<int>> &): The  indexs of each Polynomial in slots.
+- **lead**(bool): Whether is  lead or not. 
+
+: Construct a polynomial vector.
+
+<br>
+
+```cpp
+PolynomialVector(const PolynomialVector &copy) = default;
+```
+- **copy** (const PolynomialVector &copy): The  Polynomial.
+
+: Copys a given PolynomialVector to the current one
+
+
+<br>
+
+```cpp
+PolynomialVector(PolynomialVector &&source) = default;
+```
+- **source** (Polynomial &&): The  Polynomial.
+
+: Moves a given PolynomialVector to the current one
+
+<br>
+
+```cpp
+PolynomialVector &operator = (const PolynomialVector &assign);
+```
+- **copy** (const PolynomialVector &copy): The  Polynomial.
+
+: Copy constructor.
+<br>
+
+
+```cpp
+PolynomialVector &operator = (PolynomialVector &&assign) = default;
+```
+- **source** (Polynomial &&): The  Polynomial.
+
+: Move constructor.
+
+<br>
+
+
+```cpp
+vector<Polynomial>  &polys();
+```    
+: Gets the Polynomials of PolynomialVector.
+
+```cpp
+vector<vector<int>> &index()
+```  
+: Gets the PolynomialVector index.
+
+<br>
+
+
+### 18. Homomorphic Mod polynomial class : **<font color='red'><span id="EvalModPoly">EvalModPoly</span> </font>**
+
+**Description**： Parameter config class for homomorphic mod.
+
+**Functions**: 
+
+```cpp
+EvalModPoly(const PoseidonContext &context,SineType type,mpf_class scaling_factor,uint32_t levelStart,uint32_t logMessageRatio,uint32_t doubleAngle,uint32_t K,uint32_t arcSineDegree,uint32_t SineDegree);
+
+```
+- **context** (const PoseidonContext &): The PoseidonContext.
+- **type** (SineType): CosDiscrete,SinContinuous or CosContinuous.
+- **scaling_factor** (mpf_class): The scaling factor of HomomorphicMod process.
+- **levelStart** (uint32_t): The start level in modulus chain.
+- **logMessageRatio** (uint32_t): The logarithm of message ratio.
+- **doubleAngle** (uint32_t): The num of double angle.
+- **K** (uint32_t): The rang if Chebyshev.
+- **arcSineDegree** (uint32_t): arcSine poly degree.
+- **SineDegree** (uint32_t): SineDegree poly degree.
+
+: Constructs  homomorphic Mod parameters.
+
+
+<br>
+
+
+
+
+
+
+
+
+### 19.  Evaluator Factory  class : **<font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font>**
 
 **Description**： EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
@@ -1128,8 +1353,8 @@ void bootstrap(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly
 
 <br>
 
-
-<!-- ### 22. Key switch : **<font color='red'> switch_key</font>**
+<!-- 
+### 22. Key switch : **<font color='red'> switch_key</font>**
 
 ```c
 void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &switch_key);
