@@ -65,16 +65,16 @@ int main() {
     // Initialize the CKKS encoder with the provided context.
     CKKSEncoder ckksenc(context);
 
-    // Encode the message into a plaintext using the scaling factor from the context.
+//*************************************************************************
+//************************encode and encrypt*******************************
+//*************************************************************************
     ckksenc.encode(message, plainA, context.scaling_factor());
-
-    // Encrypt the plaintext and store the result in a ciphertext.
     enc.encrypt(plainA, ciphA);
 
-    // Decrypt the ciphertext and store the result back into a plaintext.
+//*************************************************************************
+//************************decode and decrypt*******************************
+//*************************************************************************
     dec.decrypt(ciphA, plainRes);
-
-    // Decode the plaintext back into the message vector.
     ckksenc.decode(plainRes, message1);
 
     // Display the first 10 values of the source and result vectors for comparison.
@@ -157,7 +157,12 @@ int main(){
     //multiply_plain
     print_example_banner("Example: Multiply Plain / Multiply Plain in CKKS");
     auto start = chrono::high_resolution_clock::now();
+
+//*************************************************************************
+//******************Plaintext-Ciphertext Multiplication********************
+//*************************************************************************
     ckks_eva->multiply_plain(cipherA,plainB,cipherRes);
+
     ckks_eva->read(cipherRes);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -250,7 +255,12 @@ int main(){
     //multiply
     print_example_banner("Example: Multiply / Multiply in CKKS");
     auto start = chrono::high_resolution_clock::now();
+
+//*************************************************************************
+//****************Ciphertext-Ciphertext Multiplication*********************
+//*************************************************************************
     ckks_eva->multiply(cipherA,cipherB,cipherRes,relinKeys);
+
     ckks_eva->read(cipherRes);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -337,7 +347,12 @@ int main(){
     //rotate
     print_example_banner("Example: Rotation / Rotation in CKKS");
     auto start = chrono::high_resolution_clock::now();
+
+//*************************************************************************
+//*************************Ciphertext Rotation*****************************
+//*************************************************************************
     ckks_eva->rotate(cipherA,cipherRes,rotKeys,1);
+
     ckks_eva->read(cipherRes);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -453,7 +468,12 @@ int main(){
     auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
 
     auto start = chrono::high_resolution_clock::now();
+
+//*************************************************************************
+//************************Matrix Multiplication****************************
+//*************************************************************************
     ckks_eva->multiplyByDiagMatrixBSGS(cipherA,matrixPlain,cipherRes,rotKeys);
+    
     ckks_eva->read(cipherRes);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
