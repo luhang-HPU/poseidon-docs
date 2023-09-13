@@ -253,9 +253,9 @@ Ciphertext &operator=(Ciphertext &&assign);
 ```cpp
 void newPoly(const PoseidonContext &context, uint32_t rns_num_q, uint32_t rns_num_p);
 ```
-- **context** (const PoseidonContext &):
-- **rns_num_q** (uint32_t):
-- **rns_num_p** (uint32_t):
+- **context** (const PoseidonContext &): The Poseidon context.
+- **rns_num_q** (uint32_t): The rns number of modulus q.
+- **rns_num_p** (uint32_t): The rns number of modulus p.
 
 : A function for creating a new polynomial.
 
@@ -264,10 +264,10 @@ void newPoly(const PoseidonContext &context, uint32_t rns_num_q, uint32_t rns_nu
 ```cpp
 void newMetaData(const mpf_class &scaling_factor, bool isNTT, uint32_t level, uint32_t poly_degree);
 ```
-- **scaling_factor** (const mpf_class &): 
-- **isNTT** (bool):
-- **level** (uint32_t):
-- **poly_degree** (uint32_t):
+- **scaling_factor** (const mpf_class &): The scaling factor.
+- **isNTT** (bool): The plain is NTT form or not.
+- **level** (uint32_t): The level in modulus chain.
+- **poly_degree** (uint32_t): The degree of polynomial.
 
 : A function to create new metadata.
 
@@ -353,7 +353,7 @@ PublicKey &operator=(PublicKey &&assign) = default;
 <br>
 
 ```cpp
-const Ciphertext data() const noexcept;
+const Ciphertext data() const;
 ```
 : The function is used to get the key.
 
@@ -422,7 +422,7 @@ std::vector<std::vector<PublicKey>> &data();
 <br>
 
 ```cpp
-inline std::size_t size() const noexcept;
+std::size_t size() const;
 ```
 : The function is used to get the number of keys.
 
@@ -481,7 +481,7 @@ GaloisKeys &operator=(GaloisKeys &&assign) = default;
 <br>
 
 ```cpp
-static inline std::size_t get_index(uint32_t galois_elt);
+static std::size_t get_index(uint32_t galois_elt);
 ```
 - **galois_elt** (uint32_t):The Galois element.
 
@@ -491,7 +491,7 @@ static inline std::size_t get_index(uint32_t galois_elt);
 
 
 ```cpp
-inline bool has_key(uint32_t galois_elt) const;
+bool has_key(uint32_t galois_elt) const;
 ```
 - **galois_elt** (uint32_t):The Galois element.
 
@@ -668,7 +668,7 @@ void set_secret_key(const SecretKey &secret_key);
 
 
 ```cpp
-void set_public_key(const PublicKey &public_key)
+void set_public_key(const PublicKey &public_key);
 ```
 - **public_key** (const PublicKey &): The public key.
 
@@ -755,7 +755,7 @@ vector<int> &rot_index();
 
 
 ```cpp
-void set_step(uint32_t step) 
+void set_step(uint32_t step);
 ```
 - **step** (uint32_t): The number of modulus used during encoding matrix message to plaintext.
 
