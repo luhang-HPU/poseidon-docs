@@ -35,7 +35,7 @@ Degree = 2048
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Private Information Retrieval(PIR)
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       53.748
@@ -49,7 +49,7 @@ Degree = 2048
   </tr>
  <tr>
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Medical privacy computing
+    Framingham Heart Study
     </th>
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       1.987
@@ -69,7 +69,7 @@ Degree = 4096
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Private Information Retrieval(PIR)
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       146.403
@@ -83,7 +83,7 @@ Degree = 4096
   </tr>
  <tr>
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Medical privacy computing
+    Framingham Heart Study
     </th>
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       4.001
@@ -103,7 +103,7 @@ Degree = 8192
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Private Information Retrieval(PIR)
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       512.426
@@ -117,7 +117,7 @@ Degree = 8192
   </tr>
  <tr>
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Medical privacy computing
+    Framingham Heart Study
     </th>
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       8.237
@@ -136,7 +136,7 @@ Degree = 16384
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Private Information Retrieval(PIR)
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       1751.006
@@ -150,7 +150,7 @@ Degree = 16384
   </tr>
  <tr>
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Medical privacy computing
+    Framingham Heart Study
     </th>
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       16.749
@@ -183,7 +183,7 @@ Degree = 32768
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Private Information Retrieval(PIR)
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       5669.146
@@ -197,7 +197,7 @@ Degree = 32768
   </tr>
  <tr>
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Medical privacy computing
+    Framingham Heart Study
     </th>
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       34.848
@@ -252,7 +252,7 @@ Degree = 4096
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Encrypted query BasePIR
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       0.1898
@@ -272,7 +272,7 @@ Degree = 8192
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Encrypted query BasePIR
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       0.80467
@@ -292,7 +292,7 @@ Degree = 16384
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Encrypted query BasePIR
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       3.3973
@@ -313,7 +313,7 @@ Degree = 32768
  </tr>
   <tr style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
     <th style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
-    Encrypted query BasePIR
+    Private Information Retrieval (PIR)
     </th >
     <td style="width:1300px; text-align:center; vertical-align:middle;height:40px;" >
       13.2914
