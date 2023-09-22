@@ -1,4 +1,4 @@
-# BFV 
+# BGV 
 
 ## Data Structures
 
@@ -17,17 +17,17 @@ Poseidon Supported parameter data structures：
 
 
 
-### 2. Parameter class of the BFV encryption scheme : **<font color='red'>BFVParametersLiteralDefault</font>**
+### 2. Parameter class of the BGV encryption scheme : **<font color='red'>BGVParametersLiteralDefault</font>**
 
-**Description**： BFVParametersLiteralDefault is a class for initialization encryption parameters.
+**Description**： BGVParametersLiteralDefault is a class for initialization encryption parameters.
 
 **Functions**:
 ```cpp
-BFVParametersLiteralDefault(DegreeType degreeType);
+BGVParametersLiteralDefault(DegreeType degreeType);
 ```
 - **degreeType** (DegreeType): Indicates the degree of a polynomial. The optional values are "degree_2048", "degree_4096", "degree_8192", "degree_16384", or "degree_32768"
 
-: Constructs bfv default parameters.
+: Constructs bgv default parameters.
 
 
 
@@ -503,9 +503,9 @@ inline bool has_key(uint32_t galois_elt) const;
 
 
 
-### 9. BFV encryption scheme  class : **<font color='red'>BatchEncoder</font>**
+### 9. BGV encryption scheme  class : **<font color='red'>BatchEncoder</font>**
 
-**Description**：BatchEncoder is a class used for encoding and decoding in the BFV encryption scheme.<br>
+**Description**：BatchEncoder is a class used for encoding and decoding in the BGV/BFV encryption scheme.<br>
 
 
 **Functions**：
@@ -514,7 +514,7 @@ BatchEncoder(const PoseidonContext &context);
 ```
 - **context** (const PoseidonContext &): The poseidon context.
 
-: Creates a BatchEncoder. It is necessary that the encryption parameters given through the SEALContext object support batching.
+: Creates a BatchEncoder. It is necessary that the encryption parameters given through the PoseidonContext object support batching.
 
 
 <br>
@@ -541,8 +541,8 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 
 <br>
 
-<!-- 
-### 10. Plaintext matrix : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
+
+<!-- ### 10. Plaintext matrix : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
 
 **Description**：MatrixPlain is a class for storing plaintext matrix information.
 
@@ -557,8 +557,8 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 
 - **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
 
-- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements. -->
-
+- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
+ -->
 
 
 
@@ -619,14 +619,6 @@ inline void create_galois_keys(const std::vector<int> &steps, GaloisKeys &destin
 
 <br>
 
-```cpp
-inline void create_conj_keys(GaloisKeys &destination);
-```
-- **destination** (RelinKeys &): The GaloisKeys which is used to store the computation result.
-
-: A function used to create a conjugate rotation key. It is only used in CKKS conjugate.
-
-<br>
 
 
 
@@ -745,6 +737,7 @@ void decrypt(const Ciphertext &encrypted, Plaintext &destination);
 
 **Description**：EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
+**Members**：null.
 
 **Functions**： 
 ```cpp
@@ -864,7 +857,6 @@ void rotate_row(Ciphertext &encrypted, int rot_step, const GaloisKeys &galois_ke
 - **encrypted** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **rot_step** (int): An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.<br>
 
-
 ### 8. Ciphertext Rescale  : **<font color='red'> rescale</font>**
 ```c
 void rescale(Ciphertext &encrypted);
@@ -874,8 +866,6 @@ void rescale(Ciphertext &encrypted);
 
 **Parameters**：
 - **encrypted** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-
-
 <!-- ### 8. Key switching : **<font color='red'> switch_key</font>**
 
 ```c
@@ -891,9 +881,9 @@ void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &s
 
 
 
-<!-- ### 8. Ciphertext and plaintext matrix multiplication : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
+<!-- ### 8. Ciphertext and plaintext matrix multiplication : **<font color='red'> multiplyByDiagMatrixBSGS</font>** -->
 
-```c
+<!-- ```c
 void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
 ```
 
@@ -904,6 +894,6 @@ void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Cipherte
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
- -->
+- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations. -->
+
 
