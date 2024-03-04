@@ -5,16 +5,31 @@ Installing Poseidon is very simple. The installation package has integrated the 
 |---|-----------------------------------|
 | Linux | GNU G++ (>= 9.0), CMake (>= 3.12) |
 
+<table>
+<tbody>
+<tr>
+        <th>System</th>
+        <th>Toolchain</th>
+    </tr>
+    <tr>
+        <td>Linux</td>
+        <td>GNU G++ (>= 9.0), CMake (>= 3.12)</td>
+    </tr>
+</tr>
+</tbody>
+</table>
+
+
 # Download the Installation Package
 
 There are three ways to download the Poseidon installation package:
-
+<!--
 **GitHub**
 
 ```
-wget https://github.com/luhang-CCL/Poseidon/raw/main/downloads/poseidon-xdma-v2.6.deb
+wget https://github.com/luhang-CCL/Poseidon/raw/main/downloads/poseidon-xdma-v2.6.deb 
 ```
-
+-->
 **Gitee (recommended)**
 
 Centos
@@ -22,14 +37,14 @@ Centos
 ```
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-3.0.0-1.el7.x86_64.rpm
 ```
-
+<!--
 **Baidu Netdisk**
 
 ```
 https://pan.baidu.com/s/12PJr49DyHtVIQJYrBXVDLQ?pwd=awf8
 
 ```
-
+-->
 # Install the Package
 
 After you’ve downloaded the installation package, navigate to the download directory and install it using the following command:
