@@ -10,7 +10,7 @@ Installing Poseidon is very simple. The installation package has integrated the 
     </tr>
     <tr>
         <td>Linux</td>
-        <td>GNU G++ (>= 9.0), CMake (>= 3.12)</td>
+        <td>GNU G++ (>= 8.0), CMake (>= 3.12)</td>
     </tr>
 </tr>
 </tbody>
