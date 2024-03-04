@@ -10,7 +10,7 @@ Private Set Intersection (PSI)
 .. toctree::
    :maxdepth: 4
 
-   Private Set Intersection/Private
+   Private Set Intersection/PSI
 
 
 
