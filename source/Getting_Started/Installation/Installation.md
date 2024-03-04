@@ -1,9 +1,6 @@
 Installing Poseidon is very simple. The installation package has integrated the HPU driver for the operating system. We have tested it on ubuntu 18.04. Higher version (i.e. 20.04 and 22.04) also might also work well. 
 
 # Download and Install Poseidon Hardware Library
-| System | Toolchain                         |
-|---|-----------------------------------|
-| Linux | GNU G++ (>= 9.0), CMake (>= 3.12) |
 
 <table>
 <tbody>
