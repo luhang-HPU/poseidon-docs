@@ -102,13 +102,6 @@ Private Information Retrieval, also known as covert search, is a very practical 
 <br>
 
 ```cpp
-
-#include <bits/stdc++.h>
-
-#include "poseidon/seal/modulus.h"
-#include "poseidon/seal/memorymanager.h"
-#include "poseidon/seal/util/globals.h"
-#include "poseidon/seal/util/ntt.h"
 #include "poseidon/PoseidonContext.h"
 #include "poseidon/CKKSEncoder.h"
 #include "poseidon/plaintext.h"
@@ -118,15 +111,11 @@ Private Information Retrieval, also known as covert search, is a very practical 
 #include "poseidon/keygenerator.h"
 #include "poseidon/util/precision.h"
 #include "poseidon/Evaluator.h"
-
-#include "poseidon/keyswitch/keyswitch_bv.h"
 #include "poseidon/RNSPoly.h"
 #include "poseidon/util/debug.h"
 using namespace std;
-
 using namespace poseidon;
 using namespace poseidon::util;
-
 int main() {
 
     cout << BANNER  << endl;
@@ -233,16 +222,6 @@ int main() {
         printf("result vec[%d] : %0.10f + %0.10f I \n",i,real(mat[1][i]), imag(mat[1][i]));
         printf("result vec[%d] : %0.10f + %0.10f I \n",i,real(message2[i]), imag(message2[i]));
     }
-
-
-
-
-
-
-
-//    poly *= poly2;
-//    poly.dot_to_coeff();
-//    poly.coeff_to_dot();
 
     return 0;
 }
