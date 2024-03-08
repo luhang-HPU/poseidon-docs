@@ -46,25 +46,14 @@ Framingham Heart Study (FHS) is the longest duration cardiovascular epidemiologi
 ## Code
 ```cpp
 
-#include <bits/stdc++.h>
-
-#include "poseidon/seal/modulus.h"
-#include "poseidon/seal/memorymanager.h"
-#include "poseidon/seal/util/globals.h"
-#include "poseidon/seal/util/ntt.h"
 #include "poseidon/PoseidonContext.h"
 #include "poseidon/CKKSEncoder.h"
 #include "poseidon/plaintext.h"
-#include "poseidon/util/random_sample.h"
 #include "poseidon/encryptor.h"
 #include "poseidon/decryptor.h"
 #include "poseidon/keygenerator.h"
 #include "poseidon/util/precision.h"
 #include "poseidon/Evaluator.h"
-
-#include "poseidon/keyswitch/keyswitch_bv.h"
-#include "poseidon/RNSPoly.h"
-#include "poseidon/CKKSEncoder.h"
 #include "poseidon/util/debug.h"
 using namespace std;
 
@@ -72,7 +61,6 @@ using namespace poseidon;
 using namespace poseidon::util;
 
 int main() {
-
     cout << BANNER  << endl;
     cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
     cout << "" << endl;
@@ -255,9 +243,7 @@ int main() {
 
     //expected answer
     double x = coef_age * age + coef_sbp * sbp + coef_dbp * dbp + coef_chl * chl + coef_height * height + coef_weight * weight;
-
     printf("expected answer = %.8f \n",exp(x) / (exp(x) + 1));
-
     return 0;
 }
 
