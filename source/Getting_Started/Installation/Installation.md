@@ -65,7 +65,7 @@ sudo rpm -e poseidon-3.0.0-1.el7.x86_64
 **Ubuntu**
 ```
 #install
-sudo apt-get install ./poseidon-3.0.0.x86_64.deb
+sudo apt-get install ./poseidon-3.0.0_x86_64.deb
 
 #uninstall
 sudo apt-get remove poseidon
