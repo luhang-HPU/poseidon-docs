@@ -53,12 +53,6 @@ Bootstrapping mainly consists of four steps: **ModRaise**, **CoeffToSlot**, **Ev
 ## Code
 ```cpp
 
-#include <bits/stdc++.h>
-
-#include "poseidon/seal/modulus.h"
-#include "poseidon/seal/memorymanager.h"
-#include "poseidon/seal/util/globals.h"
-#include "poseidon/seal/util/ntt.h"
 #include "poseidon/PoseidonContext.h"
 #include "poseidon/CKKSEncoder.h"
 #include "poseidon/plaintext.h"
@@ -68,19 +62,13 @@ Bootstrapping mainly consists of four steps: **ModRaise**, **CoeffToSlot**, **Ev
 #include "poseidon/keygenerator.h"
 #include "poseidon/util/precision.h"
 #include "poseidon/Evaluator.h"
-
-#include "poseidon/keyswitch/keyswitch_bv.h"
-#include "poseidon/RNSPoly.h"
-#include "poseidon/CKKSEncoder.h"
 using namespace std;
 using namespace poseidon;
 
 int main() {
-
     cout << BANNER  << endl;
     cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
     cout << "" << endl;
-
 
     uint32_t q0_bit = 63;
     auto q_def = 40;
@@ -161,11 +149,6 @@ int main() {
     LinearMatrixGroup mat_group_dec;
     d.create(mat_group,ckks_encoder,2);
     x.create(mat_group_dec,ckks_encoder,1);
-
-
-
-
-
     //=====================keys  =========================
     KeyGenerator kgen(context);
     kgen.create_public_key(public_key);
@@ -205,9 +188,6 @@ int main() {
         printf("result vec[%d] : %0.10f + %0.10f I \n",i,(real(vec_result[i])), imag(vec_result[i]));
     }
     GetPrecisionStats(vec_result,message);
-
-
     return 0;
 }
-
 ```
