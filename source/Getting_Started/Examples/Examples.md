@@ -80,7 +80,7 @@ int main() {
 //======================== SUB =========================================
     print_example_banner("Example: SUB / SUB in ckks");
     timestacs.start();
-    ckks_eva->add(ct,ct2,ct_res);
+    ckks_eva->sub(ct,ct2,ct_res);
     timestacs.end();
     ckks_eva->read(ct_res);
     timestacs.print_time("SUB TIME: ");
