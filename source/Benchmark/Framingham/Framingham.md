@@ -45,64 +45,57 @@ Framingham Heart Study (FHS) is the longest duration cardiovascular epidemiologi
 
 ## Code
 ```cpp
-// Include necessary Poseidon library headers for different functionalities.
 
-#include <iostream>
-#include <fstream>   
-#include <cstdlib>
-#include <vector>
-#include <cmath>
-#include <complex>
-#include <math.h>
-#include <gmpxx.h>
+#include <bits/stdc++.h>
 
-#include "poseidon/Release/define.h"
-#include "poseidon/Release/homomorphic_DFT.h"
-#include "poseidon/Release/linear_transform.h"
-#include "poseidon/Release/util/number_theory.h"
-#include "poseidon/Release/hardware/ConfigGen.h"
+#include "poseidon/seal/modulus.h"
+#include "poseidon/seal/memorymanager.h"
+#include "poseidon/seal/util/globals.h"
+#include "poseidon/seal/util/ntt.h"
+#include "poseidon/PoseidonContext.h"
+#include "poseidon/CKKSEncoder.h"
+#include "poseidon/plaintext.h"
+#include "poseidon/util/random_sample.h"
+#include "poseidon/encryptor.h"
+#include "poseidon/decryptor.h"
+#include "poseidon/keygenerator.h"
+#include "poseidon/util/precision.h"
+#include "poseidon/Evaluator.h"
 
-#include "poseidon/Release/Ciphertext.h"
-
-#include "poseidon/Release/util/matrix_operation.h"
-#include "poseidon/Release/CKKSEncoder.h"
-#include "poseidon/Release/BatchEncoder.h"
-#include "poseidon/Release/random/random_sample.h"
-
-#include "poseidon/Release/random/RandomGen.h"
-#include "poseidon/Release/random/Blake2xbPRNG.h"
-#include "poseidon/Release/KeyGenerator.h"
-#include "poseidon/Release/Encryptor.h"
-#include "poseidon/Release/Decryptor.h"
-#include "poseidon/Release/ParametersLiteral.h"
-#include "poseidon/Release/rlwe.h"
-#include "poseidon/Release/RelinKeys.h"
-
-#include "poseidon/Release/Evaluator.h"
-#include "poseidon/Release/HardwareEvaluator.h"
-#include "poseidon/Release/linear_transform.h"
-#include "poseidon/Release/util/matrix_operation.h"
-#include "poseidon/Release/homomorphic_mod.h"
-#include "poseidon/Release/util/chebyshev_interpolation.h"
-
-
-//===================== Chebyshev  ============================
+#include "poseidon/keyswitch/keyswitch_bv.h"
+#include "poseidon/RNSPoly.h"
+#include "poseidon/CKKSEncoder.h"
+#include "poseidon/util/debug.h"
 using namespace std;
+
 using namespace poseidon;
+using namespace poseidon::util;
 
-double this_fun(double x)  {
-    return  exp(x) / (exp(x) + 1);
-    //return sin(6.283185307179586 * x) ;
-}
+int main() {
 
-int main()
-{
+    cout << BANNER  << endl;
+    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
+    cout << "" << endl;
 
-    CKKSParametersLiteralDefault ckks_param_literal(degree_2048);
-    PoseidonContext context(ckks_param_literal);
+    ParametersLiteral ckks_param_literal{
+            CKKS,
+            15,
+            14,
+            40,
+            5,
+            0,
+            0,
+            {},
+            {}
+    };
+    vector<uint32_t> logQTmp{31,31,31,31,31,31,31,31,31,31, 31,31,31,31,31,31,31,31,31,31};//,31,31,31,31}; //
+    vector<uint32_t> logPTmp{31,31,31,31,31,31,31,31,31,31, 31,31,31,31,31,31,31,31,31,31};//,31,31,31,31}; //
+
+    ckks_param_literal.set_log_modulus(logQTmp,logPTmp);
+    PoseidonContext context(ckks_param_literal,poseidon::sec_level_type::none);
 
     //=====================init data ============================
-    int vec_size = 1 << ckks_param_literal.LogSlots;
+    auto vec_size = ckks_param_literal.slot();
     double age, sbp, dbp, chl, height, weight;
     age = 26;
     sbp = 100;
@@ -134,7 +127,7 @@ int main()
     message_height.resize(vec_size);
     message_weight.resize(vec_size);
 
-    //The address with a message index of 0 stores the original value of the corresponding body data
+    //message下标为0的地址存储对应身体数据的原始值
     message_age[0] = age;
     message_sbp[0] = sbp;
     message_dbp[0] = dbp;
@@ -142,7 +135,7 @@ int main()
     message_height[0] = height;
     message_weight[0] = weight;
 
-    //Coef storage corresponding coefficient
+    //coef存储对应系数
     double coef_age = 0.072;
     double coef_sbp = 0.013;
     double coef_dbp = -0.029;
@@ -150,7 +143,7 @@ int main()
     double coef_height = -0.053;
     double coef_weight = 0.021;
 
-    //The coefficients of Taylor expansion
+    //taylor展开的系数
     double taylor_coef_0 = 1.0 / 2;
     double taylor_coef_1 = 1.0 / 4;
     double taylor_coef_3 = -1.0 / 48;
@@ -167,41 +160,23 @@ int main()
     GaloisKeys conjKeys;
     // vector<uint32_t> rot_elemt;
     CKKSEncoder ckks_encoder(context);
-//=====================poly init===================================
-    auto a = -8.0;
-    auto b = 8.0;
-    auto deg = 64;
-    printf("Evaluation of the function f(x) for even slots and g(x) for odd slots in the range [%0.2f, %0.2f] (degree of approximation: %d)\n", a, b, deg);
-
-    auto approxF = util::Approximate(this_fun, a, b, deg);
-    approxF.lead() = true;
-    //auto approxG = util::Approximate(g, a, b, deg);
-    vector <Polynomial> poly_v{approxF};
-    vector<vector<int>> slotsIndex(1,vector<int>(context.poly_degree() >> 1,0));
-    vector<int> idxF(context.poly_degree() >> 1);
-
-    for(int i = 0; i < context.poly_degree() >> 1; i++){
-        idxF[i] = i;   // Index with all even slots
-    }
-    slotsIndex[0] = idxF; // Assigns index of all even slots to poly[0] = f(x)
-
-    PolynomialVector polys(poly_v,slotsIndex);
 
     //=====================keys  =========================
     KeyGenerator kgen(context);
     kgen.create_public_key(public_key);
     kgen.create_relin_keys(relinKeys);
-    kgen.create_conj_keys(conjKeys);
+    // kgen.create_galois_keys(steps,rotKeys);
     Encryptor enc(context,public_key,kgen.secret_key());
     Decryptor dec(context,kgen.secret_key());
 
+
     //-------------------encode--------------------------------
-    ckks_encoder.encode(message_age, plain_age, context.scaling_factor());
-    ckks_encoder.encode(message_sbp, plain_sbp, context.scaling_factor());
-    ckks_encoder.encode(message_dbp, plain_dbp, context.scaling_factor());
-    ckks_encoder.encode(message_chl, plain_chl, context.scaling_factor());
-    ckks_encoder.encode(message_height, plain_height, context.scaling_factor());
-    ckks_encoder.encode(message_weight, plain_weight, context.scaling_factor());
+    ckks_encoder.encode(message_age,ckks_param_literal.scale(), plain_age);
+    ckks_encoder.encode(message_sbp,ckks_param_literal.scale(), plain_sbp);
+    ckks_encoder.encode(message_dbp,ckks_param_literal.scale(), plain_dbp);
+    ckks_encoder.encode(message_chl, ckks_param_literal.scale(),plain_chl);
+    ckks_encoder.encode(message_height,ckks_param_literal.scale(), plain_height);
+    ckks_encoder.encode(message_weight,ckks_param_literal.scale(), plain_weight);
 
     //-------------------encrypt--------------------------------
     enc.encrypt(plain_age,cipher_age);
@@ -212,31 +187,61 @@ int main()
     enc.encrypt(plain_weight,cipher_weight);
 
     //-------------------------calculate----------------------------------
-    //Create CKKS Evaluator
+    //创建CKKS Evaluator
+
     auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
 
     auto start = chrono::high_resolution_clock::now();
 
-    //Compute x = 0.072∙Age+0.013∙SBP-0.029∙DBP+0.008∙CHL-0.053∙height+0.021∙weight
-
-    ckks_eva->multiply_const(cipher_age, coef_age, cipher_age);
-    ckks_eva->multiply_const(cipher_sbp, coef_sbp, cipher_sbp);
-    ckks_eva->multiply_const(cipher_dbp, coef_dbp, cipher_dbp);
-    ckks_eva->multiply_const(cipher_chl, coef_chl, cipher_chl);
-    ckks_eva->multiply_const(cipher_height, coef_height, cipher_height);
-    ckks_eva->multiply_const(cipher_weight, coef_weight, cipher_weight);
+    //计算 x = 0.072∙Age+0.013∙SBP-0.029∙DBP+0.008∙CHL-0.053∙height+0.021∙weight
+    auto scale = ckks_param_literal.scale();
+    ckks_eva->multiply_const(cipher_age, coef_age, scale,cipher_age,ckks_encoder);
+    ckks_eva->multiply_const(cipher_sbp, coef_sbp, scale,cipher_sbp,ckks_encoder);
+    ckks_eva->multiply_const(cipher_dbp, coef_dbp, scale,cipher_dbp,ckks_encoder);
+    ckks_eva->multiply_const(cipher_chl, coef_chl, scale,cipher_chl,ckks_encoder);
+    ckks_eva->multiply_const(cipher_height, coef_height, scale,cipher_height,ckks_encoder);
+    ckks_eva->multiply_const(cipher_weight, coef_weight, scale,cipher_weight,ckks_encoder);
 
     ckks_eva->add(cipher_age, cipher_sbp, cipher_x);
     ckks_eva->add(cipher_x, cipher_dbp, cipher_x);
     ckks_eva->add(cipher_x, cipher_chl, cipher_x);
     ckks_eva->add(cipher_x, cipher_height, cipher_x);
     ckks_eva->add(cipher_x, cipher_weight, cipher_x);
-    ckks_eva->rescale(cipher_x);
+    ckks_eva->rescale_dynamic(cipher_x,cipher_x,scale);
 
-    //Compute e^x/(e^x+1)
-    ckks_eva->multiply_const(cipher_x,(2.0/(double)(b-a)),cipher_x);
-    ckks_eva->rescale(cipher_x);
-    ckks_eva->evaluatePolyVector(cipher_x,cipher_result,polys,cipher_x.metaData()->getScalingFactor(),relinKeys,ckks_encoder);
+
+    //计算e^x/(e^x+1)
+    ckks_eva->multiply_relin_dynamic(cipher_x, cipher_x, cipher_x_square, relinKeys);
+
+    // gmp_printf("%.8Ff\n", cipher_x.metaData()->getScalingFactor().get_mpf_t()); //mpf_class
+    // gmp_printf("%.8Ff\n", cipher_x_square.metaData()->getScalingFactor().get_mpf_t());
+    ckks_eva->rescale_dynamic(cipher_x_square,cipher_x_square,scale);
+    // gmp_printf("%.8Ff\n", cipher_x_square.metaData()->getScalingFactor().get_mpf_t());
+
+    ckks_eva->multiply_const(cipher_x_square, taylor_coef_9, scale,cipher_result,ckks_encoder);
+    printf("taylor_coef_9 cipher_result: %.8f\n", cipher_result.scale());
+    ckks_eva->add_const(cipher_result, taylor_coef_7, cipher_result,ckks_encoder);
+    printf("taylor_coef_7 cipher_result: %.8f\n", cipher_result.scale());
+
+
+    ckks_eva->rescale_dynamic(cipher_result,cipher_result,scale);
+    ckks_eva->multiply_relin_dynamic(cipher_result, cipher_x_square, cipher_result, relinKeys);
+    ckks_eva->add_const(cipher_result, taylor_coef_5, cipher_result,ckks_encoder);
+
+
+    ckks_eva->rescale_dynamic(cipher_result,cipher_result,scale);
+    ckks_eva->multiply_relin_dynamic(cipher_result, cipher_x_square, cipher_result, relinKeys);
+    ckks_eva->add_const(cipher_result, taylor_coef_3, cipher_result,ckks_encoder);
+
+
+    ckks_eva->rescale_dynamic(cipher_result,cipher_result,scale);
+    ckks_eva->multiply_relin_dynamic(cipher_result, cipher_x_square, cipher_result, relinKeys);
+    ckks_eva->add_const(cipher_result, taylor_coef_1, cipher_result,ckks_encoder);
+
+
+    ckks_eva->multiply_relin_dynamic(cipher_result, cipher_x, cipher_result, relinKeys);
+    ckks_eva->add_const(cipher_result, taylor_coef_0, cipher_result,ckks_encoder);
+
     ckks_eva->read(cipher_result);
     auto stop = chrono::high_resolution_clock::now();
     auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
@@ -253,7 +258,13 @@ int main()
 
     printf("expected answer = %.8f \n",exp(x) / (exp(x) + 1));
 
+
+
+
+
     return 0;
+}
+
 }
 
 ```
