@@ -34,6 +34,12 @@ Centos
 ```
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-3.0.0-1.el7.x86_64.rpm
 ```
+
+Ubuntu 
+```
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-3.0.0_x86_64.deb
+```
+
 <!--
 **Baidu Netdisk**
 
@@ -55,6 +61,16 @@ sudo yum localinstall poseidon-3.0.0-1.el7.x86_64.rpm
 #uninstall
 sudo rpm -e poseidon-3.0.0-1.el7.x86_64
 ```
+
+**Ubuntu**
+```
+#install
+sudo apt-get install ./poseidon-3.0.0.x86_64.deb
+
+#uninstall
+sudo apt-get remove poseidon
+```
+
 
 The installation process will require the system reboot before it wraps up. The target installation folder for the headers and dynamic library locates at /usr/poseidon. Meanwhile, it constructs a soft link in /usr/local/include for the headers.  
 
