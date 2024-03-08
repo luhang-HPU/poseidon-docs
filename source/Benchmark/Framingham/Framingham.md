@@ -258,13 +258,7 @@ int main() {
 
     printf("expected answer = %.8f \n",exp(x) / (exp(x) + 1));
 
-
-
-
-
     return 0;
-}
-
 }
 
 ```
