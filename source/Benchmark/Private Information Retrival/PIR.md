@@ -102,126 +102,150 @@ Private Information Retrieval, also known as covert search, is a very practical 
 <br>
 
 ```cpp
-// Standard libraries for input/output and mathematical operations
-#include <iostream>
-#include <fstream>
-#include <cstdlib>
-#include <vector>
-#include <cmath>
-#include <complex>
-#include <gmpxx.h>
 
-// Poseidon library headers for Fully Homomorphic Encryption operations and utilities
-#include "poseidon/Release/define.h"
-#include "poseidon/Release/homomorphic_DFT.h"
-#include "poseidon/Release/linear_transform.h"
-#include "poseidon/Release/util/number_theory.h"
-#include "poseidon/Release/hardware/ConfigGen.h"
-#include <gmpxx.h>
-#include "poseidon/Release/Ciphertext.h"
+#include <bits/stdc++.h>
 
-#include "poseidon/Release/util/matrix_operation.h"
-#include "poseidon/Release/CKKSEncoder.h"
-#include "poseidon/Release/BatchEncoder.h"
-#include "poseidon/Release/random/random_sample.h"
+#include "poseidon/seal/modulus.h"
+#include "poseidon/seal/memorymanager.h"
+#include "poseidon/seal/util/globals.h"
+#include "poseidon/seal/util/ntt.h"
+#include "poseidon/PoseidonContext.h"
+#include "poseidon/CKKSEncoder.h"
+#include "poseidon/plaintext.h"
+#include "poseidon/util/random_sample.h"
+#include "poseidon/encryptor.h"
+#include "poseidon/decryptor.h"
+#include "poseidon/keygenerator.h"
+#include "poseidon/util/precision.h"
+#include "poseidon/Evaluator.h"
 
-#include "poseidon/Release/random/RandomGen.h"
-#include "poseidon/Release/random/Blake2xbPRNG.h"
-#include "poseidon/Release/KeyGenerator.h"
-#include "poseidon/Release/Encryptor.h"
-#include "poseidon/Release/Decryptor.h"
-#include "poseidon/Release/ParametersLiteral.h"
-#include "poseidon/Release/rlwe.h"
-#include "poseidon/Release/RelinKeys.h"
+#include "poseidon/keyswitch/keyswitch_bv.h"
+#include "poseidon/RNSPoly.h"
+#include "poseidon/util/debug.h"
+using namespace std;
 
-#include "poseidon/Release/Evaluator.h"
-#include "poseidon/Release/HardwareEvaluator.h"
-#define RNS_C 2
-#include "poseidon/Release/linear_transform.h"
-#include "poseidon/Release/util/matrix_operation.h"
-
-// Using the Poseidon namespace for clarity
 using namespace poseidon;
+using namespace poseidon::util;
 
 int main() {
-    //===================== Configuration ============================
-    // Initialize CKKS parameters with a default degree of 2048
-    CKKSParametersLiteralDefault ckks_param_literal(degree_2048);
-    PoseidonContext context(ckks_param_literal);
 
-    //===================== Initialize Random Data ===================
-    // Create vectors to hold complex numbers and results
-    std::vector<std::complex<double>> vec, vec_result, vec_result1;
-    int mat_size = 1 << ckks_param_literal.LogSlots; // Determine matrix size based on log slots
-    std::vector<vector<std::complex<double>>> mat(mat_size, vector<complex<double>>(mat_size, 0));
-    std::vector<vector<std::complex<double>>> mat_T(mat_size);
+    cout << BANNER  << endl;
+    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
+    cout << "" << endl;
+
+    ParametersLiteral ckks_param_literal{
+            CKKS,
+            13,
+            12,
+            40,
+            5,
+            0,
+            0,
+            {},
+            {}
+    };
+
+//    vector<uint32_t> logQTmp{25,33,31,31,31,31,31,31,31,31, 31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31};//,31,31,31,31}; //
+//    vector<uint32_t> logPTmp{31,31,31,31,31,31,31,31,31,31, 31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31};//,31,31,31,31,31,31,31,31,31,31,31};  //
+    vector<uint32_t> logQTmp{31,31,31,31};//,31,31,31,31}; //
+    vector<uint32_t> logPTmp{31,31,31,31};//,
+    ckks_param_literal.set_log_modulus(logQTmp,logPTmp);
+//    PoseidonContext context(ckks_param_literal);
+    PoseidonContext context(ckks_param_literal,sec_level_type::none);
+
+
+    //=====================init random data ============================
+    std::vector<std::complex<double>> vec;
+    std::vector<std::complex<double>> vec_result,vec_result1;
+    int mat_size = 1 << ckks_param_literal.LogSlots();
+    std::vector<vector<std::complex<double>>> mat(mat_size,vector<complex<double>>(mat_size,0));
+    std::vector<vector<std::complex<double>>> mat_T(mat_size);//(mat_size,vector<complex<double>>(mat_size));
     std::vector<vector<std::complex<double>>> mat_T1;
-    
-    // Create a message vector initialized with zeros
-    vector<complex<double>> message(mat_size, 0);
-    message[1] = 1;  // Set the second element to 1
+    //create message
+    vector<complex<double>> message(mat_size,0);
+    message[1] = 1;
 
     vector<complex<double>> message_tmp(mat_size);
-    vector<complex<double>> message_sum(mat_size << 1, 0.0);
+    vector<complex<double>> message_sum(mat_size << 1,0.0);
 
-    //===================== Initialize Plaintext & Ciphertext ========
-    Plaintext plainA, plainB, plainRes, plainRes1, plainT;
-    Ciphertext cipherA, cipherB, cipherRes, cipherRes1, cipherRes2, cipherRes3;
+    //=====================init  Plain & Ciph =========================
+    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
+    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
     PublicKey public_key;
     RelinKeys relinKeys;
-    GaloisKeys rotKeys;
     GaloisKeys conjKeys;
+    GaloisKeys rotKeys;
+    vector<uint32_t> rot_elemt;
     CKKSEncoder ckks_encoder(context);
-
-    //===================== Generate Matrices ========================
+    //=====================GenMatrices  ========================
     MatrixPlain matrixPlain;
-    // Populate the matrix with random complex numbers
-    for (int i = 0; i < mat_size; i++) {
-        sample_random_complex_vector2(mat[i], mat_size);
+
+    for(int i = 0; i < mat_size; i++){
+        sample_random_complex_vector2(mat[i],mat_size);
+    }
+    auto &modulus = context.crt_context()->first_context_data()->coeff_modulus();
+    int level = modulus.size() - 1;
+    matrix_operations::transpose_matrix(mat,mat_T1);
+    for(int i = 0; i < mat.size(); i++){
+        matrix_operations::diagonal(mat_T1, i,mat_T[i]);
     }
 
-    // Matrix operations
-    auto level = context.crt_context()->maxLevel();
-    matrix_operations::transpose_matrix(mat, mat_T1); // Transpose the matrix
-    for (int i = 0; i < mat.size(); i++) {
-        matrix_operations::diagonal(mat_T1, i, mat_T[i]);
-    }
-    GenMatrixformBSGS(matrixPlain, matrixPlain.rot_index, ckks_encoder, mat_T, level, context.crt_context()->primes_q()[level], 1, ckks_param_literal.LogSlots);
 
-    //===================== Generate Keys ============================
+    GenMatrixformBSGS(matrixPlain,matrixPlain.rot_index, ckks_encoder, mat_T,
+                      level , safe_cast<double>(modulus.back().value()) , 1, ckks_param_literal.LogSlots());
+
+
+//=====================keys  =========================
+    //
     KeyGenerator kgen(context);
     kgen.create_public_key(public_key);
+
     kgen.create_relin_keys(relinKeys);
-    kgen.create_galois_keys(matrixPlain.rot_index, rotKeys);
-    kgen.create_conj_keys(conjKeys);
 
-    Encryptor enc(context, public_key, kgen.secret_key());
-    Decryptor dec(context, kgen.secret_key());
+    kgen.create_galois_keys(matrixPlain.rot_index,rotKeys);
 
-    //===================== Operations ===============================
-    // Encode the message
-    ckks_encoder.encode(message, plainA, context.scaling_factor());
 
-    // Encrypt the plaintext
-    enc.encrypt(plainA, cipherA);
+    Encryptor enc(context,public_key,kgen.secret_key());
+    Decryptor dec(context,kgen.secret_key());
 
-    // Evaluation operations on the ciphertext
+
+
+    //gmp_printf("cc : %.Zd\n",two_pow_64_2.get_mpz_t());
+    Plaintext plaintext,plaintext2;
+    double scale = std::pow(2.0,51);
+    ckks_encoder.encode(message, scale,plaintext);
+    vector<complex<double>> message2;
+    printf("scale : %.10lf\n",plaintext.scale());
+
+    Ciphertext ct,ct2;
+    enc.encrypt(plaintext,ct);
     auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
-    auto start = chrono::high_resolution_clock::now();
-    ckks_eva->multiplyByDiagMatrixBSGS(cipherA, matrixPlain, cipherRes, rotKeys);
+    Timestacs timestacs;
+    timestacs.start();
+    ckks_eva->multiplyByDiagMatrixBSGS(ct,matrixPlain,cipherRes,rotKeys);
+    timestacs.end();
+    timestacs.print_time("PIR TIME : ");
     ckks_eva->read(cipherRes);
+    dec.decrypt(cipherRes,plaintext2);
 
-    // Decrypt and decode the resulting ciphertext
-    dec.decrypt(cipherRes, plainRes);
-    ckks_encoder.decode(plainRes, vec_result);
-
-    // Display results
-    for (int i = 0; i < 8; i++) {
-        printf("result vec[%d] : %0.10f + %0.10f I \n", i, real(mat[1][i]), imag(mat[1][i]));
-        printf("result vec[%d] : %0.10f + %0.10f I \n", i, real(vec_result[i]), imag(vec_result[i]));
+    ckks_encoder.decode(plaintext2,message2);
+    for(int i = 0; i < 8; i++){
+        printf("result vec[%d] : %0.10f + %0.10f I \n",i,real(mat[1][i]), imag(mat[1][i]));
+        printf("result vec[%d] : %0.10f + %0.10f I \n",i,real(message2[i]), imag(message2[i]));
     }
+
+
+
+
+
+
+
+//    poly *= poly2;
+//    poly.dot_to_coeff();
+//    poly.coeff_to_dot();
 
     return 0;
 }
+
 
 ```
