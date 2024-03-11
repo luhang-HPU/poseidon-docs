@@ -30,11 +30,13 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 We used two methods to enhance the security of the algorithm:
 <br>
 <ul>
-  <li>Cuckoo hash!</li>
+  <li>Cuckoo hash</li>
   <li>OPRF</li>
 
 </ul>
 
+**Cuckoo hash**
+<br>
 
 ![p3](p3.png)
 <style>
@@ -43,6 +45,9 @@ We used two methods to enhance the security of the algorithm:
     }
 </style>
 
+<br>
+
+**OPRF**
 <br>
 
 ![p4](p4.png)
