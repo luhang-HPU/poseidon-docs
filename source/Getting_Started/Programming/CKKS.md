@@ -5,14 +5,14 @@
 
 
 
-Poseidon Supported parameter data structures
+Poseidon Supported parameter data structures:
 
 <br>
 
 ### 1. Memory address management : **<font color='red'><span id="MemoryManager">MemoryManager</span> </font>**
 
 
-**Description** MemoryManager is a class used to manage addresses and memory space in hardware mode. It is not recommended for users to use it directly.
+**Description**: MemoryManager is a class used to manage addresses and memory space in hardware mode. It is not recommended for users to use it directly.
 
 
 
@@ -21,12 +21,11 @@ Poseidon Supported parameter data structures
 
 ### 2. Parameter class of the encryption scheme : **<font color='red'>ParametersLiteral</font>**
 
-**Description** ParametersLiteral  is a class for initializing encryption parameters.
+**Description**: ParametersLiteral  is a class for initializing encryption parameters.
 
 **Functions**:
 ```cpp
-ParametersLiteral(SchemeType schemeType, uint32_t LogN, uint32_t LogSlots,
-                          uint32_t LogScale, uint32_t HammingWeight, uint32_t q0_level, Modulus plain_modulus, const vector<Modulus> &Q, const vector<Modulus> &P);
+ParametersLiteral(SchemeType schemeType, uint32_t LogN, uint32_t LogSlots, uint32_t LogScale, uint32_t HammingWeight, uint32_t q0_level, Modulus plain_modulus, const vector<Modulus> &Q, const vector<Modulus> &P);
 ```
 - **schemeType** (SchemeType): Indicates the scheme type. The optional values are "CKKS", "BFV", "BGV".
 - **LogN** (uint32_t): The logarithm of polynomial degree number.
@@ -158,7 +157,7 @@ uint32_t scale() const()
 
 ### 2. Parameter class of the default encryption scheme : **<font color='red'>ParametersLiteralDefault</font>**
 
-**Description** ParametersLiteralDefault is a class for initializing encryption parameters.It is a derived class of ParametersLiteral.
+**Description**: ParametersLiteralDefault is a class for initializing encryption parameters.It is a derived class of ParametersLiteral.
 
 **Functions**:
 ```cpp
@@ -176,9 +175,9 @@ ParametersLiteralDefault(SchemeType schemeType,uint32_t degree,sec_level_type se
 
 ### 3. Context information management class : **<font color='red'>PoseidonContext</font>**
 
-**Description** PoseidonContext is a class used to generate and manage context information.
+**Description**: PoseidonContext is a class used to generate and manage context information.
 
-**Functions**
+**Functions**:
 ```cpp
 PoseidonContext(const ParametersLiteral& paramLiteral,sec_level_type sec_level = sec_level_type::none,bool using_hardware = true);
 ```
@@ -251,9 +250,9 @@ std::shared_ptr<UniformRandomGeneratorFactory> random_generator() const;
 ### 4. Plaintext class : **<font color='red'><span id="Plaintext">Plaintext</span> </font>** 
 
 
-**Description** Plaintext is a class for storing plaintext information.
+**Description**: Plaintext is a class for storing plaintext information.
 
-**Functions**
+**Functions**:
 ```cpp
 Plaintext(MemoryPoolHandle pool = MemoryManager::GetPool())
 ```
@@ -636,9 +635,9 @@ std::string to_string() const;
 ### 5. Ciphertext class : **<font color='red'><span id="Ciphertext">Ciphertext</span> </font>** 
 
 
-**Description** Ciphertext is a class for storing ciphertext information.
+**Description**: Ciphertext is a class for storing ciphertext information.
 
-**Functions**
+**Functions**:
 ```cpp
 Ciphertext(MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
@@ -998,9 +997,9 @@ void compute_ckks_hardware_id() const;
 
 
 ### 6. Public key class : **<font color='red'><span id="PublicKey">PublicKey</span> </font>**  
-**Description** PublicKey is a class for storing public key information.
+**Description**: PublicKey is a class for storing public key information.
 
-**Functions**
+**Functions**:
 ```cpp
 PublicKey();
 ```
@@ -1059,10 +1058,10 @@ const Ciphertext data() const noexcept;
 ### 7. Relinearize key class : **<font color='red'><span id="RelinKeys">RelinKeys</span> </font>** 
 
 
-**Description**RelinKeys is a class for storing relinearized key information.
+**Description**:RelinKeys is a class for storing relinearized key information.
 
 
-**Functions**
+**Functions**:
 
 ```cpp
 RelinKeys();
@@ -1121,9 +1120,9 @@ const std::vector<std::vector<PublicKey>> &key() const;
 
 ### 8. **<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**:  Galois key class 
 
-**Description**GaloisKeys is a class for storing Galoiskeys information.
+**Description**:GaloisKeys is a class for storing Galoiskeys information.
 
-**Functions** 
+**Functions**: 
 
 ```cpp
 GaloisKeys();
@@ -1199,11 +1198,11 @@ const std::vector<std::vector<PublicKey>> &key(std::uint32_t galois_elt) const;
 
 ### 9. **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>** : CKKS encryption scheme  class  
 
-**Description** CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
+**Description**: CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
 - **paramLiteral** (const ParametersLiteral): Indicates the encryption parameter used to calculate context information.
 
-**Functions**
+**Functions**:
 
 ```cpp
 CKKSEncoder(const PoseidonContext &context);
@@ -1288,9 +1287,9 @@ void decode(const Plaintext &plain, std::vector<std::complex<double>> &destinati
 
 ### 10. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
 
-**Description** KeyGenerator is a class for generating keys.
+**Description**: KeyGenerator is a class for generating keys.
 
-**Functions**
+**Functions**:
 ```cpp
 KeyGenerator(const PoseidonContext &params);
 ```
@@ -1355,9 +1354,9 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 ### 11. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
 
-**Description** Encryptor is a class used to encrypt plaintext.
+**Description**: Encryptor is a class used to encrypt plaintext.
 
-**Functions**
+**Functions**:
 
 ```cpp
 Encryptor(const PoseidonContext &context, const SecretKey &secret_key);
@@ -1481,9 +1480,9 @@ void encrypt_zero_symmetric(Ciphertext &destination, MemoryPoolHandle pool = Mem
 
 ### 12. Decryption class : **<font color='red'><span id="Decryptor">Decryptor</span> </font>**
 
-**Description** Decryptor is a class for decrypting plaintext.
+**Description**: Decryptor is a class for decrypting plaintext.
 
-**Functions**
+**Functions**:
 ```cpp
 Decryptor(const PoseidonContext &context, const SecretKey &secret_key);
 ```
@@ -1510,9 +1509,9 @@ void decrypt(const Ciphertext &encrypted, Plaintext &destination);
 ### 13. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
 
 
-**Description** MatrixPlain is a class for storing plaintext matrix information.
+**Description**: MatrixPlain is a class for storing plaintext matrix information.
  
-**Members**
+**Members**:
 - **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
 
 - **N1** (uint32_t): Indicates the number of rows in a matrix.
@@ -1532,9 +1531,9 @@ void decrypt(const Ciphertext &encrypted, Plaintext &destination);
 
 ### 14. Group of Plaintext matrix in linear transform : **<font color='red'><span id="LinearMatrixGroup">LinearMatrixGroup</span> </font>**
 
-**Description** LinearMatrixGroup is a class for storing a group of plaintext matrix information.
+**Description**: LinearMatrixGroup is a class for storing a group of plaintext matrix information.
 
-**Functions**
+**Functions**:
 ```cpp
 LinearMatrixGroup() = default;
 ```
@@ -1577,7 +1576,7 @@ const int step() const;
 
 ### 15. Homomorphic DFT Parameter class  : **<font color='red'><span id="HomomorphicDFTMatrixLiteral">HomomorphicDFTMatrixLiteral</span> </font>**
 
-**Description** Parameter config class for homomorphic DFT.
+**Description**: Parameter config class for homomorphic DFT.
 
 **Functions**:
 ```cpp
@@ -1613,7 +1612,7 @@ HomomorphicDFTMatrixLiteral(DFTType type, uint32_t logN, uint32_t logSlots,uint3
 
 ### 16.  Polynomial  class : **<font color='red'><span id="Polynomial">Polynomial</span> </font>**
 
-**Description**The polynomial coefficients class in homomorphic poly evaluator.
+**Description**:The polynomial coefficients class in homomorphic poly evaluator.
 
 **Functions**: 
 ```cpp
@@ -1652,7 +1651,7 @@ vector<complex<double>> &data();
 
 ### 17.  PolynomialVector  class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
 
-**Description**A vector of polynomials  class in homomorphic poly evaluator.
+**Description**:A vector of polynomials  class in homomorphic poly evaluator.
 
 **Functions**: 
 ```cpp
@@ -1726,7 +1725,7 @@ vector<vector<int>> &index()
 
 ### 18. Homomorphic Mod polynomial class : **<font color='red'><span id="EvalModPoly">EvalModPoly</span> </font>**
 
-**Description** Parameter config class for homomorphic mod.
+**Description**: Parameter config class for homomorphic mod.
 
 **Functions**: 
 
@@ -1758,9 +1757,9 @@ EvalModPoly(const PoseidonContext &context,SineType type,double scaling_factor,u
 
 ### 19.  Evaluator Factory  class : **<font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font>**
 
-**Description** EvaluatorFactory is a class used to create the Poseidon algorithm library.
+**Description**: EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
-**Functions** 
+**Functions**: 
 ```cpp
 auto create(const PoseidonContext &context)->std::shared_ptr< Envaluator >;
 ```
@@ -1779,9 +1778,9 @@ auto create(const PoseidonContext &context)->std::shared_ptr< Envaluator >;
 void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
 ```
 
-**Description** This function performs homomorphic addition on two ciphertexts.<br>
+**Description**: This function performs homomorphic addition on two ciphertexts.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph1** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
@@ -1796,9 +1795,9 @@ void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
 void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
 ```
 
-**Description**This function performs homomorphic addition between a ciphertext and a plaintext.<br>
+**Description**:This function performs homomorphic addition between a ciphertext and a plaintext.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph1** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
@@ -1813,9 +1812,9 @@ void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
 void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
 ```
 
-**Description** This function performs homomorphic subtraction between two ciphertexts.<br>
+**Description**: This function performs homomorphic subtraction between two ciphertexts.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph1** (Ciphertext):  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).<br>
 - **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing the subtrahend (the number to be subtracted).<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
@@ -1830,9 +1829,9 @@ void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
 void multiply_relin(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, const RelinKeys &relin_key) override;
 ```
 
-**Description**This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
+**Description**:This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
@@ -1848,9 +1847,9 @@ void multiply_relin(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, co
 void multiply_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
 ```
 
-**Description** This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
+**Description**: This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
@@ -1865,9 +1864,9 @@ void multiply_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) overr
 void rescale (const Ciphertext &ciph,Ciphertext &result) const;
 ```
 
-**Description** This function performs a rescaling operation on a ciphertext.<br>
+**Description**: This function performs a rescaling operation on a ciphertext.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
 
 
@@ -1880,9 +1879,9 @@ void rescale (const Ciphertext &ciph,Ciphertext &result) const;
 void rotate(const Ciphertext &ciph,int step, const GaloisKeys &galoisKeys, Ciphertext &result) const;
 ```
 
-**Description** This function is used to rotate a ciphertext.<br>
+**Description**: This function is used to rotate a ciphertext.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **step** (int):  An integer, indicating the rotation step length. A positive number represents a rotation to the right, and a negative number represents a rotation to the left.
 - **galoisKeys** (const GaloisKeys &):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.<br>
@@ -1898,9 +1897,9 @@ void rotate(const Ciphertext &ciph,int step, const GaloisKeys &galoisKeys, Ciphe
 void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &result) const;
 ```
 
-**Description** This function  is used to conjugate a ciphertext, that is, to transform each of its elements into its complex conjugate.<br>
+**Description**: This function  is used to conjugate a ciphertext, that is, to transform each of its elements into its complex conjugate.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph** (Ciphertext):    A reference to a **Ciphertext** object, representing the ciphertext to be conjugated.<br>
 - **conj_keys** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption key used for conjugation.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the resulting ciphertext after the conjugation.<br>
@@ -1915,9 +1914,9 @@ void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &
 void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
 ```
 
-**Description** This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
+**Description**: This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
@@ -1933,7 +1932,7 @@ void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Cipherte
 void coeff_to_slot(const Ciphertext &ciph,const LinearMatrixGroup& matrix_group,Ciphertext &result_real,Ciphertext &result_imag,const GaloisKeys &galoisKeys,const CKKSEncoder &encoder) const;
 ```
 
-**Description**  This function is used to transform a ciphertext from the coefficient domain to the slot domain.
+**Description**:  This function is used to transform a ciphertext from the coefficient domain to the slot domain.
 
 **Parameters**:  
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing the ciphertext to be transformed.
@@ -1954,7 +1953,7 @@ void coeff_to_slot(const Ciphertext &ciph,const LinearMatrixGroup& matrix_group,
 void slot_to_coeff(Ciphertext &ciph_real, Ciphertext &ciph_imag, LinearMatrixGroup &matrix_group, Ciphertext &result, const GaloisKeys &rot_key, const GaloisKeys &conj_key, CKKSEncoder &encoder) override;
 ```
 
-**Description** This function is used to transform a ciphertext from the slot domain to the coefficient domain.
+**Description**: This function is used to transform a ciphertext from the slot domain to the coefficient domain.
 
 **Parameters**: 
 - **ciph_real** (Ciphertext): A reference to a **Ciphertext** object, representing the real part of the ciphertext to be transformed.
@@ -1977,7 +1976,7 @@ void ftt_fwd(Plaintext &plain ,Plaintext &result)
 void ftt_fwd(Ciphertext &ciph, Ciphertext &result) override;
 ```
 
-**Description** This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
+**Description**: This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
 
 **Parameters**: 
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
@@ -1995,7 +1994,7 @@ void ftt_inv(Plaintext &plain ,Plaintext &result) override;
 void ftt_inv(Ciphertext &ciph ,Ciphertext &result) override;
 ```
 
-**Description** This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
+**Description**: This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
 
 **Parameters**: 
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
@@ -2013,7 +2012,7 @@ void ftt_inv(Ciphertext &ciph ,Ciphertext &result) override;
 void read(Ciphertext &ciph) override;
 ```
 
-**Description** This function is used to read data from the acceleration card in the ciphertext.
+**Description**: This function is used to read data from the acceleration card in the ciphertext.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing the ciphertext to be read.
@@ -2028,7 +2027,7 @@ void read(Ciphertext &ciph) override;
 void multiply_const(const Ciphertext &ciph, complex<double> constData, double scale,Ciphertext &result, CKKSEncoder &encoder) override;
 ```
 
-**Description** This function is used for the homomorphic multiplication of a ciphertext and a complex constant.
+**Description**: This function is used for the homomorphic multiplication of a ciphertext and a complex constant.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
@@ -2048,7 +2047,7 @@ void multiply_const(const Ciphertext &ciph, complex<double> constData, double sc
 void add_const(const Ciphertext &ciph, double constData, Ciphertext &result,const CKKSEncoder &encoder) const;
 ```
 
-**Description** This function is used for the homomorphic addition of a ciphertext and a real constant.
+**Description**: This function is used for the homomorphic addition of a ciphertext and a real constant.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
@@ -2065,7 +2064,7 @@ void add_const(const Ciphertext &ciph, double constData, Ciphertext &result,cons
 void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const GaloisKeys &rot_key);
 ```
 
-**Description** This function is used for the Discrete Fourier Transform (DFT) of a ciphertext.
+**Description**: This function is used for the Discrete Fourier Transform (DFT) of a ciphertext.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
@@ -2083,7 +2082,7 @@ void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const Galo
 void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale);
 ```
 
-**Description** This function is used for dynamic rescaling of a ciphertext.
+**Description**: This function is used for dynamic rescaling of a ciphertext.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A const reference to a **Ciphertext** object, representing a ciphertext.
@@ -2099,7 +2098,7 @@ void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale
 void evaluatePolyVector(const Ciphertext &ciph,Ciphertext &destination,const PolynomialVector &polys,double scale,const RelinKeys &relin_key,const CKKSEncoder &encoder) const;
 ```
 
-**Description** This function is used to evaluate a polynomial. The coefficients of Chebyshev or Taylor polynomials are pre-calculated, and then the polynomial calculation is performed.
+**Description**: This function is used to evaluate a polynomial. The coefficients of Chebyshev or Taylor polynomials are pre-calculated, and then the polynomial calculation is performed.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
@@ -2119,7 +2118,7 @@ void evaluatePolyVector(const Ciphertext &ciph,Ciphertext &destination,const Pol
 void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const RelinKeys &relin_key, CKKSEncoder &encoder) override;
 ```
 
-**Description** This function is used to perform modular arithmetic on a ciphertext.
+**Description**: This function is used to perform modular arithmetic on a ciphertext.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
@@ -2139,7 +2138,7 @@ const LinearMatrixGroup &matrix_group0, const LinearMatrixGroup &matrix_group1,
 const RelinKeys &relin_key, const GaloisKeys &rot_key,const CKKSEncoder &encoder) ;
 ```
 
-**Description** This function is used to bootstrap a ciphertext.
+**Description**: This function is used to bootstrap a ciphertext.
 
 **Parameters**: 
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
@@ -2161,9 +2160,9 @@ const RelinKeys &relin_key, const GaloisKeys &rot_key,const CKKSEncoder &encoder
 void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &switch_key);
 ```
 
-**Description** This function switches the key of a ciphertext.<br>
+**Description**: This function switches the key of a ciphertext.<br>
 
-**Parameters**
+**Parameters**:
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
 - **switch_key** (PublicKey):  A constant reference to a vector of **PublicKey** objects, representing a given set of public keys. -->
