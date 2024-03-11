@@ -22,11 +22,3 @@ Framingham Heart Study
 
 
    Framingham/Framingham
-
-
-Bootstrap
-=============
-.. toctree::
-   :maxdepth: 4
-
-   Bootstrap/Bootstrap
