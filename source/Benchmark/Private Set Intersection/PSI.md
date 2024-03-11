@@ -53,3 +53,14 @@ We used two methods to enhance the security of the algorithm:
 </style>
 
 <br>
+
+## Performance improvement and utilization of resource advantages
+<br>
+![p5](p5.png)
+<style>
+    img[alt="p5"]{
+        width:600px;
+    }
+</style>
+
+<br>
