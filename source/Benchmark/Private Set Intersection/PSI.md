@@ -36,6 +36,7 @@ We used two methods to enhance the security of the algorithm:
 </ul>
 
 **Cuckoo hash**
+<br>
 Cuckoo hashing is a hashing technique that can efficiently solve conflict problems. In PSI, it can be used to construct data structures for efficient processing and searching of elements in a set.
 <br>
 <ol>
