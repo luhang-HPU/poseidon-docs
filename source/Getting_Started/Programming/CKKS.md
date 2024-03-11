@@ -155,7 +155,7 @@ uint32_t scale() const()
 <br>
 
 
-### 2. Parameter class of the default encryption scheme : **<font color='red'>ParametersLiteralDefault</font>**
+### 3. Parameter class of the default encryption scheme : **<font color='red'>ParametersLiteralDefault</font>**
 
 **Description**: ParametersLiteralDefault is a class for initializing encryption parameters.It is a derived class of ParametersLiteral.
 
@@ -173,7 +173,7 @@ ParametersLiteralDefault(SchemeType schemeType,uint32_t degree,sec_level_type se
 <br>
 
 
-### 3. Context information management class : **<font color='red'>PoseidonContext</font>**
+### 4. Context information management class : **<font color='red'>PoseidonContext</font>**
 
 **Description**: PoseidonContext is a class used to generate and manage context information.
 
@@ -247,7 +247,7 @@ std::shared_ptr<UniformRandomGeneratorFactory> random_generator() const;
 
 
 
-### 4. Plaintext class : **<font color='red'><span id="Plaintext">Plaintext</span> </font>** 
+### 5. Plaintext class : **<font color='red'><span id="Plaintext">Plaintext</span> </font>** 
 
 
 **Description**: Plaintext is a class for storing plaintext information.
@@ -632,7 +632,7 @@ std::string to_string() const;
 <br>
 
 
-### 5. Ciphertext class : **<font color='red'><span id="Ciphertext">Ciphertext</span> </font>** 
+### 6. Ciphertext class : **<font color='red'><span id="Ciphertext">Ciphertext</span> </font>** 
 
 
 **Description**: Ciphertext is a class for storing ciphertext information.
@@ -996,7 +996,7 @@ void compute_ckks_hardware_id() const;
 
 
 
-### 6. Public key class : **<font color='red'><span id="PublicKey">PublicKey</span> </font>**  
+### 7. Public key class : **<font color='red'><span id="PublicKey">PublicKey</span> </font>**  
 **Description**: PublicKey is a class for storing public key information.
 
 **Functions**:
@@ -1055,7 +1055,7 @@ const Ciphertext data() const noexcept;
 
 
 
-### 7. Relinearize key class : **<font color='red'><span id="RelinKeys">RelinKeys</span> </font>** 
+### 8. Relinearize key class : **<font color='red'><span id="RelinKeys">RelinKeys</span> </font>** 
 
 
 **Description**:RelinKeys is a class for storing relinearized key information.
@@ -1118,7 +1118,7 @@ const std::vector<std::vector<PublicKey>> &key() const;
 
 
 
-### 8. **<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**:  Galois key class 
+### 9. Galois key class : **<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**
 
 **Description**:GaloisKeys is a class for storing Galoiskeys information.
 
@@ -1196,7 +1196,7 @@ const std::vector<std::vector<PublicKey>> &key(std::uint32_t galois_elt) const;
 
 
 
-### 9. **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>** : CKKS encryption scheme  class  
+### 10. CKKS encryption scheme  class : **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>**
 
 **Description**: CKKSEncoder is a class for encoding and decoding CKKS encryption schemes.
 
@@ -1285,7 +1285,7 @@ void decode(const Plaintext &plain, std::vector<std::complex<double>> &destinati
 <br>
 
 
-### 10. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
+### 11. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
 
 **Description**: KeyGenerator is a class for generating keys.
 
@@ -1352,7 +1352,7 @@ inline void create_conj_keys(GaloisKeys &destination);
 
 
 
-### 11. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
+### 12. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
 
 **Description**: Encryptor is a class used to encrypt plaintext.
 
@@ -1478,7 +1478,7 @@ void encrypt_zero_symmetric(Ciphertext &destination, MemoryPoolHandle pool = Mem
 <br>
 
 
-### 12. Decryption class : **<font color='red'><span id="Decryptor">Decryptor</span> </font>**
+### 13. Decryption class : **<font color='red'><span id="Decryptor">Decryptor</span> </font>**
 
 **Description**: Decryptor is a class for decrypting plaintext.
 
@@ -1506,7 +1506,7 @@ void decrypt(const Ciphertext &encrypted, Plaintext &destination);
 
 
 
-### 13. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
+### 14. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
 
 
 **Description**: MatrixPlain is a class for storing plaintext matrix information.
@@ -1529,7 +1529,7 @@ void decrypt(const Ciphertext &encrypted, Plaintext &destination);
 
 
 
-### 14. Group of Plaintext matrix in linear transform : **<font color='red'><span id="LinearMatrixGroup">LinearMatrixGroup</span> </font>**
+### 15. Group of Plaintext matrix in linear transform : **<font color='red'><span id="LinearMatrixGroup">LinearMatrixGroup</span> </font>**
 
 **Description**: LinearMatrixGroup is a class for storing a group of plaintext matrix information.
 
@@ -1574,7 +1574,7 @@ const int step() const;
 <br>
 
 
-### 15. Homomorphic DFT Parameter class  : **<font color='red'><span id="HomomorphicDFTMatrixLiteral">HomomorphicDFTMatrixLiteral</span> </font>**
+### 16. Homomorphic DFT Parameter class  : **<font color='red'><span id="HomomorphicDFTMatrixLiteral">HomomorphicDFTMatrixLiteral</span> </font>**
 
 **Description**: Parameter config class for homomorphic DFT.
 
@@ -1610,7 +1610,7 @@ HomomorphicDFTMatrixLiteral(DFTType type, uint32_t logN, uint32_t logSlots,uint3
 
 
 
-### 16.  Polynomial  class : **<font color='red'><span id="Polynomial">Polynomial</span> </font>**
+### 17.  Polynomial  class : **<font color='red'><span id="Polynomial">Polynomial</span> </font>**
 
 **Description**:The polynomial coefficients class in homomorphic poly evaluator.
 
@@ -1649,7 +1649,7 @@ vector<complex<double>> &data();
 
 
 
-### 17.  PolynomialVector  class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
+### 18.  PolynomialVector  class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
 
 **Description**:A vector of polynomials  class in homomorphic poly evaluator.
 
@@ -1723,7 +1723,7 @@ vector<vector<int>> &index()
 <br>
 
 
-### 18. Homomorphic Mod polynomial class : **<font color='red'><span id="EvalModPoly">EvalModPoly</span> </font>**
+### 19. Homomorphic Mod polynomial class : **<font color='red'><span id="EvalModPoly">EvalModPoly</span> </font>**
 
 **Description**: Parameter config class for homomorphic mod.
 
@@ -1755,7 +1755,7 @@ EvalModPoly(const PoseidonContext &context,SineType type,double scaling_factor,u
 
 
 
-### 19.  Evaluator Factory  class : **<font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font>**
+### 20.  Evaluator Factory  class : **<font color='red'><span id="EvaluatorFactory">EvaluatorFactory</span> </font>**
 
 **Description**: EvaluatorFactory is a class used to create the Poseidon algorithm library.
 
