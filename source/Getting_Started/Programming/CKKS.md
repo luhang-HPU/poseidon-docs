@@ -69,84 +69,84 @@ uint32_t degree() const;
 <br>
 
 ```cpp
-uint32_t slot() const
+uint32_t slot() const;
 ```
 : Return the number of message slots.
 
 <br>
 
 ```cpp
-const parms_id_type& parms_id() const
+const parms_id_type& parms_id() const;
 ```
 : Return the id of the params.
 
 <br>
 
 ```cpp
-const SchemeType &scheme() const
+const SchemeType &scheme() const;
 ```
 : Return the scheme type. 
 
 <br>
 
 ```cpp
-uint32_t LogN() const
+uint32_t LogN() const;
 ```
 : Return the logarithm of polynomial degree number.
 
 <br>
 
 ```cpp
-uint32_t LogSlots() const
+uint32_t LogSlots() const;
 ```
 : Return the logarithm of message slots number.
 
 <br>
 
 ```cpp
-uint32_t HammingWeight() const
+uint32_t HammingWeight() const;
 ```
 : Return the hamming weight.
 
 <br>
 
 ```cpp
-uint32_t q0_level() const
+uint32_t q0_level() const;
 ```
 : Return the rns level of q0.
 
 <br>
 
 ```cpp
-const Modulus &plain_modulus() const
+const Modulus &plain_modulus() const;
 ```
 : Return the plain modulus.
 
 <br>
 
 ```cpp
-const vector<Modulus> &Q() const
+const vector<Modulus> &Q() const;
 ```
 : Return the modulus of modulus chain Q.
 
 <br>
 
 ```cpp
-const vector<Modulus> &P() const
+const vector<Modulus> &P() const;
 ```
 : Return the modulus of modulus chain P.
 
 <br>
 
 ```cpp
-uint32_t LogScale() const
+uint32_t LogScale() const;
 ```
 : Return the logarithm of scaling factor.
 
 <br>
 
 ```cpp
-uint32_t scale() const() 
+uint32_t scale() const();
 ```
 : Return the scaling factor.
 
@@ -190,14 +190,14 @@ PoseidonContext(const ParametersLiteral& paramLiteral,sec_level_type sec_level =
 <br>
 
 ```cpp
- shared_ptr<const poseidon::ParametersLiteral> parameters_literal() const 
+ shared_ptr<const poseidon::ParametersLiteral> parameters_literal() const;
 ```
 : Return the parameters list.
 
 <br>
 
 ```cpp
-KeySwitchVariant key_switch_variant() const ;
+KeySwitchVariant key_switch_variant() const;
 ```
 : Return the key switch variant of current parameter.
 
@@ -219,7 +219,7 @@ shared_ptr<HardwareContext> hardware_context() const;
 <br>
 
 ```cpp
-bool using_hardware() const ;
+bool using_hardware() const;
 ```
 : Return the status of using hardware.
 
@@ -254,7 +254,7 @@ std::shared_ptr<UniformRandomGeneratorFactory> random_generator() const;
 
 **Functions**:
 ```cpp
-Plaintext(MemoryPoolHandle pool = MemoryManager::GetPool())
+Plaintext(MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
 - **pool** (MemoryPoolHandle): The MemoryPoolHandle pointing to a valid memory pool.
 
@@ -273,7 +273,7 @@ Plaintext(std::size_t coeff_count, MemoryPoolHandle pool = MemoryManager::GetPoo
 <br>
 
 ```cpp
-Plaintext(const std::string &hex_poly, MemoryPoolHandle pool = MemoryManager::GetPool())
+Plaintext(const std::string &hex_poly, MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
 - **hex_poly** (const std::string &): The formatted polynomial string specifying the plaintext polynomial.
 - **pool** (MemoryPoolHandle): The MemoryPoolHandle pointing to a valid memory pool.
@@ -316,7 +316,7 @@ Plaintext(Plaintext &&source) = default;
 <br>
 
 ```cpp
-void reserve(std::size_t capacity)
+void reserve(std::size_t capacity);
 ```
 - **capacity** (std::size_t):The capacity.
 
