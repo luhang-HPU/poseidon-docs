@@ -39,7 +39,7 @@ We used two methods to enhance the security of the algorithm:
 Cuckoo hashing is a hashing technique that can efficiently solve conflict problems. In PSI, it can be used to construct data structures for efficient processing and searching of elements in a set.
 <br>
 <ol>
-  <li>Hash table iniEach element in the dataset is hashed to one or more positions.tialization:<ul><li>Each participant initializes two or more hash tables using the cuckoo hash algorithm.</li><li></li></ul></li>
+  <li>Hash table initialization:<ul><li>Each element in the dataset is hashed to one or more positions.</li><li>Each participant initializes two or more hash tables using the cuckoo hash algorithm.</li></ul></li>
   <li>Data insertion and search:<ul><li>When inserting data into a hash table, if a position is found to be occupied, the original element will be "squeezed out" and an attempt will be made to insert at the position defined by other hash functions.</li><li>This method can make the search operation very efficient, as each element has only a limited number of possible positions.</li></ul></li>
 
 </ol>
