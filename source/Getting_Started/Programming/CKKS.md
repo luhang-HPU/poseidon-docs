@@ -1217,13 +1217,21 @@ CKKSEncoder(const PoseidonContext &context);
 
 ```cpp
 void encode(const std::vector<std::complex<double>> &values, parms_id_type parms_id, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
 void encode(const std::vector<double> &values, parms_id_type parms_id, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-void encode(double value, parms_id_type parms_id, double scale, Plaintext &destination,
- MemoryPoolHandle pool = MemoryManager::GetPool()) const;
- void encode(double value, parms_id_type parms_id, double scale, Plaintext &destination,
- MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
+void encode(std::complex<double>, parms_id_type parms_id, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
+void encode(double value, parms_id_type parms_id, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
+
  void encode(int64_t value, parms_id_type parms_id, double scale, Plaintext &destination) const;
 ```
+
 - **values** (const vector<complex<double>> & /const vector<double> & /std::complex<double> / double / int64_t): The source message.
 - **parms_id** (parms_id_type): parms_id determining the encryption parameters to
     be used by the result plaintext.
@@ -1240,28 +1248,33 @@ pool pointed to by the given MemoryPoolHandle.
 
 ```cpp
 void encode(const std::vector<std::complex<double>> &values, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
 void encode(const std::vector<double> &values, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
 void encode(std::complex<double> value, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
 void encode(double value, double scale, Plaintext &destination,MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
 void encode(int64_t value,  double scale, Plaintext &destination) const;
-
 ```
 - **values** (const vector<complex<double>> & /const vector<double> & / double / std::complex<double> / int64_t): The source message.
 - **scale** (double): Scaling parameter defining encoding precision.
 - **destination** (Plaintext): The plaintext polynomial to overwrite with the
     result.
 
-: Encodes a vector of double-precision floating-point real or complex numbers
-    into a plaintext polynomial. Append zeros if vector size is less than N/2.
-    The encryption parameters used are the top level parameters for the given
-    context. Dynamic memory allocations in the process are allocated from the
-    memory pool pointed to by the given MemoryPoolHandle.
+: Encodes a vector of double-precision floating-point real or complex numbersinto a plaintext polynomial. Append zeros if vector size is less than N/2.The encryption parameters used are the top level parameters for the givencontext. Dynamic memory allocations in the process are allocated from the memory pool pointed to by the given MemoryPoolHandle.
 
 <br>
 
 
 ```cpp
 void decode(const Plaintext &plain, std::vector<double> &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
+```
+```cpp
 void decode(const Plaintext &plain, std::vector<std::complex<double>> &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
 ```
 - **plain** (const Plaintext &): The source message.
