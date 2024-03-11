@@ -14,6 +14,10 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
     }
 </style> 
 
+<div style="text-align: center;">
+    <img src="p1.png" alt="box" style="width:400px;">
+</div>
+
 <br>
 <br>
 
