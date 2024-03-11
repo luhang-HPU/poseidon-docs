@@ -66,3 +66,8 @@ We used two methods to enhance the security of the algorithm:
 
 <br>
 
+## Code
+
+```
+wget xxx
+```
