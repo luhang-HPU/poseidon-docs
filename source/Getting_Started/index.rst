@@ -13,6 +13,7 @@ Programming
    :maxdepth: 4
 
 
+   Programming/COMMON
    Programming/CKKS
    Programming/BFV
    Programming/BGV
