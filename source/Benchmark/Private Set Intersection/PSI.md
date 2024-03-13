@@ -23,6 +23,7 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 <br>
 
 **Intersection of privacy sets based on Homomorphic Encryption:**
+<br>
 The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophisticated application of cryptographic techniques to perform secure computations on encrypted data. Homomorphic Encryption allows for operations to be carried out on ciphertexts, producing an encrypted result that, when decrypted, matches the result of operations performed on the plaintext. This capability is particularly useful for privacy-preserving computations, such as securely computing the intersection of two sets without revealing the contents of either set to the other party. This is a crucial functionality in scenarios like secure data sharing between organizations, privacy-preserving data mining, and secure multi-party computation.
 <br>
 
@@ -83,11 +84,17 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
 
 <br>
 
+<center>
+
 ![p4](p4.png)
+
+</center>
+
 <style>
     img[alt="p4"]{
-        width:600px;
+        width:500px;
     }
+
 </style>
 
 <br>
