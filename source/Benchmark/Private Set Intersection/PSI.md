@@ -24,11 +24,17 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 
 **Intersection of privacy sets based on Homomorphic Encryption:**
 
+<center>
+
 ![p2](p2.png)
+
+</center>
+
 <style>
     img[alt="p2"]{
-        width:600px;
+        width:500px;
     }
+
 </style>
 
 ## Security reinforcement methods
