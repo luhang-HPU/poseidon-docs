@@ -92,7 +92,7 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
 
 <style>
     img[alt="p4"]{
-        width:500px;
+        width:700px;
     }
 
 </style>
