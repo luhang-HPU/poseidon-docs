@@ -61,11 +61,17 @@ Cuckoo hashing is a hashing technique that can efficiently solve conflict proble
 
 <br>
 
+<center>
+
 ![p3](p3.png)
+
+</center>
+
 <style>
     img[alt="p3"]{
-        width:600px;
+        width:800px;
     }
+
 </style>
 
 <br>
