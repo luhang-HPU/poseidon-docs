@@ -69,7 +69,7 @@ Cuckoo hashing is a hashing technique that can efficiently solve conflict proble
 
 <style>
     img[alt="p3"]{
-        width:1200px;
+        width:1600px;
     }
 
 </style>
