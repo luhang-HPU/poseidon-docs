@@ -65,6 +65,8 @@ The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophi
     }
 
 </style>
+<br>
+<br>
 
 ## Security reinforcement methods
 We used two methods to enhance the security of the algorithm:
@@ -131,15 +133,18 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
 
 <br>
 
-## Performance improvement and utilization of resource advantages
+## Reduce depth
 <br>
+<br>
+APSI typically involves intensive computation, especially when dealing with large-scale datasets, where complex computational steps may result in significant computational overhead. By optimizing data structures and algorithms, the depth of these calculations can be reduced, thereby reducing overall computational and communication costs.
+<br>
+<ul>
+  <li>Reduce multiplication depth: Divide the sender's set into S equally sized parts and independently evaluate the matching polynomial for each part</li>
+  <li>Using batch processing: For each S part mentioned above, the sender's set can be further divided into poly_modulus_degree equal sized parts. The receiver can batch encrypt its data items to generate a query ciphertext Q=Enc ([X, X,..., X]).</li>
+  <li>Receiver pre calculates query powers: The receiver pre calculates certain powers of the query, encrypts them, and sends them along with Q to the sender</li>
 
-![p5](p5.png)
-<style>
-    img[alt="p5"]{
-        width:600px;
-    }
-</style>
+</ul>
+
 
 <br>
 
