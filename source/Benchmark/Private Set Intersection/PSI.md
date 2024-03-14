@@ -22,6 +22,32 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 
 <br>
 
+**Unbalanced PSI**
+<br>
+Unbalanced Private Set Intersection (Unbalanced PSI) refers to a variant of Private Set Intersection (PSI) protocols tailored to the situation where there is a large disparity in set sizes between the two participating parties. PSI is a cryptographic technique that allows two parties to compute the intersection of their private sets without revealing any additional information about their sets other than what can be inferred from the intersection itself.
+<center>
+
+![ubp](ubp.png)
+
+</center>
+
+<style>
+    img[alt="ubp"]{
+        width:600px;
+    }
+
+</style>
+<br>
+Applications of Unbalanced PSI：
+<br>
+<ul>
+  <li>Ad Networks: Where a client wants to check if any of its small set of identifiers (like cookies or ad identifiers) intersect with a large database of opted-out users.</li>
+  <li>Threat Intelligence Sharing: When a small organization wants to check its indicators of compromise (IoCs) against a larger organization's extensive threat database without revealing its IoCs.</li>
+  <li>Biometric Matching: In scenarios where a client wishes to check if a biometric identifier matches any in a large database, without revealing the identifier or learning about other entries in the database.</li>
+
+</ul>
+
+
 **Intersection of privacy sets based on Homomorphic Encryption:**
 <br>
 The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophisticated application of cryptographic techniques to perform secure computations on encrypted data. Homomorphic Encryption allows for operations to be carried out on ciphertexts, producing an encrypted result that, when decrypted, matches the result of operations performed on the plaintext. This capability is particularly useful for privacy-preserving computations, such as securely computing the intersection of two sets without revealing the contents of either set to the other party. This is a crucial functionality in scenarios like secure data sharing between organizations, privacy-preserving data mining, and secure multi-party computation.
