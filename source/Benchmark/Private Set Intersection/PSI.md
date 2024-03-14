@@ -130,13 +130,13 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
     }
 
 </style>
-
+<br>
 <br>
 
 ## Reduce depth
 APSI typically involves intensive computation, especially when dealing with large-scale datasets, where complex computational steps may result in significant computational overhead. By optimizing data structures and algorithms, the depth of these calculations can be reduced, thereby reducing overall computational and communication costs.
 <br>
-<br>
+
 <ul>
   <li>Reduce multiplication depth: Divide the sender's set into S equally sized parts and independently evaluate the matching polynomial for each part</li>
   <li>Using batch processing: For each S part mentioned above, the sender's set can be further divided into poly_modulus_degree equal sized parts. The receiver can batch encrypt its data items to generate a query ciphertext Q=Enc ([X, X,..., X]).</li>
