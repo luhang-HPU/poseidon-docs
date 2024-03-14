@@ -22,3 +22,12 @@ Framingham Heart Study
 
 
    Framingham/Framingham
+
+Resnet20
+=================================
+
+.. toctree::
+   :maxdepth: 4
+
+
+   resnet20/resnet20
