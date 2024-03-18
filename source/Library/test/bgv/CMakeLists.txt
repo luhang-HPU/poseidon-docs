@@ -1,0 +1,6 @@
+add_executable(test_bgv_encrypt test_bgv_encrypt.cpp)
+target_link_libraries(test_bgv_encrypt poseidon_shared )
+
+
+add_executable(test_bgv_basic test_bgv_basic.cpp)
+target_link_libraries(test_bgv_basic poseidon_shared )
