@@ -147,8 +147,3 @@ APSI typically involves intensive computation, especially when dealing with larg
 
 <br>
 
-## Code
-
-```
-wget xxx
-```
