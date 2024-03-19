@@ -47,8 +47,3 @@ Instead of calculating ReLU function directly, we aim at `sign(x)` first. As it 
 
 At last, make use of the sign funtion: `ReLU(x) = (sign(x)+1)*x/2` to implement ReLU function.
 
-## Code
-
-```
-
-```
