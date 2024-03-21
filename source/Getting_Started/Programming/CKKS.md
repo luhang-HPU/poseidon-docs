@@ -418,7 +418,7 @@ void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
 <br>
 
 
-### 4. Multiplication between ciphertexts : **<font color='red'> multiply</font>**
+### 4. Multiplication between ciphertexts : **<font color='red'> multiply_relin</font>**
 
 ```c
 void multiply_relin(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, const RelinKeys &relin_key) override;
@@ -743,7 +743,7 @@ void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly,
 <br>
 
 
-### 21. Bootstrap : **<font color='red'> bootstrap</font>**
+### 21. Bootstrap : **<font color='red'> bootstrap</font>** 
 
 ```c
 void bootstrap(const Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly,
