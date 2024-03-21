@@ -1,4 +1,4 @@
-# BFV 
+# BFV (**<font color='blue'> Hardware Updating</font>**)
 
 ## Data Structures
 
@@ -116,7 +116,7 @@ void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
   <br>
 
 
-### 5. Multiplication between ciphertexts : **<font color='red'> multiply</font>**
+### 5. Multiplication between ciphertexts : **<font color='red'> multiply</font>** (**<font color='blue'> only software</font>**)
 
 ```c
 void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) const override;
@@ -181,7 +181,7 @@ void BFVEvaluator_S::square_inplace( Ciphertext &ciph) const
   <br>
 
 
-### 9.  Relinearization : **<font color='red'> relinearize</font>**
+### 9.  Relinearization : **<font color='red'> relinearize</font>** (**<font color='blue'> only software</font>**)
 
 ```c
 void relinearize(const Ciphertext &ciph1, const RelinKeys &relin_keys, Ciphertext &result) const override;
@@ -230,7 +230,7 @@ void rotate_row(const Ciphertext &ciph,int rot_step, const GaloisKeys &galois_ke
 
 <br>
 
-### 12. Modulo drop: **<font color='red'> drop_modulus</font>**
+### 12. Modulo drop: **<font color='red'> drop_modulus</font>** 
 
 ```c
 void drop_modulus(const Ciphertext &ciph, Ciphertext &result, uint32_t level) const;
