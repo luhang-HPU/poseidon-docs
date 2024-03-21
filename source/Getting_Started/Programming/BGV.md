@@ -1,4 +1,4 @@
-# BGV
+# BGV  (**<font color='blue'> Hardware Updating</font>**)
 
 ## Data Structures
 
@@ -115,7 +115,7 @@ void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
 
 <br>
 
-### 5. Multiplication between ciphertexts : **<font color='red'> multiply</font>**
+### 5. Multiplication between ciphertexts : **<font color='red'> multiply</font>**  (**<font color='blue'> only software</font>**)
 
 ```c
 void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) const override;
@@ -164,7 +164,7 @@ void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext
 
 <br>
 
-### 8.  Relinearization : **<font color='red'> relinearize</font>**
+### 8.  Relinearization : **<font color='red'> relinearize</font>**  (**<font color='blue'> only software</font>**)
 
 ```c
 void relinearize(const Ciphertext &ciph1, const RelinKeys &relin_keys, Ciphertext &result) const override;
