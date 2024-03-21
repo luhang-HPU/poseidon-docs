@@ -575,8 +575,9 @@ void slot_to_coeff(Ciphertext &ciph_real, Ciphertext &ciph_imag, LinearMatrixGro
 ### 12. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
 
 ```c
-void ftt_fwd(Plaintext &plain ,Plaintext &result)
-void ftt_fwd(Ciphertext &ciph, Ciphertext &result) override;
+void ftt_fwd(Plaintext &plain ,Plaintext &result);
+void ftt_fwd(Plaintext &plain ,Plaintext &result,parms_id_type id);
+void ftt_fwd(Ciphertext &ciph, Ciphertext &result);
 ```
 
 **Description**: This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
@@ -585,6 +586,7 @@ void ftt_fwd(Ciphertext &ciph, Ciphertext &result) override;
 
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **id** (parms_id_type): Target parms_id of plain.(BGV or BFV)
 - **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the transformed plaintext or ciphertext.
 
 
@@ -594,8 +596,7 @@ void ftt_fwd(Ciphertext &ciph, Ciphertext &result) override;
 ### 13. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
 
 ```c
-void ftt_inv(Plaintext &plain ,Plaintext &result) override;
-void ftt_inv(Ciphertext &ciph ,Ciphertext &result) override;
+void ftt_inv(Ciphertext &ciph ,Ciphertext &result);
 ```
 
 **Description**: This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
