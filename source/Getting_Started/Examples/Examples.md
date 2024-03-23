@@ -1,3 +1,389 @@
+#  BFV Basic
+```cpp
+
+#include <bits/stdc++.h>
+#include "poseidon/seal/modulus.h"
+#include "poseidon/PoseidonContext.h"
+#include "poseidon/batchencoder.h"
+#include "poseidon/plaintext.h"
+#include "poseidon/util/debug.h"
+#include "poseidon/key/keys.h"
+#include "poseidon/keygenerator.h"
+#include "poseidon/Evaluator.h"
+#include "poseidon/encryptor.h"
+#include "poseidon/decryptor.h"
+using namespace std;
+
+using namespace poseidon;
+using namespace poseidon::util;
+
+int main() {
+
+    cout << BANNER  << endl;
+    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
+    cout << "" << endl;
+
+//    ParametersLiteral bfv_param_literal{
+//            BFV,
+//            14,
+//            14,
+//            40,
+//            5,
+//            0,
+//            65537,
+//            {},
+//            {}
+//    };
+//    vector<uint32_t> logQTmp{31,31,31,31, 31,31,31};//,31,31,31,31}; //
+//    vector<uint32_t> logQTmp{31,31,31,31, 31,31,31,31,  31,31,31,31, 31,31,31};//,31,31,31,31}; //
+//    bfv_param_literal.set_plain_modulus(65537);
+//    vector<uint32_t> logQTmp{31,31,31,31};//,31,31,31,31}; //
+//    vector<uint32_t> logPTmp{31};//,31,31,31,31}; //
+//    bfv_param_literal.set_log_modulus(logQTmp,logPTmp);
+    ParametersLiteralDefault bfv_param_literal(BFV,16384,poseidon::sec_level_type::none);
+
+    PoseidonContext context(bfv_param_literal,poseidon::sec_level_type::none);
+    BatchEncoder enc(context);
+    KeyGenerator keygen(context);
+    PublicKey publicKey;
+    GaloisKeys galoisKeys;
+    RelinKeys relinKeys;
+    keygen.create_public_key(publicKey);
+    keygen.create_galois_keys(vector<int>{0,-1,1},galoisKeys);
+    keygen.create_relin_keys(relinKeys);
+
+    Encryptor encryptor(context,publicKey);
+    Decryptor decryptor(context,keygen.secret_key());
+
+    Plaintext plainA,plainB,plain_res;
+    Ciphertext ciphA,ciphB,ciphC,ciphD;
+    auto slot_num = bfv_param_literal.slot();
+    vector<uint64_t> a = {77,2,3};
+    vector<uint64_t> b = {11,33,22};
+    vector<uint64_t> message_res;
+
+    enc.encode(a,plainA);
+    enc.encode(b,plainB);
+    encryptor.encrypt(plainA,ciphA);
+    encryptor.encrypt(plainB,ciphB);
+
+    Timestacs timestacs;
+    auto eva = EvaluatorFactory::DefaultFactory()->create(context);
+    auto eva_soft = EvaluatorFactory::SoftFactory()->create(context);
+
+    //======================== ADD =========================================
+    print_example_banner("Example: ADD / ADD in bfv");
+    timestacs.start();
+    eva->add(ciphA,ciphB,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+    auto message_want = a;
+    for(auto i = 0; i < message_want.size(); i++){
+        message_want[i] += b[i];
+    }
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+
+    //======================== SUB =========================================
+    print_example_banner("Example: SUB / SUB in bfv");
+    timestacs.start();
+    eva->sub(ciphA,ciphB,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++){
+        message_want[i] -= b[i];
+    }
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+
+    //======================== NTT =========================================
+    print_example_banner("Example: NTT / NTT in bfv");
+    timestacs.start();
+    eva->ftt_fwd(ciphA,ciphA);
+    eva->ftt_inv(ciphA,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+
+
+    //======================== Mod Switch =========================================
+    print_example_banner("Example: Mod Switch / Mod Switch in bfv");
+    cout << "Before Mod Switch level : " << ciphA.level() << endl;
+    timestacs.start();
+
+    eva->drop_modulus_to_next(ciphA,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+
+    cout << "After  Mod Switch level : " << ciphA.level() << endl;
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+
+    //======================== MULTIPLY_PLAIN =========================================
+    print_example_banner("Example: MULTIPLY_PLAIN / MULTIPLY_PLAIN in bfv");
+    timestacs.start();
+    eva->multiply_plain(ciphA,plainA,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++){
+        message_want[i] *= a[i] ;
+        message_want[i] %= 65537;
+    }
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+
+
+//======================== multiply =========================================
+    print_example_banner("Example: MULTIPLY / MULTIPLY in bfv");
+    timestacs.start();
+    eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
+    eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
+    timestacs.end();
+    eva->read(ciphA);
+
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++){
+        message_want[i] *= message_want[i] ;
+        message_want[i] %= 65537;
+//        message_want[i] *= message_want[i] ;
+//        message_want[i] %= 65537;
+    }
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+    //======================== rotate row =========================================
+    print_example_banner("Example: ROTATE_ROW / ROTATE_ROW in bfv");
+    timestacs.start();
+    eva->rotate_row(ciphA,1,galoisKeys,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+    eva->rotate_row(ciphA,-1,galoisKeys,ciphA);
+
+
+    //======================== rotate col =========================================
+    print_example_banner("Example: ROTATE_COL / ROTATE_COL in bfv");
+    timestacs.start();
+    eva->rotate_col(ciphA,galoisKeys,ciphA);
+    timestacs.end();
+    eva->read(ciphA);
+
+    timestacs.print_time("TIME : ");
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+    eva->rotate_col(ciphA,galoisKeys,ciphA);
+//======================== ADD_PLAIN =========================================
+    print_example_banner("Example: ADD_PLAIN / ADD_PLAIN in bfv");
+    timestacs.start();
+
+    eva->add_plain(ciphA,plainA,ciphA);
+    timestacs.end();
+    timestacs.print_time("TIME : ");
+    eva->read(ciphA);
+
+
+    decryptor.decrypt(ciphA,plain_res);
+    enc.decode(plain_res,message_res);
+
+    for(auto i = 0; i < message_want.size(); i++){
+        message_want[i] += a[i];
+    }
+    for(auto i = 0; i < message_want.size(); i++) {
+        printf("source_data[%d] : %ld\n", i, message_want[i]);
+        printf("result_data[%d] : %ld\n", i, message_res[i]);
+    }
+
+    return 0;
+}
+
+```
+
+
+#  BFV Matrix vector multiplication
+```cpp
+#include "poseidon/PoseidonContext.h"
+#include "poseidon/CKKSEncoder.h"
+#include "poseidon/plaintext.h"
+#include "poseidon/batchencoder.h"
+#include "poseidon/util/random_sample.h"
+#include "poseidon/encryptor.h"
+#include "poseidon/decryptor.h"
+#include "poseidon/keygenerator.h"
+#include "poseidon/util/precision.h"
+#include "poseidon/Evaluator.h"
+#include "poseidon/util/debug.h"
+using  namespace  poseidon;
+
+int main(){
+
+    cout << BANNER  << endl;
+    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
+    cout << "" << endl;
+
+    ParametersLiteralDefault bfv_param_literal(BFV,8192,poseidon::sec_level_type::none);
+
+
+    PoseidonContext context(bfv_param_literal,poseidon::sec_level_type::none,true);
+    BatchEncoder enc(context);
+    KeyGenerator keygen(context);
+    PublicKey publicKey;
+    GaloisKeys galoisKeys;
+    RelinKeys relinKeys;
+    keygen.create_public_key(publicKey);
+    keygen.create_relin_keys(relinKeys);
+
+    Encryptor encryptor(context,publicKey);
+    Decryptor decryptor(context,keygen.secret_key());
+
+    //=====================init  Plain & Ciph =========================
+    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
+    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
+
+    int mat_size = bfv_param_literal.slot();
+    auto level = bfv_param_literal.Q().size() - 1;
+    auto coeff_mod = bfv_param_literal.plain_modulus();
+    vector<uint64_t> message(mat_size,1);
+    vector<uint64_t> vec_result(mat_size,0);
+
+    std::vector<vector<uint64_t>> mat_T(mat_size);
+    std::vector<vector<uint64_t>> mat_T1;
+
+
+
+    std::vector<vector<uint64_t>> mat(mat_size,vector<uint64_t>(mat_size,0));
+    for(int i = 0; i < mat_size; i++){
+        sample_random_vector(mat[i],mat_size,i);
+    }
+    sample_random_vector(message,mat_size,10);
+    //=====================GenMatrices  ========================
+    MatrixPlain matrixPlain;
+
+    vector<uint64_t > message_tmp;
+    matrix_operations::matrix_vector_multiply_mod(mat, message, message_tmp,coeff_mod.value());
+//
+    matrix_operations::rotate_slots_matrix(mat,mat_T1);
+
+    GenMatrixformBSGS(matrixPlain,matrixPlain.rot_index, enc, mat_T1,
+                      level ,1,  bfv_param_literal.LogSlots());
+
+
+
+
+    //=====================keys  =========================
+    //
+
+    vector<int> rot_index_tmp;
+    for(auto index : matrixPlain.rot_index){
+        if(index >= mat_size/2){
+            rot_index_tmp.push_back(index - mat_size/2);
+        }
+        else{
+            rot_index_tmp.push_back(index);
+        }
+    }
+    rot_index_tmp.push_back(0);
+
+    keygen.create_galois_keys(rot_index_tmp,galoisKeys);
+    // kgen.create_galois_keys(rot_elemt,rotKeys);
+
+    //===================== Doing ==============================
+    //encode
+
+    enc.encode(message,plainA);
+
+    //encrypt
+    encryptor.encrypt(plainA,cipherA);
+
+    auto start = chrono::high_resolution_clock::now();
+//evaluate
+    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
+
+    Timestacs timestacs;
+    timestacs.start();
+    ckks_eva->multiplyByDiagMatrixBSGS(cipherA,matrixPlain,cipherRes,galoisKeys);
+    timestacs.end();
+    timestacs.print_time("MULT MATRIX : ");
+    ckks_eva->read(cipherRes);
+
+
+    //decode & decrypt
+    decryptor.decrypt(cipherRes,plainRes);
+    enc.decode(plainRes,vec_result);
+//    for(int i = 0; i < 4; i++){
+//        for(int j = 0; j < 4; j++) {
+//            printf("mat vec[%d][%d] : %d  \n", i, j,mat_T1[i][j]);
+//        }
+//    }
+
+    for(int i = 0; i < 4; i++){
+        printf("soft vec[%d]   : %d  \n",i,message_tmp[i]);
+        printf("result vec[%d] : %d  \n",i,vec_result[i]);
+    }
+
+
+}
+
+```
+
+
+
+
+
+
+
+
+
+
 #  CKKS Basic
 ```cpp
 #include "poseidon/PoseidonContext.h"
