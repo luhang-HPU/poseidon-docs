@@ -1,4 +1,4 @@
-# BFV (**<font color='blue'> Hardware Updating</font>**)
+# BFV
 
 ## Data Structures
 
@@ -47,6 +47,27 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 - **res** (vector<uint32_t> &): The result of message.
 
 : A function used to decode a plaintext polynomial into a complex number vector.
+
+<br>
+
+
+### 2. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
+
+**Description**: MatrixPlain is a class for storing plaintext matrix information.
+
+**Members**:
+
+- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
+
+- **N1** (uint32_t): Indicates the number of rows in a matrix.
+
+- **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
+
+- **scale** (double): Indicates the scaling factor of the matrix(only used in CKKS).
+
+- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+
+- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
 
 <br>
 
@@ -280,6 +301,25 @@ void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const override;
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
 - **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the inverse transformed ciphertext or plaintext.
 
+<br>
+
+### 15. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
+
+```c
+void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
+```
+
+**Description**: This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
+
+**Parameters**:
+
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
+
+
+<br>
 
 
 
