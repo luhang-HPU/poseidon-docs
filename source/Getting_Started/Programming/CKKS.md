@@ -417,8 +417,41 @@ void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
 
 <br>
 
+### 4. Multiplication between ciphertexts : **<font color='red'> multiply</font>** (**<font color='blue'> only software</font>**)
 
-### 4. Multiplication between ciphertexts : **<font color='red'> multiply_relin</font>**
+```c
+void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) const override;
+```
+
+**Description**：This function performs homomorphic multiplication between two ciphertexts.<br>
+
+**Parameters**：
+
+- **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+
+  <br>
+
+  ### 5.  Relinearization : **<font color='red'> relinearize</font>** (**<font color='blue'> only software</font>**)
+
+```c
+void relinearize(const Ciphertext &ciph1, const RelinKeys &relin_keys, Ciphertext &result) const override;
+```
+
+**Description**: This function  performs relinearization operation on the ciphertext.
+
+**Parameters:**
+
+* **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.
+* **relin_keys** (RelinKeys): A reference to a **RelinKeys** object,representing the relinearization key.
+* **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
+
+   <br>
+
+
+
+### 6. Multiplication between ciphertexts : **<font color='red'> multiply_relin</font>**
 
 ```c
 void multiply_relin(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, const RelinKeys &relin_key) override;
@@ -437,7 +470,7 @@ void multiply_relin(Ciphertext &ciph0, Ciphertext &ciph1, Ciphertext &result, co
 <br>
 
 
-### 5. Multiplication of ciphertext and plaintext : **<font color='red'> multiply_plain</font>**
+### 7. Multiplication of ciphertext and plaintext : **<font color='red'> multiply_plain</font>**
 
 ```c
 void multiply_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
@@ -455,7 +488,7 @@ void multiply_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) overr
 <br>
 
 
-### 6. Rescale : **<font color='red'> rescale</font>**
+### 8. Rescale : **<font color='red'> rescale</font>**
 
 ```c
 void rescale (const Ciphertext &ciph,Ciphertext &result) const;
@@ -471,7 +504,7 @@ void rescale (const Ciphertext &ciph,Ciphertext &result) const;
 <br>
 
 
-### 7. Ciphertext rotation : **<font color='red'> rotate</font>**
+### 9. Ciphertext rotation : **<font color='red'> rotate</font>**
 
 ```c
 void rotate(const Ciphertext &ciph,int step, const GaloisKeys &galoisKeys, Ciphertext &result) const;
@@ -490,7 +523,7 @@ void rotate(const Ciphertext &ciph,int step, const GaloisKeys &galoisKeys, Ciphe
 <br>
 
 
-### 8. Take conjugate : **<font color='red'> conjugate</font>**
+### 10. Take conjugate : **<font color='red'> conjugate</font>**
 
 ```c
 void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &result) const;
@@ -508,7 +541,7 @@ void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &
 
 
 
-### 9. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
+### 11. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
 
 ```c
 void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
@@ -527,7 +560,7 @@ void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Cipherte
 <br>
 
 
-### 10. Coefficient to plaintext slot : **<font color='red'> coeff_to_slot</font>**
+### 12. Coefficient to plaintext slot : **<font color='red'> coeff_to_slot</font>**
 
 ```c
 void coeff_to_slot(const Ciphertext &ciph,const LinearMatrixGroup& matrix_group,Ciphertext &result_real,Ciphertext &result_imag,const GaloisKeys &galoisKeys,const CKKSEncoder &encoder) const;
@@ -549,7 +582,7 @@ void coeff_to_slot(const Ciphertext &ciph,const LinearMatrixGroup& matrix_group,
 
 
 
-### 11. Plaintext slot to coefficient : **<font color='red'> slot_to_coeff</font>**
+### 13. Plaintext slot to coefficient : **<font color='red'> slot_to_coeff</font>**
 
 ```c
 void slot_to_coeff(Ciphertext &ciph_real, Ciphertext &ciph_imag, LinearMatrixGroup &matrix_group, Ciphertext &result, const GaloisKeys &rot_key, const GaloisKeys &conj_key, CKKSEncoder &encoder) override;
@@ -572,7 +605,7 @@ void slot_to_coeff(Ciphertext &ciph_real, Ciphertext &ciph_imag, LinearMatrixGro
 
 
 
-### 12. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
+### 14. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
 
 ```c
 void ftt_fwd(Plaintext &plain ,Plaintext &result);
@@ -593,7 +626,7 @@ void ftt_fwd(Ciphertext &ciph, Ciphertext &result);
 <br>
 
 
-### 13. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
+### 15. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
 
 ```c
 void ftt_inv(Ciphertext &ciph ,Ciphertext &result);
@@ -612,7 +645,7 @@ void ftt_inv(Ciphertext &ciph ,Ciphertext &result);
 
 
 
-### 14. Read ciphertext information from accelerator card : **<font color='red'> read</font>**
+### 16. Read ciphertext information from accelerator card : **<font color='red'> read</font>**
 
 ```c
 void read(Ciphertext &ciph) override;
@@ -628,7 +661,7 @@ void read(Ciphertext &ciph) override;
 
 <br>
 
-### 15. Multiplication of ciphertext and complex constant : **<font color='red'> multiply_const</font>**
+### 17. Multiplication of ciphertext and complex constant : **<font color='red'> multiply_const</font>**
 
 ```c
 void multiply_const(const Ciphertext &ciph, complex<double> constData, double scale,Ciphertext &result, CKKSEncoder &encoder) override;
@@ -649,7 +682,7 @@ void multiply_const(const Ciphertext &ciph, complex<double> constData, double sc
 <br>
 
 
-### 16. Addition of ciphertext and complex constant : **<font color='red'> add_const</font>**
+### 18. Addition of ciphertext and complex constant : **<font color='red'> add_const</font>**
 
 ```cpp
 void add_const(const Ciphertext &ciph, double constData, Ciphertext &result,const CKKSEncoder &encoder) const;
@@ -667,7 +700,7 @@ void add_const(const Ciphertext &ciph, double constData, Ciphertext &result,cons
 
 <br>
 
-### 17. Discrete Fourier Transform on ciphertext : **<font color='red'> dft</font>**
+### 19. Discrete Fourier Transform on ciphertext : **<font color='red'> dft</font>**
 
 ```c
 void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const GaloisKeys &rot_key);
@@ -686,7 +719,7 @@ void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const Galo
 <br>
 
 
-### 18. Dynamic rescale : **<font color='red'> rescale_dynamic</font>**
+### 20. Dynamic rescale : **<font color='red'> rescale_dynamic</font>**
 
 ```c
 void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale);
@@ -703,7 +736,7 @@ void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale
 <br>
 
 
-### 19. Polynomial evaluation : **<font color='red'> evaluatePolyVector</font>**
+### 21. Polynomial evaluation : **<font color='red'> evaluatePolyVector</font>**
 
 ```c
 void evaluatePolyVector(const Ciphertext &ciph,Ciphertext &destination,const PolynomialVector &polys,double scale,const RelinKeys &relin_key,const CKKSEncoder &encoder) const;
@@ -724,7 +757,7 @@ void evaluatePolyVector(const Ciphertext &ciph,Ciphertext &destination,const Pol
 <br>
 
 
-### 20. Evaluate modulo on ciphertext vector : **<font color='red'> eval_mod</font>**
+### 22. Evaluate modulo on ciphertext vector : **<font color='red'> eval_mod</font>**
 
 ```c
 void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const RelinKeys &relin_key, CKKSEncoder &encoder) override;
@@ -743,7 +776,7 @@ void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly,
 <br>
 
 
-### 21. Bootstrap : **<font color='red'> bootstrap</font>** 
+### 23. Bootstrap : **<font color='red'> bootstrap</font>** 
 
 ```c
 void bootstrap(const Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly,
@@ -769,7 +802,7 @@ const RelinKeys &relin_key, const GaloisKeys &rot_key,const CKKSEncoder &encoder
 
 <!-- 
 
-### 22. Key switch : **<font color='red'> switch_key</font>**
+### 24. Key switch : **<font color='red'> switch_key</font>**
 
 ```c
 void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &switch_key);
