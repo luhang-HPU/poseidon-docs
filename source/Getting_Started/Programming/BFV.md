@@ -188,7 +188,7 @@ void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext
 
 
 
-### 8. Square inplace: **<font color='red'> square_inplace</font>**
+### 8. Square inplace: **<font color='red'> square_inplace</font>** (**<font color='blue'> only software</font>**)
 
 ```c
 void BFVEvaluator_S::square_inplace( Ciphertext &ciph) const
