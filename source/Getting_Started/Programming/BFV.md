@@ -272,8 +272,8 @@ void drop_modulus_to_next(const Ciphertext &ciph, Ciphertext &result) const;
 ### 13. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
 
 ```c
-void ftt_fwd(const Plaintext &plain, Plaintext &result) const override;
-void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const override;
+void ftt_fwd(const Plaintext &plain ,Plaintext &result,parms_id_type id = parms_id_zero) const;
+void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
 **Description**: This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
@@ -282,6 +282,7 @@ void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const override;
 
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **id** (Ciphertext): Target parms_id of plain(BGV or BFV).
 - **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the transformed plaintext or ciphertext.
 
 <br>
@@ -289,8 +290,7 @@ void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const override;
 ### 14. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
 
 ```c
-void ftt_inv(const Plaintext &plain, Plaintext &result) const override;
-void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const override;
+void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
 **Description**: This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
