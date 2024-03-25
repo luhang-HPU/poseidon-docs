@@ -297,7 +297,6 @@ void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const;
 
 **Parameters**: 
 
-- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
 - **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the inverse transformed ciphertext or plaintext.
 
