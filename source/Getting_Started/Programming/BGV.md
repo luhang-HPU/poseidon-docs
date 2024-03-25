@@ -49,6 +49,26 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 
 <br>
 
+### 2. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
+
+**Description**: MatrixPlain is a class for storing plaintext matrix information.
+
+**Members**:
+
+- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
+
+- **N1** (uint32_t): Indicates the number of rows in a matrix.
+
+- **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
+
+- **scale** (double): Indicates the scaling factor of the matrix(only used in CKKS).
+
+- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+
+- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
+
+<br>
+
 ## Evaluation Functions
 
 ### 1. Addition between ciphertexts : **<font color='red'> add</font>**
@@ -234,8 +254,8 @@ void drop_modulus_to_next(const Ciphertext &ciph, Ciphertext &result) const;
 ### 12. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
 
 ```c
-void ftt_fwd(const Plaintext &plain, Plaintext &result) const override;
-void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const override;
+void ftt_fwd(const Plaintext &plain ,Plaintext &result,parms_id_type id = parms_id_zero) const;
+void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
 **Description**: This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
@@ -244,6 +264,7 @@ void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const override;
 
 - **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
+- **id** (Ciphertext): Target parms_id of plain(BGV or BFV).
 - **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the transformed plaintext or ciphertext.
 
 <br>
@@ -251,7 +272,6 @@ void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const override;
 ### 13. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
 
 ```c
-void ftt_inv(const Plaintext &plain, Plaintext &result) const override;
 void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const override;
 ```
 
@@ -259,11 +279,32 @@ void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const override;
 
 **Parameters**: 
 
-- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
 - **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
 - **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the inverse transformed ciphertext or plaintext.
 
 <br>
+
+### 14. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
+
+```c
+void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
+```
+
+**Description**: This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
+
+**Parameters**:
+
+- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
+- **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
+- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
+
+
+<br>
+
+
+
+
 
 <!-- ### 8. Key switching : **<font color='red'> switch_key</font>**
 
