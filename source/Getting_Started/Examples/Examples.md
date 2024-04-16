@@ -170,7 +170,7 @@ int main() {
     print_example_banner("Example: MULTIPLY / MULTIPLY in bfv");
     timestacs.start();
     eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
-    eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
+   // eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
     timestacs.end();
     eva->read(ciphA);
 
