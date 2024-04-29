@@ -31,3 +31,12 @@ Resnet20
 
 
    resnet20/resnet20
+
+LR_train
+=================================
+
+.. toctree::
+   :maxdepth: 4
+
+
+   LR_train/LR_train
