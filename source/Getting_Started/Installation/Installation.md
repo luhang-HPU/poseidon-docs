@@ -20,24 +20,21 @@ Installing Poseidon is very simple. The installation package has integrated the 
 # Download the Installation Package
 
 There are three ways to download the Poseidon installation package:
-<!--
-**GitHub**
 
-```
-wget https://github.com/luhang-CCL/Poseidon/raw/main/downloads/poseidon-xdma-v2.6.deb 
-```
--->
 **Gitee (recommended)**
 
-Centos
+Here are all the installation packages.
+[downloads list](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)
 
+You can also download it this way (check the version carefully)
+Centos
 ```
-wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-3.0.0-1.el7.x86_64.rpm
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0-1.el7.x86_64.rpm
 ```
 
 Ubuntu 
 ```
-wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-3.0.0_x86_64.deb
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0_x86_64.deb
 ```
 
 <!--
@@ -56,16 +53,16 @@ After you’ve downloaded the installation package, navigate to the download dir
 
 ```
 #install
-sudo yum localinstall poseidon-3.0.0-1.el7.x86_64.rpm
+sudo yum localinstall poseidon-4.0.0-1.el7.x86_64.rpm
 
 #uninstall
-sudo rpm -e poseidon-3.0.0-1.el7.x86_64
+sudo rpm -e poseidon-4.0.0-1.el7.x86_64
 ```
 
 **Ubuntu**
 ```
 #install
-sudo apt-get install ./poseidon-3.0.0_x86_64.deb
+sudo apt-get install ./poseidon-4.0.0_x86_64.deb
 
 #uninstall
 sudo apt-get remove poseidon
