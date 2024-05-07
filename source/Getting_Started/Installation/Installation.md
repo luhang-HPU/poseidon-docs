@@ -19,20 +19,21 @@ Installing Poseidon is very simple. The installation package has integrated the 
 
 # Download the Installation Package
 
-There are three ways to download the Poseidon installation package:
+There are two ways to download the Poseidon installation package:
 
 **Gitee (recommended)**
 
-Here are all the installation packages.
-[downloads list](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)
+Here are all the installation packages.<br>
+[The download address of the installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)<br>
 
-You can also download it this way (check the version carefully)
-Centos
+You can also download it this way (check the version carefully)<br>
+
+**Centos**
 ```
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0-1.el7.x86_64.rpm
 ```
 
-Ubuntu 
+**Ubuntu**
 ```
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0_x86_64.deb
 ```
