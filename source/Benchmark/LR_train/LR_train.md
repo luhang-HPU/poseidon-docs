@@ -2,7 +2,25 @@
 
 <div style="text-align: justify">
 
-Logistic Regression is a generalized linear model mainly used in binary classification. It works as a classifier utilizing Logistic function (also named Sigmoid function). Logistic Regression Classifier aims at learning a binary classification model from the features of training data. The training process is to construct a prediction function with Logistic function and to iterate the loss within each epoch.
+Logistic Regression is a generalized linear model mainly used in binary classification. It works as a classifier utilizing Logistic function (also named Sigmoid function).
+
+Sigmoid function pocesses a pretty S-curve.
+
+![sigmoid](6.png)
+<style>
+    img[alt="sigmoid"]{
+        width:400px;
+    }
+</style> Logistic Regression Classifier aims at learning a binary classification model from the features of training data. 
+
+![classification](7.png)
+<style>
+    img[alt="classification"]{
+        width:600px;
+    }
+</style> 
+
+The training process is to construct a prediction function with Logistic function and to make the loss iterate within each epoch.
 
 ![prediction](1.png)
 <style>
@@ -11,11 +29,16 @@ Logistic Regression is a generalized linear model mainly used in binary classifi
     }
 </style> 
 
-<br>
-<br>
 
 
 ## Derivation of the gradient
+
+![curve](8.png)
+<style>
+    img[alt="curve"]{
+        width:700px;
+    }
+</style> 
 
 The logarithm of Loss function:
 ![loss](2.png)
