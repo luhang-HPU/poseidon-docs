@@ -1,1139 +1,233 @@
-#  BFV Basic
+The examples directory contains BFV, BGV and CKKS basic operation examples.
+
+All the BFV, BGV and CKKS basic examples supports different security level, different polynomial degree, and can be executed on both CPU or HPU accelerator card. In particular, if users wish to test the examples in various scenarios, they can customize the security parameters to meet the requirement.
+
+
+
+# Introduction of examples
+
+Here, we introduce a BFV example to show how to program with the Poseidon library.
+
+
+
+There are three different key switch schemes in the project ---- BV, GHS and Hybrid scheme, in which the modulus setting regulation is different from one another.
+
+In BV key switch scheme, the number of modulus chain P is 1 and the number of modulus chain Q is variable.
+
+In GHS key switch scheme, the number of modulus chain P is limited to be equal to the number of modulus chain Q.
+
+In Poseidon, we use the BV key switch scheme in BFV and BGV scheme and GHS key switch scheme in CKKS scheme (the Hybrid key switch scheme is unused for now). 
+
+
+
+## Choose the device type
+
+First of all, we need to decide whether to run the program on the CPU or HPU. 
+
+If we would like to run the program on the CPU, we choose the `DEVICE_SOFTWARE` device type. 
+
+If we would like to implement the HPU card to accelerate the process, we could choose the `DEVICE_HARDWARE` device type.
+
+The software mode is always applicable, however the hardware mode is only supported when **the hardware library and the HPU card are both installed**.
+
 ```cpp
-
-#include <bits/stdc++.h>
-#include "poseidon/seal/modulus.h"
-#include "poseidon/PoseidonContext.h"
-#include "poseidon/batchencoder.h"
-#include "poseidon/plaintext.h"
-#include "poseidon/util/debug.h"
-#include "poseidon/key/keys.h"
-#include "poseidon/keygenerator.h"
-#include "poseidon/Evaluator.h"
-#include "poseidon/encryptor.h"
-#include "poseidon/decryptor.h"
-using namespace std;
-
-using namespace poseidon;
-using namespace poseidon::util;
-
-int main() {
-
-    cout << BANNER  << endl;
-    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
-    cout << "" << endl;
-
-//    ParametersLiteral bfv_param_literal{
-//            BFV,
-//            14,
-//            14,
-//            40,
-//            5,
-//            0,
-//            65537,
-//            {},
-//            {}
-//    };
-//    vector<uint32_t> logQTmp{31,31,31,31, 31,31,31};//,31,31,31,31}; //
-//    vector<uint32_t> logQTmp{31,31,31,31, 31,31,31,31,  31,31,31,31, 31,31,31};//,31,31,31,31}; //
-//    bfv_param_literal.set_plain_modulus(65537);
-//    vector<uint32_t> logQTmp{31,31,31,31};//,31,31,31,31}; //
-//    vector<uint32_t> logPTmp{31};//,31,31,31,31}; //
-//    bfv_param_literal.set_log_modulus(logQTmp,logPTmp);
-    ParametersLiteralDefault bfv_param_literal(BFV,16384,poseidon::sec_level_type::none);
-
-    PoseidonContext context(bfv_param_literal,poseidon::sec_level_type::none);
-    BatchEncoder enc(context);
-    KeyGenerator keygen(context);
-    PublicKey publicKey;
-    GaloisKeys galoisKeys;
-    RelinKeys relinKeys;
-    keygen.create_public_key(publicKey);
-    keygen.create_galois_keys(vector<int>{0,-1,1},galoisKeys);
-    keygen.create_relin_keys(relinKeys);
-
-    Encryptor encryptor(context,publicKey);
-    Decryptor decryptor(context,keygen.secret_key());
-
-    Plaintext plainA,plainB,plain_res;
-    Ciphertext ciphA,ciphB,ciphC,ciphD;
-    auto slot_num = bfv_param_literal.slot();
-    vector<uint64_t> a = {77,2,3};
-    vector<uint64_t> b = {11,33,22};
-    vector<uint64_t> message_res;
-
-    enc.encode(a,plainA);
-    enc.encode(b,plainB);
-    encryptor.encrypt(plainA,ciphA);
-    encryptor.encrypt(plainB,ciphB);
-
-    Timestacs timestacs;
-    auto eva = EvaluatorFactory::DefaultFactory()->create(context);
-    auto eva_soft = EvaluatorFactory::SoftFactory()->create(context);
-
-    //======================== ADD =========================================
-    print_example_banner("Example: ADD / ADD in bfv");
-    timestacs.start();
-    eva->add(ciphA,ciphB,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-    auto message_want = a;
-    for(auto i = 0; i < message_want.size(); i++){
-        message_want[i] += b[i];
-    }
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-
-    //======================== SUB =========================================
-    print_example_banner("Example: SUB / SUB in bfv");
-    timestacs.start();
-    eva->sub(ciphA,ciphB,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++){
-        message_want[i] -= b[i];
-    }
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-
-    //======================== NTT =========================================
-    print_example_banner("Example: NTT / NTT in bfv");
-    timestacs.start();
-    eva->ftt_fwd(ciphA,ciphA);
-    eva->ftt_inv(ciphA,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-
-
-    //======================== Mod Switch =========================================
-    print_example_banner("Example: Mod Switch / Mod Switch in bfv");
-    cout << "Before Mod Switch level : " << ciphA.level() << endl;
-    timestacs.start();
-
-    eva->drop_modulus_to_next(ciphA,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-
-    cout << "After  Mod Switch level : " << ciphA.level() << endl;
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-
-    //======================== MULTIPLY_PLAIN =========================================
-    print_example_banner("Example: MULTIPLY_PLAIN / MULTIPLY_PLAIN in bfv");
-    timestacs.start();
-    eva->multiply_plain(ciphA,plainA,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++){
-        message_want[i] *= a[i] ;
-        message_want[i] %= 65537;
-    }
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-
-
-//======================== multiply =========================================
-    print_example_banner("Example: MULTIPLY / MULTIPLY in bfv");
-    timestacs.start();
-    eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
-   // eva->multiply_relin(ciphA,ciphA,ciphA,relinKeys);
-    timestacs.end();
-    eva->read(ciphA);
-
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++){
-        message_want[i] *= message_want[i] ;
-        message_want[i] %= 65537;
-//        message_want[i] *= message_want[i] ;
-//        message_want[i] %= 65537;
-    }
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-    //======================== rotate row =========================================
-    print_example_banner("Example: ROTATE_ROW / ROTATE_ROW in bfv");
-    timestacs.start();
-    eva->rotate_row(ciphA,1,galoisKeys,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-    eva->rotate_row(ciphA,-1,galoisKeys,ciphA);
-
-
-    //======================== rotate col =========================================
-    print_example_banner("Example: ROTATE_COL / ROTATE_COL in bfv");
-    timestacs.start();
-    eva->rotate_col(ciphA,galoisKeys,ciphA);
-    timestacs.end();
-    eva->read(ciphA);
-
-    timestacs.print_time("TIME : ");
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-    eva->rotate_col(ciphA,galoisKeys,ciphA);
-//======================== ADD_PLAIN =========================================
-    print_example_banner("Example: ADD_PLAIN / ADD_PLAIN in bfv");
-    timestacs.start();
-
-    eva->add_plain(ciphA,plainA,ciphA);
-    timestacs.end();
-    timestacs.print_time("TIME : ");
-    eva->read(ciphA);
-
-
-    decryptor.decrypt(ciphA,plain_res);
-    enc.decode(plain_res,message_res);
-
-    for(auto i = 0; i < message_want.size(); i++){
-        message_want[i] += a[i];
-    }
-    for(auto i = 0; i < message_want.size(); i++) {
-        printf("source_data[%d] : %ld\n", i, message_want[i]);
-        printf("result_data[%d] : %ld\n", i, message_res[i]);
-    }
-
-    return 0;
-}
-
+PoseidonFactory::get_instance()->set_device_type(DEVICE_SOFTWARE);
+PoseidonFactory::get_instance()->set_device_type(DEVICE_HARDWARE);
 ```
 
 
-#  BFV Matrix vector multiplication
+
+## Parameter Specification & Encryption Class Initialization
+
+We need to specify the parameters to initiate the context, including the encryption scheme, the polynomial degree and the security level.
+
 ```cpp
-#include "poseidon/PoseidonContext.h"
-#include "poseidon/CKKSEncoder.h"
-#include "poseidon/plaintext.h"
-#include "poseidon/batchencoder.h"
-#include "poseidon/util/random_sample.h"
-#include "poseidon/encryptor.h"
-#include "poseidon/decryptor.h"
-#include "poseidon/keygenerator.h"
-#include "poseidon/util/precision.h"
-#include "poseidon/Evaluator.h"
-#include "poseidon/util/debug.h"
-using  namespace  poseidon;
-
-int main(){
-
-    cout << BANNER  << endl;
-    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
-    cout << "" << endl;
-
-    ParametersLiteralDefault bfv_param_literal(BFV,8192,poseidon::sec_level_type::none);
-
-
-    PoseidonContext context(bfv_param_literal,poseidon::sec_level_type::none,true);
-    BatchEncoder enc(context);
-    KeyGenerator keygen(context);
-    PublicKey publicKey;
-    GaloisKeys galoisKeys;
-    RelinKeys relinKeys;
-    keygen.create_public_key(publicKey);
-    keygen.create_relin_keys(relinKeys);
-
-    Encryptor encryptor(context,publicKey);
-    Decryptor decryptor(context,keygen.secret_key());
-
-    //=====================init  Plain & Ciph =========================
-    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
-    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
-
-    int mat_size = bfv_param_literal.slot();
-    auto level = bfv_param_literal.Q().size() - 1;
-    auto coeff_mod = bfv_param_literal.plain_modulus();
-    vector<uint64_t> message(mat_size,1);
-    vector<uint64_t> vec_result(mat_size,0);
-
-    std::vector<vector<uint64_t>> mat_T(mat_size);
-    std::vector<vector<uint64_t>> mat_T1;
+ParametersLiteralDefault bfv_param_literal(BFV, 16384, poseidon::sec_level_type::tc128);
+PoseidonContext context = PoseidonFactory::get_instance()->create_poseidon_context(
+        bfv_param_literal, poseidon::sec_level_type::tc128);
+```
 
 
 
-    std::vector<vector<uint64_t>> mat(mat_size,vector<uint64_t>(mat_size,0));
-    for(int i = 0; i < mat_size; i++){
-        sample_random_vector(mat[i],mat_size,i);
-    }
-    sample_random_vector(message,mat_size,10);
-    //=====================GenMatrices  ========================
-    MatrixPlain matrixPlain;
+With the context generated, we could construct the key generator, encoder, encryptor, decryptor and evaluator class.
 
-    vector<uint64_t > message_tmp;
-    matrix_operations::matrix_vector_multiply_mod(mat, message, message_tmp,coeff_mod.value());
-//
-    matrix_operations::rotate_slots_matrix(mat,mat_T1);
+```cpp
+BatchEncoder enc(context);
 
-    GenMatrixformBSGS(matrixPlain,matrixPlain.rot_index, enc, mat_T1,
-                      level ,1,  bfv_param_literal.LogSlots());
+KeyGenerator keygen(context);
+PublicKey public_key;
+GaloisKeys galois_keys;
+RelinKeys relin_keys;
+keygen.create_public_key(public_key);
+keygen.create_galois_keys(vector<int>{0, -1, 1}, galois_keys);
+keygen.create_relin_keys(relin_keys);
 
+Encryptor encryptor(context, public_key);
+Decryptor decryptor(context, keygen.secret_key());
 
-
-
-    //=====================keys  =========================
-    //
-
-    vector<int> rot_index_tmp;
-    for(auto index : matrixPlain.rot_index){
-        if(index >= mat_size/2){
-            rot_index_tmp.push_back(index - mat_size/2);
-        }
-        else{
-            rot_index_tmp.push_back(index);
-        }
-    }
-    rot_index_tmp.push_back(0);
-
-    keygen.create_galois_keys(rot_index_tmp,galoisKeys);
-    // kgen.create_galois_keys(rot_elemt,rotKeys);
-
-    //===================== Doing ==============================
-    //encode
-
-    enc.encode(message,plainA);
-
-    //encrypt
-    encryptor.encrypt(plainA,cipherA);
-
-    auto start = chrono::high_resolution_clock::now();
-//evaluate
-    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
-
-    Timestacs timestacs;
-    timestacs.start();
-    ckks_eva->multiplyByDiagMatrixBSGS(cipherA,matrixPlain,cipherRes,galoisKeys);
-    timestacs.end();
-    timestacs.print_time("MULT MATRIX : ");
-    ckks_eva->read(cipherRes);
+std::shared_ptr<EvaluatorBfvBase> bfv_eva =
+        PoseidonFactory::get_instance()->create_bfv_evaluator(context);
+```
 
 
-    //decode & decrypt
-    decryptor.decrypt(cipherRes,plainRes);
-    enc.decode(plainRes,vec_result);
-//    for(int i = 0; i < 4; i++){
-//        for(int j = 0; j < 4; j++) {
-//            printf("mat vec[%d][%d] : %d  \n", i, j,mat_T1[i][j]);
-//        }
-//    }
 
-    for(int i = 0; i < 4; i++){
-        printf("soft vec[%d]   : %d  \n",i,message_tmp[i]);
-        printf("result vec[%d] : %d  \n",i,vec_result[i]);
-    }
+## Encoding and Encryption
+
+We could encode the message with the `BatchEncoder` class and encrypt the plaintext the `Encryptor` class.
+
+```cpp
+Plaintext plain1;
+Ciphertext ciph1;
+std::vector<int> message1 = {1, 2, 3};
+
+enc.encode(message1, plain1);
+encryptor.encrypt(plain1, ciph1);
+```
 
 
+
+In BFV and BGV scheme, integer is supported, therefore the type of message is `std::vector<int>`.
+
+In CKKS scheme, double and complex number are supported, therefore the message could be `std::vector<double>` or `std::vector<std::complex<double>>` type.
+
+
+
+## Homomorphic Computation
+
+We could execute the homomorphic computation by calling the member function of the `Evaluator` class.
+
+```cpp
+bfv_eva->add(ciph1, ciph2, ciph1);
+```
+
+
+
+As above, most of the homomorphic computation function supports the inplace computation. That is, the result ciphertext could be one of the operand ciphertext.
+
+
+
+## Decoding and Decryption
+
+After all the homomorphic computations are done, we could decrypt the ciphertext result with the `Decryptor` class and decode the plaintext result with the `Encoder` class.
+
+```cpp
+decryptor.decrypt(ciph1, plain_res);
+enc.decode(plain_res, message_res);
+```
+
+
+
+## Time and Correctness Measurement
+
+In Poseidon examples, `TimeStac` class is used to measure the time spent on the homomorphic computation.
+
+```cpp
+Timestacs timestacs;
+timestacs.start();
+timestacs.end();
+timestacs.print_time("TIME : ");
+```
+
+
+
+In BFV and BGV examples, the integer type homomorphic computation result and the integer calculated directly should be the same.
+
+```cpp
+for (auto i = 0; i < message_want.size(); i++)
+{
+    printf("source_data[%d] : %ld\n", i, message1[i]);
+    printf("result_data[%d] : %ld\n", i, message_res[i]);
 }
+```
 
+
+
+In CKKS examples, the double type homomorphic computation result and the integer calculated directly may differ in decimal number.
+
+The `GetPrecisionStats` function give the mean square error of the result.
+
+```cpp
+ for (auto i = 0; i < 4; i++)
+    {
+        printf("source_data[%d] : %.10lf + %.10lf I\n", i, message_want[i].real(),
+               message_want[i].imag());
+        printf("result_data[%d] : %.10lf + %.10lf I\n", i, message_res[i].real(),
+               message_res[i].imag());
+    }
+    util::GetPrecisionStats(message_want, message_res);
 ```
 
 
 
 
 
+# Examples
 
 
 
+##  BFV Basic
 
+The `test_bfv_basic.cpp` exmaple tests a variety of BFV homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation. 
 
-#  CKKS Basic
-```cpp
-#include "poseidon/PoseidonContext.h"
-#include "poseidon/CKKSEncoder.h"
-#include "poseidon/plaintext.h"
-#include "poseidon/util/random_sample.h"
-#include "poseidon/encryptor.h"
-#include "poseidon/decryptor.h"
-#include "poseidon/keygenerator.h"
-#include "poseidon/util/precision.h"
-#include "poseidon/Evaluator.h"
-#include "poseidon/util/debug.h"
-using namespace std;
-
-using namespace poseidon;
-using namespace poseidon::util;
-
-int main() {
-
-    cout << BANNER  << endl;
-    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
-    cout << "" << endl;
-
-    ParametersLiteralDefault aa(CKKS,4096,poseidon::sec_level_type::none);
-    PublicKey public_key;
-    RelinKeys relinKeys;
-    GaloisKeys galoisKeys;
-    PoseidonContext context(aa,poseidon::sec_level_type::none);
-
-    CKKSEncoder enc(context);
-    KeyGenerator keygen(context);
-    keygen.create_public_key(public_key);
-    keygen.create_relin_keys(relinKeys);
-    keygen.create_galois_keys(vector<int>{0,1},galoisKeys);
-
-
-    Encryptor encryptor(context,public_key);
-    Decryptor decryptor(context,keygen.secret_key());
-    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
-
-    auto slot_num = aa.slot();
-    vector<complex<double>> message,message2;
-    vector<complex<double>>message_want(slot_num);
-    vector<complex<double>> message_res;
-
-    sample_random_complex_vector(message,slot_num);
-    sample_random_complex_vector(message2,slot_num);
-
-    Plaintext plaintext,plaintext2,plaintext_res;
-    double scale = std::pow(2.0,51);
-    enc.encode(message, scale,plaintext);
-    enc.encode(message2, scale,plaintext2);
-
-    Ciphertext ct,ct2,ct_res;
-    encryptor.encrypt(plaintext,ct);
-    encryptor.encrypt(plaintext2,ct2);
-
-    Timestacs timestacs;
-//======================== ADD =========================================
-    print_example_banner("Example: ADD / ADD in ckks");
-    timestacs.start();
-    ckks_eva->add(ct,ct2,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-
-    timestacs.print_time("ADD TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    message_want = message;
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] += message2[i];
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-
-//======================== SUB =========================================
-    print_example_banner("Example: SUB / SUB in ckks");
-    timestacs.start();
-    ckks_eva->sub(ct,ct2,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-    timestacs.print_time("SUB TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    message_want = message;
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] -= message2[i];
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-    //======================== ROTATE =========================================
-    print_example_banner("Example: ROTATE / ROTATE in ckks");
-    timestacs.start();
-    ckks_eva->rotate(ct,1,galoisKeys,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-
-    timestacs.print_time("ROTATE TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message;
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] = message[i];
-    }
-    std::rotate(message_want.begin(),message_want.begin()+1,message_want.end());
-
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-    //======================== conj =========================================
-    print_example_banner("Example: CONJUGATE / CONJUGATE in ckks");
-    timestacs.start();
-    ckks_eva->conjugate(ct,galoisKeys,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-
-    timestacs.print_time("CONJUGATE TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message;
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] = std::conj(message[i]);
-    }
-
-
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-
-    //======================== ADD_PLAIN =========================================
-    print_example_banner("Example: ADD_PLAIN / ADD_PLAIN in ckks");
-    timestacs.start();
-    ckks_eva->add_plain(ct,plaintext_res,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-    timestacs.print_time("ADD_PLAIN TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message;
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] += message[i];
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-    //======================== MULT_PLAIN =========================================
-    print_example_banner("Example: MULT_PLAIN / MULT_PLAIN in ckks");
-
-
-    Ciphertext tmp,tmp2;
-    timestacs.start();
-    tmp = ct;
-    timestacs.end();
-    timestacs.print_time("copy_tmp TIME: ");
-    timestacs.start();
-    tmp.resize(context,ct.parms_id(),2);
-    timestacs.end();
-    timestacs.print_time("resize_tmp TIME: ");
-
-    timestacs.start();
-    ckks_eva->multiply_plain(ct,plaintext_res,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-    timestacs.print_time("MULT_PLAIN TIME: ");
-
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message;
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] *= message[i];
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-    //======================== RESCALE =========================================
-    print_example_banner("Example: RESCALE / RESCALE in ckks");
-    timestacs.start();
-    ckks_eva->rescale(ct_res,ct_res);
-    timestacs.end();
-    ckks_eva->read(ct_res);
-
-
-    timestacs.print_time("RESCALE TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-    //======================== MULTIPLY_RELIN_DYNAMIC =========================================
-    print_example_banner("Example: MULTIPLY_RELIN_DYNAMIC / MULTIPLY_RELIN_DYNAMIC in ckks");
-    timestacs.start();
-    ckks_eva->multiply_relin_dynamic(ct_res,ct2,ct_res,relinKeys);
-    timestacs.end();
-    ckks_eva->rescale(ct_res,ct_res);
-    ckks_eva->read(ct_res);
-
-
-    timestacs.print_time("MULTIPLY_RELIN_DYNAMIC TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] *= message2[i];
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-
-    //======================== MULT_CONST =========================================
-    print_example_banner("Example: MULT_CONST_DIRECT/ MULT_CONST_DIRECT in ckks");
-    timestacs.start();
-    ckks_eva->multiply_const_direct(ct_res,2,ct_res,enc);
-    ckks_eva->read(ct_res);
-
-    timestacs.end();
-    timestacs.print_time("MULT_CONST_DIRECT TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] *= 2;
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-
-    //======================== MULT_CONST =========================================
-    print_example_banner("Example: MULT_CONST / MULT_CONST in ckks");
-    timestacs.start();
-    ckks_eva->multiply_const(ct_res,-5.0, 1.0,ct_res,enc);
-    ckks_eva->read(ct_res);
-
-    timestacs.end();
-    timestacs.print_time("MULT_CONST TIME: ");
-    decryptor.decrypt(ct_res,plaintext_res);
-    enc.decode(plaintext_res,message_res);
-    //message_want = message
-    for(auto i = 0; i < slot_num; i++){
-        message_want[i] *= -5;
-    }
-    for(auto i = 0; i < 4; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_want[i].real() ,message_want[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message_res[i].real() ,message_res[i].imag());
-    }
-    util::GetPrecisionStats(message_want,message_res);
-
-    return 0;
-}
-
-
-```
-
-
-# Evaluate Poly
-```cpp
-#include "poseidon/PoseidonContext.h"
-#include "poseidon/CKKSEncoder.h"
-#include "poseidon/plaintext.h"
-#include "poseidon/util/random_sample.h"
-#include "poseidon/encryptor.h"
-#include "poseidon/decryptor.h"
-#include "poseidon/keygenerator.h"
-#include "poseidon/util/precision.h"
-#include "poseidon/Evaluator.h"
-#include "poseidon/util/debug.h"
-using namespace std;
-
-using namespace poseidon;
-using namespace poseidon::util;
-double fii(double x)  {
-    //return  1 / (exp(-x) + 1);
-    return sin(6.283185307179586 * x) ;
-}
-int main() {
-
-    cout << BANNER  << endl;
-    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
-    cout << "" << endl;
-
-    ParametersLiteral ckks_param_literal{
-            CKKS,
-            11,
-            10,
-            40,
-            5,
-            0,
-            0,
-            {},
-            {}
-    };
-    vector<uint32_t> logQTmp{31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31}; //,31,31,31,31,31,31,31,31,31,31
-    vector<uint32_t> logPTmp{31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31};
-
-    ckks_param_literal.set_log_modulus(logQTmp,logPTmp);
-    PoseidonContext context(ckks_param_literal,poseidon::sec_level_type::none);
-
-    //=====================init random data ============================
-    std::vector<std::complex<double>> vec;
-    std::vector<std::complex<double>> vec_result,vec_result1;
-    std::vector<vector<std::complex<double>>> mat;
-    int mat_size = 1 << ckks_param_literal.LogSlots();
-    mat.resize(mat_size);
-    //create message
-    vector<complex<double>> message;
-    vector<complex<double>> message_tmp(mat_size);
-    vector<complex<double>> message_sum(mat_size << 1,0.0);
-    sample_random_complex_vector(message, mat_size);
-    for(int i = 0; i < mat_size; i++){
-        message[i] = complex<double>(0.79 - (double)i/mat_size,0.38 -(double)(i)/mat_size);
-    }
-    for(int i = 0; i < message.size(); i++){
-        message[i].imag(0);
-    }
-    vector<complex<double>> message1(message.size());
-    for (size_t i = 0; i < context.parameters_literal()->degree() >> 1; i++) {
-        message1[i].real(fii(message[i].real())) ;
-    }
-
-    //
-    //=====================poly init===================================
-    auto a = -4.0;
-    auto b = 4.0;
-    auto deg = 64;
-    printf("Evaluation of the function f(x) for even slots and g(x) for odd slots in the range [%0.2f, %0.2f] (degree of approximation: %d)\n", a, b, deg);
-    auto approxF = util::Approximate(fii, a, b, deg);
-    approxF.lead() = true;
-    //auto approxG = util::Approximate(g, a, b, deg);
-    vector <Polynomial> poly_v{approxF};
-    vector<vector<int>> slotsIndex(1,vector<int>(context.parameters_literal()->degree() >> 1,0));
-    vector<int> idxF(context.parameters_literal()->degree() >> 1);
-
-
-    for(int i = 0; i < context.parameters_literal()->degree() >> 1; i++){
-        idxF[i] = i;   // Index with all even slots
-    }
-
-    slotsIndex[0] = idxF; // Assigns index of all even slots to poly[0] = f(x)
-
-
-    PolynomialVector polys(poly_v,slotsIndex);
-    //=====================init  Plain & Ciph =========================
-    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
-    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
-    PublicKey public_key;
-    RelinKeys relinKeys;
-    GaloisKeys conjKeys;
-    vector<uint32_t> rot_elemt;
-
-    auto level_start = logQTmp.size() - 1;
-    CKKSEncoder ckks_encoder(context);
-
-
-
-
-//=====================keys  =========================
-    //
-    KeyGenerator kgen(context);
-    kgen.create_public_key(public_key);
-    kgen.create_relin_keys(relinKeys);
-
-    Encryptor enc(context,public_key,kgen.secret_key());
-    Decryptor dec(context,kgen.secret_key());
-
-
-
-    //gmp_printf("cc : %.Zd\n",two_pow_64_2.get_mpz_t());
-    Plaintext plaintext,plaintext2,plaintext3;
-    vector<complex<double>> message2,message3;
-    double scale = std::pow(2.0,40);
-    ckks_encoder.encode(message, scale,plaintext);
-    printf("scale : %.10lf\n",plaintext.scale());
-    Ciphertext ct,ct2;
-    enc.encrypt(plaintext,ct);
-    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
-    auto scale_tmp = safe_cast<double>(ckks_param_literal.Q().back().value()) ;
-    ckks_eva->multiply_const(ct,(2.0/(double)(b-a)),scale_tmp,ct,ckks_encoder);
-
-
-    ckks_eva->rescale(ct,ct);
-    Timestacs time;
-    time.start();
-    ckks_eva->evaluatePolyVector(ct,ct2,polys,ct.scale(),relinKeys,ckks_encoder);
-    time.end();
-    printf("ct scale : %.10lf\n",ct.scale());
-    time.print_time("evaluatePolyVector time :");
-    ckks_eva->read(ct2);
-    dec.decrypt(ct2,plaintext2);
-    ckks_encoder.decode(plaintext2,message2);
-
-
-    auto ftt_inv = message2;
-    for(auto i = 0; i < 8; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message1[i].real() ,message1[i].imag());
-        printf("result  vec[%d] : %.10lf + %.10lf I\n",i,message2[i].real() ,message2[i].imag());
-
-
-    }
-
-    util::GetPrecisionStats(message1,message2);
-
-    return 0;
-}
-
-```
-
-
-# Matrix vector multiplication
-
-```cpp
-#include "poseidon/PoseidonContext.h"
-#include "poseidon/CKKSEncoder.h"
-#include "poseidon/plaintext.h"
-#include "poseidon/util/random_sample.h"
-#include "poseidon/encryptor.h"
-#include "poseidon/decryptor.h"
-#include "poseidon/keygenerator.h"
-#include "poseidon/util/precision.h"
-#include "poseidon/Evaluator.h"
-#include "poseidon/RNSPoly.h"
-#include "poseidon/util/debug.h"
-using namespace std;
-using namespace poseidon;
-using namespace poseidon::util;
-int main() {
-
-    cout << BANNER  << endl;
-    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
-    cout << "" << endl;
-
-    ParametersLiteral ckks_param_literal{
-            CKKS,
-            13,
-            12,
-            40,
-            5,
-            0,
-            0,
-            {},
-            {}
-    };
-
-//    vector<uint32_t> logQTmp{25,33,31,31,31,31,31,31,31,31, 31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31};//,31,31,31,31}; //
-//    vector<uint32_t> logPTmp{31,31,31,31,31,31,31,31,31,31, 31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31};//,31,31,31,31,31,31,31,31,31,31,31};  //
-    vector<uint32_t> logQTmp{31,31,31,31};//,31,31,31,31}; //
-    vector<uint32_t> logPTmp{31,31,31,31};//,
-    ckks_param_literal.set_log_modulus(logQTmp,logPTmp);
-//    PoseidonContext context(ckks_param_literal);
-    PoseidonContext context(ckks_param_literal,sec_level_type::none);
-
-
-    //=====================init random data ============================
-    std::vector<std::complex<double>> vec;
-    std::vector<std::complex<double>> vec_result,vec_result1;
-    int mat_size = 1 << ckks_param_literal.LogSlots();
-    std::vector<vector<std::complex<double>>> mat(mat_size,vector<complex<double>>(mat_size,0));
-    std::vector<vector<std::complex<double>>> mat_T(mat_size);//(mat_size,vector<complex<double>>(mat_size));
-    std::vector<vector<std::complex<double>>> mat_T1;
-    //create message
-    vector<complex<double>> message(mat_size,0);
-    sample_random_complex_vector2(message,mat_size);
-
-    vector<complex<double>> message_tmp(mat_size);
-    vector<complex<double>> message_sum(mat_size << 1,0.0);
-
-    //=====================init  Plain & Ciph =========================
-    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
-    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
-    PublicKey public_key;
-    RelinKeys relinKeys;
-    GaloisKeys conjKeys;
-    GaloisKeys rotKeys;
-    vector<uint32_t> rot_elemt;
-    CKKSEncoder ckks_encoder(context);
-    //=====================GenMatrices  ========================
-    MatrixPlain matrixPlain;
-
-    for(int i = 0; i < mat_size; i++){
-        sample_random_complex_vector2(mat[i],mat_size);
-    }
-    auto &modulus = context.crt_context()->first_context_data()->coeff_modulus();
-    int level = modulus.size() - 1;
-    //matrix_operations::transpose_matrix(mat,mat_T1);
-    for(int i = 0; i < mat.size(); i++){
-        matrix_operations::diagonal(mat, i,mat_T[i]);
-    }
-
-
-    GenMatrixformBSGS(matrixPlain,matrixPlain.rot_index, ckks_encoder, mat_T,
-                      level , safe_cast<double>(modulus.back().value()) , 1, ckks_param_literal.LogSlots());
-
-
-//=====================keys  =========================
-    //
-    KeyGenerator kgen(context);
-    kgen.create_public_key(public_key);
-
-    kgen.create_relin_keys(relinKeys);
-
-    kgen.create_galois_keys(matrixPlain.rot_index,rotKeys);
-
-
-    Encryptor enc(context,public_key,kgen.secret_key());
-    Decryptor dec(context,kgen.secret_key());
-
-
-
-    //gmp_printf("cc : %.Zd\n",two_pow_64_2.get_mpz_t());
-    Plaintext plaintext,plaintext2;
-    double scale = std::pow(2.0,51);
-    ckks_encoder.encode(message, scale,plaintext);
-    vector<complex<double>> message2;
-    printf("scale : %.10lf\n",plaintext.scale());
-
-    Ciphertext ct,ct2;
-    enc.encrypt(plaintext,ct);
-    auto ckks_eva = EvaluatorFactory::SoftFactory()->create(context);
-    ckks_eva->multiplyByDiagMatrixBSGS(ct,matrixPlain,cipherRes,rotKeys);
-    ckks_eva->read(cipherRes);
-    dec.decrypt(cipherRes,plaintext2);
-
-    ckks_encoder.decode(plaintext2,message2);
-    matrix_operations::matrix_vector_multiply(mat, message, message_tmp);
-    for(auto i = 0; i < 8; i++){
-        printf("source_data[%d] : %.10lf + %.10lf I\n",i,message_tmp[i].real() ,message_tmp[i].imag());
-        printf("result_data[%d] : %.10lf + %.10lf I\n",i,message2[i].real() ,message2[i].imag());
-    }
-    util::GetPrecisionStats(message_tmp,message2);
-    return 0;
-}
-```
-# Bootstrap
-##  Method
-<div style="text-align: justify">
-
-Bootstrapping mainly consists of four steps: **ModRaise**, **CoeffToSlot**, **EvalMod**, **SlotToCoeff**
-<br>
-
-<center>
-
-![b1](b1.png)
-![b2](b2.png)
-![bf](bf.png)
-
-</center>
-
-<style>
-    img[alt="b1"]{
-        width:500px;
-    }
-    img[alt="b2"]{
-        width:500px;
-    }
-    img[alt="bf"]{
-        width:450px;
-    }
-</style>
-
-<br>
-
-**<font color='red'>Optimization: Chebyshev </font>**
-
-<center>
-
-![b3](b3.png)
-![b4](b4.png)
-![b5](b5.png)
-
-</center>
-
-<style>
-    img[alt="b3"]{
-        width:300px;
-    }
-    img[alt="b4"]{
-        width:300px;
-    }
-    img[alt="b5"]{
-        width:600px;
-    }
-</style>
-<br>
-</div> 
-
-## Code
-```cpp
-
-#include "poseidon/PoseidonContext.h"
-#include "poseidon/CKKSEncoder.h"
-#include "poseidon/plaintext.h"
-#include "poseidon/util/random_sample.h"
-#include "poseidon/encryptor.h"
-#include "poseidon/decryptor.h"
-#include "poseidon/keygenerator.h"
-#include "poseidon/util/precision.h"
-#include "poseidon/Evaluator.h"
-using namespace std;
-using namespace poseidon;
-
-int main() {
-    cout << BANNER  << endl;
-    cout << "POSEIDON SOFTWARE  VERSION:" <<POSEIDON_VERSION << endl;
-    cout << "" << endl;
-
-    uint32_t q0_bit = 63;
-    auto q_def = 40;
-
-    ParametersLiteral ckks_param_literal{
-            CKKS,
-            15,
-            14,
-            40,
-            1,
-            1,
-            0,
-            {},
-            {}
-    };
-
-
-    vector<uint32_t> logQTmp{31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31}; //,31,31,31,31,31,31,31,31,31,31
-    vector<uint32_t> logPTmp{31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31,  31,31,31,31,31,31,31,31,31,31};
-    //vector<uint32_t> logPTmp{60};//,
-    ckks_param_literal.set_log_modulus(logQTmp,logPTmp);
-    PoseidonContext context(ckks_param_literal,poseidon::sec_level_type::none);
-    auto q0 = context.crt_context()->q0();
-
-
-
-
-    //=====================init random data ============================
-    std::vector<std::complex<double>> vec;
-    std::vector<std::complex<double>> vec_result,vec_result1;
-    std::vector<vector<std::complex<double>>> mat;
-    int mat_size = 1 << ckks_param_literal.LogSlots();
-    mat.resize(mat_size);
-    //create message
-    vector<complex<double>> message;
-    vector<complex<double>> message1;
-    sample_random_complex_vector(message, mat_size);
-    for(auto &m : message){
-        m = sin(m);
-    }
-
-    //=====================init  Plain & Ciph =========================
-    Plaintext plainA,plainB,plainRes,plainRes1,plainT;
-    Ciphertext cipherA,cipherB,cipherRes,cipherRes1,cipherRes2,cipherRes3;
-    PublicKey public_key;
-    RelinKeys relinKeys;
-    GaloisKeys rotKeys;
-    GaloisKeys conjKeys;
-    vector<uint32_t> rot_elemt;
-    //
-
-    CKKSEncoder ckks_encoder(context);
-
-    //=====================EvalMod  ========================
-    auto level_start = ckks_param_literal.Q().size() - 1;
-
-    EvalModPoly evalModPoly(context, CosDiscrete,(uint64_t)1 << (q0_bit - 25) ,level_start-6,8, 3,16,0,30);
-
-    auto scFac = evalModPoly.ScFac();
-    double K = evalModPoly.K();
-    auto qDiff = evalModPoly.QDiff();
-    auto q0OverMessageRatio = exp2(round(log2((double)q0 / (double)evalModPoly.MessageRatio()) ) ) ;
-    // If the scale used during the EvalMod step is smaller than Q0, then we cannot increase the scale during
-    // the EvalMod step to get a free division by MessageRatio, and we need to do this division (totally or partly)
-    // during the CoeffstoSlots step
-
-    auto CoeffsToSlotsScaling = 1.0;
-    CoeffsToSlotsScaling *= evalModPoly.qDiv() / (K * scFac * qDiff);
-
-    auto SlotsToCoeffsScaling = ckks_param_literal.scale();
-    SlotsToCoeffsScaling = SlotsToCoeffsScaling / ((double)evalModPoly.ScalingFactor() / (double)evalModPoly.MessageRatio() );
-    //auto SlotsToCoeffsScaling = 1;
-
-
-    HomomorphicDFTMatrixLiteral d(0, ckks_param_literal.LogN(), ckks_param_literal.LogSlots(), level_start, vector<uint32_t>(3,1), true, CoeffsToSlotsScaling, false, 1);
-    HomomorphicDFTMatrixLiteral x(1, ckks_param_literal.LogN(), ckks_param_literal.LogSlots(),  7 , vector<uint32_t>(3,1), true, SlotsToCoeffsScaling, false, 1);
-    LinearMatrixGroup mat_group;
-    LinearMatrixGroup mat_group_dec;
-    d.create(mat_group,ckks_encoder,2);
-    x.create(mat_group_dec,ckks_encoder,1);
-    //=====================keys  =========================
-    KeyGenerator kgen(context);
-    kgen.create_public_key(public_key);
-    kgen.create_relin_keys(relinKeys);
-    //rotKeys = kgen.create_galois_keys(mat_group.rot_index(),kgen.secret_key());
-    //GaloisKeys rotKeys;
-    kgen.create_galois_keys(mat_group.rot_index(),rotKeys);
-    Encryptor enc(context,public_key,kgen.secret_key());
-    Decryptor dec(context,kgen.secret_key());
-
-    //===================== Doing ==============================
-    //encode
-    ckks_encoder.encode(message,(int64_t) 1 << q_def ,plainA);
-    //encrypt
-    enc.encrypt(plainA,cipherA);
-
-    //evaluate
-    auto ckks_eva = EvaluatorFactory::DefaultFactory()->create(context);
-
-
-    // scale the message to Delta = Q/MessageRatio
-    auto start = chrono::high_resolution_clock::now();
-    cout << "bootstraping start..."<< endl;
-
-    ckks_eva->bootstrap(cipherA,cipherRes,evalModPoly,mat_group,mat_group_dec,relinKeys,rotKeys,ckks_encoder);
-    ckks_eva->read(cipherRes);
-    auto stop = chrono::high_resolution_clock::now();
-    auto duration = chrono::duration_cast<chrono::microseconds>(stop - start);
-    cout << "EXP TIME: " << duration.count() << " microseconds"<< endl;
-
-    //decode & decrypt
-    dec.decrypt(cipherRes,plainRes);
-    ckks_encoder.decode(plainRes,vec_result);
-    for(int i = 0; i < 10; i++){
-
-        printf("source vec[%d] : %0.10f + %0.10f I \n",i,(real(message[i])), imag(message[i]));
-        printf("result vec[%d] : %0.10f + %0.10f I \n",i,(real(vec_result[i])), imag(vec_result[i]));
-    }
-    GetPrecisionStats(vec_result,message);
-    return 0;
-}
-```
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 16384 and security level of tc_128, to run the `test_bfv_basic.cpp` example.
+
+Every basic operation in the `test_bfv_basic.cpp` example will record the time spent and verify the correctness of homomorphic computation result.
+
+
+
+## BFV Matrix Vector Multiplication
+
+The `test_bfv_mult_matrix.cpp` example tests the multiplication of ciphertext by plaintext matrix. 
+
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 8192 and security level of tc128, to run the `test_bfv_mult_matrix.cpp` example.
+
+This example compares the homomorphic computation result with the correct answer.
+
+
+
+## BGV Basic
+
+The `test_bgv_basic.cpp` example tests a variety of BGV homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation. 
+
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 16384 and security level of tc_128, to run the `test_bgv_basic.cpp` example.
+
+Every basic operation in the `test_bgv_basic.cpp` example will record the time spent and verify the correctness of homomorphic computation result.
+
+
+
+## CKKS Basic
+
+The `test_ckks_basic.cpp` example tests a variety of BGV homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation, conjugation, rescaling.
+
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 16384 and security level of tc_128, to run the `test_ckks_basic.cpp` example.
+
+As the CKKS scheme is based on approximate computation, there might be decimal deviation bewteen the homomorphic computation results and the correct results. Every basic operation in the `test_ckks_basic.cpp` example will record the time spent and the precision of homomorphic computation results.
+
+
+
+## CKKS Coeff to Slot & Slot to Coeff
+
+The `test_ckks_slot_to_coeff.cpp` example tests the function of `coeff to slot` and `slot to coeff`, converting the ciphertext from coefficient mode to slot mode or converting the ciphertext from slot mode to coefficient mode.
+
+The `coeff to slot` and `slot to coeff` function are two important operations in CKKS bootstrapping. In CKKS bootstrapping, it is necessary to perform a modulo operation on the coefficients of the polynomial. However, only homomorhpic addition and homomorphic multiplication could be performed to simulate the modulo operation. And the homomorphic addition and homomorphic multiplication are perform for slot. Therefore, it is necessary for the coefficients of polynomial to be converted to slot. When all the other operations are done, the slot needs to be converted to coefficients in the end.
+
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 16384 and security level of tc_128, to run the `test_ckks_slot_to_coeff.cpp` example.
+
+
+
+## CKKS Evaluate Poly Vector
+
+The `test_ckks_evaluate_poly_vector.cpp` example tests the function of evaluating poly vector which is an important part of homomorphic modulo operation in CKKS bootstrapping. 
+
+`evaluate_poly_vector` simulates the modulo function.
+
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 4096 and security level of tc_128, to run the `test_ckks_evaluate_poly_vector.cpp` example.
+
+
+
+## CKKS Bootstrap
+
+The `test_ckks_bootstrap.cpp` example tests the bootstrap function of CKKS.
+
+Users can choose customized parameters or default parameters, which are software version, polynomial degree of 4096 and security level of tc_128, to run the `test_ckks_bootstrap.cpp` example.
+
