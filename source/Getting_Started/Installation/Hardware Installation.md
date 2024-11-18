@@ -21,20 +21,20 @@ There are two ways to download the Poseidon installation package:
 **Gitee (recommended)**
 
 Here are all the installation packages.<br>
-[The download address of the installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)<br> (TODO)
+[The download address of the installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)<br>
 
 You can also download installation package with `wget` (check the version carefully)<br>
 
 **CentOS**
 
 ```shell
-wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0-1.el7.x86_64.rpm(TODO)
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
 **Ubuntu**
 
 ```shell
-wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0_x86_64.deb(TODO)
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x86_64.deb
 ```
 
 
@@ -46,14 +46,14 @@ After you’ve downloaded the installation package, navigate to the download dir
 
 ```shell
 #install
-sudo yum localinstall poseidon-4.0.0-1.el7.x86_64.rpm
+sudo yum localinstall poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
 **Ubuntu**
 
 ```shell
 #install
-sudo apt-get install ./poseidon-4.0.0_x86_64.deb
+sudo apt-get install ./poseidon-1.0.0_x86_64.deb
 ```
 
 
@@ -69,7 +69,7 @@ You can uninstall the software installation package with the following command:
 
 ```shell
 #uninstall
-sudo rpm -e poseidon-4.0.0-1.el7.x86_64
+sudo rpm -e poseidon-1.0.0-1.el7.x86_64
 ```
 
 **Ubuntu**
