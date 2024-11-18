@@ -20,9 +20,9 @@ There are two ways to download the software installation package.
 
 The software installation package can be downloaded from the following link:
 
-**GitHub** link(TODO)
+[GitHub]([luhang-HPU/poseidon](https://github.com/luhang-HPU/poseidon))
 
-**Gitee** link(TODO)
+[Gitee]([Poseidon: downloads for poseidon - Gitee.com](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads))
 
 
 
@@ -31,13 +31,13 @@ Also you can download the software installation package with the following comma
 **CentOS**
 
 ```shell
-wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0-1.el7.x86_64.rpm (TODO)
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
 **Ubuntu**
 
 ```shell
-wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-4.0.0_x86_64.deb (TODO)
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x86_64.deb
 ```
 
 
@@ -50,14 +50,14 @@ You can install the software installation package with the following command:
 
 ```shell
 #install
-sudo yum localinstall poseidon-4.0.0-1.el7.x86_64.rpm
+sudo yum localinstall poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
 **Ubuntu**
 
 ```shell
 #install
-sudo apt-get install ./poseidon-4.0.0_x86_64.deb
+sudo apt-get install ./poseidon-1.0.0_x86_64.deb
 ```
 
 The installation process will require the system reboot before it wraps up. The target installation folder for the headers and dynamic library locates at /usr/poseidon. Meanwhile, it constructs a soft link in /usr/local/include for the headers.  
@@ -72,7 +72,7 @@ You can uninstall the software installation package with the following command:
 
 ```shell
 #uninstall
-sudo rpm -e poseidon-4.0.0-1.el7.x86_64
+sudo rpm -e poseidon-1.0.0-1.el7.x86_64
 ```
 
 **Ubuntu**
@@ -104,9 +104,9 @@ g++ filename.cpp -o filename -I/usr/local/include/poseidon_software/ -lposeidon_
 
 You can download the software source code from the following link:
 
-**GitHub** link(TODO)
+[GitHub]([luhang-HPU/poseidon](https://github.com/luhang-HPU/poseidon))
 
-**Gitee** link(TODO)
+[Gitee]([Poseidon: downloads for poseidon - Gitee.com](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads))
 
 
 
