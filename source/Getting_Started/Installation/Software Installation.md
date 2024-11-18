@@ -1,8 +1,12 @@
+# Software Installation
+
+
+
 Poseidon(software version) provides the dynamic library installation package as well as the source code. It is recommended for users to download and install the software package if you are only going to call the API functions rather than modifying the source code.
 
 
 
-# Requirement 
+## Requirement 
 
 * Operating System: Ubuntu >= 18.04 LTS , CentOS >= 7.0
 * Tool chain: GNU g++ ( >= 8.0) , CMake ( >= 3.12 )
@@ -10,11 +14,11 @@ Poseidon(software version) provides the dynamic library installation package as 
 
 
 
-# Software Installation Package
+## Software Installation Package
 
 
 
-## Download
+### Download
 
 There are two ways to download the software installation package.
 
@@ -42,7 +46,7 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x
 
 
 
-## Installation
+### Installation
 
 You can install the software installation package with the following command:
 
@@ -64,7 +68,7 @@ The installation process will require the system reboot before it wraps up. The 
 
 
 
-## Uninstallation
+### Uninstallation
 
 You can uninstall the software installation package with the following command:
 
@@ -84,7 +88,7 @@ sudo apt-get remove poseidon
 
  
 
-## Compile
+### Compile
 
 We recommand to use CMake for project management. 
 
@@ -96,11 +100,11 @@ g++ filename.cpp -o filename -I/usr/local/include/poseidon_software/ -lposeidon_
 
 
 
-# Software Source Code 
+## Software Source Code 
 
 
 
-## Download
+### Download
 
 You can download the software source code from the following link:
 
@@ -110,7 +114,7 @@ You can download the software source code from the following link:
 
 
 
-## Compile
+### Compile
 
 You can compile the source code with the following command:
 
@@ -137,7 +141,7 @@ If you are going to modify the source code, you should modify the the cmake file
 
 
 
-## Test
+### Test
 
 After installation, you can test the library through the examples provided in [“Examples”](https://poseidon-hpu.readthedocs.io/en/latest/Getting_Started/index.html#examples).
 
