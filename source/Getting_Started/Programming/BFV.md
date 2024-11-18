@@ -3,15 +3,14 @@
 ## Data Structures
 
 
-Poseidon Supported parameter data structures, the following is specific to BFV：
+Poseidon supported parameter data structures, the following is specific to BFV：
 
 <br>
 
 
-### 1. BFV encryption scheme  class : **<font color='red'>BatchEncoder</font>**
+### 1. BFV encoding and decoding class : **<font color='red'>BatchEncoder</font>**
 
-**Description**：BatchEncoder is a class used for encoding and decoding in the BFV encryption scheme.<br>
-
+**Description**：`BatchEncoder` is used to encode and decode message for BFV encryption scheme.
 
 **Functions**：
 
@@ -21,7 +20,7 @@ BatchEncoder(const PoseidonContext &context);
 
 - **context** (const PoseidonContext &): The poseidon context.
 
-: Creates a BatchEncoder. It is necessary that the encryption parameters given through the SEALContext object support batching.
+Usage: Creates a BatchEncoder. It is necessary that the encryption parameters given through the PoseidonContext object support batching.
 
 
 <br>
@@ -31,10 +30,10 @@ BatchEncoder(const PoseidonContext &context);
 void encode(const vector<uint32_t> &src, Plaintext &plain);
 ```
 
-- **src** (const vector<uint32_t> &): The source message.
-- **plain** (Plaintext &): The source message.
+- **src** (const vector<uint32_t> &): The source message is an array of integer elements.
+- **plain** (Plaintext &): The output plaintext .
 
-: A function used to encode a complex number vector into a plaintext polynomial.
+Usage: Encoding a vector of integer numbers into a plaintext.
 
 <br>
 
@@ -46,14 +45,14 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 - **plain** const Plaintext &plain): The plaintext.
 - **res** (vector<uint32_t> &): The result of message.
 
-: A function used to decode a plaintext polynomial into a complex number vector.
+Usage: It is used to decode a plaintext into a vector of integer.
 
 <br>
 
 
 ### 2. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
 
-**Description**: MatrixPlain is a class for storing plaintext matrix information.
+**Description**: MatrixPlain is a class for storing plaintext matrix.
 
 **Members**:
 
@@ -71,185 +70,184 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 
 <br>
 
-## Evaluation Functions
+### 3. Evaluator class : **<font color='red'><span id="EvaluatorBfvBase">EvaluatorBfvBase</span> </font>**
 
-### 1. Ciphertext and ciphertext addition : **<font color='red'> add</font>**
+**Description**: EvaluatorBfvBase is a evaluator for homomorphic computation for BFV scheme. 
 
-```c
-void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
+**Members**: The member functions are listed in Chapter [Evaluation Functions](#Evaluation Functions).
+
+
+
+
+
+## <a id = "Evaluation Functions">Evaluation Functions</a>
+
+
+
+### 1. Addition of ciphertext and ciphertext: <font color='red'> add</font>
+
+```cpp
+void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 ```
 
-**Description**：This function performs homomorphic addition on two ciphertexts.<br>
+* **ciph1** (Ciphertext): representing the addend.
+* **ciph2** (Ciphertext): representing the other addend.
+* **result** (Ciphertext): storing the addition result.
 
-**Parameters**：
+Usage: `add` computes `result` = `ciph1` + `ciph2` . 
 
-- **ciph1** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 
-<br>
 
-### 2. Ciphertext and plaintext addition : **<font color='red'> add_plain</font>**
+### 2. Addition of ciphertext and plaintext: **<font color='red'> add_plain</font>**
 
-```c
-void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result) override;
+```cpp
+void add_plain(Ciphertext &ciph, Plaintext &plain, Ciphertext &result);
 ```
 
-**Description**：This function performs homomorphic addition between a ciphertext and a plaintext.<br>
+* **ciph** (Ciphertext): representing the addend.
 
-**Parameters**：
+* **plain** (Plaintext): representing the other addend.
 
-- **ciph1** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
-  <br>
+* **result** (Ciphertext): storing the addition result.
+
+Usage: `add_plain` computes `result` = `ciph` + `plain` .
 
 
-### 3. Ciphertext and ciphertext subtraction : **<font color='red'> sub</font>**
 
-```c
-void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result) override;
+### 3. Subtraction ciphertext from ciphertext: **<font color='red'> sub</font>**
+
+```cpp
+void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 ```
 
-**Description**：This function performs homomorphic subtraction between two ciphertexts.<br>
+* **ciph1** (Ciphertext): representing the minuend.
 
-**Parameters**：
+* **ciph2** (Ciphertext): representing the subtrahend
 
-- **ciph1** (Ciphertext):  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).<br>
-- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing the subtrahend (the number to be subtracted).<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
-  <br>
+* **result** (Ciphertext): storing the computation result.
+
+Usage: `sub` computes `result` = `ciph1` - `ciph2`.
 
 
-### 4. Subtraction plaintext from ciphertext : **<font color='red'> sub_plain</font>**
 
-```c
-void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &result) const override;
+### 4. Subtraction plaintext from ciphertext: **<font color='red'> sub_plain</font>**
+
+```cpp
+void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &result);
 ```
 
-**Description**: This function performs homomorphic operation of subtracting the plaintext from the plaintext.
+* **ciph** (Ciphertext): representing the minuend.
 
-**Parameters**：
+* **plain** (Plaintext): representing the subtrahend.
 
-* **ciph** (Ciphertext):  A reference to a **Ciphertext** object, representing the minuend (the number from which another is to be subtracted).
-* **plain** (Plaintext): A reference to a **Plaintext** object, representing the subtrahend (the number to be subtracted).
-* **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
-  <br>
+* **result** (Ciphertext): storing the computation result.
+
+Usage: `sub_plain` computes `result` = `ciph` - `plain` .
 
 
-### 5. Multiplication between ciphertexts : **<font color='red'> multiply</font>** (**<font color='blue'> only software</font>**)
 
-```c
-void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) const override;
+### 5. Multiplication between ciphertexts: **<font color='red'> multiply</font>** (**<font color='blue'> only software</font>**)
+
+```cpp
+void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result);
 ```
 
-**Description**：This function performs homomorphic multiplication between two ciphertexts.<br>
+* **ciph1** (Ciphertext): representing a ciphertext.
+* **ciph2** (Ciphertext): representing the other ciphertext.
+* **result** (Ciphertext): storing the computation result.
 
-**Parameters**：
+Usage: `multiply` computes `result` = `ciph1` * `ciph2`.
 
-- **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
-  <br>
+
 
 
 ### 6. Multiplication between ciphertext and plaintext : **<font color='red'> multiply_plain</font>**
 
-```c
-void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &result) const override;
+```cpp
+void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &result) const;
 ```
 
-**Description**：This function performs homomorphic multiplication between a ciphertext and a plaintext.<br>
+- **ciph** (Ciphertext): representing a ciphertext.
+- **plain** (Plaintext): representing a plaintext.
+- **result** (Ciphertext): storing the computation result.
 
-**Parameters**：
+Usage: `multiply_plain` computes `result` = `ciph` * `plain`.
 
-- **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
-  <br>
+
 
 
 ### 7. Multiplication with relinearization : **<font color='red'> multiply_relin</font>**
 
-```c
-void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result, const RelinKeys &relin_key) const override;
+```cpp
+void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result, const RelinKeys &relin_key) const;
 ```
 
-**Description**: This function performs homomorphic multiplication between two ciphertexts and uses the relinearization key to reduce the ciphertext size.<br>
-
-**Parameters**:
-
-- **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **ciph2** (Ciphertext): A reference to a **Ciphertext** object, representing another ciphertext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
+- **ciph1** (Ciphertext): representing a ciphertext.
+- **ciph2** (Ciphertext): representing the other ciphertext.
+- **result** (Ciphertext): storing the computation result.
 - **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the relinearization key.
 
-<br>
+Usage: `multiply_relin` computes `result` = `ciph1` * `ciph2` and relinearize the ciphertext size of `result`.
 
 
 
-### 8. Square inplace: **<font color='red'> square_inplace</font>** (**<font color='blue'> only software</font>**)
+### 8. Square inplace: **<font color='red'> square_inplace</font>** (**<font color='blue'>only software</font>**)
 
-```c
-void BFVEvaluator_S::square_inplace( Ciphertext &ciph) const
+```cpp
+void BFVEvaluator_S::square_inplace(Ciphertext &ciph) const;
 ```
 
-**Description**: This function performs homomorphic square operation of the ciphertext inplace.<br>
+- **ciph** (Ciphertext): representing a ciphertext.
 
-**Parameters**:
-
-- **ciph** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.<br>
-  <br>
+Usage: `square_inplace` computes `ciph` = `ciph` ^ `2` inplace.
 
 
-### 9.  Relinearization : **<font color='red'> relinearize</font>** (**<font color='blue'> only software</font>**)
 
-```c
-void relinearize(const Ciphertext &ciph1, const RelinKeys &relin_keys, Ciphertext &result) const override;
+
+### 9.  Relinearization : **<font color='red'> relinearize</font>** (**<font color='blue'>only software</font>**)
+
+```cpp
+void relinearize(const Ciphertext &ciph, Ciphertext &result, const RelinKeys &relin_keys) const;
 ```
 
-**Description**: This function  performs relinearization operation on the ciphertext.
+* **ciph** (Ciphertext): representing a ciphertext.
+* **relin_keys** (RelinKeys): representing the relinearization key.
+* **result** (Ciphertext): storing the computation result.
 
-**Parameters:**
+Usage: `relinearize` function performs relinearization operation on the ciphertext.
 
-* **ciph1** (Ciphertext):   A reference to a **Ciphertext** object, representing a ciphertext.
-* **relin_keys** (RelinKeys): A reference to a **RelinKeys** object,representing the relinearization key.
-* **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
-  <br>
+
 
 
 ### 10. Ciphertext row rotation : **<font color='red'> rotate_col</font>**
 
-```c
-void rotate_col(const Ciphertext &ciph, const GaloisKeys &galois_keys, Ciphertext &result) const override;
+```cpp
+void rotate_col(const Ciphertext &ciph, Ciphertext &result, const GaloisKeys &galois_keys) const;
 ```
 
-**Description**：This function is used to perform a column rotation operation on a ciphertext.<br>
+- **ciph** (Ciphertext): representing a ciphertext.
+- **galois_keys** (GaloisKeys): representing the galois keys used for rotation.
+- **result** (Ciphertext): storing the ciphertext after column rotation.
 
-**Parameters**：
+Usage: `rotate_col`  performs a column rotation operation on a ciphertext.
 
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **galois_keys** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption keys used for row rotation.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the ciphertext after column rotation.
-  <br>
+
 
 
 ### 11. Ciphertext column rotation : **<font color='red'> rotate_row</font>**
 
 ```c
-void rotate_row(const Ciphertext &ciph,int rot_step, const GaloisKeys &galois_keys, Ciphertext &result) const override;
+void rotate_row(const Ciphertext &ciph, Ciphertext &result, int step, const GaloisKeys &galois_keys) const;
 ```
 
-**Description**：This function is used to perform a row rotation operation on a ciphertext.<br>
+- **ciph** (Ciphertext): representing a ciphertext.
+- **result** (Ciphertext): storing the ciphertext after row rotation.
+- **step** (int): An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.
+- **galois_keys** (GaloisKeys): representing the galois keys used for row rotation.
 
-**Parameters**：
+Usage: `rotate_row` performs a row rotation operation on a ciphertext.
 
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **rot_step** (int): An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.<br>
-- **galois_keys** (GaloisKeys): A constant reference to a **GaloisKeys** object, representing the encryption keys used for row rotation.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the ciphertext after row rotation.
 
-<br>
 
 ### 12. Modulo drop: **<font color='red'> drop_modulus</font>** 
 
@@ -258,99 +256,54 @@ void drop_modulus(const Ciphertext &ciph, Ciphertext &result, uint32_t level) co
 void drop_modulus_to_next(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
-**Description**：This function drops the modulus at specific level . It switches a ciphertext encrypted by modulo q_1...q_k into a ciphertext encrypted modulus down to q_1...q_{k-1}.<br>
+- **ciph** (Ciphertext): representing a ciphertext.
+- **result** (Ciphertext): storing the ciphertext after dropping the modulus.
 
-**Parameters**：
+* **level** (uint32_t): The modulus level to switch into.
 
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the ciphertext after dropping the modulus.
+Usage: `drop_modulus` drops the modulus into a specific level. `drop_modulus_to_next` drops the modulus into the next level.
 
-* **level** (uint32_t):  The modulus level to switch into.
 
-<br>
 
-### 13. Fast Fourier Transform (forward) : **<font color='red'> ftt_fwd</font>** 
+### 13. Number Theoretic Transform (forward) : **<font color='red'> ntt_fwd</font>** 
 
-```c
-void ftt_fwd(const Plaintext &plain ,Plaintext &result,parms_id_type id = parms_id_zero) const;
-void ftt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
+```cpp
+void ntt_fwd(const Plaintext &plain, Plaintext &result, parms_id_type parms_id = parms_id_zero) const;
+void ntt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
-**Description**: This function is used for the Fast Fourier Transform (FFT) of a plaintext or ciphertext.
+- **plain** (Plaintext): representing a plaintext.
+- **ciph** (Ciphertext): representing a ciphertext.
+- **id** (Ciphertext): target parms_id of plain(only used in BGV or BFV).
+- **result** (Ciphertext/Plaintext): storing the transformed plaintext or ciphertext.
 
-**Parameters**: 
+Usage: `ntt_fwd` performs the Number Theoretic Transform(NTT) on a plaintext or a ciphertext.
 
-- **plain** (Plaintext): A reference to a **Plaintext** object, representing a plaintext.
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
-- **id** (Ciphertext): Target parms_id of plain(BGV or BFV).
-- **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the transformed plaintext or ciphertext.
 
-<br>
 
-### 14. Fast Fourier Transform (inverse) : **<font color='red'> ftt_inv</font>**
+### 14. Number Theoretic Transform (inverse) : **<font color='red'> ntt_inv</font>**
 
 ```c
-void ftt_inv(const Ciphertext &ciph, Ciphertext &result) const;
+void ntt_inv(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
-**Description**: This function is used for the Inverse Fast Fourier Transform (IFFT) of a ciphertext or plaintext.
+- **ciph** (Ciphertext): representing a ciphertext.
+- **result** (Ciphertext or Plaintext): storing the inverse transformed ciphertext or plaintext.
 
-**Parameters**: 
+Usage: `ntt_inv` performs the Inverse Number Theoretic Transform(INTT) on a plaintext or a ciphertext.
 
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.
-- **result** (Ciphertext or Plaintext): A reference to either a **Plaintext** or **Ciphertext** object, used to store the inverse transformed ciphertext or plaintext.
 
-<br>
 
-### 15. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
+### 15. Matrix multiplication of ciphertext and plaintext matrix : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
 
-```c
-void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
+```cpp
+void multiply_by_diag_matrix_bsgs(const Ciphertext &ciph, const MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) const;
 ```
 
-**Description**: This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
-
-**Parameters**:
-
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
+- **ciph** (Ciphertext): representing a ciphertext.
+- **plain_mat** (MatrixPlain): representing a plaintext matrix.
+- **result** (Ciphertext): storing the computation result.
+- **rot_key** (GaloisKeys): representing the galois key for rotation.
 
 
-<br>
-
-
-
-<!-- ### 8. Key switching : **<font color='red'> switch_key</font>**
-
-```c
-void switch_key(Ciphertext &ciph, Ciphertext &result, const vector<PublicKey> &switch_key);
-```
-
-**Description**：This function switches the key of a ciphertext.<br>
-
-**Parameters**：
-
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **switch_key** (PublicKey):  A constant reference to a vector of **PublicKey** objects, representing a given set of public keys. -->
-
-
-
-<!-- ### 8. Ciphertext and plaintext matrix multiplication : **<font color='red'> multiplyByDiagMatrixBSGS</font>**
-
-```c
-void multiplyByDiagMatrixBSGS(Ciphertext &ciph, MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) override;
-```
-
-
-**Description**：This function multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.<br>
-
-**Parameters**：
-
-- **ciph** (Ciphertext): A reference to a **Ciphertext** object, representing a ciphertext.<br>
-- **plain_mat** (MatrixPlain):  A reference to a **MatrixPlain** object, representing a plaintext matrix.<br>
-- **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.<br>
-- **rot_key** (GaloisKeys):   A constant reference to a **GaloisKeys** object, representing the encryption key used for rotations.
-  -->
+Usage: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.
