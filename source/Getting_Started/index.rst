@@ -3,7 +3,8 @@ Installation
 .. toctree::
    :maxdepth: 4
 
-   Installation/Installation
+   Installation/Software Installation
+   Installation/Hardware Installation
 
 
 Programming
@@ -13,10 +14,11 @@ Programming
    :maxdepth: 4
 
 
-   Programming/COMMON
+   Programming/Common
    Programming/CKKS
    Programming/BFV
    Programming/BGV
+   Programming/Hardware
 
 
 Examples
