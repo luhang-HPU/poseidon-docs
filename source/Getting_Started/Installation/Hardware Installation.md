@@ -1,8 +1,10 @@
+# Hardware Installation
+
 Poseidon(hardware version) provides the dynamic library installation package. It is recommended for users to download and install the software package if you are only going to call the API functions rather than modifying the source code.
 
 The hardware version installation package contains all the software functions provided by software version install package. However, if users wish to 
 
-# Requirement 
+## Requirement 
 
 * Operating System: Ubuntu >= 18.04 LTS , CentOS >= 7.0
 * Tool chain: GNU g++ ( >= 8.0) , CMake ( >= 3.12 )
@@ -12,9 +14,9 @@ The hardware version installation package contains all the software functions pr
 
 
 
-# Hardware Installation Package
+## Hardware Installation Package
 
-## Download
+### Download
 
 There are two ways to download the Poseidon installation package:
 
@@ -38,7 +40,7 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x
 ```
 
 
-## Installation
+### Installation
 
 After you’ve downloaded the installation package, navigate to the download directory and install it using the following command:
 
@@ -61,7 +63,7 @@ The installation process will require the system reboot before it wraps up. The 
 
 
 
-## Uninstallation
+### Uninstallation
 
 You can uninstall the software installation package with the following command:
 
@@ -83,7 +85,7 @@ sudo apt-get remove poseidon
 
 
 
-## Test
+### Test
 
 After installation, you can test the library through the examples provided in ["Examples"](https://poseidon-hpu.readthedocs.io/en/latest/Getting_Started/index.html#examples). 
 
