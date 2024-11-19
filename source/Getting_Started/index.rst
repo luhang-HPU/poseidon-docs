@@ -14,11 +14,11 @@ Programming
    :maxdepth: 4
 
 
-   Programming/Common
-   Programming/CKKS
-   Programming/BFV
-   Programming/BGV
-   Programming/Hardware
+   Programming/Basic
+   Programming/FHEs
+   Programming/FHEs/CKKS
+   Programming/FHEs/BFV
+   Programming/FHEs/BGV
 
 
 Examples
@@ -26,4 +26,4 @@ Examples
 .. toctree::
    :maxdepth: 4
 
-   Examples/Examples
+   Coding/Examples
