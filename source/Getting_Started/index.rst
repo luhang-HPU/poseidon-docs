@@ -21,7 +21,7 @@ Programming
    Programming/FHEs/BGV
 
 
-Examples
+Coding
 =============
 .. toctree::
    :maxdepth: 4
