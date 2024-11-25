@@ -12,10 +12,7 @@ The Poseidon dynamic library supports both software and acceleration cards. On t
 * Hardware: Poseidon HPU accelerator card
 * Hardware driver (The hardware driver has been integrated into the hardware installation package)
 
-
-## Installation Package
-
-### Download
+## Download
 
 There are two ways to download the Poseidon installation package:
 
@@ -35,7 +32,7 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0-1
 ```
 
 
-### Installation
+## Installation Package
 
 After you’ve downloaded the installation package, navigate to the download directory and install it using the following command:
 
@@ -51,7 +48,7 @@ The installation process will require the system reboot before it wraps up. The 
 
 
 
-### Uninstallation
+## Uninstallation Package
 
 You can uninstall the software installation package with the following command:
 
@@ -63,7 +60,7 @@ sudo rpm -e poseidon-1.0.0-1.el7.x86_64
 ```
 
 
-### Test
+## Test
 
 After installation, you can test the library through the examples provided in ["Examples"](https://poseidon-hpu.readthedocs.io/en/latest/Getting_Started/index.html#examples). 
 

@@ -18,7 +18,7 @@ Both of the above situations support compilation. The purpose of compilation is 
 
 
 
-### Download
+## Download
 
 You can download the software source code from the following link:
 
@@ -26,9 +26,9 @@ You can download the software source code from the following link:
 
 
 
-### Build
+## Build
 
-#### Situation one:
+### Situation one
 
 You can directly compile the source code with the following command:
 
@@ -39,7 +39,7 @@ make -j
 ```
 
 
-#### Situation two:
+### Situation two
 
 Situation two requires the hardware library to be installed before compiling.
 
@@ -59,7 +59,7 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-hardwar
 sudo yum localinstall poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
-##### ***Build***
+***Build***
 
 After the hardware library are installed, you can compile the source code with the following command:
 
@@ -82,8 +82,7 @@ Poseidon provides a bunch of cmake variables for users to decide what kind of so
 If you are going to modify the source code, you should modify the the cmake files as well.
 
 
-
-### Test
+## Test
 
 We recommand to use CMake for project management, enable POSEIDON_BUILD_EXAMPLES. 
 
