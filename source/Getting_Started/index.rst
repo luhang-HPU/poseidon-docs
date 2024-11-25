@@ -6,13 +6,13 @@ Installation
    Installation/Software Installation
    Installation/Hardware Installation
 
-Compile
+Compile && Installation
 =============
 .. toctree::
    :maxdepth: 4
 
-   Compile/Complie
-   Compile/Installation
+   Compile && Installation/Complie
+   Compile && Installation/Installation
 
 
 Programming

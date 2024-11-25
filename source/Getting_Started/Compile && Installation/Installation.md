@@ -63,9 +63,14 @@ sudo rpm -e poseidon-1.0.0-1.el7.x86_64
 ```
 
 
-
 ### Test
 
 After installation, you can test the library through the examples provided in ["Examples"](https://poseidon-hpu.readthedocs.io/en/latest/Getting_Started/index.html#examples). 
+
+The command is as follow:
+
+```shell
+g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -std=c++17
+```
 
 If you encounter any installation problems regarding the OS compatibility, please feel free to contact us via email: luhang@ict.ac.cn
