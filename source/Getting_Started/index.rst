@@ -11,7 +11,7 @@ Compile && Installation
 .. toctree::
    :maxdepth: 4
 
-   Compile && Installation/Complie
+   Compile && Installation/Compile
    Compile && Installation/Installation
 
 
