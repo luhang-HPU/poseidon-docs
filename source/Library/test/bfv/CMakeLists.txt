@@ -1,6 +1,0 @@
-add_executable(test_bfv_encrypt test_bfv_encrypt.cpp)
-target_link_libraries(test_bfv_encrypt poseidon_shared )
-
-
-add_executable(test_bfv_basic test_bfv_basic.cpp)
-target_link_libraries(test_bfv_basic poseidon_shared )
