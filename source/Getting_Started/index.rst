@@ -13,10 +13,10 @@ Programming
    :maxdepth: 4
 
    Programming/Basic
-   Programming/FHEs
-   Programming/FHEs/CKKS
-   Programming/FHEs/BFV
-   Programming/FHEs/BGV
+   Programming/FHE schemes
+   Programming/FHE schemes/CKKS
+   Programming/FHE schemes/BFV
+   Programming/FHE schemes/BGV
 
 
 Coding
