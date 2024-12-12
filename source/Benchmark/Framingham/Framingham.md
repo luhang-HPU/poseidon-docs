@@ -3,7 +3,7 @@
 **Framingham Heart Study (FHS)** is the longest duration cardiovascular epidemiological study funded by the National Institutes of Health in 1948, aimed at improving understanding of the epidemiology of coronary heart disease in the United States. FHS indicates that cardiovascular disease is closely related to various factors such as age, blood pressure, cholesterol, height, weight, etc. Therefore, these health-related parameters can be used to predict the probability of cardiovascular disease. The following picture illustrates the history of FHS.
 
 
-![f1](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/Framingham/f1.png)
+![f1](f1.png)
 
 <style>
     img[alt="f1"]{
@@ -18,16 +18,12 @@
 Based on the simplified FHS research dataset, we conclude that cardiovascular disease is closely related to the factor of age, systolic blood pressure (SBP), diastolic blood pressure (DBP), total cholesterol (CHL), height and weight.
 
 The factor parameter `x` can be calculated by the following formula:
-$$
-x = 0.072 \cdot Age + 0.013 \cdot SBP - 0.029 \cdot DBP + 0.008 \cdot CHL - 0.053 \cdot height + 0.021 \cdot weight
-$$
+$$ x = 0.072 \cdot Age + 0.013 \cdot SBP - 0.029 \cdot DBP + 0.008 \cdot CHL - 0.053 \cdot height + 0.021 \cdot weight $$
 
 
 
 The probability of suffering from cardiovascular disease can be predicted by the following formula:
-$$
-Pr(CDS) = \frac {e ^ x} {1 + e ^ x}
-$$
+$$ Pr(CDS) = \frac {e ^ x} {1 + e ^ x} $$
 
 
 
@@ -50,7 +46,7 @@ The following flowchart illustrate the concrete process:
 
 
 
-![ff](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/Framingham/flowf.png)
+![ff](flowf.png)
 
 <style>
     img[alt="ff"]{
