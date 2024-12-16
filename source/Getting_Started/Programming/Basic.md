@@ -198,11 +198,10 @@ ParametersLiteralDefault(SchemeType scheme_type, uint32_t degree, sec_level_type
 **Functions**:
 
 ```cpp
-PoseidonContext(const ParametersLiteral& param_literal,sec_level_type sec_level = sec_level_type::none,bool using_hardware = true);
+PoseidonContext(const ParametersLiteral& param_literal, bool using_hardware = true);
 ```
 
 - **param_literal** (const ParametersLiteral&): Indicates the encryption parameter which is used to calculate context information.
-- **sec_level** (sec_level_type): The security level to check the parameters.
 - **using_hardware** (bool): Whether to use hardware.
 
 **Usage**: Constructs poseidon context.
@@ -306,7 +305,7 @@ Plaintext(const std::string &hex_poly, MemoryPoolHandle pool = MemoryManager::Ge
 
 **Usage**: Constructs a plaintext from a given hexadecimal string describing the plaintext polynomial.
 
-Note: The string description of the polynomial must adhere to the format returned by to_string(),which is of the form "7FFx^3 + 1x^1 + 3" and summarized by the following rules
+Note: The string description of the polynomial must adhere to the format returned by to_string(), which is of the form "7FFx^3 + 1x^1 + 3" and summarized by the following rules: 
 
     1. Terms are listed in order of strictly decreasing exponent 
     2. Coefficient values are non-negative and in hexadecimal format (upper

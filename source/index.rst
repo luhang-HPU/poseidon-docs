@@ -1,9 +1,8 @@
 =====================================
 Welcome to Poseidon's documentation!!
 =====================================
-.. image:: kingimage.png
+.. image:: Image/kingimage.png
    :class: top-right-image
-
 
 
 .. toctree::
@@ -23,7 +22,7 @@ Welcome to Poseidon's documentation!!
 
 
 .. toctree::
-   :maxdepth: 3
-   :caption: Benchmark
-
-   Benchmark/index
+..   :maxdepth: 3
+..   :caption: Benchmark
+..
+..   Benchmark/index

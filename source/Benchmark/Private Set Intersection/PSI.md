@@ -1,7 +1,6 @@
 ## Introduction
 
 <div style="text-align: justify">
-
 Private Set Intersection (PSI) is a cryptographic technique that allows two parties to find the common elements in their respective sets without revealing any other information about their sets to each other. This means they can identify what data they share in common, without disclosing any data that isn't shared. PSI is crucial in contexts where privacy and confidentiality are important, such as in secure data sharing, privacy-preserving data analysis, and in cybersecurity, enabling collaboration and data comparison without compromising sensitive information.
 <br>
 <br>
@@ -9,7 +8,7 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 
 <center>
 
-![p1](p1.png)
+![p1](../../Image/Benchmark/Private Set Intersection/p1.png)
 
 </center>
 
@@ -27,7 +26,7 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 Unbalanced Private Set Intersection (Unbalanced PSI) refers to a variant of Private Set Intersection (PSI) protocols tailored to the situation where there is a large disparity in set sizes between the two participating parties. PSI is a cryptographic technique that allows two parties to compute the intersection of their private sets without revealing any additional information about their sets other than what can be inferred from the intersection itself.
 <center>
 
-![ubp](ubp.png)
+![ubp](../../Image/Benchmark/Private Set Intersection/ubp.png)
 
 </center>
 
@@ -55,7 +54,7 @@ The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophi
 
 <center>
 
-![p2](p2.png)
+![p2](../../Image/Benchmark/Private Set Intersection/p2.png)
 
 </center>
 
@@ -91,7 +90,7 @@ Cuckoo hashing is a hashing technique that can efficiently solve conflict proble
 
 <center>
 
-![p3](p3.png)
+![p3](../../Image/Benchmark/Private Set Intersection/p3.png)
 
 </center>
 
@@ -120,7 +119,7 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
 
 <center>
 
-![p4](p4.png)
+![p4](../../Image/Benchmark/Private Set Intersection/p4.png)
 
 </center>
 

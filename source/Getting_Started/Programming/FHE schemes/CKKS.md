@@ -9,7 +9,7 @@ Poseidon Supported parameter data structures, the following is specific to CKKS:
 
 ### 1. CKKS encoding and decoding class : **<font color='red'><span id="CKKSEncoder">CKKSEncoder</span> </font>**
 
-**Description**: `CKKSEncoder` is a class for encoding and decoding message for CKKS scheme.
+**Description**: `CKKSEncoder` is used to encode and decode message for CKKS scheme.
 
 **Functions**:
 
@@ -17,85 +17,43 @@ Poseidon Supported parameter data structures, the following is specific to CKKS:
 CKKSEncoder(const PoseidonContext &context);
 ```
 
-- **context** (const PoseidonContext &): The PoseidonContext.
+- **context** (const PoseidonContext &): The context specified by user, which includes the parameters of homomorphic encryption scheme, polynomial degree and security level.
 
 **Usage**: Creates a CKKSEncoder instance initialized with the specified PoseidonContext.
 <br>
 
 ```cpp
 void encode(const std::vector<std::complex<double>> &values, parms_id_type parms_id, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
 
-```cpp
 void encode(const std::vector<double> &values, parms_id_type parms_id, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
 
-```cpp
 void encode(std::complex<double>, parms_id_type parms_id, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
 
-```cpp
 void encode(double value, parms_id_type parms_id, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
 
-```cpp
 void encode(int64_t value, parms_id_type parms_id, double scale, Plaintext &destination) const;
 ```
 
-- **values** (const vector<complex<double>> & /const vector<double> & /std::complex<double> / double / int64_t): The source message.
-- **parms_id** (parms_id_type): parms_id determining the encryption parameters to
-  be used by the result plaintext.
+- **values** (const vector<complex<double\>>&, const vector\<double\>&, std::complex\<double\>, double, int64_t): The source number message.
+- **parms_id** (parms_id_type): parms_id specifies the modulus level of the modulus chain to of the result plaintext.
 - **scale** (double): Scaling parameter defining encoding precision.
 - **destination** (Plaintext): The plaintext polynomial to overwrite with the result.
 
-**Usage**: Encodes a vector of double-precision floating-point real or complex numbers into a plaintext polynomial. Append zeros if vector size is less than N/2.
-Dynamic memory allocations in the process are allocated from the memory pool pointed to by the given MemoryPoolHandle.
-
-<br>
-
-```cpp
-void encode(const std::vector<std::complex<double>> &values, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
-
-```cpp
-void encode(const std::vector<double> &values, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
-
-```cpp
-void encode(std::complex<double> value, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
-
-```cpp
-void encode(double value, double scale, Plaintext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
-
-```cpp
-void encode(int64_t value,  double scale, Plaintext &destination) const;
-```
-
-- **values** (const vector<complex<double>> & /const vector<double> & / double / std::complex<double> / int64_t): The source message.
-- **scale** (double): Scaling parameter defining encoding precision.
-- **destination** (Plaintext): The plaintext polynomial to overwrite with the
-  result.
-
-**Usage**: Encodes a vector of double-precision floating-point real or complex numbersinto a plaintext polynomial. Append zeros if vector size is less than N/2.The encryption parameters used are the top level parameters for the givencontext. Dynamic memory allocations in the process are allocated from the memory pool pointed to by the given MemoryPoolHandle.
+**Usage**: `encode` function encodes a vector of  numbers into a plaintext polynomial. It appends zeros to the end if the vector size is less than N/2 (N is the polynomial degree).
 
 <br>
 
 
 ```cpp
 void decode(const Plaintext &plain, std::vector<double> &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
-```
 
-```cpp
 void decode(const Plaintext &plain, std::vector<std::complex<double>> &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
 ```
 
-- **plain** (const Plaintext &): The source message.
-- **destination** (std::vector<double> & /  std::vector<std::complex<double>> &):Vector value type (double or std::complex<double>).
+- **plain** (const Plaintext &): The plaintext to be decoded.
+- **destination** (std::vector\<double\>&, std::vector\<std::complex\<double\>\>&): A number vector to store the message.
 
-
-**Usage**: Decodes a plaintext polynomial into double-precision floating-point real or complex numbers. Dynamic memory allocations in the process are allocated from the memory pool pointed to by the given MemoryPoolHandle.
+**Usage**: `decode` function decodes a plaintext polynomial into a vector of numbers.
 
 <br>
 
@@ -175,21 +133,20 @@ const int step() const;
 **Functions**:
 
 ```cpp
-HomomorphicDFTMatrixLiteral(DFTType type, uint32_t logN, uint32_t logSlots,uint32_t levelStart, vector<uint32_t> levels,
-                            bool repackImag2Real,double scaling,bool bitReversed,uint32_t logBSGSRatio);
+HomomorphicDFTMatrixLiteral(LinearType type, uint32_t log_n, uint32_t log_slots, uint32_t level_start, vector<uint32_t> levels, bool repack_imag_to_real = false, double scaling = 1.0, bool bit_reversed = false, uint32_t log_bsgs_ratio = 0);
 ```
 
-- **type** (DFTType): DFT or IDFT.
-- **logN** (uint32_t): The logarithm of polynomial degree.
-- **logSlots** (uint32_t): The logarithm of plaintext slots.
-- **levelStart** (uint32_t): The start level in modulus chain.
-- **levels** (vector<uint32_t>): The levels of DFT process not the level in modulus chain. 
-- **repackImag2Real** (uint32_t): Allow repackage image message to real message ciphertext.
+- **type** (LinearType): indicating the matrix type (DFT or IDFT).
+- **log_n** (uint32_t): The logarithm of polynomial degree.
+- **log_slots** (uint32_t): The logarithm of plaintext slots.
+- **level_start** (uint32_t): The start level in modulus chain.
+- **levels** (vector<uint32_t>): The levels of DFT process. 
+- **repack_imag_to_real** (uint32_t): Allowing repackage image message to real message ciphertext.
 - **scaling** (uint32_t): The scaling factor of HomomorphicDFT process.
-- **bitReversed** (uint32_t): Allow bit reversed(only support false).
-- **logBSGSRatio** (uint32_t): The ratio of BSGS matrix, 1 is recommend.
+- **bit_reversed** (uint32_t): Allow bit reversed (only support false).
+- **log_bsgs_ratio** (uint32_t): The ratio of BSGS matrix (1 is recommend).
 
-**Usage**: Constructs  homomorphic DFT parameters.
+**Usage**: `HomomorphicDFTMatrixLiteral` class constructs the DFT or IDFT matrix.
 
 <br>
 
@@ -209,47 +166,11 @@ HomomorphicDFTMatrixLiteral(DFTType type, uint32_t logN, uint32_t logSlots,uint3
 
 **Description**: The polynomial coefficients class in homomorphic polynomial evaluator.
 
-**Functions**: 
-
-```cpp
-Polynomial();
-```
-
-**Usage**: Empty polynomial, and the type is Monomial.
-
 <br>
 
-```cpp
-Polynomial(const Polynomial &copy) = default;
-```
+### 6.  PolynomialVector class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
 
-- **copy** (const Polynomial &): The  Polynomial.
-
-**Usage**: Copy constructor.
-
-<br>
-
-```cpp
-Polynomial(Polynomial &&source) = default;
-```
-
-- **source** (Polynomial &&): The  Polynomial.
-
-**Usage**: Move constructor.
-
-<br>
-
-```cpp
-vector<complex<double>> &data();
-```
-
-**Usage**: Get the Polynomial coefficient data.
-
-<br>
-
-### 6.  PolynomialVector  class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
-
-**Description**: A vector of polynomials  class in homomorphic polynomial evaluator.
+**Description**: A vector of polynomials class in homomorphic polynomial evaluator.
 
 **Functions**: 
 
@@ -262,12 +183,12 @@ PolynomialVector() = default;
 <br>
 
 ```cpp
-PolynomialVector(const vector<Polynomial> &polys, const vector<vector<int>> &indexs,bool lead = true);
+PolynomialVector(const vector<Polynomial> &polys, const vector<vector<int>> &indexs, bool lead = true);
 ```
 
 - **polys** (const vector<Polynomial> &): The  Polynomials.
 - **indexs** (const vector<vector<int>> &): The  indexs of each Polynomial in slots.
-- **lead**(bool): Whether is  lead or not. 
+- **lead**(bool): Whether is lead or not. 
 
 **Usage**: Construct a polynomial vector.
 
@@ -337,20 +258,20 @@ vector<vector<int>> &index()
 **Functions**: 
 
 ```cpp
-EvalModPoly(const PoseidonContext &context, SineType type, double scaling_factor, uint32_t levelStart, uint32_t logMessageRatio, uint32_t doubleAngle, uint32_t K, uint32_t arcSineDegree, uint32_t SineDegree);
+EvalModPoly(const PoseidonContext &context, SineType type, double scaling_factor, uint32_t level_start, uint32_t 							log_message_ratio, uint32_t double_angle, uint32_t k, uint32_t arcsine_degree, uint32_t sine_degree);
 ```
 
 - **context** (const PoseidonContext &): The PoseidonContext.
 - **type** (SineType): Cosine Discrete, Sine Continuous or Cosine Continuous.
 - **scaling_factor** (double): The scaling factor of HomomorphicMod process.
-- **levelStart** (uint32_t): The start level in modulus chain.
-- **logMessageRatio** (uint32_t): The logarithm of message ratio.
-- **doubleAngle** (uint32_t): The num of double angle.
-- **K** (uint32_t): The rang if Chebyshev.
-- **arcSineDegree** (uint32_t): arcSine poly degree.
-- **SineDegree** (uint32_t): SineDegree poly degree.
+- **level_start** (uint32_t): The start level in modulus chain.
+- **log_message_ratio** (uint32_t): The logarithm of message ratio.
+- **double_angle** (uint32_t): The num of double angle.
+- **k** (uint32_t): The rang if Chebyshev.
+- **arcsine_degree** (uint32_t): arcSine poly degree.
+- **sine_degree** (uint32_t): SineDegree poly degree.
 
-**Usage**: Constructs  homomorphic Mod parameters.
+**Usage**: Constructs homomorphic mod parameters.
 
 <br>
 

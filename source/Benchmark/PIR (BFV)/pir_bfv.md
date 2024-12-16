@@ -8,7 +8,7 @@ Private Information Retrieval (PIR), as an extension of Information Retrieval, e
 1. Correctness: Users get correct data as they request.
 2. Security: The server does not know the true query conditions.
 
-![pir](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/pir_bfv/1.png)
+![pir](../../Image/Benchmark/PIR (BFV)/1.png)
 
 <style>
     img[alt="pir"]{
@@ -34,7 +34,7 @@ Suppose the amount of the data from the client is `n`. The basic procedure is as
 5. The client decrypts the ciphertext and gets the inquired data $B_i$.
 
 
-![basic](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/pir_bfv/5.png)
+![basic](../../Image/Benchmark/PIR (BFV)/5.png)
 
 <style>
     img[alt="basic"]{
@@ -46,7 +46,7 @@ Suppose the amount of the data from the client is `n`. The basic procedure is as
 The basic PIR protocol can be extracted into four functions: (Setup, Query, Answer, Extract).
 
 
-![function](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/pir_bfv/6.png)
+![function](../../Image/Benchmark/PIR (BFV)/6.png)
 
 <style>
     img[alt="function"]{
@@ -62,7 +62,7 @@ Consider the basic PIR protocol, which consumes a lot on the computation and the
 Thus, we pack multiple data into one homomorphic encryption plaintext.
 
 
-![packing](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/pir_bfv/2.png)
+![packing](../../Image/Benchmark/PIR (BFV)/2.png)
 
 <style>
     img[alt="packing"]{
@@ -78,7 +78,7 @@ We convert data from the linear vector into a 2-dimension matrix.
 
 When we use a 2-dimension inquiry, most query requests can be supported within the two inquiry ciphertexts.
 
-![convert](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/pir_bfv/3.png)
+![convert](../../Image/Benchmark/PIR (BFV)/3.png)
 
 <style>
     img[alt="convert"]{
@@ -92,7 +92,7 @@ When we use a 2-dimension inquiry, most query requests can be supported within t
 
 We construct probabilistic batch code based on Cuckoo Hash, to divide the database into several batches, and execute multiple inquiries at the same time according to different batches.
 
-![Multi-query](C:/Users/Lenovo/Desktop/Poseidon-main/Poseidon-main/source/Benchmark/pir_bfv/4.png)
+![Multi-query](../../Image/Benchmark/PIR (BFV)/4.png)
 
 <style>
     img[alt="Multi-query"]{

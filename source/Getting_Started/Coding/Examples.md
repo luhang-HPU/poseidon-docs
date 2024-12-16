@@ -31,7 +31,10 @@ If we would like to implement the HPU card to accelerate the process, we could c
 The software mode is always applicable, however the hardware mode is only supported when **the hardware library and the HPU card are both installed**.
 
 ```cpp
+// To run the program with CPU, set the DEVICE_SOFTWARE
 PoseidonFactory::get_instance()->set_device_type(DEVICE_SOFTWARE);
+
+// To run the program with HPU, set the DEVICE_HARDWARE
 PoseidonFactory::get_instance()->set_device_type(DEVICE_HARDWARE);
 ```
 
@@ -42,9 +45,13 @@ PoseidonFactory::get_instance()->set_device_type(DEVICE_HARDWARE);
 We need to specify the parameters to initiate the context, including the encryption scheme, the polynomial degree and the security level.
 
 ```cpp
+// Here we choose the homomorphic encryption scheme to be BFV, 
+// the polynomial degree to be 16384, 
+// the security level to be tc128
 ParametersLiteralDefault bfv_param_literal(BFV, 16384, poseidon::sec_level_type::tc128);
-PoseidonContext context = PoseidonFactory::get_instance()->create_poseidon_context(
-        bfv_param_literal, poseidon::sec_level_type::tc128);
+
+// Create the context with the customized parameter    
+PoseidonContext context = PoseidonFactory::get_instance()->create_poseidon_context(bfv_param_literal);
 ```
 
 
@@ -59,14 +66,14 @@ PublicKey public_key;
 GaloisKeys galois_keys;
 RelinKeys relin_keys;
 keygen.create_public_key(public_key);
-keygen.create_galois_keys(vector<int>{0, -1, 1}, galois_keys);
+keygen.create_galois_keys(galois_keys);
 keygen.create_relin_keys(relin_keys);
 
 Encryptor encryptor(context, public_key);
 Decryptor decryptor(context, keygen.secret_key());
 
-std::shared_ptr<EvaluatorBfvBase> bfv_eva =
-        PoseidonFactory::get_instance()->create_bfv_evaluator(context);
+// Before performing the homomorphic computation, the evaluator class should be specified
+std::shared_ptr<EvaluatorBfvBase> bfv_eva = PoseidonFactory::get_instance()->create_bfv_evaluator(context);
 ```
 
 

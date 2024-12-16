@@ -4,7 +4,7 @@ Logistic Regression (or LR) is actually a classification problem, although it na
 
 
 
-![sigmoid](https://poseidon-hpu.readthedocs.io/en/latest/_images/6.png)
+![sigmoid](../../Image/Benchmark/LR Train/6.png)
 
 Logistic Regression Classifier aims at learning a binary classification model from the features of the input training data. The model takes the linear combination of the input feature as the variable,$\theta_0+\theta_1x_1+,\ldots,+\theta_nx_n=
 \sum_{i=1}^n \theta_ix_i$，where $x_0$ is always 1. We can also present it as $\theta^Tx$.  Putting it into the sigmoid function, we get a prediction model as:

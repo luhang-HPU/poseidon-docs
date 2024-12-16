@@ -1,10 +1,3 @@
-Private Information Retrival (PIR)
-===================================
-.. toctree::
-   :maxdepth: 4
-
-   Private Information Retrival/PIR
-
 Private Set Intersection (PSI)
 ==============================
 .. toctree::
@@ -39,7 +32,7 @@ LR_train
    :maxdepth: 4
 
 
-   LR_train/LR_train
+   LR Train/LR Train
 
 PIR_BFV
 =================================
