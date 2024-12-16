@@ -281,7 +281,7 @@ EvalModPoly(const PoseidonContext &context, SineType type, double scaling_factor
 
 ### 1. Addition between ciphertexts : **<font color='red'> add</font>**
 
-```c
+```cpp
 void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 ```
 
@@ -298,7 +298,7 @@ void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 
 ### 2. Addition of ciphertext and plaintext : **<font color='red'> add_plain</font>**
 
-```c
+```cpp
 void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result);
 ```
 
@@ -315,7 +315,7 @@ void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result);
 
 ### 3. Subtraction between ciphertexts : **<font color='red'> sub</font>**
 
-```c
+```cpp
 void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 ```
 
@@ -331,7 +331,7 @@ void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 
 ### 4. Multiplication between ciphertexts : **<font color='red'> multiply</font>** (**<font color='blue'> only software</font>**)
 
-```c
+```cpp
 void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) const;
 ```
 
@@ -346,7 +346,7 @@ void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &resu
 
 ### 5.  Relinearization : **<font color='red'> relinearize</font>** (**<font color='blue'> only software</font>**)
 
-```c
+```cpp
 void relinearize(const Ciphertext &ciph, Ciphertext &result, const RelinKeys &relin_keys) const;
 ```
 
@@ -398,7 +398,7 @@ void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &
 
 ### 8. Rescale : **<font color='red'> rescale</font>**
 
-```c
+```cpp
 void rescale (const Ciphertext &ciph,Ciphertext &result) const;
 ```
 
@@ -412,7 +412,7 @@ void rescale (const Ciphertext &ciph,Ciphertext &result) const;
 
 ### 9. Ciphertext rotation : **<font color='red'> rotate</font>**
 
-```c
+```cpp
 void rotate(const Ciphertext &ciph, Ciphertext &result, int step, const GaloisKeys &galois_keys) const;
 ```
 
@@ -429,7 +429,7 @@ void rotate(const Ciphertext &ciph, Ciphertext &result, int step, const GaloisKe
 
 ### 10. Take conjugate : **<font color='red'> conjugate</font>**
 
-```c
+```cpp
 void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &result) const;
 ```
 
@@ -445,7 +445,7 @@ void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &
 
 ### 11. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiply_by_diag_matrix_bsgs</font>**
 
-```c
+```cpp
 void multiply_by_diag_matrix_bsgs(const Ciphertext &ciph, const MatrixPlain &plain_mat, Ciphertext &result, const GaloisKeys &rot_key) const;
 ```
 
@@ -463,7 +463,7 @@ void multiply_by_diag_matrix_bsgs(const Ciphertext &ciph, const MatrixPlain &pla
 
 ### 12. Coefficient to plaintext slot : **<font color='red'> coeff_to_slot</font>**
 
-```c
+```cpp
 void coeff_to_slot(const Ciphertext &ciph, const LinearMatrixGroup &matrix_group, Ciphertext &result_real, Ciphertext &result_imag, const GaloisKeys &galoisKeys, const CKKSEncoder &encoder) const;
 ```
 
@@ -483,7 +483,7 @@ void coeff_to_slot(const Ciphertext &ciph, const LinearMatrixGroup &matrix_group
 
 ### 13. Plaintext slot to coefficient : **<font color='red'> slot_to_coeff</font>**
 
-```c
+```cpp
 void slot_to_coeff(const Ciphertext &ciph_real, const Ciphertext &ciph_imag, const LinearMatrixGroup &matrix_group, Ciphertext &result, const GaloisKeys &galoisKeys, const CKKSEncoder &encoder) const;
 ```
 
@@ -523,7 +523,7 @@ void ntt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
 
 ### 15. Number Theoretic Transform (inverse) : **<font color='red'> ntt_inv</font>**
 
-```c
+```cpp
 void ntt_inv(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
@@ -538,7 +538,7 @@ void ntt_inv(const Ciphertext &ciph, Ciphertext &result) const;
 
 ### 17. Multiplication of ciphertext and constant value : **<font color='red'> multiply_const</font>**
 
-```c
+```cpp
 void multiply_const(const Ciphertext &ciph, complex<double> constData, double scale,Ciphertext &result, CKKSEncoder &encoder);
 ```
 
@@ -573,7 +573,7 @@ void add_const(const Ciphertext &ciph, double const_data, Ciphertext &result,con
 
 ### 19. Discrete Fourier Transform on ciphertext : **<font color='red'> dft</font>**
 
-```c
+```cpp
 void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const GaloisKeys &rot_key);
 ```
 
@@ -591,7 +591,7 @@ void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const Galo
 
 ### 20. Dynamic rescale : **<font color='red'> rescale_dynamic</font>**
 
-```c
+```cpp
 void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale);
 ```
 
@@ -606,7 +606,7 @@ void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale
 
 ### 21. Polynomial evaluation : **<font color='red'> evaluate_poly_vector</font>**
 
-```c
+```cpp
 void evaluate_poly_vector(const Ciphertext &ciph, Ciphertext &destination, const PolynomialVector &polys, double scale, const RelinKeys &relin_key, const CKKSEncoder &encoder) const;
 ```
 
@@ -626,7 +626,7 @@ void evaluate_poly_vector(const Ciphertext &ciph, Ciphertext &destination, const
 
 ### 22. Evaluate modulo on the ciphertext vector : **<font color='red'> eval_mod</font>**
 
-```c
+```cpp
 void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const RelinKeys &relin_key, CKKSEncoder &encoder);
 ```
 
@@ -645,7 +645,7 @@ void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly,
 
 ### 23. Bootstrap : **<font color='red'> bootstrap</font>** 
 
-```c
+```cpp
 void bootstrap(const Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const LinearMatrixGroup &matrix_group0, const LinearMatrixGroup &matrix_group1, const RelinKeys &relin_key, const GaloisKeys &rot_key,const CKKSEncoder &encoder);
 ```
 

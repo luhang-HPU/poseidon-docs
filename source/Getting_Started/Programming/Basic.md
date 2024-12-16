@@ -1578,7 +1578,7 @@ void set_device_type(DEVICE_TYPE type)
 
 ### 1. Read ciphertext information from accelerator card : **<font color='red'> read</font>**
 
-```c
+```cpp
 void read(Ciphertext &ciph);
 ```
 
