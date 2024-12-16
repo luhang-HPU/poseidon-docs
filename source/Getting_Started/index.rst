@@ -3,7 +3,7 @@ Installation
 .. toctree::
    :maxdepth: 4
 
-   Installation/Compile
+   Installation/Compilation
    Installation/Installation
 
 Programming

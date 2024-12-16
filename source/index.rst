@@ -22,7 +22,7 @@ Welcome to Poseidon's documentation!!
 
 
 .. toctree::
-..   :maxdepth: 3
-..   :caption: Benchmark
-..
+   :maxdepth: 3
+   :caption: Benchmark
+
 ..   Benchmark/index
