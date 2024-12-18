@@ -46,7 +46,7 @@ make -j
 
 ## Build Software Source Code With Hardware Package (Optional)
 
-*** This requires the hardware library to be installed before compiling!!!***
+***This requires the hardware library to be installed before compiling!!!***
 
 
 
