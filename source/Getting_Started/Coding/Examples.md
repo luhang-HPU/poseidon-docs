@@ -1,4 +1,4 @@
-The ***poseidon/examples*** directory contains three subdirectories ***BFV*** , ***BGV*** and ***CKKS*** , which contain basic example programming for different schemes.
+The ***poseidon/examples*** directory contains three subdirectories ***BFV***, ***BGV*** and ***CKKS*** , which contain basic example programming for different schemes.
 
 All the BFV, BGV and CKKS examples support different security levels and polynomial degrees. Additionally, they can be executed in both software mode and hardware mode. If users wish to execute the examples in various scenarios, they can customize the security parameters to meet the requirement.
 
@@ -26,7 +26,7 @@ For now, Poseidon implement **BV** key switch scheme for **BFV**, **BGV** and **
 
 <br>
 
-## Choose the device type
+## Choose the Device Type
 
 At the beginning of the program, we need to decide whether to run the program on the CPU or HPU.
 
