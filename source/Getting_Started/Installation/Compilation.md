@@ -51,7 +51,7 @@ make -j
 
 **Install dependency**
 
-You can download installation package with `wget` (check the version carefully)
+You can download installation package with *wget* (check the version carefully)
 
 ```shell
 # Ubuntu download

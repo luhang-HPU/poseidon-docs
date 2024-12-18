@@ -20,7 +20,7 @@ On the premise that you are equipped with the HPU card, you can switch the execu
 
 There are two ways to download the Poseidon installation package:
 
-1. Download Poseidon package with the link: [The download address of the installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)
+1. Download Poseidon package with the link: [Poseidon installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)
 2. Download Poseidon package with `wget` (check the version carefully)
 
 ```shell
