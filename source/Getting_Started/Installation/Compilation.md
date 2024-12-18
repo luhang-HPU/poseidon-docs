@@ -1,21 +1,21 @@
-# Compile
-
 Poseidon is comprised of open-source software code and non-open-source hardware code, which results in different ways to compile and install.
 
-If you are going to have a try on FHE or Poseidon library, both compiling source code only or whole package installation is recommended. 
+Here are our recommendation for different users:
 
-If you are equipped with HPU card and not to modify the software source code, whole package installation is recommended.
+1. If you are going to have a try on FHE or Poseidon library, both **compiling source code only** or **whole package installation** is recommended. 
+2. If you are equipped with HPU card and not to modify the software source code, **whole package installation** is recommended.
+3. If you are equipped with HPU card and want to modify the software code, **compiling source code with hardware library** is recommended.
 
-If you are equipped with HPU card and want to modify the software code, compiling source code with hardware library is recommended.
+<br>
 
-
+# Compile
 
 Poseidon supports two ways to compile the open-source software code.
 
 1. Compile software source code only
 2. Compile software source code with hardware package
 
-
+<br>
 
 ## Requirement 
 
@@ -23,14 +23,13 @@ Poseidon supports two ways to compile the open-source software code.
 * Tool chain: GNU g++ ( >= 8.0) , CMake ( >= 3.12 )
 * Dependency library: gmp ( >= 6.3.0)
 
-
+<br>
 
 ## Source Code Download
 
-Download the software source code from the following link:
-[SourceCode]([luhang-HPU/poseidon](https://github.com/luhang-HPU/poseidon))
+Download the software source code from the following link: [SourceCode]([luhang-HPU/poseidon](https://github.com/luhang-HPU/poseidon))
 
-
+<br>
 
 ## Build Software Source Code Only
 
@@ -42,16 +41,17 @@ cmake ..
 make -j
 ```
 
+<br>
 
-
-## Build Software Source Code With Hardware Package (Optional)
+## Build Software Source Code With Hardware Library
 
 ***This requires the hardware library to be installed before compiling!!!***
 
-
+<br>
 
 **Install dependency**
-You can download installation package with `wget` (check the version carefully)<br>
+
+You can download installation package with `wget` (check the version carefully)
 
 ```shell
 # Ubuntu download
@@ -65,9 +65,10 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-hardwar
 sudo yum localinstall poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
-
+<br>
 
 **Build**
+
 After the hardware library is installed, you can compile the source code with the following command:
 
 ```shell
@@ -87,19 +88,22 @@ Poseidon provides a bunch of cmake variables for users to decide what kind of so
 | POSEIDON_BUILD_TEST     | bool          | Build gtest cases                         |
 | POSEIDON_USE_HARDWARE   | bool          | Build software only or with hardware code |
 
+<br>
 
 
-
-## Run the Examples
+## Execute the Examples
 
 Enable `POSEIDON_BUILD_EXAMPLES` when building.
 
 ```shell
+cmake -DPOSEIDON_BUILD_EXAMPLES=ON ..
+make -j
+
 cd build/bin
-./test_[example name]
+./test_example_file_name
 
 # Please upgrade to sudo privilege when executing with hardware
-sudo ./test_[example name]
+sudo ./test_example_file_name
 ```
 
 

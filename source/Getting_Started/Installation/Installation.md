@@ -1,10 +1,10 @@
-# Whole Package Installation
+# Whole Package Installation (Updating)
 
-Poseidon provides the dynamic library installation package. It is recommended for users to download and install the software package if you are only going to call the API functions rather than modifying the source code. 
+Poseidon installation package includes both software code and hardware code. 
 
-The Poseidon dynamic library supports both software and acceleration cards. On the premise that you have an accelerator card, you can choose to switch between the software or the accelerator card. In the absence of an acceleration card, you can just use the software.
+On the premise that you are equipped with the HPU card, you can switch the execution environment between the CPU and the HPU.
 
-
+<br>
 
 ## Requirement 
 
@@ -14,16 +14,15 @@ The Poseidon dynamic library supports both software and acceleration cards. On t
 * Hardware: Poseidon HPU accelerator card
 * Hardware driver (The hardware driver has been integrated into the hardware installation package)
 
-
+<br>
 
 ## Download
 
 There are two ways to download the Poseidon installation package:
 
-1. Here are all the installation packages.<br>
-[The download address of the installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)<br>
+1. Download Poseidon package with the link: [The download address of the installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)
+2. Download Poseidon package with `wget` (check the version carefully)
 
-2. You can also download installation package with `wget` (check the version carefully)<br>
 ```shell
 # Ubuntu
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x86_64.deb
@@ -32,45 +31,49 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
-
+<br>
 
 ## Installation Package
 
-After you’ve downloaded the installation package, navigate to the download directory and install it using the following command:
+Navigate to the download directory and install it with the following command:
 ```shell
 # Ubuntu
-sudo apt-get install ./poseidon-1.0.0_x86_64.deb
+sudo apt-get install poseidon-1.0.0_x86_64.deb
 
 # Centos
 sudo yum localinstall poseidon-1.0.0-1.el7.x86_64.rpm
 ```
 
-The installation process will require the system reboot before it wraps up. The target installation folder for the headers and dynamic library locates at /usr/poseidon. Meanwhile, it constructs a soft link in /usr/local/include for the headers.  
+The installation process will require the system reboot before it wraps up. The target installation folder for the headers and dynamic library locates at */usr/poseidon*. Meanwhile, it constructs a soft link in */usr/local/include* for the headers.  
 
-
+<br>
 
 ## Uninstallation Package
 
-You can uninstall the software installation package with the following command:
+You can uninstall Poseidon package with the following command:
 ```shell
 # Ubuntu
 sudo apt-get remove poseidon
+
 # Centos
 sudo rpm -e poseidon-1.0.0-1.el7.x86_64
 ```
 
+<br>
 
-
-## Run the Examples
+## Execute the Examples
 
 Enable `POSEIDON_BUILD_EXAMPLES` when building.
 
 ```shell
+cmake -DPOSEIDON_BUILD_EXAMPLES=ON ..
+make -j
+
 cd build/bin
-./test_[example name]
+./test_example_file_name
 
 # Please upgrade to sudo privilege when executing with hardware
-sudo ./test_[example name]
+sudo ./test_example_file_name
 ```
 
 
