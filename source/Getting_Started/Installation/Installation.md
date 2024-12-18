@@ -21,7 +21,7 @@ On the premise that you are equipped with the HPU card, you can switch the execu
 There are two ways to download the Poseidon installation package:
 
 1. Download Poseidon package with the link: [Poseidon installation package](https://gitee.com/luhang-HPU/poseidon/tree/master/downloads)
-2. Download Poseidon package with `wget` (check the version carefully)
+2. Download Poseidon package with *wget* (check the version carefully)
 
 ```shell
 # Ubuntu
@@ -33,7 +33,7 @@ wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0-1
 
 <br>
 
-## Installation Package
+## Installation
 
 Navigate to the download directory and install it with the following command:
 ```shell
@@ -48,7 +48,7 @@ The installation process will require the system reboot before it wraps up. The 
 
 <br>
 
-## Uninstallation Package
+## Uninstallation
 
 You can uninstall Poseidon package with the following command:
 ```shell
