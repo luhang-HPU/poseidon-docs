@@ -3,13 +3,12 @@ The `poseidon/examples` directory contains three subdirectories `BFV` , `BGV` an
 All the BFV, BGV and CKKS examples support different security levels and polynomial degrees. Additionally, they can be executed in both software mode and hardware mode. If users wish to execute the examples in various scenarios, they can customize the security parameters to meet the requirement.
 
 
-
+<br>
 # How to Program with Poseidon
 
 In this chapter, we will introduce an example based on BFV to show how to program with Poseidon.
 
-
-
+<br>
 ## Prerequisites
 
 Poseidon supports three different key switch schemes -- **BV**, **GHS** and **HYBRID**, of which the difference lies in the setting of modulus chain.
@@ -23,7 +22,7 @@ In **HYBRID** key switch scheme, the size of modulus chain P and Q is unlimited.
 For now, Poseidon implement **BV** key switch scheme for **BFV**, **BGV** and **CKKS**.
 
 
-
+<br>
 ## Choose the device type
 
 At the beginning of the program, we need to decide whether to run the program on the CPU or HPU.
@@ -39,7 +38,7 @@ PoseidonFactory::get_instance()->set_device_type(DEVICE_HARDWARE);
 **Pay attention! Hardware mode (*DEVICE_HARDWARE*) is supported only when both the Poseidon hardware library and the HPU card are installed**.
 
 
-
+<br>
 ## Parameter Specification & Encryption Class Initialization
 
 Next, we need to specify the parameters which are the encryption scheme, polynomial degree and security level to initiate the context.
@@ -76,7 +75,7 @@ std::shared_ptr<EvaluatorBfvBase> bfv_eva = PoseidonFactory::get_instance()->cre
 ```
 
 
-
+<br>
 ## Encoding and Encryption
 
 We could encode the message with `BatchEncoder` and encrypt the plaintext with `Encryptor` .
@@ -93,7 +92,7 @@ encryptor.encrypt(plain1, ciph1);
 The message type differs between the schemes. Integer is supported in **BFV** and **BGV**, while double and std::complex are supported in **CKKS**.
 
 
-
+<br>
 ## Homomorphic Computation
 
 We could execute the homomorphic computation by calling the member function of the `Evaluator` class.
@@ -110,7 +109,7 @@ bfv_eva->drop_modulus_to_next(ciph1, ciph1);
 ```
 
 
-
+<br>
 ## Decoding and Decryption
 
 After all the homomorphic computations are done, we could decrypt the ciphertext result with `Decryptor` and decode the plaintext result with `Encoder`.
@@ -123,12 +122,12 @@ enc.decode(plain_res, message_res);
 ```
 
 
-
+<br>
 ## Timer, Accuracy and Precision
 
 Poseidon provides some useful gadgets for users.
 
-1. `TimeStacs` , the timer to record the total time spent on the homomorphic computation.
+* `TimeStacs` , the timer to record the total time spent on the homomorphic computation.
 
 ```cpp
 Timestacs timestacs;
@@ -139,7 +138,7 @@ timestacs.print_time("TIME : ");
 
 
 
-2. Accuracy
+* Accuracy
 
 In **BFV** and **BGV** examples, the result of homomorphic computation should be the same as the result calculated directly.
 
@@ -163,7 +162,7 @@ for (auto i = 0; i < 4; i++)
 
 
 
-3. `GetPrecisionStats`, the function for measurement of precision for **CKKS**
+* `GetPrecisionStats`, the function for measurement of precision for **CKKS**
 
 In **CKKS** examples, `GetPrecisionStats` calculates the mean square error of the result.
 
@@ -172,9 +171,9 @@ util::GetPrecisionStats(message_want, message_res);
 ```
 
 
-
+<br>
 # Examples
-
+<br>
 ##  BFV Basic
 
 The **test_bfv_basic.cpp** exmaple tests a variety of **BFV** homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation. 
@@ -184,7 +183,7 @@ Users can choose customized parameters or default parameters, which are software
 Every basic operation in the **test_bfv_basic.cpp** example will record the time spent and verify the correctness of homomorphic computation result.
 
 
-
+<br>
 ## BFV Matrix Vector Multiplication
 
 The **test_bfv_mult_matrix.cpp** example tests the multiplication of ciphertext by plaintext matrix. 
@@ -194,7 +193,7 @@ Users can choose customized parameters or default parameters, which are software
 This example compares the homomorphic computation result with the correct answer.
 
 
-
+<br>
 ## BGV Basic
 
 The **test_bgv_basic.cpp** example tests a variety of **BGV** homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation. 
@@ -204,7 +203,7 @@ Users can choose customized parameters or default parameters, which are software
 Every basic operation in the **test_bgv_basic.cpp** example will record the time spent and verify the correctness of homomorphic computation result.
 
 
-
+<br>
 ## CKKS Basic
 
 The **test_ckks_basic.cpp** example tests a variety of **CKKS** homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation, conjugation, rescaling.
@@ -214,7 +213,7 @@ Users can choose customized parameters or default parameters, which are software
 As the **CKKS** scheme is based on approximate computation, there might be decimal deviation bewteen the homomorphic computation results and the correct results. Every basic operation in the **test_ckks_basic.cpp** example will record the time spent and the precision of homomorphic computation results.
 
 
-
+<br>
 ## CKKS Coeff to Slot & Slot to Coeff
 
 The **test_ckks_slot_to_coeff.cpp** example tests the function of **coeff to slot** and **slot to coeff**, converting the ciphertext from coefficient mode to slot mode or converting the ciphertext from slot mode to coefficient mode.
@@ -224,7 +223,7 @@ The **coeff to slot** and **slot to coeff** function are two important operation
 Users can choose customized parameters or default parameters, which are software version, polynomial degree of 16384 and security level of tc_128, to execute the **test_ckks_slot_to_coeff.cpp** example.
 
 
-
+<br>
 ## CKKS Evaluate Poly Vector
 
 The **test_ckks_evaluate_poly_vector.cpp** example tests the function of evaluating poly vector which is an important part of homomorphic modulo operation in **CKKS** bootstrapping. 
@@ -234,7 +233,7 @@ The **test_ckks_evaluate_poly_vector.cpp** example tests the function of evaluat
 Users can choose customized parameters or default parameters, which are software version, polynomial degree of 4096 and security level of tc_128, to execute the **test_ckks_evaluate_poly_vector.cpp** example.
 
 
-
+<br>
 ## CKKS Bootstrap
 
 The **test_ckks_bootstrap.cpp** example tests the bootstrap function of **CKKS**.
