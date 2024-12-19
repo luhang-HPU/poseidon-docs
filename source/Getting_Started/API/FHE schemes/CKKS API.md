@@ -1,4 +1,4 @@
-# CKKS 
+# CKKS API
 
 ## Data Structures
 
@@ -289,7 +289,7 @@ void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 - **ciph2** (Ciphertext): representing another ciphertext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `add` computes `result` = `ciph1` + `ciph2` . 
+**Usage**: `add` computes *result* = *ciph1* + *ciph2* . 
 
 <br>
 
@@ -307,7 +307,7 @@ void add_plain(Ciphertext &ciph, Plaintext &plain,Ciphertext &result);
 
 - **result** (Ciphertext): storing the addition result.
 
-**Usage**: `add_plain` computes `result` = `ciph` + `plain` .
+**Usage**: `add_plain` computes *result* = *ciph* + *plain* .
 
 
 <br>
@@ -324,8 +324,7 @@ void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `sub` computes `result` = `ciph1` - `ciph2`.
-
+**Usage**: `sub` computes *result* = *ciph1* - *ciph2*.
 
 <br>
 
@@ -340,7 +339,7 @@ void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &resu
 - **ciph2** (Ciphertext): representing the other ciphertext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `multiply` computes `result` = `ciph1` * `ciph2`.
+**Usage**: `multiply` computes *result* = *ciph1* * *ciph2*.
 
 <br>
 
@@ -372,7 +371,7 @@ void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext
 - **result** (Ciphertext): storing the computation result.
 - **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the relinearization key.
 
-**Usage**: `multiply_relin` computes `result` = `ciph1` * `ciph2` and relinearize the ciphertext size of `result`.
+**Usage**: `multiply_relin` computes *result* = *ciph1* * *ciph2* and relinearize the ciphertext size of *result*.
 
 <br>
 
@@ -389,7 +388,7 @@ void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &
 - **plain** (Plaintext): representing a plaintext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `multiply_plain` computes `result` = `ciph` * `plain`.
+**Usage**: `multiply_plain` computes *result* = *ciph* * *plain*.
 
 <br>
 
@@ -548,7 +547,7 @@ void multiply_const(const Ciphertext &ciph, complex<double> constData, double sc
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 - **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder.
 
-**Usage**: `multiply_const` computes `result` = `ciph` * `const`.
+**Usage**: `multiply_const` computes *result* = *ciph* * *const*.
 
 <br>
 
@@ -565,7 +564,7 @@ void add_const(const Ciphertext &ciph, double const_data, Ciphertext &result,con
 - **constData** (double): representing a real constant.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `add_const` computes `result` = `ciph` + `const_data`.
+**Usage**: `add_const` computes *result* = *ciph* + *const_data*.
 
 <br>
 
@@ -599,7 +598,7 @@ void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale
 - **result** (Ciphertext):representing a ciphertext.
 - **min_scale** (double): representing the given scaling factor.
 
-**Usage**: `rescale_dynamic` is used for multiple times of rescale of the ciphertext util the scale becomes satisfied with the `min_scale`.
+**Usage**: `rescale_dynamic` is used for multiple times of rescale of the ciphertext util the scale becomes satisfied with the *min_scale*.
 
 <br>
 

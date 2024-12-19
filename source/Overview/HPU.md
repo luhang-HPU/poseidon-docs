@@ -1,8 +1,6 @@
 # Homomorphic Computing Unit (HPU)
 
 <div style="text-align: justify">
-
-
 Poseidon is tightly coupled with the specialized hardware accelerator for FHE, namely **ZhangJiang No.1** or **ZJ-1** for simplicity. ZJ-1 is a PCIe interfaced SoC, providing highly parallelized computation for various FHE operations defined in Poseidon. It is a highly pipelined architecture with fine-grained operator executing on the timing-optimized microarchitectures. 
 
 ![ZJ1](../Image/Overview/ZJ1.png)

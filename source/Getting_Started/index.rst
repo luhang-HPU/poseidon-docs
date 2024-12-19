@@ -6,22 +6,21 @@ Installation
    Installation/Compilation
    Installation/Installation
 
-Programming
+API
 =================================
 
 .. toctree::
    :maxdepth: 4
 
-   Programming/Basic
-   Programming/FHE schemes
-   Programming/FHE schemes/CKKS
-   Programming/FHE schemes/BFV
-   Programming/FHE schemes/BGV
+   API/Basic API
+   API/FHE schemes/CKKS API
+   API/FHE schemes/BFV API
+   API/FHE schemes/BGV API
 
 
-Coding
+Program
 =============
 .. toctree::
    :maxdepth: 4
 
-   Coding/Examples
+   /Examples

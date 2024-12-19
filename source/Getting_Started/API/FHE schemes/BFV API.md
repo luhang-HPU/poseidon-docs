@@ -1,4 +1,4 @@
-# BFV
+# BFV API
 
 ## Data Structures
 
@@ -94,7 +94,7 @@ void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 * **ciph2** (Ciphertext): representing the other addend.
 * **result** (Ciphertext): storing the addition result.
 
-**Usage**: `add` computes `result` = `ciph1` + `ciph2` . 
+**Usage**: `add` computes *result* = *ciph1* + *ciph2* . 
 
 
 
@@ -110,7 +110,7 @@ void add_plain(Ciphertext &ciph, Plaintext &plain, Ciphertext &result);
 
 * **result** (Ciphertext): storing the addition result.
 
-**Usage**: `add_plain` computes `result` = `ciph` + `plain` .
+**Usage**: `add_plain` computes *result* = *ciph* + *plain* .
 
 
 
@@ -126,7 +126,7 @@ void sub(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 
 * **result** (Ciphertext): storing the computation result.
 
-**Usage**: `sub` computes `result` = `ciph1` - `ciph2`.
+**Usage**: `sub` computes *result* = *ciph1* - *ciph2*.
 
 
 
@@ -142,7 +142,7 @@ void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
 
 * **result** (Ciphertext): storing the computation result.
 
-**Usage**: `sub_plain` computes `result` = `ciph` - `plain` .
+**Usage**: `sub_plain` computes *result* = *ciph* - *plain* .
 
 
 
@@ -156,7 +156,7 @@ void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &resu
 * **ciph2** (Ciphertext): representing the other ciphertext.
 * **result** (Ciphertext): storing the computation result.
 
-**Usage**: `multiply` computes `result` = `ciph1` * `ciph2`.
+**Usage**: `multiply` computes *result* = *ciph1* * *ciph2*.
 
 
 
@@ -171,7 +171,7 @@ void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &
 - **plain** (Plaintext): representing a plaintext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `multiply_plain` computes `result` = `ciph` * `plain`.
+**Usage**: `multiply_plain` computes *result* = *ciph* * *plain*.
 
 
 
@@ -187,7 +187,7 @@ void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext
 - **result** (Ciphertext): storing the computation result.
 - **relin_key** (RelinKeys): A constant reference to a **RelinKeys** object, representing the relinearization key.
 
-**Usage**: `multiply_relin` computes `result` = `ciph1` * `ciph2` and relinearize the ciphertext size of `result`.
+**Usage**: `multiply_relin` computes *result* = *ciph1* * *ciph2* and relinearize the ciphertext size of *result*.
 
 
 
@@ -199,7 +199,7 @@ void BFVEvaluator_S::square_inplace(Ciphertext &ciph) const;
 
 - **ciph** (Ciphertext): representing a ciphertext.
 
-**Usage**: `square_inplace` computes `ciph` = `ciph` ^ `2` inplace.
+**Usage**: `square_inplace` computes *ciph* = *ciph* ^ *2* inplace.
 
 
 

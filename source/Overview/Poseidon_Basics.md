@@ -1,14 +1,10 @@
 
 # Poseidon Basics
 
-<div style="text-align: justify">
+Poseidon is a **homomorphic computation library** specifically designed for **Homomorphic Computing Unit (HPU)**, which supports three widely-used **fully homomorphic encryption (FHE)** algorithms: *BFV*, *BGV* and *CKKS*. 
 
-Poseidon is a Homomorphic Computing Library specifically designed for Homomorphic Computing Unit (HPU). It contains basic data structures and evaluation functions for Fully Homomorphic Encryption (FHE).
+Poseidon library consists of basic data structures and advanced homomorphic evaluation. In *BFV* and *BGV*, all kinds of homomorphic computations like addition, multiplication, relinearization, rotation is supported for integer messages. In *CKKS*,  homomorphic computations like addition, multiplication, relinearization, rotation, conjugation and even bootstrap is supported for float messages and complex messages.
 
-Poseidon supports three widely-used FHE algorithms: CKKS, BFV and BGV. CKKS relies on approximate computing that takes noise as part of its precision loss. The decrypted plaintext might be different from the original plaintext for encryption. BFV and BGV, apart from CKKS, have exactly identical decrypted plaintext, but it only applies for the encryption of integer values. 
+Moreover, Poseidon enables users to build up more flexible functionality and programmability in a wide range of business scenarios with the low-level homomorphic computation primitives. On the one hand, users could integrate Poseidon with upper-level privacy computing framework, *Secretflow* or *Primihub*, executing *Private Set Intersection (PSI)*, *Private Information Retrieval (PIR)* and more complicated encrypted inference of *DNN* and *LLM* in the end-to-end way. On the other hand, all the FHE-relate parameters are configurable in Poseidon, users could build their own application as they wish with default parameter or self-customized parameter.
 
-Poseidon completely supports CKKS, including simple evaluations like ciphertext-ciphertext/plaintext addition/multiplication, as well as the complex operations like rotation, conjungate, keyswitch, taylor/Chebyshev series expansion and even bootstrap. It enables more flexible functionality and programmability in a wide range of business scenarios. For example, you could integrate Poseidon with upper-level privacy computing framework, i.e. secretflow or primihub, executing PSI, PIR and more complicated encrypted inference of DNNs and LLMs, in an end-to-end manner. Poseidon does not support bootstrap in BFV and BGV for now. However, for the applications that only require limited leveled multiplications, the functionalities of BFV and BGV provided in Poseidon are sufficient enough. 
-
-All the FHE-related parameters are configurable in Poseidon. You can use pre-set parameters by default or customized parameters as you wish. Poseidon provides easy parameter setting for each FHE algorithm, implemented by the parameter setting class and API (see Section "Getting Started").
-
-<div>
+See section *Getting Started* for details in installation and programming.

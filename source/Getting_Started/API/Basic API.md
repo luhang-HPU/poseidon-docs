@@ -1,10 +1,8 @@
-# Basic
+# Basic API
 
 ## Data Structures
 
-Poseidon library supports three FHE schemes (BFV, BGV and CKKS).
-
-The following data structures are applicable for BFV, BGV, CKKS.
+The following data structures are applicable for all the three FHE schemes (**BFV**, **BGV** and **CKKS**) supported by Poseidon.
 
 <br>
 
@@ -30,7 +28,7 @@ ParametersLiteral(SchemeType scheme_type, uint32_t log_n, uint32_t log_slots,
                       MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
 
-- **scheme_type** (SchemeType): Indicates the scheme type, in which options are `CKKS`, `BFV` and `BGV`.
+- **scheme_type** (SchemeType): Indicates the scheme type, in which options are *CKKS*, *BFV* and *BGV*.
 - **log_n** (uint32_t): The logarithm of polynomial degree number.
 - **log_slots** (uint32_t): The logarithm of message slots number.
 - **log_scale** (uint32_t): The logarithm of scaling factor.
@@ -182,9 +180,9 @@ ParametersLiteralDefault(SchemeType scheme_type, uint32_t degree, sec_level_type
                              MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
 
-- **scheme_type** (SchemeType): Indicates the scheme type, in which the options are `CKKS`, `BFV`, `BGV`.
-- **degree** (uint32_t): Indicates the degree number, in which the options are  `2048`, `4096`,`8192`,`16384`,`32768`.
-- **sec_level** (sec_level_type): Indicates the security level, in which the options are `none`, `tc128`,`tc192`,`tc256`.
+- **scheme_type** (SchemeType): Indicates the scheme type, in which the options are *CKKS*, *BFV*, *BGV*.
+- **degree** (uint32_t): Indicates the degree number, in which the options are  *2048*, *4096*,*8192*,*16384*,*32768*.
+- **sec_level** (sec_level_type): Indicates the security level, in which the options are *none*, *tc128*,*tc192*,*tc256*.
 
 **Usage**: Constructs the default parameters.
 
@@ -1562,7 +1560,7 @@ std::unique_ptr<EvaluatorCkksBase> create_ckks_evaluator(PoseidonContext &contex
 DEVICE_TYPE get_device_type() const
 ```
 
-**Usage**: Getting the device type. It returns `DEVICE_TYPE::DEVICE_SOFTWAR` when using software mode, and returns `DEVICE_TYPE::DEVICE_HARDWARE` when using hardware mode.
+**Usage**: Getting the device type. It returns *DEVICE_TYPE::DEVICE_SOFTWAR* when using software mode, and returns *DEVICE_TYPE::DEVICE_HARDWARE* when using hardware mode.
 
 <br>
 

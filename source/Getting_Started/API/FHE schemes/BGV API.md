@@ -1,4 +1,4 @@
-# BGV
+# BGV API
 
 ## Data Structures
 
@@ -96,7 +96,7 @@ void add(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) c
 - **ciph2** (Ciphertext): representing another ciphertext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `add` computes `result` = `ciph1` + `ciph2` . 
+**Usage**: `add` computes *result* = *ciph1* + *ciph2* . 
 
 
 
@@ -110,7 +110,7 @@ void add_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
 - **plain** (Plaintext): representing a plaintext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `add_plain` computes `result` = `ciph` + `plain` .
+**Usage**: `add_plain` computes *result* = *ciph* + *plain* .
 
 
 
@@ -124,7 +124,7 @@ void sub(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) c
 - **ciph2** (Ciphertext): representing the subtrahend (the number to be subtracted).
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `sub` computes `result` = `ciph1` - `ciph2`.
+**Usage**: `sub` computes *result* = *ciph1* - *ciph2*.
 
 
 
@@ -137,7 +137,7 @@ void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
 * **ciph** (Ciphertext): representing the minuend (the number from which another is to be subtracted).
 * **plain** (Plaintext): representing the subtrahend (the number to be subtracted).
 * **result** (Ciphertext): storing the computation result.
-* **Usage**: `sub_plain` computes `result` = `ciph` - `plain` .
+* **Usage**: `sub_plain` computes *result* = *ciph* - *plain* .
 
 <br>
 
@@ -153,7 +153,7 @@ void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &resu
 - **ciph2** (Ciphertext): representing another ciphertext.
 - **result** (Ciphertext): storing the computation result.
 
-**Usage**: `multiply` computes `result` = `ciph1` * `ciph2`.
+**Usage**: `multiply` computes *result* = *ciph1* * *ciph2*.
 
 <br>
 
@@ -169,7 +169,7 @@ void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &
 - **plain** (Plaintext): representing a plaintext.
 - **result** (Ciphertext): storing the multiplication result.
 
-**Usage**: `multiply_plain` computes `result` = `ciph` * `plain`.
+**Usage**: `multiply_plain` computes *result* = *ciph* * *plain*.
 
 <br>
 
@@ -186,7 +186,7 @@ void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext
 - **result** (Ciphertext): storing the computation result.
 - **relin_key** (RelinKeys): representing the relinearization key.
 
-**Usage**: `multiply_relin` computes `result` = `ciph1` * `ciph2` and relinearize the ciphertext size of `result`.
+**Usage**: `multiply_relin` computes *result* = *ciph1* * *ciph2* and relinearize the ciphertext size of *result*.
 
 <br>
 
