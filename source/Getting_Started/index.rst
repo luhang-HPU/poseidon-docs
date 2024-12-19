@@ -18,9 +18,9 @@ API
    API/FHE schemes/BGV API
 
 
-Program
+Programming
 =============
 .. toctree::
    :maxdepth: 4
 
-   /Examples
+   Programming/Examples
