@@ -187,7 +187,7 @@ util::GetPrecisionStats(message_want, message_res);
 
 <br>
 
-##  BFV Basic
+##  BFV Basic Example
 
 The **test_bfv_basic.cpp** exmaple tests a variety of **BFV** homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation. 
 
@@ -198,7 +198,7 @@ Every basic operation in the **test_bfv_basic.cpp** example will record the time
 
 <br>
 
-## BFV Matrix Vector Multiplication
+## BFV Matrix Vector Multiplication Example
 
 The **test_bfv_mult_matrix.cpp** example tests the multiplication of ciphertext by plaintext matrix. 
 
@@ -209,7 +209,7 @@ This example compares the homomorphic computation result with the correct answer
 
 <br>
 
-## BGV Basic
+## BGV Basic Example
 
 The **test_bgv_basic.cpp** example tests a variety of **BGV** homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation. 
 
@@ -220,7 +220,7 @@ Every basic operation in the **test_bgv_basic.cpp** example will record the time
 
 <br>
 
-## CKKS Basic
+## CKKS Basic Example
 
 The **test_ckks_basic.cpp** example tests a variety of **CKKS** homomorphic operations, including addition of ciphetexts, addition of ciphertext and plaintext, substraction ciphertext from ciphertext, substraction plaintext from ciphertext, multiplication of ciphertext by ciphertext, multiplication of ciphertext by plaintext, mod switching, NTT/inverse NTT and rotation, conjugation, rescaling.
 
@@ -231,7 +231,7 @@ As the **CKKS** scheme is based on approximate computation, there might be decim
 
 <br>
 
-## CKKS Coeff to Slot & Slot to Coeff
+## CKKS Coeff to Slot & Slot to Coeff Example
 
 The **test_ckks_slot_to_coeff.cpp** example tests the function of **coeff to slot** and **slot to coeff**, converting the ciphertext from coefficient mode to slot mode or converting the ciphertext from slot mode to coefficient mode.
 
@@ -242,7 +242,7 @@ Users can choose customized parameters or default parameters, which are software
 
 <br>
 
-## CKKS Evaluate Poly Vector
+## CKKS Evaluate Poly Vector Example
 
 The **test_ckks_evaluate_poly_vector.cpp** example tests the function of evaluating poly vector which is an important part of homomorphic modulo operation in **CKKS** bootstrapping. 
 
@@ -253,7 +253,7 @@ Users can choose customized parameters or default parameters, which are software
 
 <br>
 
-## CKKS Bootstrap
+## CKKS Bootstrap Example
 
 The **test_ckks_bootstrap.cpp** example tests the bootstrap function of **CKKS**.
 
