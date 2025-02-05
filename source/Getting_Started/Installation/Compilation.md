@@ -56,8 +56,10 @@ You can download installation package with *wget* (check the version carefully)
 ```shell
 # Ubuntu download
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-hardware-1.0.0_x86_64.deb
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/dpdk.deb
 # Ubuntu install
 sudo apt-get install ./poseidon-1.0.0_x86_64.deb
+sudo apt-get install dpdk.deb
 
 # CentOS download
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-hardware-1.0.0-1.el7.x86_64.rpm

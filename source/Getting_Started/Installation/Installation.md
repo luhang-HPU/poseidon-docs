@@ -26,6 +26,7 @@ There are two ways to download the Poseidon installation package:
 ```shell
 # Ubuntu
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x86_64.deb
+wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/dpdk.deb
 
 # CentOS
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0-1.el7.x86_64.rpm
@@ -39,6 +40,7 @@ Navigate to the download directory and install it with the following command:
 ```shell
 # Ubuntu
 sudo apt-get install poseidon-1.0.0_x86_64.deb
+sudo apt-get install dpdk.deb
 
 # Centos
 sudo yum localinstall poseidon-1.0.0-1.el7.x86_64.rpm
@@ -54,6 +56,7 @@ You can uninstall Poseidon package with the following command:
 ```shell
 # Ubuntu
 sudo apt-get remove poseidon
+sudo apt-get remove dpdk
 
 # Centos
 sudo rpm -e poseidon-1.0.0-1.el7.x86_64
