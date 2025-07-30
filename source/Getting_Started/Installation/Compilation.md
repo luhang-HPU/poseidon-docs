@@ -27,7 +27,7 @@ Poseidon supports two ways to compile the open-source software code.
 
 ## Source Code Download
 
-Download the software source code from the following link: [SourceCode]([luhang-HPU/poseidon](https://github.com/luhang-HPU/poseidon))
+Download the software source code from the following link: [SourceCode](https://github.com/luhang-HPU/poseidon)
 
 <br>
 
