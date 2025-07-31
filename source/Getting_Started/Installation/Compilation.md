@@ -32,19 +32,23 @@ Download the software source code from the following link: [SourceCode](https://
 <br>
 
 ## Build Software Source Code Only
-
 You can directly compile the source code with the following command:
 
 ```shell
 mkdir build && cd build
-cmake ..
+cmake .. # You can open CMake Variable
 make -j
+
+# If you need to install the library
+sudo make install
+# If you install the library in a specified path, you need to add the corresponding environment variables
 ```
 
 <br>
 
-## Build Software Source Code With Hardware Library
+## Install Hardware Library
 
+***If you don't use hardware, don't use this method!!!***
 ***This requires the hardware library to be installed before compiling!!!***
 
 <br>
