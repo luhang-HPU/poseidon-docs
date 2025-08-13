@@ -65,7 +65,7 @@ void decode(const Plaintext &plain, std::vector<std::complex<double>> &destinati
 - **plain** (const Plaintext &): The plaintext to be decoded.
 - **destination** (std::vector\<double\>&, std::vector\<std::complex\<double\>\>&): A number vector to store the message.
 
-**Usage**: The `decode` function decodes a plaintext polynomial into a vector of numbers. The decoding result is fulfilled with zeros to size $$N$$.
+**Usage**: The `decode` function decodes a plaintext polynomial into a vector of numbers. The decoding result is fulfilled with zeros to size $$N/2$$.
 
 For a plaintext $$m \in \mathbb{R}^N$$ , the corresponding message $$z$$ can be computed by $$(z;\overline{z}) = (U;\overline{U}) \cdot m$$ which is the inverse of encoding.
 
