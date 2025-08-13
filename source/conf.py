@@ -17,6 +17,7 @@ release = '1'
 extensions = [
     'recommonmark',
     'sphinx_markdown_tables'
+    'sphinx.ext.mathjax'
 ]
 
 templates_path = ['_templates']
