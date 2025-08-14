@@ -24,6 +24,13 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = []
 
+# -- Math --------------------------------------------------------
+# 配置 MathJax（如果使用 sphinx.ext.mathjax）
+mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+# 上面的 CDN 链接是 MathJax v3 版本，也可以使用其他来源
+
+
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
