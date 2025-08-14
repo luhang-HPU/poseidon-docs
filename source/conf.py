@@ -31,8 +31,8 @@ html_static_path = ['_static']
 html_css_files = [
     'styles.css'
 ]
-
 html_logo = '_static/logoS.png'
+html_math_renderer = 'mathjax'
 
 # -------------------------- latex -------------------------------------------------
 latex_engine = 'xelatex'
