@@ -17,8 +17,9 @@ release = '1'
 extensions = [
     'recommonmark',
     'sphinx_markdown_tables',
-    'sphinx.ext.mathjax',
-    'sphinx.ext.imgmath'
+    'sphinx.ext.mathjax'
+    # mathjax和imgmath只能二选一
+    #'sphinx.ext.imgmath'
 ]
 
 templates_path = ['_templates']
@@ -26,9 +27,7 @@ exclude_patterns = []
 
 # -- Math --------------------------------------------------------
 # 配置 MathJax（如果使用 sphinx.ext.mathjax）
-mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
-# 上面的 CDN 链接是 MathJax v3 版本，也可以使用其他来源
-
+mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"
 
 
 # -- Options for HTML output -------------------------------------------------
