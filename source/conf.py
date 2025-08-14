@@ -27,7 +27,7 @@ exclude_patterns = []
 
 # -- Math --------------------------------------------------------
 # 配置 MathJax（如果使用 sphinx.ext.mathjax）
-mathjax_path = "https://cdn.jsdelivr.net/npm/mathjax@4/tex-svg.js"
+mathjax_path = 'MathJax-master/mml-chtml.js'
 
 
 # -- Options for HTML output -------------------------------------------------
