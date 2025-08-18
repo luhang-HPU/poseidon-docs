@@ -1,0 +1,47 @@
+site_name: 'Poseidon Documentation'
+repo_url:
+site_author: 'LuHang'
+copyright: '2023, LuHang'
+docs_dir: 'docs'
+site_dir: 'site'
+extra:
+    version: 1.0
+
+theme: 
+#    name: 'material'
+    name: 'readthedocs'
+    logo: '_static/logoR.png'
+
+# plugins:
+#   - search
+#   - awesome-pages
+
+
+markdown_extensions:
+    - toc:
+        permalink: true
+    - pymdownx.highlight:  # 代码高亮
+        anchor_linenums: true
+    - pymdownx.arithmatex
+
+extra_javascript:
+    - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+
+nav:
+    - Home: './index.md'
+    - OVERVIEW:
+        - Poseidon Introduction: './Overview/Poseidon_Basics.md'
+        - Homomorphic Computing Unit (HPU): './Overview/HPU.md'
+    - GETTING STARTED:
+        - Installation:
+            - Compile: './Getting_Started/Installation/Compilation.md'
+            - Installation: './Getting_Started/Installation/Installation.md'
+        - API:
+            - Basic API: './Getting_Started/API/Basic API.md'
+            - BFV API: './Getting_Started/API/FHE schemes/BFV API.md'
+            - BGV API: './Getting_Started/API/FHE schemes/BGV API.md'
+            - CKKS API: './Getting_Started/API/FHE schemes/CKKS API.md'
+        - Programming:
+            - How to Program: './Getting_Started/Programming/How to Program.md'
+            - Examples: './Getting_Started/Programming/Examples.md'
+
