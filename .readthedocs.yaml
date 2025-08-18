@@ -17,15 +17,10 @@ build:
     post_checkout:
       - git checkout test-tjj
 
-# Optionally build your docs in additional formats such as PDF and ePub
-# formats:
-#    - pdf
-#    - epub
+mkdocs:
+  configuration: mkdocs.yml
 
-# Optional but recommended, declare the Python requirements required
-# to build your documentation
-# See https://docs.readthedocs.io/en/stable/guides/reproducible-builds.html
+# Optionally declare the Python requirements required to build your docs
 # python:
-#     install:
-#       - requirements: source/requirement.txt
-
+#    install:
+#    - requirements: docs/requirements.txt
