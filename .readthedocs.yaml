@@ -14,7 +14,7 @@ build:
     # rust: "1.70"
     # golang: "1.20"
   jobs:
-    post_build:
+    post_checkout:
       - git checkout test-tjj
 
 # Optionally build your docs in additional formats such as PDF and ePub
