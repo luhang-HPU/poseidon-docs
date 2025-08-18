@@ -1,5 +1,5 @@
 site_name: 'Poseidon Documentation'
-repo_url:
+repo_url: 'https://github.com/luhang-HPU/poseidon-docs-new'
 site_author: 'LuHang'
 copyright: '2023, LuHang'
 docs_dir: 'docs'
@@ -10,7 +10,7 @@ extra:
 theme: 
 #    name: 'material'
     name: 'readthedocs'
-    logo: './_static/logoR.png'
+    logo: '$docs_dir/_static/logoR.png'
 
 # plugins:
 #   - search
