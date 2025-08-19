@@ -4,8 +4,6 @@
 
 The following data structures are applicable for all the three FHE schemes (**BFV**, **BGV** and **CKKS**) supported by Poseidon.
 
-<br>
-
 
 
 ### 1. Memory address management : **<font color='red'><span id="MemoryManager">MemoryManager</span> </font>**
@@ -25,6 +23,7 @@ The following data structures are applicable for all the three FHE schemes (**BF
 ParametersLiteral(SchemeType scheme_type, uint32_t log_n, uint32_t log_slots,
                       uint32_t log_scale, uint32_t hamming_weight, uint32_t q0_level,
                       Modulus plain_modulus, const vector<Modulus> &q, const vector<Modulus> &p,
+                      sec_level_type sec_level = poseidon::sec_level_type::none,
                       MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
 
@@ -37,6 +36,7 @@ ParametersLiteral(SchemeType scheme_type, uint32_t log_n, uint32_t log_slots,
 - **plain_modulus** (Modulus): The plain modulus (only used in BGV or BFV scheme).
 - **q** (const vector<Modulus> &): Determined modulus value of modulus chain Q.
 - **p** (const vector<Modulus> &): Determined modulus value of modulus chain P.
+- **sec_level** (sec_level_type): the security level -- none, tc128, tc192, tc256.
 
 **Usage**: Constructs customized parameters.
 
@@ -68,7 +68,7 @@ void set_modulus(const vector<Modulus> &mod_chain_q,const vector<Modulus> &mod_c
 uint32_t degree() const;
 ```
 
-**Usage**: Return the polynomial degree.
+**Usage**: Return the ciphertext polynomial degree which is the power of 2 (usually to be 4096, 8192, 16384, 32768, 65536).
 
 <br>
 
@@ -76,7 +76,7 @@ uint32_t degree() const;
 uint32_t slot() const;
 ```
 
-**Usage**: Return the number of message slots.
+**Usage**: Return the number of slots in ciphertext which equals degree / 2.
 
 <br>
 
@@ -84,7 +84,7 @@ uint32_t slot() const;
 const parms_id_type & parms_id() const;
 ```
 
-**Usage**: Return the id of the parameters.
+**Usage**: Return the id of modulus level presented by 256 bits.
 
 <br>
 
@@ -92,7 +92,7 @@ const parms_id_type & parms_id() const;
 const SchemeType &scheme() const;
 ```
 
-**Usage**: Return the scheme type. 
+**Usage**: Return the scheme type (BFV, BGV or CKKS). 
 
 <br>
 
@@ -100,7 +100,7 @@ const SchemeType &scheme() const;
 uint32_t LogN() const;
 ```
 
-**Usage**: Return the logarithm of polynomial degree number.
+**Usage**: Return the logarithm of polynomial degree.
 
 <br>
 
@@ -108,7 +108,7 @@ uint32_t LogN() const;
 uint32_t LogSlots() const;
 ```
 
-**Usage**: Return the logarithm of message slots number.
+**Usage**: Return the logarithm of slots.
 
 <br>
 
@@ -116,7 +116,7 @@ uint32_t LogSlots() const;
 uint32_t HammingWeight() const;
 ```
 
-**Usage**: Return the hamming weight.
+**Usage**: Return the hamming weight of parameter.
 
 <br>
 
@@ -124,7 +124,7 @@ uint32_t HammingWeight() const;
 uint32_t q0_level() const;
 ```
 
-**Usage**: Return the RNS level of q_0.
+**Usage**: Return the level of the first modulus $q_0$ in modulus chain Q.
 
 <br>
 
@@ -132,7 +132,7 @@ uint32_t q0_level() const;
 const Modulus &plain_modulus() const;
 ```
 
-**Usage**: Return the plain modulus.
+**Usage**: Return the plaintext polynomial modulus.
 
 <br>
 
@@ -176,13 +176,14 @@ uint32_t scale() const();
 **Functions**:
 
 ```cpp
-ParametersLiteralDefault(SchemeType scheme_type, uint32_t degree, sec_level_type sec_level,
+ParametersLiteralDefault(SchemeType scheme_type, uint32_t degree,
+                             sec_level_type sec_level = poseidon::sec_level_type::tc128,
                              MemoryPoolHandle pool = MemoryManager::GetPool());
 ```
 
 - **scheme_type** (SchemeType): Indicates the scheme type, in which the options are *CKKS*, *BFV*, *BGV*.
-- **degree** (uint32_t): Indicates the degree number, in which the options are  *2048*, *4096*,*8192*,*16384*,*32768*.
-- **sec_level** (sec_level_type): Indicates the security level, in which the options are *none*, *tc128*,*tc192*,*tc256*.
+- **degree** (uint32_t): Indicates the degree number, in which the options are *2048*, *4096*, *8192*, *16384*, *32768*, *65536*.
+- **sec_level** (sec_level_type): Indicates the security level, in which the options are *none*, *tc128*, *tc192*, *tc256*.
 
 **Usage**: Constructs the default parameters.
 
@@ -200,7 +201,7 @@ PoseidonContext(const ParametersLiteral& param_literal, bool using_hardware = tr
 ```
 
 - **param_literal** (const ParametersLiteral&): Indicates the encryption parameter which is used to calculate context information.
-- **using_hardware** (bool): Whether to use hardware.
+- **using_hardware** (bool): Whether to use HPU hardware accelerator card.
 
 **Usage**: Constructs poseidon context.
 
@@ -243,7 +244,7 @@ shared_ptr<HardwareContext> hardware_context() const;
 bool using_hardware() const;
 ```
 
-**Usage**: Return the status of whether to use hardware.
+**Usage**: Return the status of whether to use HPU hardware accelerator card.
 
 <br>
 
