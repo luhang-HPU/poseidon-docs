@@ -3,15 +3,13 @@
 **Framingham Heart Study (FHS)** is the longest duration cardiovascular epidemiological study funded by the National Institutes of Health in 1948, aimed at improving understanding of the epidemiology of coronary heart disease in the United States. FHS indicates that cardiovascular disease is closely related to various factors such as age, blood pressure, cholesterol, height, weight, etc. Therefore, these health-related parameters can be used to predict the probability of cardiovascular disease. The following picture illustrates the history of FHS.
 
 
-![image1](../../Image/Benchmark/Framingham Heart Study/history.png)
+![image1](../Image/Benchmark/Framingham Heart Study/history.png)
 
 <style>
     img[alt="image1"]{
         width:800px;
     }
 </style>
-
-
 
 
 ## Formula of Cardiovascular Diseases Prediction
@@ -53,7 +51,7 @@ The following flowchart illustrate the private prediction process:
 
 
 
-![image2](../../Image/Benchmark/Framingham Heart Study/code flowchart.png)
+![image2](../Image/Benchmark/Framingham Heart Study/code flowchart.png)
 
 <style>
     img[alt="image2"]{

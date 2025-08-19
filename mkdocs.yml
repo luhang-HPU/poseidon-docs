@@ -1,5 +1,5 @@
 site_name: 'Poseidon Documentation'
-repo_url: 'https://github.com/luhang-HPU/poseidon-docs-new'
+repo_url: 'https://github.com/luhang-HPU/poseidon-docs'
 site_author: 'LuHang'
 copyright: '2023, LuHang'
 docs_dir: 'docs'
@@ -44,4 +44,9 @@ nav:
         - Programming:
             - How to Program: './Getting_Started/Programming/How to Program.md'
             - Examples: './Getting_Started/Programming/Examples.md'
-
+    - Benchmark:
+        - Framingham Heart Study: './Benchmark/Framingham.md'
+        - Private Information Retrieval (PIR): './Benchmark/PIR.md'
+        - Private Set Intersection (PSI): './Benchmark/PSI.md'
+        - Logistic Regression Train (LR Train): './Benchmark/LR Train.md'
+        - K-Nearest Neighbor (KNN): './Benchmark/knn.md'
