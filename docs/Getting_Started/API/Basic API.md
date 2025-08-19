@@ -4,7 +4,7 @@
 
 The following data structures are applicable for all the three FHE schemes (**BFV**, **BGV** and **CKKS**) supported by Poseidon.
 
-
+<br>
 
 ### 1. Memory address management : **<font color='red'><span id="MemoryManager">MemoryManager</span> </font>**
 
@@ -40,7 +40,7 @@ ParametersLiteral(SchemeType scheme_type, uint32_t log_n, uint32_t log_slots,
 
 **Usage**: Constructs customized parameters.
 
-<br>
+
 
 ```cpp
 void set_log_modulus(const vector<uint32_t> &log_q, const vector<uint32_t> &log_p);
@@ -51,10 +51,10 @@ void set_log_modulus(const vector<uint32_t> &log_q, const vector<uint32_t> &log_
 
 **Usage**: Set the number of bits for each modulus in the modulus chain.
 
-<br>
+
 
 ```cpp
-void set_modulus(const vector<Modulus> &mod_chain_q,const vector<Modulus> &mod_chain_p);
+void set_modulus(const vector<Modulus> &mod_chain_q, const vector<Modulus> &mod_chain_p);
 ```
 
 - **mod_chain_q** (const vector<Modulus> &): The value of each module in the modulus chain Q.
@@ -62,7 +62,7 @@ void set_modulus(const vector<Modulus> &mod_chain_q,const vector<Modulus> &mod_c
 
 **Usage**: Directly set the value of each module in the modulus chain.
 
-<br>
+
 
 ```cpp
 uint32_t degree() const;
@@ -70,15 +70,15 @@ uint32_t degree() const;
 
 **Usage**: Return the ciphertext polynomial degree which is the power of 2 (usually to be 4096, 8192, 16384, 32768, 65536).
 
-<br>
+
 
 ```cpp
 uint32_t slot() const;
 ```
 
-**Usage**: Return the number of slots in ciphertext which equals degree / 2.
+**Usage**: Return the number of slots in ciphertext.
 
-<br>
+
 
 ```cpp
 const parms_id_type & parms_id() const;
@@ -86,7 +86,7 @@ const parms_id_type & parms_id() const;
 
 **Usage**: Return the id of modulus level presented by 256 bits.
 
-<br>
+
 
 ```cpp
 const SchemeType &scheme() const;
@@ -94,31 +94,31 @@ const SchemeType &scheme() const;
 
 **Usage**: Return the scheme type (BFV, BGV or CKKS). 
 
-<br>
+
 
 ```cpp
 uint32_t LogN() const;
 ```
 
-**Usage**: Return the logarithm of polynomial degree.
+**Usage**: Return the logarithm of polynomial degree = log2(polynomial degree).
 
-<br>
+
 
 ```cpp
 uint32_t LogSlots() const;
 ```
 
-**Usage**: Return the logarithm of slots.
+**Usage**: Return the logarithm of slot size = log2(slots).
 
-<br>
+
 
 ```cpp
 uint32_t HammingWeight() const;
 ```
 
-**Usage**: Return the hamming weight of parameter.
+**Usage**: Return the hamming weight (non-zero bit size) of security parameter.
 
-<br>
+
 
 ```cpp
 uint32_t q0_level() const;
@@ -126,7 +126,7 @@ uint32_t q0_level() const;
 
 **Usage**: Return the level of the first modulus $q_0$ in modulus chain Q.
 
-<br>
+
 
 ```cpp
 const Modulus &plain_modulus() const;
@@ -134,7 +134,7 @@ const Modulus &plain_modulus() const;
 
 **Usage**: Return the plaintext polynomial modulus.
 
-<br>
+
 
 ```cpp
 const vector<Modulus> &Q() const;
@@ -142,7 +142,7 @@ const vector<Modulus> &Q() const;
 
 **Usage**: Return the modulus of modulus chain Q.
 
-<br>
+
 
 ```cpp
 const vector<Modulus> &P() const;
@@ -150,15 +150,15 @@ const vector<Modulus> &P() const;
 
 **Usage**: Return the modulus of modulus chain P.
 
-<br>
+
 
 ```cpp
 uint32_t LogScale() const;
 ```
 
-**Usage**: Return the logarithm of scaling factor.
+**Usage**: Return the logarithm of scaling factor = log2(scaling factor).
 
-<br>
+
 
 ```cpp
 uint32_t scale() const();
@@ -205,7 +205,7 @@ PoseidonContext(const ParametersLiteral& param_literal, bool using_hardware = tr
 
 **Usage**: Constructs poseidon context.
 
-<br>
+
 
 ```cpp
  shared_ptr<const poseidon::ParametersLiteral> parameters_literal() const;
@@ -213,15 +213,15 @@ PoseidonContext(const ParametersLiteral& param_literal, bool using_hardware = tr
 
 **Usage**: Return the parameters list.
 
-<br>
+
 
 ```cpp
 KeySwitchVariant key_switch_variant() const;
 ```
 
-**Usage**: Return the key switch variant of current parameter.
+**Usage**: Return the key switch variant of current parameter (BV, GHS or HYBRID)
 
-<br>
+
 
 ```cpp
 shared_ptr<CrtContext> crt_context() const;
@@ -229,7 +229,7 @@ shared_ptr<CrtContext> crt_context() const;
 
 **Usage**: Return the software context.
 
-<br>
+
 
 
 ```cpp
@@ -238,7 +238,7 @@ shared_ptr<HardwareContext> hardware_context() const;
 
 **Usage**: Return the hardware context.
 
-<br>
+
 
 ```cpp
 bool using_hardware() const;
@@ -246,17 +246,17 @@ bool using_hardware() const;
 
 **Usage**: Return the status of whether to use HPU hardware accelerator card.
 
-<br>
+
 
 ```cpp
 void set_random_generator(std::shared_ptr<UniformRandomGeneratorFactory> random_generator);
 ```
 
-- **random_generator** (std::shared_ptr< UniformRandomGeneratorFactory>): A shared pointer of the random generator.
+- **random_generator** (std::shared_ptr\<UniformRandomGeneratorFactory\>): A shared pointer of the random generator.
 
 **Usage**: Used to set up a random number generator. 
 
-<br>
+
 
 
 ```cpp
@@ -280,9 +280,9 @@ Plaintext(MemoryPoolHandle pool = MemoryManager::GetPool());
 
 - **pool** (MemoryPoolHandle): The MemoryPoolHandle pointing to a valid memory pool.
 
-**Usage**: Constructs an empty plaintext allocating no memory.
+**Usage**: Constructs an empty plaintext without allocating memory.
 
-<br>
+
 
 ```cpp
 Plaintext(std::size_t coeff_count, MemoryPoolHandle pool = MemoryManager::GetPool());
@@ -293,7 +293,7 @@ Plaintext(std::size_t coeff_count, MemoryPoolHandle pool = MemoryManager::GetPoo
 
 **Usage**: Constructs a plaintext representing a constant polynomial 0. The coefficient count of the polynomial is set to the given value. The capacity is set to the same value.
 
-<br>
+
 
 ```cpp
 Plaintext(const std::string &hex_poly, MemoryPoolHandle pool = MemoryManager::GetPool());
@@ -319,7 +319,7 @@ Note: The string description of the polynomial must adhere to the format returne
     allowed
     8. Other than the +, no other terms should have whitespace
 
-<br>
+
 
 ```cpp
 Plaintext(const Plaintext &copy) = default;
@@ -329,7 +329,7 @@ Plaintext(const Plaintext &copy) = default;
 
 **Usage**: Creates a new plaintext by copying a given one.
 
-<br>
+
 
 ```cpp
 Plaintext(Plaintext &&source) = default;
@@ -339,7 +339,7 @@ Plaintext(Plaintext &&source) = default;
 
 **Usage**: Creates a new plaintext by moving a given one.
 
-<br>
+
 
 ```cpp
 void reserve(std::size_t capacity);
@@ -349,7 +349,7 @@ void reserve(std::size_t capacity);
 
 **Usage**: Allocates enough memory to accommodate the backing array of a plaintext with given capacity.
 
-<br>
+
 
 ```cpp
 void resize(const PoseidonContext &context, parms_id_type parms_id, size_t size);
@@ -362,7 +362,7 @@ void resize(const PoseidonContext &context, parms_id_type parms_id, size_t size)
 **Usage**: Resizes the plaintext to have the given coefficient count. The plaintext is automatically reallocated if the new coefficient count does not fit in
 the current capacity.
 
-<br>
+
 
 ```cpp
 void release();
@@ -370,7 +370,7 @@ void release();
 
 **Usage**: Resets the plaintext. This function releases any memory allocated by the plaintext, returning it to the memory pool.
 
-<br>
+
 
 ```cpp
 Plaintext &operator=(const Plaintext &assign) = default;
@@ -380,7 +380,7 @@ Plaintext &operator=(const Plaintext &assign) = default;
 
 **Usage**: Copies a given plaintext to the current one.
 
-<br>
+
 
 ```cpp
 Plaintext &operator=(Plaintext &&assign) = default;
@@ -390,7 +390,7 @@ Plaintext &operator=(Plaintext &&assign) = default;
 
 **Usage**: Moves a given plaintext to the current one.
 
-<br>
+
 
 
 ```cpp
@@ -418,7 +418,7 @@ Note: The string description of the polynomial must adhere to the format returne
     allowed
     8. Other than the +, no other terms should have whitespace
 
-<br>
+
 
 ```cpp
 Plaintext &operator=(pt_coeff_type const_coeff);
@@ -426,10 +426,9 @@ Plaintext &operator=(pt_coeff_type const_coeff);
 
 - **const_coeff** (pt_coeff_type): The constant coefficient.
 
-**Usage**: Sets the value of the current plaintext to a given constant polynomial and sets the parms_id to parms_id_zero, effectively marking the plaintext as
-not NTT transformed. The coefficient count is set to one.
+**Usage**: Sets the value of the current plaintext to a given constant polynomial and sets the parms_id to parms_id_zero, effectively marking the plaintext as not NTT transformed. The coefficient count is set to one.
 
-<br>
+
 
 ```cpp
 void set_zero(std::size_t start_coeff, std::size_t length);
@@ -438,10 +437,9 @@ void set_zero(std::size_t start_coeff, std::size_t length);
 - **start_coeff** (std::size_t): The index of the first coefficient to set to zero.
 - **length** (std::size_t): The number of coefficients to set to zero.
 
-**Usage**: Sets a given range of coefficients of a plaintext polynomial to zero; does
-nothing if length is zero.
+**Usage**: Sets a given range of coefficients of a plaintext polynomial to zero; does nothing if length is zero.
 
-<br>
+
 
 ```cpp
 void set_zero(std::size_t start_coeff);
@@ -451,7 +449,7 @@ void set_zero(std::size_t start_coeff);
 
 **Usage**: Sets the plaintext polynomial coefficients to zero starting at a given index.
 
-<br>
+
 
 ```cpp
 void set_zero();
@@ -459,7 +457,7 @@ void set_zero();
 
 **Usage**: Sets the plaintext polynomial to zero.
 
-<br>
+
 
 ```cpp
 const auto &dyn_array() const;
@@ -467,7 +465,7 @@ const auto &dyn_array() const;
 
 **Usage**: Returns a reference to the backing `DynArray` object.
 
-<br>
+
 
 ```cpp
 pt_coeff_type *data();
@@ -475,7 +473,7 @@ pt_coeff_type *data();
 
 **Usage**: Returns a pointer to the beginning of the plaintext polynomial.
 
-<br>
+
 
 ```cpp
 const pt_coeff_type *data() const;
@@ -483,7 +481,7 @@ const pt_coeff_type *data() const;
 
 **Usage**: Returns a const pointer to the beginning of the plaintext polynomial.
 
-<br>
+
 
 ```cpp
 pt_coeff_type *data(std::size_t coeff_index);
@@ -494,7 +492,7 @@ pt_coeff_type *data(std::size_t coeff_index);
 
 **Usage**: Returns a pointer to a given coefficient of the plaintext polynomial.
 
-<br>
+
 
 ```cpp
 const pt_coeff_type *data(std::size_t coeff_index) const;
@@ -504,7 +502,7 @@ const pt_coeff_type *data(std::size_t coeff_index) const;
 
 **Usage**: Returns a const pointer to a given coefficient of the plaintext polynomial.
 
-<br>
+
 
 ```cpp
 const pt_coeff_type &operator[](std::size_t coeff_index) const;
@@ -514,7 +512,7 @@ const pt_coeff_type &operator[](std::size_t coeff_index) const;
 
 **Usage**: Returns a const reference to a given coefficient of the plaintext polynomial.
 
-<br>
+
 
 ```cpp
 pt_coeff_type &operator[](std::size_t coeff_index);
@@ -524,7 +522,7 @@ pt_coeff_type &operator[](std::size_t coeff_index);
 
 **Usage**: Returns a reference to a given coefficient of the plaintext polynomial.
 
-<br>
+
 
 
 ```cpp
@@ -536,7 +534,7 @@ bool operator==(const Plaintext &compare) const;
 **Usage**: Returns whether or not the plaintext has the same semantic value as a given
 plaintext. Leading zero coefficients are ignored by the comparison.
 
-<br>
+
 
 ```cpp
 bool operator!=(const Plaintext &compare) const;
@@ -547,7 +545,7 @@ bool operator!=(const Plaintext &compare) const;
 **Usage**: Returns whether or not the plaintext has a different semantic value than
 a given plaintext. Leading zero coefficients are ignored by the comparison.
 
-<br>
+
 
 ```cpp
 bool is_ntt_form() const;
@@ -555,7 +553,7 @@ bool is_ntt_form() const;
 
 **Usage**: Returns whether the plaintext is in NTT form.
 
-<br>
+
 
 ```cpp
 bool &is_ntt_form();
@@ -563,7 +561,7 @@ bool &is_ntt_form();
 
 **Usage**: Returns a reference of ntt form.
 
-<br>
+
 
 ```cpp
 double &scale();
@@ -571,7 +569,7 @@ double &scale();
 
 **Usage**: Returns a reference to the scale. This is only needed when using the ckks encryption scheme. The user should have little or no reason to ever change the scale by hand.
 
-<br>
+
 
 ```cpp
 const double &scale() const;
@@ -579,7 +577,7 @@ const double &scale() const;
 
 **Usage**: Returns a constant reference to the scale. This is only needed when using the ckks encryption scheme.
 
-<br>
+
 
 ```cpp
 const parms_id_type &parms_id() const;
@@ -587,7 +585,7 @@ const parms_id_type &parms_id() const;
 
 **Usage**: Returns a constant reference to parameter id.
 
-<br>
+
 
 ```cpp
 arms_id_type &parms_id();
@@ -595,7 +593,7 @@ arms_id_type &parms_id();
 
 **Usage**: Returns a reference to parameter id.
 
-<br>
+
 
 ```cpp
 bool is_valid(const PoseidonContext &context);
@@ -603,7 +601,7 @@ bool is_valid(const PoseidonContext &context);
 
 **Usage**: Returns whether the plaintext parameter id valid.
 
-<br>
+
 
 ```cpp
 void compute_ckks_hardware_id() const;
@@ -611,7 +609,7 @@ void compute_ckks_hardware_id() const;
 
 **Usage**: Compute the hardware id of this plaintext.
 
-<br>
+
 
 ```cpp
 MemoryPoolHandle pool() const;
@@ -619,7 +617,7 @@ MemoryPoolHandle pool() const;
 
 **Usage**: Returns the currently used MemoryPoolHandle.
 
-<br>
+
 
 ```cpp
 bool is_zero() const;
@@ -627,7 +625,7 @@ bool is_zero() const;
 
 **Usage**: Returns whether the current plaintext polynomial has all zero coefficients.
 
-<br>
+
 
 ```cpp
 std::size_t capacity() const;
@@ -635,7 +633,7 @@ std::size_t capacity() const;
 
 **Usage**: Returns the capacity of the current allocation.
 
-<br>
+
 
 ```cpp
 std::size_t coeff_count() const;
@@ -643,7 +641,7 @@ std::size_t coeff_count() const;
 
 **Usage**: Returns the coefficient count of the current plaintext polynomial.
 
-<br>
+
 
 ```cpp
 std::size_t significant_coeff_count() const;
@@ -651,7 +649,7 @@ std::size_t significant_coeff_count() const;
 
 **Usage**: Returns the significant coefficient count of the current plaintext polynomial.
 
-<br>
+
 
 ```cpp
 std::size_t nonzero_coeff_count() const;
@@ -659,7 +657,7 @@ std::size_t nonzero_coeff_count() const;
 
 **Usage**: Returns the non-zero coefficient count of the current plaintext polynomial.
 
-<br>
+
 
 ```cpp
 std::string to_string() const;
@@ -684,7 +682,7 @@ Ciphertext(MemoryPoolHandle pool = MemoryManager::GetPool());
 
 **Usage**: Constructs an empty ciphertext allocating no memory.
 
-<br>
+
 
 ```cpp
 Ciphertext(const PoseidonContext &context, MemoryPoolHandle pool = MemoryManager::GetPool());
@@ -695,7 +693,7 @@ Ciphertext(const PoseidonContext &context, MemoryPoolHandle pool = MemoryManager
 
 **Usage**: Constructs an empty ciphertext with capacity 2. In addition to the capacity, the allocation size is determined by the highest-level parameters associated to the given PoseidonContext.
 
-<br>
+
 
 ```cpp
 Ciphertext(const PoseidonContext &context, parms_id_type parms_id, MemoryPoolHandle pool = MemoryManager::GetPool());
@@ -707,7 +705,7 @@ Ciphertext(const PoseidonContext &context, parms_id_type parms_id, MemoryPoolHan
 
 **Usage**: Constructs an empty ciphertext with capacity 2. In addition to the capacity, the allocation size is determined by the encryption parameters with given parms_id.
 
-<br>
+
 
 ```cpp
 Ciphertext(const PoseidonContext &context, parms_id_type parms_id, std::size_t size_capacity,MemoryPoolHandle pool = MemoryManager::GetPool());
@@ -720,7 +718,7 @@ Ciphertext(const PoseidonContext &context, parms_id_type parms_id, std::size_t s
 
 **Usage**: Constructs an empty ciphertext with given capacity. In addition to the capacity, the allocation size is determined by the given encryption parameters.
 
-<br>
+
 
 ```cpp
  Ciphertext(const Ciphertext &copy);
@@ -730,7 +728,7 @@ Ciphertext(const PoseidonContext &context, parms_id_type parms_id, std::size_t s
 
 **Usage**: Creates a new ciphertext by copying a given one.
 
-<br>
+
 
 ```cpp
 Ciphertext(Ciphertext &&source) = default;
@@ -740,7 +738,7 @@ Ciphertext(Ciphertext &&source) = default;
 
 **Usage**: Creates a new ciphertext by moving a given one.
 
-<br>
+
 
 ```cpp
 Ciphertext(const Ciphertext &copy, MemoryPoolHandle pool);
@@ -751,7 +749,7 @@ Ciphertext(const Ciphertext &copy, MemoryPoolHandle pool);
 
 **Usage**: Creates a new ciphertext by copying a given one.
 
-<br>
+
 
 ```cpp
 void reserve(const PoseidonContext &context, parms_id_type parms_id, std::size_t size_capacity);
@@ -763,7 +761,7 @@ void reserve(const PoseidonContext &context, parms_id_type parms_id, std::size_t
 
 **Usage**: Allocates enough memory to accommodate the backing array of a ciphertext with given capacity. In addition to the capacity, the allocation size is determined by the encryption parameters corresponing to the given parms_id.
 
-<br>
+
 
 ```cpp
 void reserve(const PoseidonContext &context, std::size_t size_capacity);
@@ -774,7 +772,7 @@ void reserve(const PoseidonContext &context, std::size_t size_capacity);
 
 **Usage**: Allocates enough memory to accommodate the backing array of a ciphertext with given capacity. In addition to the capacity, the allocation size is determined by the highest-level parameters associated to the given PoseidonContext.
 
-<br>
+
 
 ```cpp
 void resize(const PoseidonContext &context, parms_id_type parms_id, std::size_t size);
@@ -786,7 +784,7 @@ void resize(const PoseidonContext &context, parms_id_type parms_id, std::size_t 
 
 **Usage**: Resizes the ciphertext to given size, reallocating if the capacity of the ciphertext is too small. The ciphertext parameters are determined by the given PoseidonContext and parms_id.
 
-<br>
+
 
 ```cpp
 void resize(const PoseidonContext &context, std::size_t size);
@@ -797,15 +795,13 @@ void resize(const PoseidonContext &context, std::size_t size);
 
 **Usage**: Resizes the ciphertext to given size, reallocating if the capacity of the ciphertext is too small. The ciphertext parameters are determined by the highest-level parameters associated to the given PoseidonContext.
 
-<br>
+
 
 ```cpp
 void release();
 ```
 
 **Usage**: Resets the ciphertext. This function releases any memory allocated by the ciphertext, returning it to the memory pool. It also sets all encryption parameter specific size information to zero.
-
-<br>
 
 
 
@@ -817,7 +813,7 @@ Ciphertext &operator=(const Ciphertext &assign);
 
 **Usage**: Copies a given ciphertext to the current one.
 
-<br>
+
 
 
 ```cpp
@@ -828,7 +824,7 @@ Ciphertext &operator=(Ciphertext &&assign) = default;
 
 **Usage**: Moves a given ciphertext to the current one.
 
-<br>
+
 
 
 ```cpp
@@ -837,7 +833,7 @@ Ciphertext &operator=(Ciphertext &&assign) = default;
 
 **Usage**: Returns a reference to the backing DynArray object.
 
-<br>
+
 
 
 ```cpp
@@ -846,7 +842,7 @@ ct_coeff_type *data();
 
 **Usage**: Returns a pointer to the beginning of the ciphertext data.
 
-<br>
+
 
 ```cpp
 const ct_coeff_type *data() const;
@@ -854,7 +850,7 @@ const ct_coeff_type *data() const;
 
 **Usage**: Returns a const pointer to the beginning of the ciphertext data.
 
-<br>
+
 
 ```cpp
 ct_coeff_type *data(std::size_t poly_index);
@@ -864,7 +860,7 @@ ct_coeff_type *data(std::size_t poly_index);
 
 **Usage**: Returns a pointer to a particular polynomial in the ciphertext data.
 
-<br>
+
 
 ```cpp
 const ct_coeff_type *data(std::size_t poly_index) const;
@@ -874,7 +870,7 @@ const ct_coeff_type *data(std::size_t poly_index) const;
 
 **Usage**: Returns a const pointer to a particular polynomial in the ciphertext data.
 
-<br>
+
 
 
 ```cpp
@@ -885,7 +881,7 @@ const RNSPoly &operator[] (std::size_t poly_index);
 
 **Usage**: Returns a const RNSPoly class to a particular polynomial in the ciphertext data.
 
-<br>
+
 
 ```cpp
 const vector<RNSPoly> &polys() const;
@@ -893,7 +889,7 @@ const vector<RNSPoly> &polys() const;
 
 **Usage**: Returns a const reference of RNSPoly vector.
 
-<br>
+
 
 ```cpp
 const vector<RNSPoly> &polys() const;
@@ -901,7 +897,7 @@ const vector<RNSPoly> &polys() const;
 
 **Usage**: Returns a reference of RNSPoly vector.
 
-<br>
+
 
 ```cpp
 RNSPoly &operator[] (std::size_t poly_index);
@@ -911,7 +907,7 @@ RNSPoly &operator[] (std::size_t poly_index);
 
 **Usage**: Returns a RNSPoly class to a particular polynomial in the ciphertext data.
 
-<br>
+
 
 ```cpp
 bool is_ntt_form() const noexcept;
@@ -919,7 +915,7 @@ bool is_ntt_form() const noexcept;
 
 **Usage**: Returns whether the ciphertext is in NTT form.
 
-<br>
+
 
 ```cpp
 bool &is_ntt_form() noexcept;
@@ -927,7 +923,7 @@ bool &is_ntt_form() noexcept;
 
 **Usage**: Returns whether the ciphertext is in NTT form.
 
-<br>
+
 
 ```cpp
 parms_id_type &parms_id() noexcept;
@@ -935,7 +931,7 @@ parms_id_type &parms_id() noexcept;
 
 **Usage**: Returns a reference to parms_id.
 
-<br>
+
 
 ```cpp
 const parms_id_type &parms_id() const noexcept;
@@ -943,7 +939,7 @@ const parms_id_type &parms_id() const noexcept;
 
 **Usage**: Returns a const reference to parms_id.
 
-<br>
+
 
 ```cpp
 double &scale() noexcept;
@@ -951,7 +947,7 @@ double &scale() noexcept;
 
 **Usage**: Returns a reference to the scale. This is only needed when using the ckks encryption scheme. The user should have little or no reason to ever change the scale by hand.
 
-<br>
+
 
 ```cpp
 const double &scale() const noexcept;
@@ -959,7 +955,7 @@ const double &scale() const noexcept;
 
 **Usage**: Returns a constant reference to the scale. This is only needed when using the ckks encryption scheme.
 
-<br>
+
 
 ```cpp
 std::uint64_t &correction_factor() noexcept;
@@ -967,7 +963,7 @@ std::uint64_t &correction_factor() noexcept;
 
 **Usage**: Returns a reference to the correction factor. This is only needed when using the BGV encryption scheme. The user should have little or no reason to ever change the correction factor by hand.
 
-<br>
+
 
 ```cpp
 const std::uint64_t &correction_factor() const noexcept;
@@ -975,7 +971,7 @@ const std::uint64_t &correction_factor() const noexcept;
 
 **Usage**: Returns a constant reference to the correction factor. This is only needed when using the BGV encryption scheme.
 
-<br>
+
 
 ```cpp
 std::size_t coeff_modulus_size() const;
@@ -983,7 +979,7 @@ std::size_t coeff_modulus_size() const;
 
 **Usage**: Returns the number of primes in the coefficient modulus of the associated encryption parameters. This directly affects the allocation size of the ciphertext.
 
-<br>
+
 
 ```cpp
 std::size_t level() const;
@@ -991,7 +987,7 @@ std::size_t level() const;
 
 **Usage**: Returns the level, which equals coeff_modulus_size - 1.
 
-<br>
+
 
 ```cpp
 std::size_t poly_modulus_degree() const;
@@ -999,7 +995,7 @@ std::size_t poly_modulus_degree() const;
 
 **Usage**: Returns the degree of the polynomial modulus of the associated encryption parameters. This directly affects the allocation size of the ciphertext.
 
-<br>
+
 
 ```cpp
 std::size_t size() const;
@@ -1007,7 +1003,7 @@ std::size_t size() const;
 
 **Usage**: Returns the size of the ciphertext.
 
-<br>
+
 
 ```cpp
 std::size_t size_capacity() const noexcept;
@@ -1015,7 +1011,7 @@ std::size_t size_capacity() const noexcept;
 
 **Usage**: Returns the capacity of the allocation. This means the largest size of the ciphertext that can be stored in the current allocation with the current encryption parameters.
 
-<br>
+
 
 
 ```cpp
@@ -1024,7 +1020,7 @@ bool is_transparent() const;
 
 **Usage**: Check whether the current ciphertext is transparent, i.e. does not require a secret key to decrypt. In typical security models such transparent ciphertexts would not be considered to be valid. Starting from the second polynomial in the current ciphertext, this function returns true if all following coefficients are identically zero. Otherwise, returns false.
 
-<br>
+
 
 
 ```cpp
@@ -1033,7 +1029,7 @@ MemoryPoolHandle pool() const noexcept;
 
 **Usage**: Returns the currently used MemoryPoolHandle.
 
-<br>
+
 
 ```cpp
 bool is_valid();
@@ -1041,7 +1037,7 @@ bool is_valid();
 
 **Usage**: Returns whether the ciphertext is valid.
 
-<br>
+
 
 ```cpp
 void compute_ckks_hardware_id() const;
@@ -1065,7 +1061,7 @@ PublicKey();
 
 **Usage**: Constructs an empty publicKey allocating no memory.
 
-<br>
+
 
 ```cpp
 PublicKey(const PublicKey &copy) = default;
@@ -1075,7 +1071,7 @@ PublicKey(const PublicKey &copy) = default;
 
 **Usage**: Creates a new publicKey by copying a given one.
 
-<br>
+
 
 ```cpp
 PublicKey(PublicKey &&source) = default;
@@ -1085,7 +1081,7 @@ PublicKey(PublicKey &&source) = default;
 
 **Usage**: Moves a new publicKey by moving a given one.
 
-<br>
+
 
 ```cpp
 PublicKey &operator=(const PublicKey &assign) = default;
@@ -1095,7 +1091,7 @@ PublicKey &operator=(const PublicKey &assign) = default;
 
 **Usage**: Copies a given publicKey to the current one.
 
-<br>
+
 
 ```cpp
 PublicKey &operator=(PublicKey &&assign) = default;
@@ -1105,7 +1101,7 @@ PublicKey &operator=(PublicKey &&assign) = default;
 
 **Usage**: Moves a given publicKey to the current one.
 
-<br>
+
 
 ```cpp
 const Ciphertext data() const noexcept;
@@ -1114,10 +1110,6 @@ const Ciphertext data() const noexcept;
 **Usage**: The function is used to get the key.
 
 <br>
-
-
-
-
 
 ### 8. Relinearize key class : **<font color='red'><span id="RelinKeys">RelinKeys</span> </font>** 
 
@@ -1133,7 +1125,7 @@ RelinKeys();
 
 **Usage**: Constructs an empty RelinKeys allocating no memory.
 
-<br>
+
 
 ```cpp
 RelinKeys(const RelinKeys &copy) = default;
@@ -1143,7 +1135,7 @@ RelinKeys(const RelinKeys &copy) = default;
 
 **Usage**: Creates a new RelinKeys by copying a given one.
 
-<br>
+
 
 ```cpp
 RelinKeys(RelinKeys &&source) = default;
@@ -1153,7 +1145,7 @@ RelinKeys(RelinKeys &&source) = default;
 
 **Usage**: Moves a new RelinKeys by moving a given one.
 
-<br>
+
 
 ```cpp
 RelinKeys &operator=(const RelinKeys &assign) = default;
@@ -1163,7 +1155,7 @@ RelinKeys &operator=(const RelinKeys &assign) = default;
 
 **Usage**: Copies a given RelinKeys to the current one.
 
-<br>
+
 
 ```cpp
 RelinKeys &operator=(RelinKeys &&assign) = default;
@@ -1173,7 +1165,7 @@ RelinKeys &operator=(RelinKeys &&assign) = default;
 
 **Usage**: Moves a given RelinKeys to the current one.
 
-<br>
+
 
 ```cpp
 const std::vector<std::vector<PublicKey>> &key() const;
@@ -1182,8 +1174,6 @@ const std::vector<std::vector<PublicKey>> &key() const;
 **Usage**: Returns a const reference to a Galois key. The returned Galois key corresponds to the given Galois element.
 
 <br>
-
-
 
 
 ### 9. Galois key class : **<font color='red'><span id="GaloisKeys">GaloisKeys</span> </font>**
@@ -1198,7 +1188,7 @@ GaloisKeys();
 
 **Usage**: Constructs an empty GaloisKeys allocating no memory.
 
-<br>
+
 
 ```cpp
 GaloisKeys(const GaloisKeys &copy) = default;
@@ -1208,7 +1198,7 @@ GaloisKeys(const GaloisKeys &copy) = default;
 
 **Usage**: Creates a new GaloisKeys by copying a given one.
 
-<br>
+
 
 ```cpp
 GaloisKeys(GaloisKeys &&source) = default;
@@ -1218,7 +1208,7 @@ GaloisKeys(GaloisKeys &&source) = default;
 
 **Usage**: Moves a new GaloisKeys by moving a given one.
 
-<br>
+
 
 ```cpp
 GaloisKeys &operator=(const GaloisKeys &assign) = default;
@@ -1228,7 +1218,7 @@ GaloisKeys &operator=(const GaloisKeys &assign) = default;
 
 **Usage**: Copies a given GaloisKeys to the current one.
 
-<br>
+
 
 ```cpp
 GaloisKeys &operator=(GaloisKeys &&assign) = default;
@@ -1238,7 +1228,7 @@ GaloisKeys &operator=(GaloisKeys &&assign) = default;
 
 **Usage**: Moves a given GaloisKeys to the current one.
 
-<br>
+
 
 ```cpp
 static inline std::size_t get_index(uint32_t galois_elt);
@@ -1248,7 +1238,7 @@ static inline std::size_t get_index(uint32_t galois_elt);
 
 **Usage**: A function used to obtain the corresponding index of a Galois element.
 
-<br>
+
 
 
 ```cpp
@@ -1259,7 +1249,7 @@ inline bool has_key(uint32_t galois_elt) const;
 
 **Usage**: Returns whether a Galois key corresponding to a given Galois element exists.
 
-<br>
+
 
 ```cpp
 const std::vector<std::vector<PublicKey>> &key(std::uint32_t galois_elt) const;
@@ -1267,10 +1257,7 @@ const std::vector<std::vector<PublicKey>> &key(std::uint32_t galois_elt) const;
 
 **Usage**: Returns a const reference to a Galois key. The returned Galois key corresponds to the given Galois element.
 
-
 <br>
-
-
 
 
 ### 10. Key generation class : **<font color='red'><span id="KeyGenerator">KeyGenerator</span> </font>**
@@ -1288,7 +1275,7 @@ KeyGenerator(const PoseidonContext &params);
 **Usage**: Constructs the key generator without keys.
 
 
-<br>
+
 
 
 ```cpp
@@ -1300,7 +1287,7 @@ KeyGenerator(const PoseidonContext& params,const SecretKey &sk);
 
 **Usage**: Constructs the key generator with secret key.
 
-<br>
+
 
 ```cpp
 inline void create_public_key(PublicKey &destination) const;
@@ -1310,7 +1297,7 @@ inline void create_public_key(PublicKey &destination) const;
 
 **Usage**: A function for creating a public key. 
 
-<br>
+
 
 ```cpp
 inline void create_relin_keys(RelinKeys &destination);
@@ -1320,7 +1307,7 @@ inline void create_relin_keys(RelinKeys &destination);
 
 **Usage**: A function to create a relinearized key.
 
-<br>
+
 
 ```cpp
 inline void create_galois_keys(const std::vector<int> &steps, GaloisKeys &destination);
@@ -1331,7 +1318,7 @@ inline void create_galois_keys(const std::vector<int> &steps, GaloisKeys &destin
 
 **Usage**: A function used to create a rotation key based on a given rotation step vector.
 
-<br>
+
 
 ```cpp
 inline void create_conj_keys(GaloisKeys &destination);
@@ -1342,8 +1329,6 @@ inline void create_conj_keys(GaloisKeys &destination);
 **Usage**: A function used to create a conjugate rotation key. It is only used in CKKS conjugate.
 
 <br>
-
-
 
 ### 11. Encryption class : **<font color='red'><span id="Encryptor">Encryptor</span> </font>**
 
@@ -1360,7 +1345,7 @@ Encryptor(const PoseidonContext &context, const SecretKey &secret_key);
 
 **Usage**: Creates an Encryptor instance initialized with the specified PoseidonContext and secret key.
 
-<br>
+
 
 ```cpp
 Encryptor(const PoseidonContext &context, const PublicKey &public_key);
@@ -1371,7 +1356,7 @@ Encryptor(const PoseidonContext &context, const PublicKey &public_key);
 
 **Usage**: Creates an Encryptor instance initialized with the specified PoseidonContext and public key.
 
-<br>
+
 
 ```cpp
 Encryptor(const PoseidonContext &context, const PublicKey &public_key, const SecretKey &secret_key);
@@ -1384,7 +1369,7 @@ Encryptor(const PoseidonContext &context, const PublicKey &public_key, const Sec
 **Usage**: Creates an Encryptor instance initialized with the specified PoseidonContext,secret key, and public key.
 
 
-<br>
+
 
 ```cpp
 void set_public_key(const PublicKey &public_key);
@@ -1394,7 +1379,7 @@ void set_public_key(const PublicKey &public_key);
 
 **Usage**: Give a new instance of public key.
 
-<br>
+
 
 ```cpp
 void set_secret_key(const SecretKey &secret_key);
@@ -1405,7 +1390,7 @@ void set_secret_key(const SecretKey &secret_key);
 **Usage**: Give a new instance of secret key.
 
 
-<br>
+
 
 
 ```cpp
@@ -1418,7 +1403,7 @@ void encrypt(const Plaintext &plain, Ciphertext &destination,MemoryPoolHandle po
 
 **Usage**: Encrypts a plaintext with the public key and stores the result in destination.
 
-<br>
+
 
 
 ```cpp
@@ -1430,7 +1415,7 @@ void encrypt_zero(Ciphertext &destination, MemoryPoolHandle pool = MemoryManager
 
 **Usage**: Encrypts a zero plaintext with the public key and stores the result in destination.
 
-<br>
+
 
 ```cpp
 void encrypt_zero(parms_id_type parms_id, Ciphertext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
@@ -1442,7 +1427,7 @@ void encrypt_zero(parms_id_type parms_id, Ciphertext &destination, MemoryPoolHan
 
 **Usage**: Encrypts a zero plaintext with the public key and stores the result in destination.
 
-<br>
+
 
 
 ```cpp
@@ -1455,7 +1440,7 @@ void encrypt_symmetric(const Plaintext &plain, Ciphertext &destination, MemoryPo
 
 **Usage**: Encrypts a plaintext with the secret key and stores the result in destination.
 
-<br>
+
 
 
 ```cpp
@@ -1468,7 +1453,7 @@ void encrypt_zero_symmetric(parms_id_type parms_id, Ciphertext &destination, Mem
 
 **Usage**: Encrypts a zero plaintext with the secret key and stores the result in destination.
 
-<br>
+
 
 ```cpp
 void encrypt_zero_symmetric(Ciphertext &destination, MemoryPoolHandle pool = MemoryManager::GetPool()) const;
@@ -1497,7 +1482,7 @@ Decryptor(const PoseidonContext &context, const SecretKey &secret_key);
 
 **Usage**: Creates a Decryptor instance initialized with the specified PoseidonContext and secret key.
 
-<br>
+
 
 
 ```cpp
@@ -1524,7 +1509,7 @@ auto create(const PoseidonContext &context)->std::shared_ptr< Envaluator >;
 
 **Usage**: A function used to create an Envaluator object based on the given PoseidonContext object can select the adopted FHE algorithms such as BFV, BGV, CKKS, and their corresponding hardware or software libraries. The specific algorithm support is detailed in the next section.  
 
-<br>
+
 
 ```cpp
 static PoseidonFactory *get_instance()
@@ -1532,7 +1517,7 @@ static PoseidonFactory *get_instance()
 
 **Usage**: The `PoseidonFactory` implements the singleton pattern. This function is used to get the static object of PoseidonFactory.
 
-<br>
+
 
 ```cpp
 PoseidonContext create_poseidon_context(const ParametersLiteral &param_literal,
@@ -1541,7 +1526,7 @@ PoseidonContext create_poseidon_context(const ParametersLiteral &param_literal,
 
 **Usage**: `create_poseidon_context` is used to create `PoseidonContext` class based on the given `param_literal` .
 
-<br>
+
 
 ```cpp
 std::unique_ptr<EvaluatorBfvBase> create_bfv_evaluator(PoseidonContext &context) const
@@ -1555,7 +1540,7 @@ std::unique_ptr<EvaluatorCkksBase> create_ckks_evaluator(PoseidonContext &contex
 
 `create_ckks_evaluator` is used to create `evaluator` class for CKKS scheme.
 
-<br>
+
 
 ```cpp
 DEVICE_TYPE get_device_type() const
@@ -1563,7 +1548,7 @@ DEVICE_TYPE get_device_type() const
 
 **Usage**: Getting the device type. It returns *DEVICE_TYPE::DEVICE_SOFTWAR* when using software mode, and returns *DEVICE_TYPE::DEVICE_HARDWARE* when using hardware mode.
 
-<br>
+
 
 ```cpp
 void set_device_type(DEVICE_TYPE type)
@@ -1571,16 +1556,4 @@ void set_device_type(DEVICE_TYPE type)
 
 **Usage**: Setting the device type.
 
-
-
-## Hardware Exclusive Operations
-
-### 1. Read ciphertext information from accelerator card : **<font color='red'> read</font>**
-
-```cpp
-void read(Ciphertext &ciph);
-```
-
-- **ciph** (Ciphertext): representing the ciphertext to be read.
-
-**Usage**: `read` function is used to read data from the acceleration card in the ciphertext. For example, after the user executes hardware evaluation function, the latest result value is still stored in HPU card.  The user need to execute the `read` function to read the latest result value from the HPU card to the RAM.
+<br>
