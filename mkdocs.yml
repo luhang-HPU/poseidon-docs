@@ -10,11 +10,8 @@ extra:
 theme: 
 #    name: 'material'
     name: 'readthedocs'
-<<<<<<< Updated upstream
-    logo: '_static/logoR.png'
-=======
     logo: 'docs/image/Logo/logoR.png'
->>>>>>> Stashed changes
+    
 
 # plugins:
 #   - search
