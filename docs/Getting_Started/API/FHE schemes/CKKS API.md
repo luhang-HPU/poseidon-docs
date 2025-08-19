@@ -75,6 +75,13 @@ For a plaintext $m \in \mathbb{R}^N$ , the corresponding message $z$ can be comp
 
 **Description**: MatrixPlain is a class for storing plaintext matrix information.
 
+```c++
+MatrixPlain()
+        : log_slots(0), n1(0), level(0),
+          scale(1.0), rot_index{}, plain_vec_pool{sz, std::map<int, Plaintext>()}, read_idx(0),
+          write_idx(0), is_precompute(false)
+```
+
 **Members**:
 
 - **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
@@ -103,13 +110,15 @@ LinearMatrixGroup() = default;
 
 **Usage**: Creates an LinearMatrixGroup instance initialized.
 
+
+
 ```cpp
 vector<MatrixPlain> &data();
 ```
 
 **Usage**: The function is used to get the vector of MatrixPlain.
 
-<br>
+
 
 
 ```cpp
@@ -118,7 +127,7 @@ vector<int> &rot_index();
 
 **Usage**: The function is used to get all rotate index.
 
-<br>
+
 
 
 ```cpp
@@ -129,7 +138,7 @@ void set_step(uint32_t step)
 
 **Usage**: The function is used to set the scaling factor of Matrix Plain. When step is 1, the  scaling factor is one modulus.
 
-<br>
+
 
 ```cpp
 const int step() const;
@@ -147,7 +156,10 @@ const int step() const;
 **Functions**:
 
 ```cpp
-HomomorphicDFTMatrixLiteral(LinearType type, uint32_t log_n, uint32_t log_slots, uint32_t level_start, vector<uint32_t> levels, bool repack_imag_to_real = false, double scaling = 1.0, bool bit_reversed = false, uint32_t log_bsgs_ratio = 0);
+HomomorphicDFTMatrixLiteral(LinearType type, uint32_t log_n, uint32_t log_slots, 
+                            uint32_t level_start, vector<uint32_t> levels, 
+                            bool repack_imag_to_real = false, double scaling = 1.0, 
+                            bool bit_reversed = false, uint32_t log_bsgs_ratio = 0);
 ```
 
 - **type** (LinearType): indicating the matrix type (DFT or IDFT).
@@ -157,12 +169,12 @@ HomomorphicDFTMatrixLiteral(LinearType type, uint32_t log_n, uint32_t log_slots,
 - **levels** (vector<uint32_t>): The levels of DFT process. 
 - **repack_imag_to_real** (uint32_t): Allowing repackage image message to real message ciphertext.
 - **scaling** (uint32_t): The scaling factor of HomomorphicDFT process.
-- **bit_reversed** (uint32_t): Allow bit reversed (only support false).
+- **bit_reversed** (uint32_t): Allow bit reversed (only support false now).
 - **log_bsgs_ratio** (uint32_t): The ratio of BSGS matrix (1 is recommend).
 
-**Usage**: `HomomorphicDFTMatrixLiteral` class constructs the DFT or IDFT matrix.
+**Usage**: `HomomorphicDFTMatrixLiteral` class constructs the DFT or IDFT matrix for bootstrapping.
 
-<br>
+
 
 ```cpp
  void create(LinearMatrixGroup &mat_group, CKKSEncoder &encoder,uint32_t step);
@@ -180,6 +192,18 @@ HomomorphicDFTMatrixLiteral(LinearType type, uint32_t log_n, uint32_t log_slots,
 
 **Description**: The polynomial coefficients class in homomorphic polynomial evaluator.
 
+```c++
+Polynomial(const vector<complex<double>> &data, int a, int b, int max_deg,
+           PolynomialBasisType basis_type, bool lead = false)
+```
+
+* data (const vector<complex<double>>): the polynomial coeffcients.
+* a (int): upper bound scope of series expansion
+* b (int): lower bound scope of series expansion
+* max_deg (int): the highest degree of polynomial
+* basis_type (PolynomialBasisType): the polynomial is to be evaluated in Monomial type or Chebyshev type.
+* lead (bool): whether contains the highest degree term of the polynomial
+
 <br>
 
 ### 6.  PolynomialVector class : **<font color='red'><span id="PolynomialVector">PolynomialVector</span> </font>**
@@ -194,7 +218,7 @@ PolynomialVector() = default;
 
 **Usage**: Construct an empty polynomial vector.
 
-<br>
+
 
 ```cpp
 PolynomialVector(const vector<Polynomial> &polys, const vector<vector<int>> &indexs, bool lead = true);
@@ -206,7 +230,7 @@ PolynomialVector(const vector<Polynomial> &polys, const vector<vector<int>> &ind
 
 **Usage**: Construct a polynomial vector.
 
-<br>
+
 
 ```cpp
 PolynomialVector(const PolynomialVector &copy) = default;
@@ -217,7 +241,7 @@ PolynomialVector(const PolynomialVector &copy) = default;
 **Usage**: Copy a given PolynomialVector to the current one.
 
 
-<br>
+
 
 ```cpp
 PolynomialVector(PolynomialVector &&source) = default;
@@ -227,7 +251,7 @@ PolynomialVector(PolynomialVector &&source) = default;
 
 **Usage**: Moves a given PolynomialVector to the current one
 
-<br>
+
 
 ```cpp
 PolynomialVector &operator = (const PolynomialVector &assign);
@@ -236,7 +260,6 @@ PolynomialVector &operator = (const PolynomialVector &assign);
 - **copy** (const PolynomialVector &copy): The  Polynomial.
 
 **Usage**: Copy constructor.
-<br>
 
 
 ```cpp
@@ -247,7 +270,7 @@ PolynomialVector &operator = (PolynomialVector &&assign) = default;
 
 **Usage**: Move constructor.
 
-<br>
+
 
 
 ```cpp
@@ -255,6 +278,8 @@ vector<Polynomial>  &polys();
 ```
 
 **Usage**: Gets the Polynomials of PolynomialVector.
+
+
 
 ```cpp
 vector<vector<int>> &index()
@@ -282,14 +307,12 @@ EvalModPoly(const PoseidonContext &context, SineType type, double scaling_factor
 - **log_message_ratio** (uint32_t): The logarithm of message ratio.
 - **double_angle** (uint32_t): The num of double angle.
 - **k** (uint32_t): The rang if Chebyshev.
-- **arcsine_degree** (uint32_t): arcSine poly degree.
-- **sine_degree** (uint32_t): SineDegree poly degree.
+- **arcsine_degree** (uint32_t): arcsine poly degree.
+- **sine_degree** (uint32_t): sine poly degree.
 
 **Usage**: Constructs homomorphic mod parameters.
 
 <br>
-
-
 
 ## Evaluation Functions
 
@@ -306,8 +329,6 @@ void add(Ciphertext &ciph1, Ciphertext &ciph2, Ciphertext &result);
 **Usage**: `add` computes *result* = *ciph1* + *ciph2* . 
 
 <br>
-
-
 
 
 ### 2. Addition of ciphertext and plaintext : **<font color='red'> add_plain</font>**
@@ -372,12 +393,11 @@ void relinearize(const Ciphertext &ciph, Ciphertext &result, const RelinKeys &re
 
 <br>
 
-
-
 ### 6. Multiplication between ciphertexts : **<font color='red'> multiply_relin</font>**
 
 ```cpp
-void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result, const RelinKeys &relin_key) const;
+void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, 
+                    Ciphertext &result, const RelinKeys &relin_key) const;
 ```
 
 - **ciph1** (Ciphertext): representing a ciphertext.
@@ -390,12 +410,11 @@ void multiply_relin(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext
 <br>
 
 
-
-
 ### 7. Multiplication of ciphertext and plaintext : **<font color='red'> multiply_plain</font>**
 
 ```cpp
-void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &result) const;
+void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, 
+                    Ciphertext &result) const;
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
@@ -405,8 +424,6 @@ void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &
 **Usage**: `multiply_plain` computes *result* = *ciph* * *plain*.
 
 <br>
-
-
 
 
 ### 8. Rescale : **<font color='red'> rescale</font>**
@@ -426,7 +443,8 @@ void rescale (const Ciphertext &ciph,Ciphertext &result) const;
 ### 9. Ciphertext rotation : **<font color='red'> rotate</font>**
 
 ```cpp
-void rotate(const Ciphertext &ciph, Ciphertext &result, int step, const GaloisKeys &galois_keys) const;
+void rotate(const Ciphertext &ciph, Ciphertext &result, 
+            int step, const GaloisKeys &galois_keys) const;
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
@@ -440,7 +458,7 @@ void rotate(const Ciphertext &ciph, Ciphertext &result, int step, const GaloisKe
 <br>
 
 
-### 10. Take conjugate : **<font color='red'> conjugate</font>**
+### 10. Conjugation : **<font color='red'> conjugate</font>**
 
 ```cpp
 void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &result) const;
@@ -454,8 +472,6 @@ void conjugate(const Ciphertext &ciph, const GaloisKeys &conj_keys, Ciphertext &
 
 <br>
 
-
-
 ### 11. Matrix multiplication of ciphertext and plaintext : **<font color='red'> multiply_by_diag_matrix_bsgs</font>**
 
 ```cpp
@@ -467,58 +483,40 @@ void multiply_by_diag_matrix_bsgs(const Ciphertext &ciph, const MatrixPlain &pla
 - **result** (Ciphertext): storing the computation result.
 - **rot_key** (GaloisKeys): representing the galois key used for rotations.
 
+**Usage**: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix, performing the linear transformation over the ciphertext with the Baby-Step-Giant-Step (BSGS) algorithm to accelerate the operations. 
 
-**Usage**: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.
+The BSGS algorithm can be performed with the following equation.
 
+$$ \begin{aligned}
+A \cdot z
+& = \sum\limits_{0 \le j \le N_2} \sum\limits_{0 \le i \le N_1}
+(u_{N_i \cdot j + i} \odot \rho(z;N_1 \cdot j + i))
+\\
+& = \sum\limits_{0 \le j < N_2} \rho (
+\sum\limits_{0 \le i < N_1} \rho(u_{N_1 \cdot j + i};-N_1 \cdot j)
+\odot \rho(z;i);N_1 \cdot j
+)
+\end{aligned} $$
 
-<br>
+notation:
 
+$A$ denotes the plain matrix
 
-### 12. Coefficient to plaintext slot : **<font color='red'> coeff_to_slot</font>**
+$z$ denotes the ciphertext
 
-```cpp
-void coeff_to_slot(const Ciphertext &ciph, const LinearMatrixGroup &matrix_group, Ciphertext &result_real, Ciphertext &result_imag, const GaloisKeys &galoisKeys, const CKKSEncoder &encoder) const;
-```
+$N_1$ is a divisor of $N/2$ and  $N_2$ is $N/2N_1$
 
-- **ciph** (Ciphertext): representing the ciphertext to be transformed.
-- **matrix_group** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the transformation.
-- **result_real** (Ciphertext): storing the real part of the transformed ciphertext.
-- **result_imag** (Ciphertext): storing the imaginary part of the transformed ciphertext.
-- **rot_key** (GaloisKeys): representing the galois key for rotation.
-- **conj_key** (GaloisKeys): representing the galois key for conjugation.
-- **encoder** (CKKSEncoder): representing the encoder used in the transformation process.
+$\odot$ denotes the Hadamard (component-wise) multiplication between vectors.
 
-**Usage**: `coeff_to_slot` transforms a ciphertext from the coefficient domain to the slot domain.
-
-<br>
-
-
-
-### 13. Plaintext slot to coefficient : **<font color='red'> slot_to_coeff</font>**
-
-```cpp
-void slot_to_coeff(const Ciphertext &ciph_real, const Ciphertext &ciph_imag, const LinearMatrixGroup &matrix_group, Ciphertext &result, const GaloisKeys &galoisKeys, const CKKSEncoder &encoder) const;
-```
-
-- **ciph_real** (Ciphertext): representing the real part of the ciphertext to be transformed.
-- **ciph_imag** (Ciphertext): representing the imaginary part of the ciphertext to be transformed.
-- **matrix_group** (LinearMatrixGroup): representing the group of linear matrices used for the transformation.
-- **result** (Ciphertext): storing the transformed ciphertext.
-- **rot_key** (GaloisKeys): representing the galois key for rotation.
-- **conj_key** (GaloisKeys): representing the galois key for conjugation.
-- **encoder** (CKKSEncoder): representing the encoder used in the transformation process.
-
-**Usage**: `slot_to_coeff` transforms a ciphertext from the slot domain to the coefficient domain.
-
+$\rho(c;s)$ denotes the rotation of ciphertext $c$, the rotation step is $s$ .
 
 <br>
 
-
-
-### 14. Number Theoretic Transform (forward) : **<font color='red'> ntt_fwd</font>** 
+### 12. Number Theoretic Transform (forward) : **<font color='red'> ntt_fwd</font>** 
 
 ```cpp
-void ntt_fwd(const Plaintext &plain, Plaintext &result, parms_id_type parms_id = parms_id_zero) const;
+void ntt_fwd(const Plaintext &plain, Plaintext &result, 
+             parms_id_type parms_id = parms_id_zero) const;
 void ntt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
 ```
 
@@ -532,9 +530,7 @@ void ntt_fwd(const Ciphertext &ciph, Ciphertext &result) const;
 <br>
 
 
-
-
-### 15. Number Theoretic Transform (inverse) : **<font color='red'> ntt_inv</font>**
+### 13. Number Theoretic Transform (inverse) : **<font color='red'> ntt_inv</font>**
 
 ```cpp
 void ntt_inv(const Ciphertext &ciph, Ciphertext &result) const;
@@ -547,16 +543,18 @@ void ntt_inv(const Ciphertext &ciph, Ciphertext &result) const;
 
 <br>
 
-
-
-### 17. Multiplication of ciphertext and constant value : **<font color='red'> multiply_const</font>**
+### 14. Multiplication of ciphertext and constant value : **<font color='red'> multiply_const</font>**
 
 ```cpp
-void multiply_const(const Ciphertext &ciph, complex<double> constData, double scale,Ciphertext &result, CKKSEncoder &encoder);
+template <typename T, typename = std::enable_if_t<
+                      std::is_same<std::remove_cv_t<T>, double>::value ||
+                      std::is_same<std::remove_cv_t<T>, std::complex<double>>::value>>
+void multiply_const(const Ciphertext &ciph, T const_data, double scale, 
+                    Ciphertext &result, const CKKSEncoder &encoder) const;
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
-- **constData** (complex \<double\> ): representing a complex constant.
+- **constData** (double or complex \<double\> ): representing a constant or a vector of constant.
 - **scale** (double): the scaling factor.
 - **result** (Ciphertext): A reference to a **Ciphertext** object, used to store the computation result.
 - **encoder** (CKKSEncoder): A reference to a **CKKSEncoder** object, representing the encoder and decoder.
@@ -566,28 +564,29 @@ void multiply_const(const Ciphertext &ciph, complex<double> constData, double sc
 <br>
 
 
-
-
-### 18. Addition of ciphertext and complex constant : **<font color='red'> add_const</font>**
+### 15. Addition of ciphertext and complex constant : **<font color='red'> add_const</font>**
 
 ```cpp
-void add_const(const Ciphertext &ciph, double const_data, Ciphertext &result,const CKKSEncoder &encoder) const;
+template <typename T, typename = std::enable_if_t<
+                      std::is_same<std::remove_cv_t<T>, double>::value ||
+                      std::is_same<std::remove_cv_t<T>, std::complex<double>>::value>>
+void add_const(const Ciphertext &ciph, T const_data, Ciphertext &result,
+               const CKKSEncoder &encoder) const
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
-- **constData** (double): representing a real constant.
+- **constData** (double or std::complex\<double\>): representing a constant or a vector of constant.
 - **result** (Ciphertext): storing the computation result.
 
 **Usage**: `add_const` computes *result* = *ciph* + *const_data*.
 
 <br>
 
-
-
-### 19. Discrete Fourier Transform on ciphertext : **<font color='red'> dft</font>**
+### 16. Discrete Fourier Transform on ciphertext : **<font color='red'> dft</font>**
 
 ```cpp
-void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const GaloisKeys &rot_key);
+void dft(Ciphertext &ciph, MatrixPlain& plain_mat,
+         Ciphertext &result,const GaloisKeys &rot_key);
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
@@ -600,9 +599,7 @@ void dft( Ciphertext &ciph, MatrixPlain& plain_mat,Ciphertext &result,const Galo
 <br>
 
 
-
-
-### 20. Dynamic rescale : **<font color='red'> rescale_dynamic</font>**
+### 17. Dynamic rescale : **<font color='red'> rescale_dynamic</font>**
 
 ```cpp
 void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale);
@@ -617,10 +614,12 @@ void rescale_dynamic(const Ciphertext &ciph,Ciphertext &result, double min_scale
 <br>
 
 
-### 21. Polynomial evaluation : **<font color='red'> evaluate_poly_vector</font>**
+### 18. Polynomial evaluation : **<font color='red'> evaluate_poly_vector</font>**
 
 ```cpp
-void evaluate_poly_vector(const Ciphertext &ciph, Ciphertext &destination, const PolynomialVector &polys, double scale, const RelinKeys &relin_key, const CKKSEncoder &encoder) const;
+void evaluate_poly_vector(const Ciphertext &ciph, Ciphertext &destination, 
+                          const PolynomialVector &polys, double scale, 
+                          const RelinKeys &relin_key, const CKKSEncoder &encoder) const;
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
@@ -634,13 +633,52 @@ void evaluate_poly_vector(const Ciphertext &ciph, Ciphertext &destination, const
 
 <br>
 
-
-
-
-### 22. Evaluate modulo on the ciphertext vector : **<font color='red'> eval_mod</font>**
+### 19. Coefficient to plaintext slot : **<font color='red'> coeff_to_slot</font>**
 
 ```cpp
-void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const RelinKeys &relin_key, CKKSEncoder &encoder);
+void coeff_to_slot(const Ciphertext &ciph, const LinearMatrixGroup &matrix_group, 
+                   Ciphertext &result_real, Ciphertext &result_imag, const GaloisKeys &galoisKeys, 
+                   const CKKSEncoder &encoder) const;
+```
+
+- **ciph** (Ciphertext): representing the ciphertext to be transformed.
+- **matrix_group** (LinearMatrixGroup): A reference to a **LinearMatrixGroup** object, representing the group of linear matrices used for the transformation.
+- **result_real** (Ciphertext): storing the real part of the transformed ciphertext.
+- **result_imag** (Ciphertext): storing the imaginary part of the transformed ciphertext.
+- **rot_key** (GaloisKeys): representing the galois key for rotation.
+- **conj_key** (GaloisKeys): representing the galois key for conjugation.
+- **encoder** (CKKSEncoder): representing the encoder used in the transformation process.
+
+**Usage**: `coeff_to_slot` transforms a ciphertext from the coefficient domain to the slot domain. It  performs the homomorphic mapping on the ciphertext.
+
+<br>
+
+### 20. Plaintext slot to coefficient : **<font color='red'> slot_to_coeff</font>**
+
+```cpp
+void slot_to_coeff(const Ciphertext &ciph_real, const Ciphertext &ciph_imag, 
+                   const LinearMatrixGroup &matrix_group, Ciphertext &result, 
+                   const GaloisKeys &galoisKeys, const CKKSEncoder &encoder) const;
+```
+
+- **ciph_real** (Ciphertext): representing the real part of the ciphertext to be transformed.
+- **ciph_imag** (Ciphertext): representing the imaginary part of the ciphertext to be transformed.
+- **matrix_group** (LinearMatrixGroup): representing the group of linear matrices used for the transformation.
+- **result** (Ciphertext): storing the transformed ciphertext.
+- **rot_key** (GaloisKeys): representing the galois key for rotation.
+- **conj_key** (GaloisKeys): representing the galois key for conjugation.
+- **encoder** (CKKSEncoder): representing the encoder used in the transformation process.
+
+**Usage**: `slot_to_coeff` transforms a ciphertext from the slot domain to the coefficient domain. It performs the inverse homomorphic mapping of `coeff_to_slot` operation.
+
+<br>
+
+
+### 21. Evaluate modulo on the ciphertext vector : **<font color='red'> eval_mod</font>**
+
+```cpp
+void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, 
+              const RelinKeys &relin_key, CKKSEncoder &encoder);
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
@@ -649,31 +687,34 @@ void eval_mod(Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly,
 - **relin_key** (RelinKeys): representing the encryption key used for relinearization.
 - **encoder** (CKKSEncoder): representing the encoder and decoder.
 
-**Usage**: `eval_mod` performs modular arithmetic on a ciphertext.
+**Usage**: `eval_mod` computes modular arithmetic on a ciphertext $[t]_q$ where $q$ is a modulus much larger than the current modulus. Bounded by $Kq$, $[t]_q$ could be approximately computed by the series expansion of $\frac{q}{2 \pi} sin(\frac{2\pi}{q} t) + O(\epsilon^3 q)$ . 
+
+![bootstrap](../../../Image/Getting_Started/CKKS/sine.png)
+
+In Poseidon, it first calculates $P_0(t) = \Delta \sum\limits_{k=0}^{d} \frac{1}{k!} {(\frac{2 \pi i t} {2^r q})}^k$ . Then computes $P_{j+1}(t) = \Delta^{-1} {(P_j(t))}^2$ for $r$ times of iteration to get $P_r(t)$ which is approximately equal to $e ^ {\frac{2 \pi i t} {q}}$ . Finally imaginary part $sin(\frac{2 \pi t}{q})$ is extracted in the by $\frac{P_r(t) - conj(P_r(t))}{2}$ .
+
+![bootstrap](../../../Image/Getting_Started/CKKS/eval_mod.png)
 
 <br>
 
 
-
-
-### 23. Bootstrap : **<font color='red'> bootstrap</font>** 
+### 22. Bootstrap : **<font color='red'> bootstrap</font>** 
 
 ```cpp
-void bootstrap(const Ciphertext &ciph, Ciphertext &result, const EvalModPoly &eva_poly, const LinearMatrixGroup &matrix_group0, const LinearMatrixGroup &matrix_group1, const RelinKeys &relin_key, const GaloisKeys &rot_key,const CKKSEncoder &encoder);
+void bootstrap(const Ciphertext &ciph, Ciphertext &result,
+               const RelinKeys &relin_keys, const GaloisKeys &galois_keys,
+               const CKKSEncoder &encoder, EvalModPoly &eval_mod_poly)
 ```
 
 - **ciph** (Ciphertext): representing a ciphertext.
 - **result** (Ciphertext): storing the bootstrapped ciphertext.
-- **eva_poly** (EvalModPoly): representing the given modular polynomial.
-- **matrix_group0** (LinearMatrixGroup): representing the first group of linear matrices used for bootstrapping.
-- **matrix_group1** (LinearMatrixGroup): representing the second group of linear matrices used for bootstrapping.
 - **relin_key** (RelinKeys): representing the encryption key used for relinearization.
-- **rot_key** (GaloisKeys): representing the encryption key used for rotation operations.
+- **galois_keys** (GaloisKeys): representing the encryption key used for rotation operations.
 - **encoder** (CKKSEncoder): representing the encoder and decoder.
+- **eva_poly** (EvalModPoly): representing the given modular polynomial.
 
-**Usage**: `bootstrap` is used for bootstrapping.
+**Usage**: `bootstrap` is used for bootstrapping. In poseidon library, `bootstrap` restore the modulus chain to the original level in the RAISE_MODULUS phase. It consumes several levels to perform the following coeff_to_slot, eval_mod, imaginary part extraction and slot_to_coeff operations. If the original modulus level is too small, the ciphertext after bootstrap may be unavailable.
 
+The process of bootstrapping is illustrated in this picture.
 
-
-
-
+![bootstrap](../../../Image/Getting_Started/CKKS/bootstrap.png)
