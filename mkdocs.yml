@@ -10,7 +10,7 @@ extra:
 theme: 
 #    name: 'material'
     name: 'readthedocs'
-    logo: 'docs/image/Logo/logoR.png'
+    logo: './Image/Logo/logoR.png'
     
 
 # plugins:
