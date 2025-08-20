@@ -2,7 +2,7 @@
 
 **Must read: This article is a guide to compiling and using hardware versions. Poseidon is divided into software and hardware versions. The hardware version is to hardware accelerate the operator, based on this software code, you also need a hardware acceleration card and corresponding drivers, incremental installation packages, etc. Do not use this method if you do not have the necessary conditions such as a hardware card.**
 
-If you don't have the necessary conditions such as a hardware card, use an open-source software library.[Software compile](./Software(compile).md)
+If you don't have the necessary conditions such as a hardware card, use an open-source software library.[Software(poseidon)](./Software(poseidon).md)
 <br>
 
 Here are our recommendation for different users:
@@ -55,7 +55,7 @@ ninja
 sudo ninja install
 sudo ldconfig
 ```
-
+![p1](../../../Image/Getting_Started/Compile and Installation/p1.png)
 <br>
 
 ## Step 2: Install Hardware Library
@@ -134,6 +134,7 @@ echo 1 > /sys/bus/pci/devices/0000:${card_id}/remove
 echo 1 > /sys/bus/pci/rescan
 ./dpdk-devbind.py -b igb_uio ${card_id}
 ```
+![p2](../../../Image/Getting_Started/Compile and Installation/p2.png)
 
 <br>
 
@@ -152,8 +153,6 @@ If you only compiles single file, you can use the examples with the following co
 
 ```shell
 # Please replace the internal variables with the actual file
-# TODO:
-# TODO 头文件加path:
 g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -std=c++17
 
 ```

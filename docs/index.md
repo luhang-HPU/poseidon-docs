@@ -11,8 +11,9 @@
 
 1. Compile and Installation
 
-     * [Hardware(compile)](./Getting_Started/Compile and Installation/Hardware(compile).md)
-     * [Software(compile)](./Getting_Started/Compile and Installation/Software(compile).md)
+     * [Software(poseidon)](./Getting_Started/Compile and Installation/Software(compile).md)
+     * [Hardware(poseidon with HPU)](./Getting_Started/Compile and Installation/Hardware(compile).md)
+
      
 2. API
 
