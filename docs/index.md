@@ -9,10 +9,10 @@
 
 ## Getting Started
 
-1. Installation
+1. Compile and Installation
 
-     * [Compile](./Getting_Started/Installation/Compilation.md)
-     * [Installation](./Getting_Started/Installation/Installation.md)
+     * [Hardware(compile)](./Getting_Started/Compile and Installation/Hardware(compile).md)
+     * [Software(compile)](./Getting_Started/Compile and Installation/Software(compile).md)
      
 2. API
 
