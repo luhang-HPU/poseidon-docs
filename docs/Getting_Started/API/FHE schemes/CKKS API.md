@@ -449,7 +449,7 @@ void rotate(const Ciphertext &ciph, Ciphertext &result,
 
 - **ciph** (Ciphertext): representing a ciphertext.
 - **result** (Ciphertext): storing the ciphertext after row rotation.
-- **rot_step** (int): An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.
+- **rot_step** (int): An integer representing the rotation step length; a positive value indicates a left rotation while a negative value indicates a right rotation.
 - **galois_keys** (GaloisKeys): representing the galois keys used for row rotation.
 
 **Usage**: `rotate` rotates a ciphertext.
