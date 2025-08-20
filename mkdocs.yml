@@ -35,8 +35,8 @@ nav:
         - Homomorphic Computing Unit (HPU): './Overview/HPU.md'
     - GETTING STARTED:
         - Compile and Installation:
-            - Software(poseidon): './Getting_Started/Compile and Installation/Software(compile).md'
-            - Hardware(poseidon with HPU): './Getting_Started/Compile and Installation/Hardware(compile).md'
+            - Software(poseidon): './Getting_Started/Compile and Installation/Software(poseidon).md'
+            - Hardware(poseidon with HPU): './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
         - API:
             - Basic API: './Getting_Started/API/Basic API.md'
             - BFV API: './Getting_Started/API/FHE schemes/BFV API.md'
