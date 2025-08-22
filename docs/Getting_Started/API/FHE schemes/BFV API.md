@@ -52,21 +52,28 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 
 ### 2. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
 
-**Description**: MatrixPlain is a class for storing plaintext matrix.
+- **Description**: MatrixPlain is a class for storing plaintext matrix information.
 
-**Members**:
+  ```c++
+  MatrixPlain()
+          : log_slots(0), n1(0), level(0),
+            scale(1.0), rot_index{}, plain_vec_pool{sz, std::map<int, Plaintext>()}, read_idx(0),
+            write_idx(0), is_precompute(false)
+  ```
 
-- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
+  **Members**:
 
-- **N1** (uint32_t): Indicates the number of rows in a matrix.
+  - **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
 
-- **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
+  - **N1** (uint32_t): Indicates the number of rows in a matrix.
 
-- **scale** (double): Indicates the scaling factor of the matrix(only used in CKKS).
+  - **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
 
-- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+  - **scale** (double): Indicates the scaling factor of the matrix.
 
-- **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
+  - **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+
+  - **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
 
 <br>
 
@@ -305,5 +312,29 @@ void multiply_by_diag_matrix_bsgs(const Ciphertext &ciph, const MatrixPlain &pla
 - **result** (Ciphertext): storing the computation result.
 - **rot_key** (GaloisKeys): representing the galois key for rotation.
 
+**Usage**: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix, performing the linear transformation over the ciphertext with the Baby-Step-Giant-Step (BSGS) algorithm to accelerate the operations. 
 
-**Usage**: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.
+The BSGS algorithm can be performed with the following equation.
+
+$$ \begin{aligned}
+A \cdot z
+& = \sum\limits_{0 \le j \le N_2} \sum\limits_{0 \le i \le N_1}
+(u_{N_i \cdot j + i} \odot \rho(z;N_1 \cdot j + i))
+\\
+& = \sum\limits_{0 \le j < N_2} \rho (
+\sum\limits_{0 \le i < N_1} \rho(u_{N_1 \cdot j + i};-N_1 \cdot j)
+\odot \rho(z;i);N_1 \cdot j
+)
+\end{aligned} $$
+
+notation:
+
+$A$ denotes the plain matrix
+
+$z$ denotes the ciphertext
+
+$N_1$ is a divisor of $N/2$ and  $N_2$ is $N/2N_1$
+
+$\odot$ denotes the Hadamard (component-wise) multiplication between vectors.
+
+$\rho(c;s)$ denotes the rotation of ciphertext $c$, the rotation step is $s$ .

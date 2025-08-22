@@ -16,10 +16,10 @@
      
 2. API
 
-     * [Basic API](./Getting_Started/API/Basic API.md)
-     * [BFV API](./Getting_Started/API/FHE schemes/BFV API.md)
-     * [BGV API](./Getting_Started/API/FHE schemes/BGV API.md)
-     * [CKKS API](./Getting_Started/API/FHE schemes/CKKS API.md)
+     * [Basic](./Getting_Started/API/Basic API.md)
+     * [BFV](./Getting_Started/API/FHE schemes/BFV API.md)
+     * [BGV](./Getting_Started/API/FHE schemes/BGV API.md)
+     * [CKKS](./Getting_Started/API/FHE schemes/CKKS API.md)
      
 3. Programming
 

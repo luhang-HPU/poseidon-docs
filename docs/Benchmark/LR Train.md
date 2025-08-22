@@ -23,7 +23,6 @@ $$
 \sigma(z) = \frac{1}{1 + e^{-z}}
 $$
 
-
 Logistic Regression Classifier aims at learning a binary classification model from the features of the input training data. The model takes the linear combination of the input feature as the variable,$\theta_0+\theta_1x_1+,\ldots,+\theta_nx_n=
 \sum_{i=1}^n \theta_ix_i$，where $x_0$ is always 1. We can also present it as $\theta^Tx$.  Putting it into the sigmoid function, we get a prediction model as:
 $$
@@ -108,14 +107,18 @@ for partitioned_matrix in input_matrix:
 	size = partitioned_matrix.row
 	for i in size
 		for j in size
-			matrix_diagonal[i][j] = matrix[j][(i+j)%size]
+			matrix_diagonal[i][j] = matrix[j][(i+j) % size]
 ```
 
 
 
+![extend plaintext](../Image/Benchmark/LR Train/extend plaintext.png)
 
 
-In step(2), we computes the Sigmoid function over the input data ciphertext.
+
+
+
+In step(2), it computes the Sigmoid function over the input data ciphertext.
 
 ```pseudocode
 ct_tmp = ct_input_diag * ct_weight
@@ -124,6 +127,40 @@ for i = 0 : slot_size / (block_size)
 	for j = 0 : block_size
 		for k = 0 : block_size
 ```
+
+
+
+
+
+In step(3), it computes the gradient of $\theta$ .  The formula of gradient in plaintext is ${ grad(\theta_j) = \frac{1}{m}\sum_{i=1}^m\Big(y_i - h_\theta(x_i))\Big)x_{i,j}}$ .
+
+```pseudocode
+// 
+
+
+ct_gradient
+for i = - : 
+```
+
+
+
+
+
+
+
+
+
+In step(4), it updates the weight.
+
+```pseudocode
+ct_weight := ct_weight - ct_gradient * plt_learning_rate
+```
+
+
+
+
+
+
 
 
 

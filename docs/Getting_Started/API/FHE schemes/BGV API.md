@@ -22,7 +22,7 @@ BatchEncoder(const PoseidonContext &context);
 
 **Usage**: Construction function creates a BatchEncoder. It is necessary that the encryption parameters given through the `PoseidonContext` object support batching.
 
-<br>
+
 
 
 ```cpp
@@ -34,7 +34,7 @@ void encode(const vector<uint32_t> &src, Plaintext &plain);
 
 **Usage**: A function used to encode a vector of integer into a plaintext.
 
-<br>
+
 
 
 ```cpp
@@ -48,29 +48,36 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 
 <br>
 
-
-
 ### 2. Plaintext matrix class : **<font color='red'><span id="MatrixPlain">MatrixPlain</span> </font>**
 
 **Description**: MatrixPlain is a class for storing plaintext matrix.
 
-**Members**:
+- **Description**: MatrixPlain is a class for storing plaintext matrix information.
 
-- **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
+  ```c++
+  MatrixPlain()
+          : log_slots(0), n1(0), level(0),
+            scale(1.0), rot_index{}, plain_vec_pool{sz, std::map<int, Plaintext>()}, read_idx(0),
+            write_idx(0), is_precompute(false)
+  ```
 
-- **N1** (uint32_t): Indicates the number of rows in a matrix.
+  **Members**:
 
-- **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
+  - **LogSlots** (uint32_t): Indicates the logarithm to 2 of the number of matrix elements.
 
-- **scale** (double): Indicates the scaling factor of the matrix(only used in CKKS).
+  - **N1** (uint32_t): Indicates the number of rows in a matrix.
 
-- **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+  - **level** (uint32_t): Indicates the level of the ciphertext module chain in which the matrix resides.
+
+  - **scale** (double): Indicates the scaling factor of the matrix.
+
+  - **rot\_index** (vector<int>):Indicates the rotation index of a matrix element in a polynomial.
+
+  - **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
 
 - **plain\_vec** (map<int,Plaintext>):Indicates the polynomial corresponding to the matrix elements.
 
 <br>
-
-
 
 ### 3. Evaluator class : **<font color='red'><span id="EvaluatorBfvBase">EvaluatorBgvBase</span> </font>**
 
@@ -79,8 +86,6 @@ void decode(const Plaintext &plain,vector<uint32_t> &res);
 **Members**: The member functions are listed in Chapter [Evaluation Functions](#Evaluation Functions).
 
 <br>
-
-
 
 ## <a id = "Evaluation Functions">Evaluation Functions</a>
 
@@ -98,7 +103,7 @@ void add(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) c
 
 **Usage**: `add` computes *result* = *ciph1* + *ciph2* . 
 
-
+<br>
 
 ### 2. Addition of ciphertext and plaintext : **<font color='red'> add_plain</font>**
 
@@ -112,7 +117,7 @@ void add_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
 
 **Usage**: `add_plain` computes *result* = *ciph* + *plain* .
 
-
+<br>
 
 ### 3. Ciphertext and ciphertext subtraction : **<font color='red'> sub</font>**
 
@@ -126,7 +131,7 @@ void sub(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &result) c
 
 **Usage**: `sub` computes *result* = *ciph1* - *ciph2*.
 
-
+<br>
 
 ### 4. Subtraction plaintext from ciphertext : **<font color='red'> sub_plain</font>**
 
@@ -140,8 +145,6 @@ void sub_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &resul
 * **Usage**: `sub_plain` computes *result* = *ciph* - *plain* .
 
 <br>
-
-
 
 ### 5. Multiplication between ciphertexts : **<font color='red'> multiply</font>**  (**<font color='blue'> only software</font>**)
 
@@ -157,8 +160,6 @@ void multiply(const Ciphertext &ciph1, const Ciphertext &ciph2, Ciphertext &resu
 
 <br>
 
-
-
 ### 6. Multiplication between ciphertext and plaintext : **<font color='red'> multiply_plain</font>**
 
 ```cpp
@@ -172,8 +173,6 @@ void multiply_plain(const Ciphertext &ciph, const Plaintext &plain, Ciphertext &
 **Usage**: `multiply_plain` computes *result* = *ciph* * *plain*.
 
 <br>
-
-
 
 ### 7. Multiplication with relinearization : **<font color='red'> multiply_relin</font>**
 
@@ -289,4 +288,29 @@ void multiply_by_diag_matrix_bsgs(const Ciphertext &ciph, const MatrixPlain &pla
 - **result** (Ciphertext): storing the computation result.
 - **rot_key** (GaloisKeys): representing the galois key for rotation.
 
-**Usage**: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix homomorphically, using the BSGS algorithm to accelerate rotation operations.
+**Usage**: `multiply_by_diag_matrix_bsgs` multiplies a ciphertext with a plaintext matrix, performing the linear transformation over the ciphertext with the Baby-Step-Giant-Step (BSGS) algorithm to accelerate the operations. 
+
+The BSGS algorithm can be performed with the following equation.
+
+$$ \begin{aligned}
+A \cdot z
+& = \sum\limits_{0 \le j \le N_2} \sum\limits_{0 \le i \le N_1}
+(u_{N_i \cdot j + i} \odot \rho(z;N_1 \cdot j + i))
+\\
+& = \sum\limits_{0 \le j < N_2} \rho (
+\sum\limits_{0 \le i < N_1} \rho(u_{N_1 \cdot j + i};-N_1 \cdot j)
+\odot \rho(z;i);N_1 \cdot j
+)
+\end{aligned} $$
+
+notation:
+
+$A$ denotes the plain matrix
+
+$z$ denotes the ciphertext
+
+$N_1$ is a divisor of $N/2$ and  $N_2$ is $N/2N_1$
+
+$\odot$ denotes the Hadamard (component-wise) multiplication between vectors.
+
+$\rho(c;s)$ denotes the rotation of ciphertext $c$, the rotation step is $s$ .
