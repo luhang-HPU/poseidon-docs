@@ -40,7 +40,7 @@ make -j
 # header files: /usr/local/include/poseidon/
 # library file: /usr/local/lib/
 sudo make install
-
+sudo ldconfig
 # If you install the library in a specified path
 # Such as: make install DESTDIR=${path}
 # will be install ${path}/usr/local/include/poseidon/ and ${path}/usr/local/lib/

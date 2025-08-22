@@ -13,6 +13,7 @@
 
      * [Software Library](./Getting_Started/Compile and Installation/Software(poseidon).md)
      * [Hardware Library](./Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md)
+     * [Trident](./Getting_Started/Compile and Installation/Trident.md)
 
 2. API
 

@@ -106,6 +106,7 @@ make -j
 # header files: /usr/local/include/poseidon/
 # library file: /usr/local/lib/
 sudo make install
+sudo ldconfig
 ```
 
 <br>

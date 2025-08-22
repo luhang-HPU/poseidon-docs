@@ -37,6 +37,7 @@ nav:
         - Compile and Installation:
             - Software Library: './Getting_Started/Compile and Installation/Software(poseidon).md'
             - Hardware Library: './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
+            - Trident: './Getting_Started/Compile and Installation/Trident.md'
         - API:
             - Basic: './Getting_Started/API/Basic API.md'
             - BFV: './Getting_Started/API/FHE schemes/BFV API.md'
