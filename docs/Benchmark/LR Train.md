@@ -99,7 +99,7 @@ In this section, we will illustrate the implementation of logistic regression in
 
 ### Step 1
 
-In step(1), the input matrix is divided into several blocks of $$2^n * 2^n$$ for the convenience of the next calculation. For example, the default size of our example input is $$780 * 9$$ , and the output size is $$9*1$$ . The $$ 780 * 9 $$ input matrix is resized into $$ 784 * 16 $$  (49 partitioned matrix of size $$2^4 * 2^4$$ ) where the newly added elements are fulfilled with zeros. 
+In step(1), the input matrix is divided into several blocks of $2^n * 2^n$ for the convenience of the next calculation. For example, the default size of our example input is $780 * 9$ , and the output size is $9*1$ . The $780 * 9$ input matrix is resized into $784 * 16$  (49 partitioned matrix of size $2^4 * 2^4$ ) where the newly added elements are fulfilled with zeros. 
 
 ```pseudocode
 input_matrix := resize(input_matrix)
@@ -334,8 +334,8 @@ std::vector<std::complex<double>> vector_to_block_message(const std::vector<std:
 * `block_size` (int) : the size of block matrix (partitioned matrix)
 
 **Usage** : It packs the first `cnt` items of the `vec` into a vector which looks like:
-$$
-\begin{bmatrix}  
+
+$$ \begin{bmatrix}  
 & \underbrace{{slot_{0} \cdots slot_{block\_size-1}}}_{block\_size \ slots}
 & | 
 & \underbrace{\cdots}_{(block\_size - 1) * block\_size} & |     
@@ -343,9 +343,7 @@ $$
 & |
 & \underbrace{\cdots}_{(block\_size - 1) * block\_size} & |   
 & \cdots 
-\end{bmatrix}
-$$
-
+\end{bmatrix} $$
 
 <br>
 
