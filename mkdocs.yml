@@ -47,7 +47,7 @@ nav:
             - Examples: './Getting_Started/Programming/Examples.md'
     - Benchmark:
         - Framingham Heart Study: './Benchmark/Framingham.md'
-        - Private Information Retrieval (PIR): './Benchmark/PIR.md'
+        - Private Information Retrieval (PIR): './Benchmark/pir_bfv.md'
         - Private Set Intersection (PSI): './Benchmark/PSI.md'
         - Logistic Regression Train (LR Train): './Benchmark/LR Train.md'
         - K-Nearest Neighbor (KNN): './Benchmark/knn.md'

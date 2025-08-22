@@ -33,7 +33,7 @@
 ## Benchmark (Updating)
 
 1. [Framingham Heart Study](./Benchmark/Framingham.md)
-2. [Private Information Retrieval (PIR)](./Benchmark/PIR.md)
+2. [Private Information Retrieval (PIR)](./Benchmark/pir_bfv.md)
 3. [Private Set Intersection (PSI)](./Benchmark/PSI.md)
 4. [Logistic Regression Train (LR Train)](./Benchmark/LR Train.md)
 5. [K-Nearest Neighbor (KNN)](./Benchmark/knn.md)
