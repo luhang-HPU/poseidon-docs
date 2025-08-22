@@ -93,9 +93,11 @@ In this section, we will illustrate the implementation of logistic regression in
 2. Compute Sigmoid function ciphertext
 3. Compute gradient ciphertext
 4. Update the weight ciphertext
-5. Repeat step(2)~(4) util convergence
+5. Repeat step(2)~(4) util the result becomes convergence
 
 
+
+### Step 1
 
 In step(1), the input matrix is divided into several blocks of $$2^n * 2^n$$ for the convenience of the next calculation. For example, the default size of our example input is $$780 * 9$$ , and the output size is $$9*1$$ . The $$ 780 * 9 $$ input matrix is resized into $$ 784 * 16 $$  (49 partitioned matrix of size $$2^4 * 2^4$$ ) where the newly added elements are fulfilled with zeros. 
 
@@ -112,43 +114,83 @@ for partitioned_matrix in input_matrix:
 
 
 
+First, the training data matrix (the blue blocks in the picture) is extended to a square matrix fulfilling with zeros.
+
+
+
 ![extend plaintext](../Image/Benchmark/LR Train/extend plaintext.png)
 
+Then the extended training data matrix is packed into a vector. On the other hand, the classification result (the red blocks in the picture) is rotated and extended into a vector where the element corresponds to the extended training data element.
 
 
 
+![extend plaintext](../Image/Benchmark/LR Train/multiplication matrix with vector.png)
+
+
+
+### Step 2
 
 In step(2), it computes the Sigmoid function over the input data ciphertext.
 
 ```pseudocode
-ct_tmp = ct_input_diag * ct_weight
+ct_tmp = ciph_x_diag * ciph_weight
 
+// accumulate the slots
 for i = 0 : slot_size / (block_size)
 	for j = 0 : block_size
 		for k = 0 : block_size
+			ct_res[i * block_size * block_size + j] += ct_tmp[i * block_size * block_size + k * block_size + j]
+			
+ct_sigmoid = evaluate_poly_vector(ct_res)
 ```
 
 
 
+Every `block_size` * `block_size` slots is accumulated to the beginning `block_size` * `block_size` slots.
 
+![extend plaintext](../Image/Benchmark/LR Train/accumulation.png)
+
+
+
+### Step 3
 
 In step(3), it computes the gradient of $\theta$ .  The formula of gradient in plaintext is ${ grad(\theta_j) = \frac{1}{m}\sum_{i=1}^m\Big(y_i - h_\theta(x_i))\Big)x_{i,j}}$ .
 
+
+
 ```pseudocode
-// 
+// computing the gradient ciphertext
+for i = 0 : x_tranpose.size()
+	ct_tmp = ct_sigmoid * ct_x_transpose[i]
+    ct_tmp = accumulate(ct_tmp)
+	ct_tmp = ct_tmp * plt(1 0 0 0 0 0 0 ...)	// all the slots in plaintext is 0 except the first slot to be 1
+	ct_tmp = rotate(ct_tmp, -i)
+	ct_grad += ct_tmp
+
+ct_grad *= (learning_rate / m)
+```
 
 
-ct_gradient
-for i = - : 
+
+```pseudocode
+// rotating the gradient ciphertext
+ct_grad_shift = ct_grad + rotate(ct_grad, -16)
+for i = 1 : block_size
+	// the i-th to the (i+block_size)-th slot to be 1
+	mask = [0, 0, ... 1, 1, ..., 1, 0, ..., 0]
+	ct_tmp = rotate(ct_grad_shift, -i % 16) * mask
+	ct_grad += rotate(ct_tmp, 16*i)
+	
+for i = 1 : slot_size / block_size
+	ct_grad += rotate(ct_grad, i * block_size)
+	i <<= 1
 ```
 
 
 
 
 
-
-
-
+### Step 4
 
 In step(4), it updates the weight.
 
@@ -156,59 +198,169 @@ In step(4), it updates the weight.
 ct_weight := ct_weight - ct_gradient * plt_learning_rate
 ```
 
+<br>
 
 
 
+## Code
+
+```c++
+void read_file(std::vector<std::complex<double>> &matrix, const std::string& file);
+```
+
+* `matrix` (std::vector\<std::complex<double>> &) : output of classification result
+* `file` (const std::string &) : the file which stores the output result
+
+**Usage** : read the input of training data from the file
 
 
 
+```c++
+void read_file(std::vector<std::vector<std::complex<double>>> &matrix, const std::string& file);
+```
+
+* `matrix` (std::vector\<std::vector\<std::complex\<double>>> &) : input of training data
+* `file` (const std::string&) : the file which stores the training data
+
+**Usage** : read the input of training data from the file
 
 
 
+```c++
+void preprocess(int block_size,
+                int block_num,
+                std::vector<std::vector<std::complex<double>>> &x,
+                std::vector<std::vector<std::complex<double>>> &x_transpose,
+                std::vector<std::vector<std::complex<double>>> &x_diag);
+```
 
-### Linear Transformation
+* `block_size` (int) : the size of block matrix (partitioned matrix)
+* `block_num` (int) : the number of block matrix (partitioned matrix)
+* `x` (std::vector\<std::vector\<std::complex\<double>>> &) : the input matrix of training data
+* `x_transpose` (std::vector\<std::vector\<std::complex\<double>>> &) : the transposed matrix of training data matrix
+* `x_diag` (std::vector\<std::vector\<std::complex\<double>>> &) : the diagonal matrix of training data matrix which is used for computing the multiplication of the matrix with the vector
 
-向量的线性变换是一个矩阵M乘以一个向量V，传统意义上的矩阵乘法
-
-The multiplication of a matrix and a vector
-
-
-
-
-
-
-
-
-
-
-
+**Usage** : Preprocessing the training data for further computation.
 
 
 
+```c++
+Ciphertext accumulate_top_n(const Ciphertext &ciph, int n, const CKKSEncoder &encoder,
+                            const Encryptor &enc, std::shared_ptr<EvaluatorCkksBase> ckks_eva,
+                            const GaloisKeys &rot_keys);
+```
+
+* `ciph` (const Ciphertext &) : the input ciphertext
+* `n` (int) : the range of accumulation
+* `encoder` (const CKKSEncoder &) : the encoder
+* `enc` (const Encryptor &) : the encryptor
+* `ckks_eva` (std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `rot_keys` (const GaloisKeys &) : the rotation key
+
+**Usage** : It accumulates the top n slots and stores the result into the first slot. It can be expressed by the equation $slot[0] = \sum\limits_{i=0}^{n-1}slot[i]$ . Pay attention that the origin slots in the ciphertext will be changed!
 
 
 
+```c++
+double sigmoid(double x);
+```
+
+* `x` (double) : input value
+
+**Usage**: It computes the Sigmoid function $\frac{e^x}{1+e^x}$ of input value x. 
 
 
 
+```c++
+Ciphertext sigmoid_approx(const Ciphertext &ciph, const PolynomialVector &polys,
+                          const CKKSEncoder &encoder, std::shared_ptr<EvaluatorCkksBase> eva,
+                          const RelinKeys &relin_keys);
+```
+
+* `ciph` (const Ciphertext &) : the input ciphertext
+* `polys` (const PolynomialVector &) : the Sigmoid function expressed by approximate polynomial
+* `encoder` (const CKKSEncoder &) : the encoder
+* `eva` (std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `relin_keys` (const RelinKeys &) : the relinearization key
+
+**Usage** : It computes the sery expansion of the Sigmoid function $\frac{e^x}{1+e^x}$ in ciphertext.
 
 
 
+```c++
+int get_size(int min, int max);
+```
+
+* `min` (int) : the minimum value
+* `max` (int) : the maximum value
+
+**Usage** : It computes the logarithm of 2 which satisfies to $min \le 2^{ret \ value} \le max$ .
 
 
 
+```c++
+Ciphertext accumulate_block_matrix(const std::shared_ptr<EvaluatorCkksBase> eva, const GaloisKeys &rot_key, const Ciphertext &ciph, int block_size);
+```
+
+* `eva` (const std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `rot_key` (const GaloisKeys &) : the rotation keys
+* `ciph` (const Ciphertext) : the ciphertext
+* `block_size` (int) : the size of block matrix (partitioned matrix)
+
+**Usage** : It accumulates every `block_size` slots into the beginning `block_size` slots. For $i \in [0, block\_size - 1]$ , there exists $slot[i] = \sum\limits_{j = 0}^{block\_size - 1}slot[i + j * block\_size]$ .
 
 
 
+```c++
+Ciphertext accumulate_slot_matrix(const std::shared_ptr<EvaluatorCkksBase> eva, const GaloisKeys &rot_key, const Ciphertext &ciph, int block_size, int block_num);
+```
+
+* `eva` (const std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `rot_key` (const GaloisKeys &) : the rotation keys
+* `ciph` (const Ciphertext &) : the ciphertext
+* `block_size` (int) : the size of block matrix (partitioned matrix)
+* `block_num` (int) : the number of block matrix (partitioned matrix)
+
+**Usage** : It accumulates every `block_size` * `block_size` slots into the beginning `block_size` * `block_size` slots. For $i \in [0, block\_size * block\_size -1]$ , there exists $slot[i] = \sum\limits_{j = 0}^{block\_num - 1}slot[i + j * block\_size * block\_size]$ .
 
 
 
+```c++
+std::vector<std::complex<double>> vector_to_block_message(const std::vector<std::complex<double>> &vec, int cnt, int block_size);
+```
+
+* `vec` (const std::vector\<std::complex\<double>> &) : the input vector
+* `cnt` (int) : the first `cnt` items of the `vec`
+* `block_size` (int) : the size of block matrix (partitioned matrix)
+
+**Usage** : It packs the first `cnt` items of the `vec` into a vector which looks like:
+$$
+\begin{bmatrix}  
+& \underbrace{{slot_{0} \cdots slot_{block\_size-1}}}_{block\_size \ slots}
+& | 
+& \underbrace{\cdots}_{(block\_size - 1) * block\_size} & |     
+& \underbrace{slot_{block\_size} \cdots slot_{2 * block\_size - 1}}_{block\_size} 
+& |
+& \underbrace{\cdots}_{(block\_size - 1) * block\_size} & |   
+& \cdots 
+\end{bmatrix}
+$$
 
 
+<br>
 
 
 
 ## Performance
 
-The environment is as follows:
+### System Environment
+
+* System: Ubuntu 20.04.6 LTS
+* CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
+* RAM: 128G
+* HPU: Zhangjiang-1
+
+
+
+### Comparison (Updating)
 
