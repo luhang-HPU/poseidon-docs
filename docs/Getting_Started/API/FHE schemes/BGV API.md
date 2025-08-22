@@ -225,7 +225,7 @@ void rotate_row(const Ciphertext &ciph, Ciphertext &result, int step, const Galo
 
 - **ciph** (Ciphertext): representing a ciphertext.
 - **result** (Ciphertext): storing the ciphertext after row rotation.
-- **step** (int): An integer representing the rotation step length; a positive value indicates a right rotation while a negative value indicates a left rotation.
+- **step** (int): An integer representing the rotation step length; a positive value indicates a left rotation while a negative value indicates a right rotation.
 - **galois_keys** (GaloisKeys): representing the galois keys used for row rotation.
 
 **Usage**: `rotate_row` performs a row rotation operation on a ciphertext.

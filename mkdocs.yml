@@ -10,7 +10,8 @@ extra:
 theme: 
 #    name: 'material'
     name: 'readthedocs'
-    logo: 'image/Logo/logoR.png'
+    logo: './Image/Logo/logoR.png'
+
 
 # plugins:
 #   - search
@@ -33,9 +34,9 @@ nav:
         - Poseidon Introduction: './Overview/Poseidon_Basics.md'
         - Homomorphic Computing Unit (HPU): './Overview/HPU.md'
     - GETTING STARTED:
-        - Installation:
-            - Compile: './Getting_Started/Installation/Compilation.md'
-            - Installation: './Getting_Started/Installation/Installation.md'
+        - Compile and Installation:
+            - Software(poseidon): './Getting_Started/Compile and Installation/Software(poseidon).md'
+            - Hardware(poseidon with HPU): './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
         - API:
             - Basic API: './Getting_Started/API/Basic API.md'
             - BFV API: './Getting_Started/API/FHE schemes/BFV API.md'
