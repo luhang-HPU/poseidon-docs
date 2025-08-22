@@ -124,3 +124,24 @@ APSI typically involves intensive computation, especially when dealing with larg
 
 <br>
 
+
+## Code
+
+APSI builds contain a lot of test cases:
+1. Divided into unlabeled and labeled
+2. Divided into large data volume and small data volume
+3. Divided into single-threaded and multi-threaded
+
+**Test function** : 
+```cpp
+void RunUnlabeledTest(size_t sender_size, vector<pair<size_t, size_t>> client_total_and_int_sizes,
+                      const PSIParams &params, size_t num_threads,
+                      bool use_different_compression = false)
+void RunLabeledTest(size_t sender_size, vector<pair<size_t, size_t>> client_total_and_int_sizes,
+                    const PSIParams &params, size_t num_threads)
+```
+* `sender_size` (size_t): the sender's size.
+* `client_total_and_int_sizes` (vector<pair<size_t, size_t>>) : A set of tests. The first term of each pair is the client size, and the second term is the number of intersections.
+* `params` (PSIParams): Basic parameter table
+* `num_threads` (size_t): Number of threads.
+
