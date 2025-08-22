@@ -35,13 +35,13 @@ nav:
         - Homomorphic Computing Unit (HPU): './Overview/HPU.md'
     - GETTING STARTED:
         - Compile and Installation:
-            - Software(poseidon): './Getting_Started/Compile and Installation/Software(poseidon).md'
-            - Hardware(poseidon with HPU): './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
+            - Software Library: './Getting_Started/Compile and Installation/Software(poseidon).md'
+            - Hardware Library: './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
         - API:
-            - Basic API: './Getting_Started/API/Basic API.md'
-            - BFV API: './Getting_Started/API/FHE schemes/BFV API.md'
-            - BGV API: './Getting_Started/API/FHE schemes/BGV API.md'
-            - CKKS API: './Getting_Started/API/FHE schemes/CKKS API.md'
+            - Basic: './Getting_Started/API/Basic API.md'
+            - BFV: './Getting_Started/API/FHE schemes/BFV API.md'
+            - BGV: './Getting_Started/API/FHE schemes/BGV API.md'
+            - CKKS: './Getting_Started/API/FHE schemes/CKKS API.md'
         - Programming:
             - How to Program: './Getting_Started/Programming/How to Program.md'
             - Examples: './Getting_Started/Programming/Examples.md'
