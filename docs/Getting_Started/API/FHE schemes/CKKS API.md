@@ -262,6 +262,8 @@ PolynomialVector &operator = (const PolynomialVector &assign);
 **Usage**: Copy constructor.
 
 
+
+
 ```cpp
 PolynomialVector &operator = (PolynomialVector &&assign) = default;
 ```

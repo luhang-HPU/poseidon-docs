@@ -1,3 +1,7 @@
+# Framingham Hear Study (FHS)
+
+
+
 ## Histroy of Framingham Heart Study
 
 **Framingham Heart Study (FHS)** is the longest duration cardiovascular epidemiological study funded by the National Institutes of Health in 1948, aimed at improving understanding of the epidemiology of coronary heart disease in the United States. FHS indicates that cardiovascular disease is closely related to various factors such as age, blood pressure, cholesterol, height, weight, etc. Therefore, these health-related parameters can be used to predict the probability of cardiovascular disease. The following picture illustrates the history of FHS.
@@ -59,24 +63,25 @@ The following flowchart illustrate the private prediction process:
     }
 </style>
 
-The evaluation of power function is approximately calculated by Taylor expansion
 
-Poseidon library provide  The time spent on the homomorphic computation of prediction 
-
+The evaluation of probability of suffering from cardiovascular diseases includes homomorphic addition, homomorphic addition of constant, homomorphic multiplication and rescaling,  where all these homomorphic evaluations are supported in Poseidon library.
 
 
 
+## Performance
 
-The evaluation of probability of suffering from cardiovascular diseases includes homomorphic addition, homomorphic addition of constant, homomorphic multiplication and rescaling. All these homomorphic functions are supported in Poseidon library.
-
-
-
-## Performance (Updating)
-
-We perform the test case in the following environment:
+The environment is as follows:
 
 * System: Ubuntu 20.04.6 LTS
 * CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
 * RAM: 128G
 * HPU: Zhangjiang-1
+
+
+
+|            | Software | HPU  |
+| ---------- | -------- | ---- |
+| Total Time |          |      |
+|            |          |      |
+|            |          |      |
 

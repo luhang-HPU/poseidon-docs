@@ -1,10 +1,27 @@
-# Logistic Regression [](https://poseidon-hpu.readthedocs.io/en/latest/Benchmark/LR_train/LR_train.html#introduction)
-
-Logistic Regression (or LR) is actually a classification problem, although it names itself as "regression". It is mainly used for the binary classification, by utilizing the Logistic Function - Sigmoid. Obviously, its value locates within (0, 1). Usually, it takes 0.5 as the threshold, below which it classifies the observed set of inputs as class "0", and vice versa. Sigmoid function is presented as a pretty S-curve.
+# Logistic Regression
 
 
+
+## Introduction
+
+Logistic Regression (LR) is actually a classification problem, although it names itself as "regression". It is mainly used for the binary classification, by utilizing the Logistic Function - Sigmoid. Obviously, its value locates within (0, 1). Usually, it takes 0.5 as the threshold, below which it classifies the observed set of inputs as class "0", and vice versa. Sigmoid function is presented as a pretty S-curve.
+
+
+
+Logistic regression (LR) is a statistical learning method widely used for **classification problems**, especially in binary classification scenarios. Despite the word "regression" in its name, it is essentially a classification model that makes classification decisions by modeling the probability of events. The core of logistic regression is to **predict the probability of an event occurring**. Using a probability threshold (usually 0.5), samples can be classified into two categories: those with probability ≥ 0.5 are classified as class "1", otherwise as class "0".
+
+
+
+#### Sigmoid Function
+
+The primary role of Sigmoid function is to map any real-valued input to a value between 0 and 1, making it ideal for modeling probabilities. It is presented as a S-shaped curve.
 
 ![sigmoid](../Image/Benchmark/LR Train/6.png)
+
+The formula of Sigmoid function is as follows:
+$$
+\sigma(z) = \frac{1}{1 + e^{-z}}
+$$
 
 Logistic Regression Classifier aims at learning a binary classification model from the features of the input training data. The model takes the linear combination of the input feature as the variable,$\theta_0+\theta_1x_1+,\ldots,+\theta_nx_n=
 \sum_{i=1}^n \theta_ix_i$，where $x_0$ is always 1. We can also present it as $\theta^Tx$.  Putting it into the sigmoid function, we get a prediction model as:
@@ -41,7 +58,9 @@ $$
 \begin{aligned}&\frac{\delta}{\delta_{\theta_j}}J(\theta)=-\frac{1}{m}\sum_{i=1}^m  \Big(y_i\frac{1}{h_\theta(x_i)}\frac{\delta}     {\delta_{\theta_j}}h_\theta(x_i)-(1-y_i)\frac{1}{1-h_\theta(x_i)}\frac{\delta}{\delta_{\theta_j}}h_\theta(x_i)\Big)\\&=-\frac{1}{m}\sum_{i=1}^m  \Big(y_i\frac{1}{g(\theta^Tx_i)})-(1-y_i)\frac{1}{1-g(\theta^Tx_i)}\Big)  \frac{\delta}{\delta_{\theta_j}}g(\theta^Tx_i)\\&=-\frac{1}{m}\sum_{i=1}^m  \Big(y_i\frac{1}{g(\theta^Tx_i)})-(1-y_i)\frac{1}{1-g(\theta^Tx_i)}\Big)  g(\theta^Tx_i)\big(1-g(\theta^Tx_i)\big)\frac{\delta}{\delta_{\theta_j}}\theta^Tx_i\\   &=-\frac{1}{m}\sum_{i=1}^m  \Big(y_i\big(1-g(\theta^Tx_i)\big)-(1-y_i)g(\theta^Tx_i)\Big)x_i^j\\&=-\frac{1}{m}\sum_{i=1}^m\Big(y_i-g(\theta^Tx_i)\Big)x_i^j\\&=-\frac{1}{m}\sum_{i=1}^m\Big(h_\theta(x_i)-y_i)\Big)x_i^j  \end{aligned}
 $$
 
-# Vectorization [](https://poseidon-hpu.readthedocs.io/en/latest/Benchmark/LR_train/LR_train.html#vectorization-method)
+
+
+## Vectorization
 
 The parameter optimization process could be vectorized, which is of great importance in FHE. We could use the following process for the vectorization: 
 
@@ -62,8 +81,134 @@ $$ E=h_\theta(x)-y=\left[\matrix{  g(A_1)-y_1\\  \cdots\\  g(A_m)-y_m}\right]=\l
 
 
 $E$ is the error (or loss) between the observed label $y$ (0 or 1) and the predicted probability obtained by the sigmoid function with $x$. Therefore, the final optimization is presented as follows: 
+$$ \theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^m\big(h_\theta(x_i)-y_i)\big)x_i^j=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^me_ix_i^j=\theta_j-\alpha\frac{1}{m}x^{jT} E $$
 
-$$ \theta_j:=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^m\big(h_\theta(x_i)-y_i)\big)x_i^j=\theta_j-\alpha\frac{1}{m}\sum_{i=1}^me_ix_i^j=\theta_j-\alpha\frac{1}{m}x^{jT} $$
 
-# Implementation
+
+## Implementation
+
+In this section, we will illustrate the implementation of logistic regression in privacy.
+
+1. Preprocess the input data
+2. Compute Sigmoid function ciphertext
+3. Compute gradient ciphertext
+4. Update the weight ciphertext
+5. Repeat step(2)~(4) util convergence
+
+
+
+In step(1), the input matrix is divided into several blocks of $$2^n * 2^n$$ for the convenience of the next calculation. For example, the default size of our example input is $$780 * 9$$ , and the output size is $$9*1$$ . The $$ 780 * 9 $$ input matrix is resized into $$ 784 * 16 $$  (49 partitioned matrix of size $$2^4 * 2^4$$ ) where the newly added elements are fulfilled with zeros. 
+
+```pseudocode
+input_matrix := resize(input_matrix)
+input_matrix_diagonal := diag(input_matrix)
+
+for partitioned_matrix in input_matrix:
+	size = partitioned_matrix.row
+	for i in size
+		for j in size
+			matrix_diagonal[i][j] = matrix[j][(i+j) % size]
+```
+
+
+
+![extend plaintext](../Image/Benchmark/LR Train/extend plaintext.png)
+
+
+
+
+
+In step(2), it computes the Sigmoid function over the input data ciphertext.
+
+```pseudocode
+ct_tmp = ct_input_diag * ct_weight
+
+for i = 0 : slot_size / (block_size)
+	for j = 0 : block_size
+		for k = 0 : block_size
+```
+
+
+
+
+
+In step(3), it computes the gradient of $\theta$ .  The formula of gradient in plaintext is ${ grad(\theta_j) = \frac{1}{m}\sum_{i=1}^m\Big(y_i - h_\theta(x_i))\Big)x_{i,j}}$ .
+
+```pseudocode
+// 
+
+
+ct_gradient
+for i = - : 
+```
+
+
+
+
+
+
+
+
+
+In step(4), it updates the weight.
+
+```pseudocode
+ct_weight := ct_weight - ct_gradient * plt_learning_rate
+```
+
+
+
+
+
+
+
+
+
+
+
+### Linear Transformation
+
+向量的线性变换是一个矩阵M乘以一个向量V，传统意义上的矩阵乘法
+
+The multiplication of a matrix and a vector
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Performance
+
+The environment is as follows:
 

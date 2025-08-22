@@ -11,7 +11,7 @@ theme:
 #    name: 'material'
     name: 'readthedocs'
     logo: './Image/Logo/logoR.png'
-    
+
 
 # plugins:
 #   - search
