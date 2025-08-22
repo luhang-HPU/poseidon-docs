@@ -1,8 +1,5 @@
 # Introduction
 
-<div style="text-align: justify">
-
-
 Private Information Retrieval (PIR), as an extension of Information Retrieval, ensures users submit query requests to the data source without being perceived or leaked. PIR protocol is supposed to meet two demands at the same time:
 
 1. Correctness: Users get correct data as they request.
@@ -10,16 +7,7 @@ Private Information Retrieval (PIR), as an extension of Information Retrieval, e
 
 ![pir](../Image/Benchmark/PIR (BFV)/1.png)
 
-<style>
-    img[alt="pir"]{
-        width:700px;
-    }
-</style> 
-
 <br>
-<br>
-
-
 
  
 
@@ -36,11 +24,6 @@ Suppose the amount of the data from the client is `n`. The basic procedure is as
 
 ![basic](../Image/Benchmark/PIR (BFV)/5.png)
 
-<style>
-    img[alt="basic"]{
-        width:700px;
-    }
-</style>
 
 
 The basic PIR protocol can be extracted into four functions: (Setup, Query, Answer, Extract).
@@ -48,11 +31,8 @@ The basic PIR protocol can be extracted into four functions: (Setup, Query, Answ
 
 ![function](../Image/Benchmark/PIR (BFV)/6.png)
 
-<style>
-    img[alt="function"]{
-        width:700px;
-    }
-</style>
+<br>
+
 
 
 ## Data Packing
@@ -64,11 +44,8 @@ Thus, we pack multiple data into one homomorphic encryption plaintext.
 
 ![packing](../Image/Benchmark/PIR (BFV)/2.png)
 
-<style>
-    img[alt="packing"]{
-        width:700px;
-    }
-</style>
+<br>
+
 
 
 
@@ -80,13 +57,9 @@ When we use a 2-dimension inquiry, most query requests can be supported within t
 
 ![convert](../Image/Benchmark/PIR (BFV)/3.png)
 
-<style>
-    img[alt="convert"]{
-        width:700px;
-    }
-</style>
-
 <br>
+
+
 
 ## Multiple Inquiries
 
@@ -94,12 +67,9 @@ We construct probabilistic batch code based on Cuckoo Hash, to divide the databa
 
 ![Multi-query](../Image/Benchmark/PIR (BFV)/4.png)
 
-<style>
-    img[alt="Multi-query"]{
-        width:700px;
-    }
-</style>
 
+
+<br>
 
 
 
