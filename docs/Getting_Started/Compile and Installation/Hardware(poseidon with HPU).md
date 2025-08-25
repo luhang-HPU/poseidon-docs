@@ -55,7 +55,7 @@ ninja
 sudo ninja install
 sudo ldconfig
 ```
-![p1](../../../Image/Getting_Started/Compile and Installation/p1.png)
+![p1](../../Image/Getting_Started/Compile and Installation/p1.png)
 <br>
 
 ## Step 2: Install Hardware Library
@@ -135,7 +135,7 @@ echo 1 > /sys/bus/pci/devices/0000:${card_id}/remove
 echo 1 > /sys/bus/pci/rescan
 ./dpdk-devbind.py -b igb_uio ${card_id}
 ```
-![p2](../../../Image/Getting_Started/Compile and Installation/p2.png)
+![p2](../../Image/Getting_Started/Compile and Installation/p2.png)
 
 <br>
 

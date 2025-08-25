@@ -26,6 +26,8 @@ Suppose the amount of the data from the client is `n`. The basic procedure is as
 
 
 
+
+
 The basic PIR protocol can be extracted into four functions: (Setup, Query, Answer, Extract).
 
 
@@ -186,6 +188,8 @@ int serialize_reply(PirReply &reply, std::stringstream &stream);
 
 **Usage**: `serialize_reply` serialize the reply into stream.
 
+<br>
+
 
 
 ## Performance (Updating)
@@ -196,6 +200,8 @@ int serialize_reply(PirReply &reply, std::stringstream &stream);
 * CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
 * RAM: 128G
 * HPU: Zhangjiang-1
+
+<br>
 
 
 

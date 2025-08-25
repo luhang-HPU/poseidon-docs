@@ -6,7 +6,7 @@ Trident contains multiple applications: PIR, LR_TRAIN, KNN, PSI and Framingham H
 
 ## Step 1: Install poseidon
 Please install the poseidon library before use it.
-poseidon is divided into two versions **[Install Software Library](./Software(poseidon).md)**, **[Install Hardware Library](./Hardware(poseidon with HPU).md)**, poseidon with HPU version requires a corresponding hardware acceleration card, and it is generally recommended to install the normal version.
+poseidon is divided into two versions **[Install Software Library](../Getting_Started/Compile and Installation/Software(poseidon).md)**, **[Install Hardware Library](../Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md)**, poseidon with HPU version requires a corresponding hardware acceleration card, and it is generally recommended to install the normal version.
 
 ## Step 2: Install dependencies
 

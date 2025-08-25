@@ -9,11 +9,8 @@
 
 ![image1](../Image/Benchmark/Framingham Heart Study/history.png)
 
-<style>
-    img[alt="image1"]{
-        width:800px;
-    }
-</style>
+<br>
+
 
 
 ## Formula of Cardiovascular Diseases Prediction
@@ -30,6 +27,8 @@ The probability of suffering from cardiovascular disease can be predicted by the
 
 $$Pr(CDS) = \frac {e ^ x} {1 + e ^ x}$$
 
+<br>
+
 
 
 
@@ -45,6 +44,8 @@ With the Poseidon library, we can realize the privacy-protected cardiovascular d
 2. The third-party receives the ciphertext from users, and executes the homomorphic prediction computation. After the homomorphic computation, the third-party returns the result ciphertext to users.
 3. Users decrypt the result ciphertext getting the prediction of their probability of suffering from cardiovascular diseases.
 
+<br>
+
 
 
 ## Code
@@ -57,16 +58,11 @@ The following flowchart illustrate the private prediction process:
 
 ![image2](../Image/Benchmark/Framingham Heart Study/code flowchart.png)
 
-<style>
-    img[alt="image2"]{
-        width:800px;
-    }
-</style>
 
 
 The evaluation of probability of suffering from cardiovascular diseases includes homomorphic addition, homomorphic addition of constant, homomorphic multiplication and rescaling,  where all these homomorphic evaluations are supported in Poseidon library.
 
-
+<br>
 
 ## Performance
 
@@ -77,7 +73,7 @@ The environment is as follows:
 * RAM: 128G
 * HPU: Zhangjiang-1
 
-
+<br>
 
 |            | Software | HPU  |
 | ---------- | -------- | ---- |
