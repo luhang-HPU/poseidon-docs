@@ -82,9 +82,9 @@ sub_and_square(ckks_eva, ciph_data, ciph_query, relin_keys, scale);
 
 
 
-**Step(4) **
+**Step(4) Subtracting two different distance**
 
-
+Subtracting two kinds of distance ciphertexts.
 
 ```c++
 ckks_eva->sub_dynamic(ciph_distance_1, ciph_distance_2, ciph_result,
@@ -218,7 +218,7 @@ Ciphertext accumulate_top_n_block(const Ciphertext &ciph, int n,
 
 **Usage** : It accumulates the top n slots and stores the result into the first slot. It can be expressed by the equation $slot[0] = \sum\limits_{i=0}^{n-1}slot[i]$ . Pay attention that the origin slots in the ciphertext will be changed!
 
-
+<br>
 
 
 
