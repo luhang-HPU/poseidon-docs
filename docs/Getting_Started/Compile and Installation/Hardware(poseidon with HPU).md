@@ -24,13 +24,17 @@ Here are our recommendation for different users:
 
 Download the software source code from the following link: [SourceCode](https://github.com/luhang-HPU/poseidon)
 
-# Installation steps
+<br>
+
+## Installation steps
 
 ***If you don't use hardware, don't use this method!!!***
 
 ***This requires the hardware library to be installed before compiling!!!***
 
-## Step 1: Install dpdk
+<br>
+
+### Step 1: Install dpdk
 
 ```shell
 # install dpdk
@@ -56,9 +60,10 @@ sudo ninja install
 sudo ldconfig
 ```
 ![p1](../../Image/Getting_Started/Compile and Installation/p1.png)
+
 <br>
 
-## Step 2: Install Hardware Library
+### Step 2: Install Hardware Library
 
 You have two options for installation.
 
@@ -111,7 +116,7 @@ sudo ldconfig
 
 <br>
 
-## Step 3: Install driver and Bind port
+### Step 3: Install driver and Bind port
 
 ```shell
 # If the server reboot needs to be executed again.
@@ -139,7 +144,7 @@ echo 1 > /sys/bus/pci/rescan
 
 <br>
 
-# Execute the Examples
+## Execute the Examples
 
 **Method one**
 After installation.
@@ -158,7 +163,7 @@ g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -
 
 ```
 
-# Cmake Variables
+## Cmake Variables
 
 Poseidon provides a range of cmake variables for users to choose from. For the experience of use, try to keep the default options.
 
