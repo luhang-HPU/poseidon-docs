@@ -16,7 +16,6 @@ Here are our recommendation for different users:
 * Operating System: Ubuntu >= 18.04 LTS , CentOS >= 7.0
 * Tool chain: GNU g++ ( >= 8.0) , CMake ( >= 3.12 )
 * Dependency library: gmp ( >= 6.3.0)
-
 <br>
 
 ## Source Code Download
@@ -57,7 +56,6 @@ sudo ninja install
 sudo ldconfig
 ```
 ![p1](../../Image/Getting_Started/Compile and Installation/p1.png)
-
 <br>
 
 ### Step 2: Install Hardware Library
@@ -73,7 +71,6 @@ sudo apt-get install ./poseidon-1.0.0_x86_64.deb
 # uistall maybe need
 # sudo apt-get remove poseidon
 ```
-<br>
 
 #### Scheme 2: Partial source code compilation of software.
 
@@ -140,7 +137,7 @@ echo 1 > /sys/bus/pci/rescan
 
 ## Execute the Examples
 
-**Method one**
+**Method one:**
 
 After installation.
 
@@ -149,7 +146,7 @@ After installation.
 ./bin/test_example_file_name 
 ```
 
-**Method two**
+**Method two:**
 
 If you only compiles single file, you can use the examples with the following command.
 

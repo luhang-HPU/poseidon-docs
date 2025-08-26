@@ -14,7 +14,7 @@ Unbalanced Private Set Intersection (Unbalanced PSI) refers to a variant of Priv
 
 ![ubp](../Image/Benchmark/Private Set Intersection/ubp.png)
 
-Applications of Unbalanced PSI：
+**Applications of Unbalanced PSI:**
 <br>
 
 <ul>
@@ -42,8 +42,6 @@ The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophi
 
 ## Security reinforcement methods
 We used two methods to enhance the security of the algorithm:
-
-<br>
 
 <ul>
   <li>Cuckoo hash</li>
@@ -76,11 +74,7 @@ Cuckoo hashing is a hashing technique that can efficiently solve conflict proble
 
 **OPRF**
 
-<br>
-
 Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol widely used for enhancing privacy protection in data processing and searching operations. OPRF enables one party (the client) to securely compute the value of a pseudo-random function from another party (the server) without revealing its input to the server.
-
-<br>
 
 <ol>
   <li>Protocol Initialization:<ul><li>Input Blinding: The first step in the OPRF protocol involves the client blinding its input. This means the client applies a randomization operation to its input to ensure the true value of the input remains private from the server. This step is crucial for preserving input privacy.</li><li>Key and Function Setup: The server possesses a private key used for the computation of its pseudo-random function. This private key is not disclosed, ensuring the security and unpredictability of the server-side computation.</li></ul></li>
@@ -147,12 +141,14 @@ Construction: `create_params1()`, `create_params2()`, `create_huge_params1()` an
 ```cpp
 OPRFKey SenderDB::get_oprf_key() const;
 ```
+
 **Usage**: get oprf key.
 
 ```cpp
 void set_data(const std::vector<Item> &data)
 ```
 * `data` (std::vector<Item>): Data of the matched party.
+
 **Usage**: Initialize the database.
 
 <br>
@@ -166,6 +162,7 @@ static void RunOPRF(const OPRFRequest &oprf_request, oprf::OPRFKey key, network:
 * `oprf_request` (OPRFRequest): Created by function `to_oprf_request`.
 * `key` (oprf::OPRFKey): Get from function `get_oprf_key`.
 * `chl` (network::Channel): Should have Request.
+
 **Usage**: Execute oprf.
 
 ```cpp
