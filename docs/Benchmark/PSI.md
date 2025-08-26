@@ -25,8 +25,6 @@ Applications of Unbalanced PSI：
 
 **Intersection of privacy sets based on Homomorphic Encryption:**
 
-<br>
-
 The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophisticated application of cryptographic techniques to perform secure computations on encrypted data. Homomorphic Encryption allows for operations to be carried out on ciphertexts, producing an encrypted result that, when decrypted, matches the result of operations performed on the plaintext. This capability is particularly useful for privacy-preserving computations, such as securely computing the intersection of two sets without revealing the contents of either set to the other party. This is a crucial functionality in scenarios like secure data sharing between organizations, privacy-preserving data mining, and secure multi-party computation.
 
 <br>
@@ -50,18 +48,12 @@ We used two methods to enhance the security of the algorithm:
 <ul>
   <li>Cuckoo hash</li>
   <li>OPRF</li>
-
 </ul>
 
-<br>
 
 **Cuckoo hash**
 
-<br>
-
 Cuckoo hashing is a hashing technique that can efficiently solve conflict problems. In PSI, it can be used to construct data structures for efficient processing and searching of elements in a set.
-
-<br>
 
 <ol>
   <li>Hash table initialization:<ul><li>Multiple Hash Functions: Cuckoo hashing utilizes two or more hash functions to determine the potential positions for each element in the hash table. This redundancy is key to resolving collisions.</li><li>Hash Tables Setup: Each participant prepares their dataset by applying cuckoo hashing. This involves initializing two or more hash tables, where each element in their dataset is hashed to one or more positions based on the hash functions. The use of multiple tables and hash functions increases the flexibility and efficiency in handling collisions.</li></ul></li>
@@ -148,14 +140,14 @@ void RunLabeledTest(size_t sender_size, vector<pair<size_t, size_t>> client_tota
 Provide some initialization parameters. This is required to initialize SenderDB class and Receiver class.
 Construction: `create_params1()`, `create_params2()`, `create_huge_params1()` and `create_huge_params2()`.
 
+<br>
+
 **Member function (Class SenderDB)**
 
 ```cpp
 OPRFKey SenderDB::get_oprf_key() const;
 ```
 **Usage**: get oprf key.
-
-<br>
 
 ```cpp
 void set_data(const std::vector<Item> &data)
@@ -176,8 +168,6 @@ static void RunOPRF(const OPRFRequest &oprf_request, oprf::OPRFKey key, network:
 * `chl` (network::Channel): Should have Request.
 **Usage**: Execute oprf.
 
-<br>
-
 ```cpp
 static void RunQuery(const Query &query, network::Channel &chl,
     std::function<void(network::Channel &, Response)> send_fun = BasicSend<Response::element_type>,
@@ -185,6 +175,7 @@ static void RunQuery(const Query &query, network::Channel &chl,
 ```
 * `query` (Query): query should be constructed.
 * `chl` (network::Channel): chl should have QueryRequest.
+
 **Usage**: Execute query.
 
 <br>
@@ -196,18 +187,15 @@ static oprf::OPRFReceiver Receiver::CreateOPRFReceiver(const vector<Item> &items
 ```
 * `items`(std::vector<Item>): The data being transformed.
 * Return (oprf::OPRFReceiver): This result is a create request.
+
 **Usage**: Perform oprf transformation on the queried data.
-
-<br>
-
 
 ```cpp
 static Request Receiver::CreateOPRFRequest(const OPRFReceiver &oprf_receiver)
 ```
 * `oprf_receiver`(OPRFReceiver): created by function `CreateOPRFReceiver`
-**Usage**: create request.
 
-<br>
+**Usage**: create request.
 
 ```cpp
 static pair<vector<HashedItem>, vector<LabelKey>> Receiver::ExtractHashes(const OPRFResponse &oprf_response, const OPRFReceiver &oprf_receiver)
@@ -215,12 +203,12 @@ static pair<vector<HashedItem>, vector<LabelKey>> Receiver::ExtractHashes(const 
 * `oprf_response`(OPRFResponse): created by function `to_oprf_response`
 * `oprf_receiver`(OPRFReceiver): created by function `CreateOPRFReceiver`
 * Return (vector<HashedItem>, vector<LabelKey>): Part one prepare for query, part two prepare for decrypt.
-**Usage**: Extracting the hash prepares the query for creation.
 
-<br>
+**Usage**: Extracting the hash prepares the query for creation.
 
 ```cpp
 std::pair<Request, IndexTranslationTable> create_query(const std::vector<HashedItem> &items);
 ```
 * `items` (std::vector<HashedItem>): created by function `ExtractHashes`
+  
 **Usage**: create query.

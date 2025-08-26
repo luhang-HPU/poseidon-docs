@@ -9,7 +9,6 @@ Here are our recommendation for different users:
 
 1. Direct installation. It is convenient when installing hardware libraries.
 2. The software part is compiled from the source code, and the hardware part is an incremental installation package. This allows you to make changes to the software section later.
-
 <br>
 
 ## Requirement 
@@ -23,7 +22,6 @@ Here are our recommendation for different users:
 ## Source Code Download
 
 Download the software source code from the following link: [SourceCode](https://github.com/luhang-HPU/poseidon)
-
 <br>
 
 ## Installation steps
@@ -31,7 +29,6 @@ Download the software source code from the following link: [SourceCode](https://
 ***If you don't use hardware, don't use this method!!!***
 
 ***This requires the hardware library to be installed before compiling!!!***
-
 <br>
 
 ### Step 1: Install dpdk
@@ -76,7 +73,6 @@ sudo apt-get install ./poseidon-1.0.0_x86_64.deb
 # uistall maybe need
 # sudo apt-get remove poseidon
 ```
-
 <br>
 
 #### Scheme 2: Partial source code compilation of software.
@@ -113,7 +109,6 @@ make -j
 sudo make install
 sudo ldconfig
 ```
-
 <br>
 
 ### Step 3: Install driver and Bind port
@@ -141,12 +136,12 @@ echo 1 > /sys/bus/pci/rescan
 ./dpdk-devbind.py -b igb_uio ${card_id}
 ```
 ![p2](../../Image/Getting_Started/Compile and Installation/p2.png)
-
 <br>
 
 ## Execute the Examples
 
 **Method one**
+
 After installation.
 
 ```shell
@@ -155,6 +150,7 @@ After installation.
 ```
 
 **Method two**
+
 If you only compiles single file, you can use the examples with the following command.
 
 ```shell
@@ -179,7 +175,5 @@ Poseidon provides a range of cmake variables for users to choose from. For the e
 POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon library, which can be turned off to speed up the compilation of parts of the poseidon library
 POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
 POSEIDON_USE_HARDWARE: It can be enabled on the premise that the hardware card meets the requirements and has hardware dependencies.
-
-<br>
 
 If you encounter any problems with compilation and installation, please feel free to contact us via email at luhang@ict.ac.cn

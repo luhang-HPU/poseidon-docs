@@ -13,7 +13,6 @@
 ## Source Code Download
 
 Download the software source code from the following link: [SourceCode](https://github.com/luhang-HPU/poseidon)
-
 <br>
 
 ## Build Source Code
@@ -46,13 +45,12 @@ sudo ldconfig
 # will be install ${path}/usr/local/include/poseidon/ and ${path}/usr/local/lib/
 # You need to add above path to PATH
 ```
-
 <br>
-
 
 ## Execute the Examples
 
 **Method one**
+
 After Build Source Code.
 
 ```shell
@@ -61,13 +59,14 @@ After Build Source Code.
 ```
 
 **Method two**
+
 If you only compiles single file, you can use the examples with the following command.
 
 ```shell
 # Please replace the internal variables with the actual file
 g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -std=c++17
 ```
-
+<br>
 
 ## Cmake Variables
 
@@ -85,7 +84,5 @@ Poseidon provides a range of cmake variables for users to choose from. For the e
 POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon library, which can be turned off to speed up the compilation of parts of the poseidon library
 POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
 POSEIDON_USE_HARDWARE: It is required in hardware notebooks, and the opening conditions are relatively harsh. See Hardware Compilation for details.
-
-<br>
 
 If you encounter any problems with compilation and installation, please feel free to contact us via email at luhang@ict.ac.cn
