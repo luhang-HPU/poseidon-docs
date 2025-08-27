@@ -37,16 +37,12 @@
 ## Benchmark (Updating)
 
 1. [Introduction](./Benchmark/Introduction.md)
+
 2. [Download and Compile](./Benchmark/Trident Installation.md)
+
 3. Applications
-
-
-
-
-
-* [Framingham Heart Study](./Benchmark/Framingham.md)
-
-* [Private Information Retrieval (PIR)](./Benchmark/pir_bfv.md)
-* [Private Set Intersection (PSI)](./Benchmark/PSI.md)
-* [Logistic Regression Train (LR Train)](./Benchmark/LR Train.md)
-* [K-Nearest Neighbor (KNN)](./Benchmark/knn.md)
+     * [Framingham Heart Study](./Benchmark/Framingham.md)
+     * [Private Information Retrieval (PIR)](./Benchmark/pir_bfv.md)
+     * [Private Set Intersection (PSI)](./Benchmark/PSI.md)
+     * [Logistic Regression Train (LR Train)](./Benchmark/LR Train.md)
+     * [K-Nearest Neighbor (KNN)](./Benchmark/knn.md)
