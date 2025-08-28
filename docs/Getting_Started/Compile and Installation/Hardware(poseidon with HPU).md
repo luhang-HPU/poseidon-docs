@@ -1,4 +1,4 @@
-# Poseidon hardware compile
+# Hardware Library
 
 **Must read: This article is a guide to compiling and using hardware versions. Poseidon is divided into software and hardware versions. The hardware version is to hardware accelerate the operator, based on this software code, you also need a hardware acceleration card and corresponding drivers, incremental installation packages, etc. Do not use this method if you do not have the necessary conditions such as a hardware card.**
 
@@ -13,14 +13,9 @@ Here are our recommendation for different users:
 
 ## Requirement 
 
-* Operating System: Ubuntu >= 18.04 LTS , CentOS >= 7.0
+* Operating System: Ubuntu >= 18.04 LTS
 * Tool chain: GNU g++ ( >= 8.0) , CMake ( >= 3.12 )
 * Dependency library: gmp ( >= 6.3.0)
-<br>
-
-## Source Code Download
-
-Download the software source code from the following link: [SourceCode](https://github.com/luhang-HPU/poseidon)
 <br>
 
 ## Installation steps
@@ -68,7 +63,7 @@ You have two options for installation.
 # download and install
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-1.0.0_x86_64.deb
 sudo apt-get install ./poseidon-1.0.0_x86_64.deb
-# uistall maybe need
+# uninstall maybe need
 # sudo apt-get remove poseidon
 ```
 
@@ -81,7 +76,7 @@ Open source software libraries are compiled into dependency packages according t
 wget https://gitee.com/luhang-CCL/poseidon/raw/master/downloads/poseidon-hardware-1.0.0_x86_64.deb
 sudo apt-get install ./poseidon-hardware-1.0.0_x86_64.deb
 
-# uistall maybe need
+# uninstall maybe need
 # sudo apt-get remove poseidon
 
 # Compile software part dependent above package
@@ -106,6 +101,24 @@ make -j
 sudo make install
 sudo ldconfig
 ```
+<br>
+
+#### Cmake Variables
+
+Poseidon provides a range of cmake variables for users to choose from. For the experience of use, try to keep the default options.
+
+| CMake Variable          | Type | Usage                    | Default |
+| ----------------------- | ---- | ------------------------ | ------- |
+| POSEIDON_BUILD_EXAMPLES | bool | Build Poseidon examples  | ON      |
+| POSEIDON_USE_ZSTD       | bool | Use zstd                 | ON      |
+| POSEIDON_USE_ZLIB       | bool | Use zlib                 | ON      |
+| POSEIDON_USE_MSGSL      | bool | Use msgsl                | ON      |
+| POSEIDON_USE_HARDWARE   | bool | Whether hardware is used | OFF     |
+
+
+POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon library, which can be turned off to speed up the compilation of parts of the poseidon library
+POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
+POSEIDON_USE_HARDWARE: It can be enabled on the premise that the hardware card meets the requirements and has hardware dependencies.
 <br>
 
 ### Step 3: Install driver and Bind port
@@ -137,16 +150,14 @@ echo 1 > /sys/bus/pci/rescan
 
 ## Execute the Examples
 
-**Method one:**
-
 After installation.
+
+You can use this way.
 
 ```shell
 # In build folder 
 ./bin/test_example_file_name 
 ```
-
-**Method two:**
 
 If you only compiles single file, you can use the examples with the following command.
 
@@ -155,22 +166,5 @@ If you only compiles single file, you can use the examples with the following co
 g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -std=c++17
 
 ```
-
-## Cmake Variables
-
-Poseidon provides a range of cmake variables for users to choose from. For the experience of use, try to keep the default options.
-
-| CMake Variable          | Type | Usage                    | Default |
-| ----------------------- | ---- | ------------------------ | ------- |
-| POSEIDON_BUILD_EXAMPLES | bool | Build Poseidon examples  | ON      |
-| POSEIDON_USE_ZSTD       | bool | Use zstd                 | ON      |
-| POSEIDON_USE_ZLIB       | bool | Use zlib                 | ON      |
-| POSEIDON_USE_MSGSL      | bool | Use msgsl                | ON      |
-| POSEIDON_USE_HARDWARE   | bool | Whether hardware is used | OFF     |
-
-
-POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon library, which can be turned off to speed up the compilation of parts of the poseidon library
-POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
-POSEIDON_USE_HARDWARE: It can be enabled on the premise that the hardware card meets the requirements and has hardware dependencies.
 
 If you encounter any problems with compilation and installation, please feel free to contact us via email at luhang@ict.ac.cn

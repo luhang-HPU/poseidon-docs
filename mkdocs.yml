@@ -34,7 +34,7 @@ nav:
         - Poseidon Introduction: './Overview/Poseidon_Basics.md'
         - Homomorphic Computing Unit (HPU): './Overview/HPU.md'
     - GETTING STARTED:
-        - Compile and Installation:
+        - Installation:
             - Software Library: './Getting_Started/Compile and Installation/Software(poseidon).md'
             - Hardware Library: './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
         - API:
@@ -47,7 +47,7 @@ nav:
             - Examples: './Getting_Started/Programming/Examples.md'
     - Benchmark:
         - Introduction: './Benchmark/Introduction.md'
-        - Download and Compile: './Benchmark/Trident Installation.md'
+        - Compilation: './Benchmark/Trident Installation.md'
         - Application:
             - Framingham Heart Study: './Benchmark/Framingham.md'
             - Private Information Retrieval (PIR): './Benchmark/pir_bfv.md'

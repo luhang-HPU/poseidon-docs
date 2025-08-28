@@ -1,8 +1,7 @@
-# Trindent compile
+# Trident compilation
 
 Trident contains multiple applications: PIR, LR_TRAIN, KNN, PSI and Framingham Heart Study.
 
-# Compile Steps:
 
 ## Step 1: Install poseidon
 Please install the poseidon library before use it.
@@ -11,7 +10,7 @@ poseidon is divided into two versions **[Install Software Library](../Getting_St
 ## Step 2: Install dependencies
 
 ### Cmake Variables
-Apps in Trindent are independent and depend on Poseidon and cmake provides an option for each application to compile or not. As follows:
+Apps in Trident are independent and depend on Poseidon and cmake provides an option for each application to compile or not. As follows:
 
 | CMake Variable | Type | Usage             | Default |
 | -------------- | ---- | ----------------- | ------- |

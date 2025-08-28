@@ -1,4 +1,4 @@
-# Poseidon software compile
+# Software Library
 
 **Must read: This article is a guide to compiling and using software versions. Poseidon is divided into software and hardware versions. The software version is the open source code mentioned in this article. The hardware version is hardware acceleration of the operator, and the full function is based on this open source code, and it also requires a hardware acceleration card and corresponding drivers, incremental installation packages, etc.**
 <br>
@@ -10,12 +10,9 @@
 * Dependency library: gmp ( >= 6.3.0)
 <br>
 
-## Source Code Download
+## Download and Installation
 
 Download the software source code from the following link: [SourceCode](https://github.com/luhang-HPU/poseidon)
-<br>
-
-## Build Source Code
 
 You can directly compile the source code with the following command:
 
@@ -47,28 +44,7 @@ sudo ldconfig
 ```
 <br>
 
-## Execute the Examples
-
-**Method one**
-
-After Build Source Code.
-
-```shell
-# In build folder 
-./bin/test_example_file_name 
-```
-
-**Method two**
-
-If you only compiles single file, you can use the examples with the following command.
-
-```shell
-# Please replace the internal variables with the actual file
-g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -std=c++17
-```
-<br>
-
-## Cmake Variables
+#### Cmake Variables
 
 Poseidon provides a range of cmake variables for users to choose from. For the experience of use, try to keep the default options.
 
@@ -84,5 +60,24 @@ Poseidon provides a range of cmake variables for users to choose from. For the e
 POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon library, which can be turned off to speed up the compilation of parts of the poseidon library
 POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
 POSEIDON_USE_HARDWARE: It is required in hardware notebooks, and the opening conditions are relatively harsh. See Hardware Compilation for details.
+
+## Execute the Examples
+
+After installation.
+
+You can use this way.
+
+```shell
+# In build folder 
+./bin/test_example_file_name 
+```
+
+If you only compiles single file, you can use the examples with the following command.
+
+```shell
+# Please replace the internal variables with the actual file
+g++ ${filename}.cpp -o ${filename} -I${poseidon_header_path} -lposeidon_shared -std=c++17
+
+```
 
 If you encounter any problems with compilation and installation, please feel free to contact us via email at luhang@ict.ac.cn

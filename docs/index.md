@@ -9,7 +9,7 @@
 
 ## Getting Started
 
-1. Compile and Installation
+1. Installation
 
      * [Software Library](./Getting_Started/Compile and Installation/Software(poseidon).md)
      * [Hardware Library](./Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md)
@@ -38,7 +38,7 @@
 
 1. [Introduction](./Benchmark/Introduction.md)
 
-2. [Download and Compile](./Benchmark/Trident Installation.md)
+2. [Compilation](./Benchmark/Trident Installation.md)
 
 3. Applications
      * [Framingham Heart Study](./Benchmark/Framingham.md)
