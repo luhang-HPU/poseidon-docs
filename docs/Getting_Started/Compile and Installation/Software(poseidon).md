@@ -61,7 +61,7 @@ POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon libr
 POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
 POSEIDON_USE_HARDWARE: It is required in hardware notebooks, and the opening conditions are relatively harsh. See Hardware Compilation for details.
 
-## Execute the Examples
+## Execute the examples
 
 After installation.
 

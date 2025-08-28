@@ -18,7 +18,7 @@ Here are our recommendation for different users:
 * Dependency library: gmp ( >= 6.3.0)
 <br>
 
-## Installation steps
+## Download and Installation
 
 ***If you don't use hardware, don't use this method!!!***
 
@@ -148,7 +148,7 @@ echo 1 > /sys/bus/pci/rescan
 ![p2](../../Image/Getting_Started/Compile and Installation/p2.png)
 <br>
 
-## Execute the Examples
+## Execute the examples
 
 After installation.
 
