@@ -1,13 +1,12 @@
+# How to Program
+
 The ***poseidon/examples*** directory contains three subdirectories ***BFV***, ***BGV*** and ***CKKS*** , which contain basic example programming for different schemes.
 
 All the BFV, BGV and CKKS examples support different security levels and polynomial degrees. Additionally, they can be executed in both software mode and hardware mode. If users wish to execute the examples in various scenarios, they can customize the security parameters to meet the requirement.
 
 
-<br>
 
-# How to Program with Poseidon
-
-In this chapter, we will introduce an example based on BFV to show how to program with Poseidon.
+In this documentation, we will introduce an example based on BFV to show how to program with Poseidon.
 
 <br>
 

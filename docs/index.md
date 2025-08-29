@@ -16,7 +16,7 @@
 
      
 
-2. API
+2. FHE APIs
 
      * [Basics](./Getting_Started/API/Basic API.md)
      * [BFV](./Getting_Started/API/FHE schemes/BFV API.md)
@@ -27,22 +27,22 @@
 
 3. Programming
 
-     * [How to Program with Poseidon](./Getting_Started/Programming/How to Program.md)
+     * [How to Program](./Getting_Started/Programming/How to Program.md)
 
      * [Examples](./Getting_Started/Programming/Examples.md)
 
 
 
 
-## Benchmark (Updating)
+## Trident Benchmark
 
-1. [Introduction](./Benchmark/Introduction.md)
+1. [Introduction](./Benchmark/Introduction/Introduction.md)
 
-2. [Compilation](./Benchmark/Trident Installation.md)
+2. [Trident Install](./Benchmark/Install/Trident Installation.md)
 
 3. Applications
-     * [Framingham Heart Study](./Benchmark/Framingham.md)
-     * [Private Information Retrieval (PIR)](./Benchmark/pir_bfv.md)
-     * [Private Set Intersection (PSI)](./Benchmark/PSI.md)
-     * [Logistic Regression Train (LR Train)](./Benchmark/LR Train.md)
-     * [K-Nearest Neighbor (KNN)](./Benchmark/knn.md)
+     * [Framingham Heart Study](./Benchmark/Application/Framingham.md)
+     * [Private Information Retrieval (PIR)](./Benchmark/Application/pir_bfv.md)
+     * [Private Set Intersection (PSI)](./Benchmark/Application/PSI.md)
+     * [Logistic Regression Train (LR Train)](./Benchmark/Application/LR Train.md)
+     * [K-Nearest Neighbor (KNN)](./Benchmark/Application/knn.md)

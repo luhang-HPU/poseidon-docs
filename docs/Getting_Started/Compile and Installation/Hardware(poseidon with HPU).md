@@ -146,7 +146,10 @@ echo 1 > /sys/bus/pci/rescan
 ./dpdk-devbind.py -b igb_uio ${card_id}
 ```
 ![p2](../../Image/Getting_Started/Compile and Installation/p2.png)
+
 <br>
+
+
 
 ## Execute the examples
 

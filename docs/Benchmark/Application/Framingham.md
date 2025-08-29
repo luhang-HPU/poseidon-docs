@@ -2,12 +2,12 @@
 
 
 
-## Histroy of Framingham Heart Study
+## Introduction
 
 **Framingham Heart Study (FHS)** is the longest duration cardiovascular epidemiological study funded by the National Institutes of Health in 1948, aimed at improving understanding of the epidemiology of coronary heart disease in the United States. FHS indicates that cardiovascular disease is closely related to various factors such as age, blood pressure, cholesterol, height, weight, etc. Therefore, these health-related parameters can be used to predict the probability of cardiovascular disease. The following picture illustrates the history of FHS.
 
 
-![image1](../Image/Benchmark/Framingham Heart Study/history.png)
+![image1](../../Image/Benchmark/Framingham Heart Study/history.png)
 
 <br>
 
@@ -48,7 +48,7 @@ With the Poseidon library, we can realize the privacy-protected cardiovascular d
 
 
 
-## Code
+## Implementation
 
 Our private cardiovascular diseases prediction example is based on CKKS scheme as the data may be float-point.
 
@@ -56,7 +56,7 @@ The following flowchart illustrate the private prediction process:
 
 
 
-![image2](../Image/Benchmark/Framingham Heart Study/code flowchart.png)
+![image2](../../Image/Benchmark/Framingham Heart Study/code flowchart.png)
 
 
 
@@ -64,20 +64,18 @@ The evaluation of probability of suffering from cardiovascular diseases includes
 
 <br>
 
-## Performance
+## Performance (TBD)
 
 The environment is as follows:
 
 * System: Ubuntu 20.04.6 LTS
 * CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
 * RAM: 128G
-* HPU: Zhangjiang-1
+* HPU: ZJ-1
 
 <br>
 
 |            | Software | HPU  |
 | ---------- | -------- | ---- |
 | Total Time |          |      |
-|            |          |      |
-|            |          |      |
 

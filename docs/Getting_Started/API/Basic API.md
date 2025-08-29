@@ -1,4 +1,4 @@
-# Basic API
+# Basic APIs
 
 ## Data Structures
 
