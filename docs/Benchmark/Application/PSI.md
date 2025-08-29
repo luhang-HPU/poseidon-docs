@@ -1,10 +1,12 @@
 # Private Set Intersection (PSI)
 
+
+
 ## Introduction
 
 Private Set Intersection (PSI) is a cryptographic technique that allows two parties to find the common elements in their respective sets without revealing any other information about their sets to each other. This means they can identify what data they share in common, without disclosing any data that isn't shared. PSI is crucial in contexts where privacy and confidentiality are important, such as in secure data sharing, privacy-preserving data analysis, and in cybersecurity, enabling collaboration and data comparison without compromising sensitive information.
 
-![p1](../Image/Benchmark/Private Set Intersection/p1.png)
+![p1](../../Image/Benchmark/Private Set Intersection/p1.png)
 
 <br>
 
@@ -12,7 +14,7 @@ Private Set Intersection (PSI) is a cryptographic technique that allows two part
 
 Unbalanced Private Set Intersection (Unbalanced PSI) refers to a variant of Private Set Intersection (PSI) protocols tailored to the situation where there is a large disparity in set sizes between the two participating parties. PSI is a cryptographic technique that allows two parties to compute the intersection of their private sets without revealing any additional information about their sets other than what can be inferred from the intersection itself.
 
-![ubp](../Image/Benchmark/Private Set Intersection/ubp.png)
+![ubp](../../Image/Benchmark/Private Set Intersection/ubp.png)
 
 **Applications of Unbalanced PSI:**
 <br>
@@ -29,7 +31,7 @@ The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophi
 
 <br>
 
-![p2](../Image/Benchmark/Private Set Intersection/p2.png)
+![p2](../../Image/Benchmark/Private Set Intersection/p2.png)
 
 <style>
     img[alt="p2"]{
@@ -40,7 +42,7 @@ The intersection of privacy sets based on Homomorphic Encryption (HE) is a sophi
 
 <br>
 
-## Security reinforcement methods
+## Implementation
 We used two methods to enhance the security of the algorithm:
 
 <ul>
@@ -49,7 +51,7 @@ We used two methods to enhance the security of the algorithm:
 </ul>
 
 
-**Cuckoo hash**
+### Cuckoo hash
 
 Cuckoo hashing is a hashing technique that can efficiently solve conflict problems. In PSI, it can be used to construct data structures for efficient processing and searching of elements in a set.
 
@@ -61,7 +63,7 @@ Cuckoo hashing is a hashing technique that can efficiently solve conflict proble
 
 <br>
 
-![p3](../Image/Benchmark/Private Set Intersection/p3.png)
+![p3](../../Image/Benchmark/Private Set Intersection/p3.png)
 
 <style>
     img[alt="p3"]{
@@ -72,7 +74,7 @@ Cuckoo hashing is a hashing technique that can efficiently solve conflict proble
 
 <br>
 
-**OPRF**
+### OPRF
 
 Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol widely used for enhancing privacy protection in data processing and searching operations. OPRF enables one party (the client) to securely compute the value of a pseudo-random function from another party (the server) without revealing its input to the server.
 
@@ -84,7 +86,7 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
 
 <br>
 
-![p4](../Image/Benchmark/Private Set Intersection/p4.png)
+![p4](../../Image/Benchmark/Private Set Intersection/p4.png)
 
 <style>
     img[alt="p4"]{
@@ -95,7 +97,7 @@ Oblivious Pseudo-Random Function (OPRF) is an important cryptographic protocol w
 
 <br>
 
-## Reduce depth
+### Reduce depth
 APSI typically involves intensive computation, especially when dealing with large-scale datasets, where complex computational steps may result in significant computational overhead. By optimizing data structures and algorithms, the depth of these calculations can be reduced, thereby reducing overall computational and communication costs.
 <br>
 
@@ -107,7 +109,7 @@ APSI typically involves intensive computation, especially when dealing with larg
 
 <br>
 
-## Code
+## Source Code
 
 APSI builds contain a lot of test cases:
 1. Divided into unlabeled and labeled
@@ -208,4 +210,27 @@ std::pair<Request, IndexTranslationTable> create_query(const std::vector<HashedI
 ```
 * `items` (std::vector<HashedItem>): created by function `ExtractHashes`
   
+
 **Usage**: create query.
+
+<br>
+
+
+
+## Performance (TBD)
+
+The environment is as follows:
+
+* System: Ubuntu 20.04.6 LTS
+* CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
+* RAM: 128G
+* HPU: ZJ-1
+
+<br>
+
+|            | Software | HPU  |
+| ---------- | -------- | ---- |
+| Total Time |          |      |
+
+
+

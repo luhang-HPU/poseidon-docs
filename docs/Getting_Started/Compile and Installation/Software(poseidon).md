@@ -56,10 +56,13 @@ Poseidon provides a range of cmake variables for users to choose from. For the e
 | POSEIDON_USE_MSGSL      | bool | Use msgsl                | ON      |
 | POSEIDON_USE_HARDWARE   | bool | Whether hardware is used | OFF     |
 
-
 POSEIDON_BUILD_EXAMPLES: An example is an application based on the Poseidon library, which can be turned off to speed up the compilation of parts of the poseidon library
 POSEIDON_USE_ZSTD, POSEIDON_USE_ZLIB, POSEIDON_USE_MSGSL: Some additional dependencies. The advantage of **turning it off** is that you don't need a VPN during the compilation process, **but the disadvantage is that it will cause some applications to not work.**
 POSEIDON_USE_HARDWARE: It is required in hardware notebooks, and the opening conditions are relatively harsh. See Hardware Compilation for details.
+
+<br>
+
+
 
 ## Execute the examples
 

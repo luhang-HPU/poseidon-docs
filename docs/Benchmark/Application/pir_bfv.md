@@ -1,17 +1,21 @@
-# Introduction
+# Private Information Retrieval (PIR)
+
+## Introduction
 
 Private Information Retrieval (PIR), as an extension of Information Retrieval, ensures users submit query requests to the data source without being perceived or leaked. PIR protocol is supposed to meet two demands at the same time:
 
 1. Correctness: Users get correct data as they request.
 2. Security: The server does not know the true query conditions.
 
-![pir](../Image/Benchmark/PIR (BFV)/1.png)
+![pir](../../Image/Benchmark/PIR (BFV)/1.png)
 
 <br>
 
  
 
-## Basic PIR
+## Implementation
+
+### Basic PIR
 
 Suppose the amount of the data from the client is `n`. The basic procedure is as follows.
 
@@ -22,7 +26,7 @@ Suppose the amount of the data from the client is `n`. The basic procedure is as
 5. The client decrypts the ciphertext and gets the inquired data $B_i$.
 
 
-![basic](../Image/Benchmark/PIR (BFV)/5.png)
+![basic](../../Image/Benchmark/PIR (BFV)/5.png)
 
 
 
@@ -31,43 +35,43 @@ Suppose the amount of the data from the client is `n`. The basic procedure is as
 The basic PIR protocol can be extracted into four functions: (Setup, Query, Answer, Extract).
 
 
-![function](../Image/Benchmark/PIR (BFV)/6.png)
+![function](../../Image/Benchmark/PIR (BFV)/6.png)
 
 <br>
 
 
 
-## Data Packing
+### Data Packing
 
 Consider the basic PIR protocol, which consumes a lot on the computation and the communication of the query requests since $n$ ciphertexts should be generated and sent each time.
 
 Thus, we pack multiple data into one homomorphic encryption plaintext.
 
 
-![packing](../Image/Benchmark/PIR (BFV)/2.png)
+![packing](../../Image/Benchmark/PIR (BFV)/2.png)
 
 <br>
 
 
 
 
-## Vector Transformer
+### Vector Transformer
 
 We convert data from the linear vector into a 2-dimension matrix.
 
 When we use a 2-dimension inquiry, most query requests can be supported within the two inquiry ciphertexts.
 
-![convert](../Image/Benchmark/PIR (BFV)/3.png)
+![convert](../../Image/Benchmark/PIR (BFV)/3.png)
 
 <br>
 
 
 
-## Multiple Inquiries
+### Multiple Inquiries
 
 We construct probabilistic batch code based on Cuckoo Hash, to divide the database into several batches, and execute multiple inquiries at the same time according to different batches.
 
-![Multi-query](../Image/Benchmark/PIR (BFV)/4.png)
+![Multi-query](../../Image/Benchmark/PIR (BFV)/4.png)
 
 
 
@@ -76,7 +80,7 @@ We construct probabilistic batch code based on Cuckoo Hash, to divide the databa
 
 
 
-## Code
+## Source Code
 
 **Typedef**:
 
@@ -192,7 +196,7 @@ int serialize_reply(PirReply &reply, std::stringstream &stream);
 
 
 
-## Performance (Updating)
+## Performance
 
 ### System Environment
 

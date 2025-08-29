@@ -44,7 +44,7 @@ The security parameters of CKKS scheme:
 
 **Process** :
 
-![process](../Image/Benchmark/KNN/process.png)
+![process](../../Image/Benchmark/KNN/process.png)
 
 
 
@@ -66,7 +66,7 @@ The query party and the data party encrypts their vectors and sends the cipherte
 
 
 
-![process](../Image/Benchmark/KNN/preprocess.png)
+![process](../../Image/Benchmark/KNN/preprocess.png)
 
 
 
@@ -127,7 +127,7 @@ The query party decrypts and decodes the ciphertext which is returned from the c
 
 
 
-## Code
+## Source Code
 
 ```c++
 void read_jsonl_query(const std::string &file,
@@ -222,15 +222,18 @@ Ciphertext accumulate_top_n_block(const Ciphertext &ciph, int n,
 
 
 
-## Performance
+## Performance (TBD)
 
-### System Environment
+The environment is as follows:
 
 * System: Ubuntu 20.04.6 LTS
 * CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
 * RAM: 128G
-* HPU: Zhangjiang-1
+* HPU: ZJ-1
 
 <br>
 
-### Comparison (Updating)
+|            | Software | HPU  |
+| ---------- | -------- | ---- |
+| Total Time |          |      |
+

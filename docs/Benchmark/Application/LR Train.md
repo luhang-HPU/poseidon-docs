@@ -16,7 +16,7 @@ Logistic regression (LR) is a statistical learning method widely used for **clas
 
 The primary role of Sigmoid function is to map any real-valued input to a value between 0 and 1, making it ideal for modeling probabilities. It is presented as a S-shaped curve.
 
-![sigmoid](../Image/Benchmark/LR Train/6.png)
+![sigmoid](../../Image/Benchmark/LR Train/6.png)
 
 The formula of Sigmoid function is as follows:
 $$
@@ -118,13 +118,13 @@ First, the training data matrix (the blue blocks in the picture) is extended to 
 
 
 
-![extend plaintext](../Image/Benchmark/LR Train/extend plaintext.png)
+![extend plaintext](../../Image/Benchmark/LR Train/extend plaintext.png)
 
 Then the extended training data matrix is packed into a vector. On the other hand, the classification result (the red blocks in the picture) is rotated and extended into a vector where the element corresponds to the extended training data element.
 
 
 
-![extend plaintext](../Image/Benchmark/LR Train/multiplication matrix with vector.png)
+![extend plaintext](../../Image/Benchmark/LR Train/multiplication matrix with vector.png)
 
 
 
@@ -148,7 +148,7 @@ ct_sigmoid = evaluate_poly_vector(ct_res)
 
 Every `block_size` * `block_size` slots is accumulated to the beginning `block_size` * `block_size` slots.
 
-![extend plaintext](../Image/Benchmark/LR Train/accumulation.png)
+![extend plaintext](../../Image/Benchmark/LR Train/accumulation.png)
 
 
 
@@ -202,7 +202,7 @@ ct_weight := ct_weight - ct_gradient * plt_learning_rate
 
 
 
-## Code
+## Source Code
 
 ```c++
 void read_file(std::vector<std::complex<double>> &matrix, const std::string& file);
@@ -349,16 +349,18 @@ $$ \begin{bmatrix}
 
 
 
-## Performance
+## Performance (TBD)
 
-### System Environment
+The environment is as follows:
 
 * System: Ubuntu 20.04.6 LTS
 * CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
 * RAM: 128G
-* HPU: Zhangjiang-1
+* HPU: ZJ-1
 
 <br>
 
-### Comparison (Updating)
+|            | Software | HPU  |
+| ---------- | -------- | ---- |
+| Total Time |          |      |
 

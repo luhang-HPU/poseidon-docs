@@ -64,5 +64,24 @@ Instead of calculating ReLU function directly, we aim at $sign(x)$ first. As it 
         width:800px;
     }
 </style>
-
 At last, make use of the sign funtion: $ReLU(x) = (sign(x)+1)*x/2$ to implement ReLU function.
+
+<br>
+
+
+
+## Performance (TBD)
+
+The environment is as follows:
+
+* System: Ubuntu 20.04.6 LTS
+* CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
+* RAM: 128G
+* HPU: ZJ-1
+
+<br>
+
+|            | Software | HPU  |
+| ---------- | -------- | ---- |
+| Total Time |          |      |
+
