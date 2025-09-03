@@ -8,7 +8,7 @@ As an attempt to utilize Poseidon at convolutional neural networks, we implement
 <br>
 <br>
 
-![resnet](../Image/Benchmark/Resnet20/1.png)
+![resnet](../../Image/Benchmark/Resnet20/1.png)
 <style>
     img[alt="resnet"]{
         width:800px;
@@ -25,7 +25,7 @@ As an attempt to utilize Poseidon at convolutional neural networks, we implement
 
 ## Architecture
 
-![architecture](../Image/Benchmark/Resnet20/2.png)
+![architecture](../../Image/Benchmark/Resnet20/2.png)
 <style>
     img[alt="architecture"]{
         width:1000px;
@@ -37,7 +37,7 @@ As an attempt to utilize Poseidon at convolutional neural networks, we implement
 ## Convolution
 
 
-![conv](../Image/Benchmark/Resnet20/4.png)
+![conv](../../Image/Benchmark/Resnet20/4.png)
 <style>
     img[alt="conv"]{
         width:800px;
@@ -47,7 +47,7 @@ As an attempt to utilize Poseidon at convolutional neural networks, we implement
 We transform 2-dimension matrixes into linear vectors to calculate convolution.
 
 
-![stride](../Image/Benchmark/Resnet20/5.png)
+![stride](../../Image/Benchmark/Resnet20/5.png)
 <style>
     img[alt="stride"]{
         width:800px;
@@ -58,7 +58,7 @@ We transform 2-dimension matrixes into linear vectors to calculate convolution.
 
 Instead of calculating ReLU function directly, we aim at $sign(x)$ first. As it is an odd funtion, we attempt to approximate it by component of odd polynomials. For $x$ within the domain of $[0.01, 1]$, we are able to construct an odd funtion $p1(x)$ to map $x$ into $[0.14, 1.86]$. Then construct odd functions $p2(p1(x))$ and $p3(p2(p1(x)))$, which finally maps $x$ from $[0.01, 1]$ to $1$. 
 
-![sign](../Image/Benchmark/Resnet20/3.png)
+![sign](../../Image/Benchmark/Resnet20/3.png)
 <style>
     img[alt="sign"]{
         width:800px;

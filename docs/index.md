@@ -2,14 +2,14 @@
 
 ## Overview
 
-* [Introduction of Poseidon](./Overview/Poseidon_Basics.md)
+* [Poseidon Introduction](./Overview/Poseidon_Basics.md)
 * [Homomorphic Computing Unit (HPU)](./Overview/HPU.md)
 
 
 
 ## Getting Started
 
-1. Installation
+1.  Poseidon Installation
 
      * [Software Library](./Getting_Started/Compile and Installation/Software(poseidon).md)
      * [Hardware Library](./Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md)
@@ -38,7 +38,7 @@
 
 1. [Introduction](./Benchmark/Introduction/Introduction.md)
 
-2. [Trident Install](./Benchmark/Install/Trident Installation.md)
+2. [Trident Installation](./Benchmark/Install/Trident Installation.md)
 
 3. Applications
      * [Framingham Heart Study](./Benchmark/Application/Framingham.md)

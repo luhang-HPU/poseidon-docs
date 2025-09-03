@@ -11,7 +11,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 
 
 
-![box](../Image/Benchmark/Private Information Retrival/image1.png)
+![box](../../Image/Benchmark/Private Information Retrival/image1.png)
 
 
 
@@ -23,7 +23,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 
 3. During the query process, the data provider is unable to determine the specific key of the query provider, and it is not clear which value was ultimately sent to the query provider.
 
-![im2](../Image/Benchmark/Private Information Retrival/image2.jpg)
+![im2](../../Image/Benchmark/Private Information Retrival/image2.jpg)
 <style>
     img[alt="im2"]{
         width:800px;
@@ -36,7 +36,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 ## Application Flowchart
 
 
-![flow](../Image/Benchmark/Private Information Retrival/flow.png)
+![flow](../../Image/Benchmark/Private Information Retrival/flow.png)
 
 
 
@@ -45,7 +45,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 
 ## Matrix Construction Method
 
-![m1](../Image/Benchmark/Private Information Retrival/m1.jpg)
+![m1](../../Image/Benchmark/Private Information Retrival/m1.jpg)
 <style>
     img[alt="m1"]{
         width:1000px;
@@ -54,7 +54,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 <br>
 <br>
 
-![m2](../Image/Benchmark/Private Information Retrival/m2.jpg)
+![m2](../../Image/Benchmark/Private Information Retrival/m2.jpg)
 <style>
     img[alt="m2"]{
         width:1000px;
@@ -63,7 +63,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 <br>
 <br>
 
-![m3](../Image/Benchmark/Private Information Retrival/m3.jpg)
+![m3](../../Image/Benchmark/Private Information Retrival/m3.jpg)
 <style>
     img[alt="m3"]{
         width:1000px;
@@ -75,7 +75,7 @@ Private Information Retrieval, also known as covert search, is a very practical 
 
 **Integration with PrimiHub to complete PIR**
 
-![demo](../Image/Benchmark/Private Information Retrival/demo.jpg)
+![demo](../../Image/Benchmark/Private Information Retrival/demo.jpg)
 <style>
     img[alt="demo"]{
         width:1000px;

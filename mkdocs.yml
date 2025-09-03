@@ -1,6 +1,6 @@
 site_name: 'Poseidon Documentation'
 repo_url: 'https://github.com/luhang-HPU/poseidon-docs'
-site_author: 'LuHang'
+site_author: 'LuHang, Cunjingxuan, Tangjiajian, Sunshuo'
 copyright: '2023, LuHang'
 docs_dir: 'docs'
 site_dir: 'site'
@@ -34,7 +34,7 @@ nav:
         - Poseidon Introduction: './Overview/Poseidon_Basics.md'
         - Homomorphic Computing Unit (HPU): './Overview/HPU.md'
     - GETTING STARTED:
-        - Installation:
+        - Poseidon Installation:
             - Software Library: './Getting_Started/Compile and Installation/Software(poseidon).md'
             - Hardware Library: './Getting_Started/Compile and Installation/Hardware(poseidon with HPU).md'
         - FHE APIs:
@@ -47,8 +47,8 @@ nav:
             - Examples: './Getting_Started/Programming/Examples.md'
     - Trident Benchmark:
         - Introduction: './Benchmark/Introduction/Introduction.md'
-        - Trident Install: './Benchmark/Install/Trident Installation.md'
-        - Application:
+        - Trident Installation: './Benchmark/Install/Trident Installation.md'
+        - Applications:
             - Framingham Heart Study: './Benchmark/Application/Framingham.md'
             - Private Information Retrieval (PIR): './Benchmark/Application/pir_bfv.md'
             - Private Set Intersection (PSI): './Benchmark/Application/PSI.md'

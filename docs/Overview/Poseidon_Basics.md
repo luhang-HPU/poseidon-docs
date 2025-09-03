@@ -1,5 +1,5 @@
 
-# Poseidon Basics
+# Poseidon Introduction
 
 Poseidon is a **homomorphic computation library** specifically designed for **Homomorphic Computing Unit (HPU)**, which supports three widely-used **fully homomorphic encryption (FHE)** algorithms: *BFV*, *BGV* and *CKKS*. 
 

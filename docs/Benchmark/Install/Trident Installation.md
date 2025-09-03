@@ -1,4 +1,4 @@
-# Trident compilation
+# Trident Installation
 
 Trident contains multiple applications: PIR, LR_TRAIN, KNN, PSI and Framingham Heart Study.
 
