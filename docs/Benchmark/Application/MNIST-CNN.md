@@ -48,18 +48,24 @@ After the convolution layer multiplies the input vector by the convolution kerne
 std::vector<double> rotation(std::vector<double> input, int shift);
 ```
 It is used for the verification of convolutional layers. To ensure that the verification method is consistent with the actual ciphertext method, the rotation function is used for rotation, followed by accumulation.
+* `input` (std::vector<double>): Input
+* `shift` (int): The rotation step
+
 <br>
 
 ```cpp
 std::vector<double> take_real(std::vector<complex<double>>& input);
 ```
 Before applying softmax, only the real parts of the vector obtained after decrypting and decoding the ciphertext are taken.
+* `input` (std::vector<double>): Input
 <br>
 
 ```cpp
 std::vector<double> matrixVectorMultiply(const std::vector<std::vector<double>>& matrix, const std::vector<double>& vec){}
 ```
 For verifying the results of the fully connected layer, directly multiply the plaintext input vector (on the right) by the fully connected layer matrix.
+* `matrix` (const std::vector<std::vector<double>>&): Fully connected layer matrix
+* `vec` (const std::vector<double>&): The plaintext input vector
 <br>
 
 **Functions for CNN**
@@ -67,21 +73,45 @@ For verifying the results of the fully connected layer, directly multiply the pl
 ```cpp
 std::vector<double> softmax(std::vector<double>& logits);
 ```
-Used to calculate the final softmax score.
+Calculating probability through normalization.
+* `logits` (std::vector<double>&): Input
 <br>
 
 ```cpp
 std::vector<double> preprocess_image(const std::vector<std::vector<int>>& image, size_t ker_size, size_t stride);
 ```
 Convert the input image (28 ∗ 28) matrix into a convolution-friendly vector, resulting in an im2col-form vector with a length of 3136.
-
+* `image` (const std::vector<std::vector<int>>&): Image data
+* `ker_size` (size_t): Size of the convolution kernel
+* `stride` (size_t): Stride
+<br>
 
 ```cpp
-std::vector<double> preprocess_image(const std::vector<std::vector<int>>& image, size_t ker_size, size_t stride);
+std::vector<float> load_binary_param(const std::string& filename);
 ```
 First, the model trained by PyTorch will be saved in the model.pt format. Then, the parameters (weights and biases) of each layer are saved separately into bin files, and this function can be used in C++ to read the parameters.
+* `filename` (const std::string& ): File name
+<br>
 
 ```cpp
-std::vector<double> replicate(const std::vector<double>& kernel, int windows = 64)
+std::vector<double> replicate(const std::vector<double>& kernel, int windows = 64);
 ```
 During convolution operations, since the input vector is elongated, the convolution kernel must be duplicated to the same length for multiplication.
+* `kernel` (const std::vector<double>&): Convolution kernel
+* `windows` (int): The length to be replicated
+<br>
+
+## Performance (TBD)
+
+The environment is as follows:
+
+* System: Ubuntu 20.04.6 LTS
+* CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
+* RAM: 128G
+* HPU: ZJ-1
+
+<br>
+
+|            | Software | HPU |
+| ---------- | -------- | --- |
+| Total Time |          |     |
