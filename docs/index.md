@@ -46,3 +46,4 @@
      * [Private Set Intersection (PSI)](./Benchmark/Application/PSI.md)
      * [Logistic Regression Train (LR Train)](./Benchmark/Application/LR Train.md)
      * [K-Nearest Neighbor (KNN)](./Benchmark/Application/knn.md)
+     * [MNIST-CNN](./Benchmark/Application/CNN-MNIST.md)
