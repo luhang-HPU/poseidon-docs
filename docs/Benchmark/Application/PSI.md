@@ -108,7 +108,7 @@ void RunLabeledTest(size_t sender_size, vector<pair<size_t, size_t>> client_tota
                     const PSIParams &params, size_t num_threads)
 ```
 * `sender_size` (size_t): the sender's size.
-* `client_total_and_int_sizes` (vector<pair<size_t, size_t>>): A set of tests. The first term of each pair is the client size, and the second term is the number of intersections.
+* `client_total_and_int_sizes` (vector<pair<size_t, size_t\>\>): A set of tests. The first term of each pair is the client size, and the second term is the number of intersections.
 * `params` (PSIParams): Basic parameter table
 * `num_threads` (size_t): Number of threads.
 
@@ -132,11 +132,13 @@ OPRFKey SenderDB::get_oprf_key() const;
 ```cpp
 void set_data(const std::vector<Item> &data)
 ```
-* `data` (std::vector<Item>): Data of the matched party.
+* `data` (std::vector<Item\>): Data of the matched party.
 
 **Usage**: Initialize the database.
 
 <br>
+
+
 
 **Member function (Class Sender)**
 
@@ -150,6 +152,8 @@ static void RunOPRF(const OPRFRequest &oprf_request, oprf::OPRFKey key, network:
 
 **Usage**: Execute oprf.
 
+
+
 ```cpp
 static void RunQuery(const Query &query, network::Channel &chl,
     std::function<void(network::Channel &, Response)> send_fun = BasicSend<Response::element_type>,
@@ -160,17 +164,19 @@ static void RunQuery(const Query &query, network::Channel &chl,
 
 **Usage**: Execute query.
 
-<br>
+
 
 **Member function (Class Receiver)**
 
 ```cpp
 static oprf::OPRFReceiver Receiver::CreateOPRFReceiver(const vector<Item> &items)
 ```
-* `items`(std::vector<Item>): The data being transformed.
+* `items`(std::vector<Item\>): The data being transformed.
 * Return (oprf::OPRFReceiver): This result is a create request.
 
 **Usage**: Perform oprf transformation on the queried data.
+
+
 
 ```cpp
 static Request Receiver::CreateOPRFRequest(const OPRFReceiver &oprf_receiver)
@@ -178,6 +184,8 @@ static Request Receiver::CreateOPRFRequest(const OPRFReceiver &oprf_receiver)
 * `oprf_receiver`(OPRFReceiver): created by function `CreateOPRFReceiver`
 
 **Usage**: create request.
+
+
 
 ```cpp
 static pair<vector<HashedItem>, vector<LabelKey>> Receiver::ExtractHashes(const OPRFResponse &oprf_response, const OPRFReceiver &oprf_receiver)
@@ -188,11 +196,12 @@ static pair<vector<HashedItem>, vector<LabelKey>> Receiver::ExtractHashes(const 
 
 **Usage**: Extracting the hash prepares the query for creation.
 
+
+
 ```cpp
 std::pair<Request, IndexTranslationTable> create_query(const std::vector<HashedItem> &items);
 ```
-* `items` (std::vector<HashedItem>): created by function `ExtractHashes`
-  
+* `items` (std::vector<HashedItem\>): created by function `ExtractHashes`
 
 **Usage**: create query.
 

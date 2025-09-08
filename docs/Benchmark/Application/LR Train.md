@@ -210,7 +210,7 @@ ct_weight := ct_weight - ct_gradient * plt_learning_rate
 void read_file(std::vector<std::complex<double>> &matrix, const std::string& file);
 ```
 
-* `matrix` (std::vector\<std::complex<double>> &) : output of classification result
+* `matrix` (std::vector<std::complex<double\>\> &) : output of classification result
 * `file` (const std::string &) : the file which stores the output result
 
 **Usage** : read the input of training data from the file
@@ -221,7 +221,7 @@ void read_file(std::vector<std::complex<double>> &matrix, const std::string& fil
 void read_file(std::vector<std::vector<std::complex<double>>> &matrix, const std::string& file);
 ```
 
-* `matrix` (std::vector\<std::vector\<std::complex\<double>>> &) : input of training data
+* `matrix` (std::vector<std::vector<std::complex<double\>\>\> &) : input of training data
 * `file` (const std::string&) : the file which stores the training data
 
 **Usage** : read the input of training data from the file
@@ -238,9 +238,9 @@ void preprocess(int block_size,
 
 * `block_size` (int) : the size of block matrix (partitioned matrix)
 * `block_num` (int) : the number of block matrix (partitioned matrix)
-* `x` (std::vector\<std::vector\<std::complex\<double>>> &) : the input matrix of training data
-* `x_transpose` (std::vector\<std::vector\<std::complex\<double>>> &) : the transposed matrix of training data matrix
-* `x_diag` (std::vector\<std::vector\<std::complex\<double>>> &) : the diagonal matrix of training data matrix which is used for computing the multiplication of the matrix with the vector
+* `x` (std::vector<std::vector<std::complex<double\>\>\> &) : the input matrix of training data
+* `x_transpose` (std::vector<std::vector<std::complex<double\>\>\> &) : the transposed matrix of training data matrix
+* `x_diag` (std::vector<std::vector<std::complex<double\>\>\> &) : the diagonal matrix of training data matrix which is used for computing the multiplication of the matrix with the vector
 
 **Usage** : Preprocessing the training data for further computation.
 
@@ -256,7 +256,7 @@ Ciphertext accumulate_top_n(const Ciphertext &ciph, int n, const CKKSEncoder &en
 * `n` (int) : the range of accumulation
 * `encoder` (const CKKSEncoder &) : the encoder
 * `enc` (const Encryptor &) : the encryptor
-* `ckks_eva` (std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `ckks_eva` (std::shared_ptr<EvaluatorCkksBase\>) : the evaluator for homomorphic computations
 * `rot_keys` (const GaloisKeys &) : the rotation key
 
 **Usage** : It accumulates the top n slots and stores the result into the first slot. It can be expressed by the equation $slot[0] = \sum\limits_{i=0}^{n-1}slot[i]$ . Pay attention that the origin slots in the ciphertext will be changed!
@@ -282,7 +282,7 @@ Ciphertext sigmoid_approx(const Ciphertext &ciph, const PolynomialVector &polys,
 * `ciph` (const Ciphertext &) : the input ciphertext
 * `polys` (const PolynomialVector &) : the Sigmoid function expressed by approximate polynomial
 * `encoder` (const CKKSEncoder &) : the encoder
-* `eva` (std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `eva` (std::shared_ptr<EvaluatorCkksBase\>) : the evaluator for homomorphic computations
 * `relin_keys` (const RelinKeys &) : the relinearization key
 
 **Usage** : It computes the sery expansion of the Sigmoid function $\frac{e^x}{1+e^x}$ in ciphertext.
@@ -304,7 +304,7 @@ int get_size(int min, int max);
 Ciphertext accumulate_block_matrix(const std::shared_ptr<EvaluatorCkksBase> eva, const GaloisKeys &rot_key, const Ciphertext &ciph, int block_size);
 ```
 
-* `eva` (const std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `eva` (const std::shared_ptr<EvaluatorCkksBase\>) : the evaluator for homomorphic computations
 * `rot_key` (const GaloisKeys &) : the rotation keys
 * `ciph` (const Ciphertext) : the ciphertext
 * `block_size` (int) : the size of block matrix (partitioned matrix)
@@ -317,7 +317,7 @@ Ciphertext accumulate_block_matrix(const std::shared_ptr<EvaluatorCkksBase> eva,
 Ciphertext accumulate_slot_matrix(const std::shared_ptr<EvaluatorCkksBase> eva, const GaloisKeys &rot_key, const Ciphertext &ciph, int block_size, int block_num);
 ```
 
-* `eva` (const std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `eva` (const std::shared_ptr<EvaluatorCkksBase\>) : the evaluator for homomorphic computations
 * `rot_key` (const GaloisKeys &) : the rotation keys
 * `ciph` (const Ciphertext &) : the ciphertext
 * `block_size` (int) : the size of block matrix (partitioned matrix)
@@ -331,7 +331,7 @@ Ciphertext accumulate_slot_matrix(const std::shared_ptr<EvaluatorCkksBase> eva, 
 std::vector<std::complex<double>> vector_to_block_message(const std::vector<std::complex<double>> &vec, int cnt, int block_size);
 ```
 
-* `vec` (const std::vector\<std::complex\<double>> &) : the input vector
+* `vec` (const std::vector<std::complex<double\>\> &) : the input vector
 * `cnt` (int) : the first `cnt` items of the `vec`
 * `block_size` (int) : the size of block matrix (partitioned matrix)
 

@@ -155,9 +155,9 @@ void sub_and_square(const std::shared_ptr<EvaluatorCkksBase> &ckks_eva,
                     const poseidon::RelinKeys &relin_keys, const double scale)
 ```
 
-* `ckks_eva` (const std::shared_ptr\<EvaluatorCkksBase\>) : The evaluator
-* `ciph_data` (std::vector\<Ciphertext\> &) : the ciphertexts from the data party
-* `ciph_query` (const std::vector\<Ciphertext\> &) : the ciphertexts from the query party
+* `ckks_eva` (const std::shared_ptr<EvaluatorCkksBase\>) : The evaluator
+* `ciph_data` (std::vector<Ciphertext\> &) : the ciphertexts from the data party
+* `ciph_query` (const std::vector<Ciphertext\> &) : the ciphertexts from the query party
 * `relin_keys` (const poseidon::RelinKeys &) : the relinearization key
 * `scale` (const double) : the scaling factor
 
@@ -178,7 +178,7 @@ Ciphertext sign_1(const Ciphertext &ciph,
 * `polys_1` (const PolynomialVector &) : the polynomial for the first round of fitting the sign function
 * `polys_2` (const PolynomialVector &) : the polynomial for the second round of fitting the sign function
 * `encoder` (const CKKSEncoder &) : the batch encoder for CKKS
-* `eva` (std::shared_ptr\<EvaluatorCkksBase\>) : the evaluator
+* `eva` (std::shared_ptr<EvaluatorCkksBase\>) : the evaluator
 * `relin_keys` (const poseidon::RelinKeys &) : the relinearization key
 
 **Usage** : `sign_1` approximately fits the sign function with two rounds of polynomial computation.
@@ -196,7 +196,7 @@ Ciphertext sign_2(const Ciphertext &ciph,
 * `ciph` (const Ciphertext &) : the ciphertext to perform the sign function
 * `polys` (const PolynomialVector &) : the polynomial for fitting the sign function
 * `encoder` (const CKKSEncoder &) : the batch encoder for CKKS
-* `eva` (std::shared_ptr\<EvaluatorCkksBase\>) : the evaluator
+* `eva` (std::shared_ptr<EvaluatorCkksBase\>) : the evaluator
 * `relin_keys` (const poseidon::RelinKeys &) : the relinearization key
 
 **Usage** : `sign_2` approximately fits the sign function with single round of polynomial computation.
@@ -214,7 +214,7 @@ Ciphertext accumulate_top_n_block(const Ciphertext &ciph, int n,
 * `n` (int) : the range of accumulation
 * `encoder` (const CKKSEncoder &) : the encoder
 * `enc` (const Encryptor &) : the encryptor
-* `ckks_eva` (std::shared_ptr\<EvaluatorCkksBase>) : the evaluator for homomorphic computations
+* `ckks_eva` (std::shared_ptr<EvaluatorCkksBase\>) : the evaluator for homomorphic computations
 * `rot_keys` (const GaloisKeys &) : the rotation key
 
 **Usage** : It accumulates the top n slots and stores the result into the first slot. It can be expressed by the equation $slot[0] = \sum\limits_{i=0}^{n-1}slot[i]$ . Pay attention that the origin slots in the ciphertext will be changed!
