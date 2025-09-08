@@ -3,10 +3,13 @@
 
 ## Introduction
 
+### MNIST
 The MNIST dataset is a training set for image recognition, containing handwritten digits from 0 to 9. It is derived from the National Institute of Standards and Technology (NIST). The training set consists of handwritten digits from 250 different people, with 50% coming from high school students and 50% from staff of the Census Bureau. The test set also contains handwritten digits in the same proportion, but it is ensured that the sets of authors for the test set and the training set are disjoint.
 
 The MNIST dataset contains a total of 70,000 images, with 60,000 in the training set and 10,000 in the test set. Each image is a 28×28 handwritten digit picture of numbers from 0 to 9. All images are in the form of a black background with white characters. The black background is represented by 0, and the white characters are represented by floating-point numbers between 0 and 1. The closer the value is to 1, the whiter the color.
+<br>
 
+### CNN
 Convolutional Neural Network (CNN) is a deep learning model proficient in processing grid-structured data such as images. Its core lies in extracting local features through convolution kernels in convolutional layers, reducing data volume and enhancing stability with pooling layers, and then outputting results via fully connected layers. By virtue of local perception and weight sharing, it significantly reduces the number of parameters and can automatically learn hierarchical features from edges to complex objects. It is widely applied in fields like image recognition and object detection, serving as an important foundation for computer vision.
 
 The data is processed to generate a model after being trained in PyTorch, and this application recognizes the data through the model in a confidential state.

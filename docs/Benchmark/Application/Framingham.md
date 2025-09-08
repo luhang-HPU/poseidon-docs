@@ -66,7 +66,9 @@ The evaluation of probability of suffering from cardiovascular diseases includes
 
 <br>
 
+## Source Code
 
+See [github](https://github.com/luhang-HPU/Trident/blob/main/heartstudy/heartstudy.cpp) for details.
 
 ## Performance (TBD)
 

@@ -42,22 +42,19 @@ The security parameters of CKKS scheme:
 
 ## Implementation
 
-**Idea** : The general process of the algorithm is as follows: subtract the corresponding dimensions of each vector → square the results → sum the results of each dimension (no square root is needed, i.e., obtaining the Euclidean distance). In the homomorphic environment, the sub_and_square operation is used to complete the difference and squaring calculations. Then, an approximate Sign function (polynomial fitting) is used to determine the magnitude relationship between two distances, resulting in a 0/1 comparison result. Through multiple rotation and accumulation operations, the "number of wins" for each point relative to other points is counted to form a relative ranking. The "relative position" is compared again with the Top-10 threshold to obtain the binarized ciphertext of the final top 10 results. After decryption, the positions with an index value of 1 are the 10 nearest data points.
+### Idea
+The general process of the algorithm is as follows: subtract the corresponding dimensions of each vector → square the results → sum the results of each dimension (no square root is needed, i.e., obtaining the Euclidean distance). In the homomorphic environment, the sub_and_square operation is used to complete the difference and squaring calculations. Then, an approximate Sign function (polynomial fitting) is used to determine the magnitude relationship between two distances, resulting in a 0/1 comparison result. Through multiple rotation and accumulation operations, the "number of wins" for each point relative to other points is counted to form a relative ranking. The "relative position" is compared again with the Top-10 threshold to obtain the binarized ciphertext of the final top 10 results. After decryption, the positions with an index value of 1 are the 10 nearest data points.
 
 
 
-**Process** :
+### Process
 
 ![process](../../Image/Benchmark/KNN/process.png)
-
-
-
 
 
 **Step(1) Initiation** 
 
 Setting the security parameters of CKKS.
-
 
 
 **Step(2) Preprocess**
