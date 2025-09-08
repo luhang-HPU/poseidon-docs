@@ -4,6 +4,8 @@
 
 ## Introduction
 
+### Logistic Regression
+
 Logistic Regression (LR) is actually a classification problem, although it names itself as "regression". It is mainly used for the binary classification, by utilizing the Logistic Function - Sigmoid. Obviously, its value locates within (0, 1). Usually, it takes 0.5 as the threshold, below which it classifies the observed set of inputs as class "0", and vice versa. Sigmoid function is presented as a pretty S-curve.
 
 
@@ -60,7 +62,7 @@ $$
 
 
 
-## Vectorization
+### Vectorization
 
 The parameter optimization process could be vectorized, which is of great importance in FHE. We could use the following process for the vectorization: 
 
