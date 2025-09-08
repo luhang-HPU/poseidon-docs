@@ -43,11 +43,11 @@ After the convolution layer multiplies the input vector by the convolution kerne
 
 **Variables**
 
-* `conv_kernels` (std::vector\<std::vector\<double>>): Contains 4 convolutional cores, each volume The core has 49 elements. Row-first storage.
-* `fc1_weights` (std::vector\<std::vector\<double>>): Full connection weight, size: 256 ∗ 64.
+* `conv_kernels` (std::vector\<std::vector\<double\>\>): Contains 4 convolutional cores, each volume The core has 49 elements. Row-first storage.
+* `fc1_weights` (std::vector\<std::vector\<double\>\>): Full connection weight, size: 256 ∗ 64.
 * `fc1_bias_vec` (std::vector\<double>): Full connection bias, size: 64;
-* `fc2_weights` (std::vector\<std::vector\<double>>): Full connection weight, size: 64 ∗ 10.
-* `fc2_bias_vec` (std::vector\<double>): Full connection bias, size: 10;
+* `fc2_weights` (std::vector\<std::vector\<double\>\>): Full connection weight, size: 64 ∗ 10.
+* `fc2_bias_vec` (std::vector\<double\>): Full connection bias, size: 10;
 
 **Validation function**
 
@@ -57,7 +57,7 @@ std::vector<double> take_real(std::vector<complex<double>>& input);
 
 Before applying softmax, only the real parts of the vector obtained after decrypting and decoding the ciphertext are taken.
 
-* `input` (std::vector\<double>): Input
+* `input` (std::vector\<double\>): Input
   <br>
 
 ```cpp
@@ -66,8 +66,8 @@ std::vector<double> matrixVectorMultiply(const std::vector<std::vector<double>>&
 
 For verifying the results of the fully connected layer, directly multiply the plaintext input vector (on the right) by the fully connected layer matrix.
 
-* `matrix` (const std::vector\<std::vector\<double>>&): Fully connected layer matrix
-* `vec` (const std::vector\<double>&): The plaintext input vector
+* `matrix` (const std::vector\<std::vector\<double\>\>&): Fully connected layer matrix
+* `vec` (const std::vector\<double\>&): The plaintext input vector
   <br>
 
 **Functions for CNN**
@@ -87,7 +87,7 @@ std::vector<double> preprocess_image(const std::vector<std::vector<int>>& image,
 
 Convert the input image (28 ∗ 28) matrix into a convolution-friendly vector, resulting in an im2col-form vector with a length of 3136.
 
-* `image` (const std::vector\<std::vector\<int>>&): Image data
+* `image` (const std::vector\<std::vector\<int\>\>&): Image data
 * `ker_size` (size_t): Size of the convolution kernel
 * `stride` (size_t): Stride
   <br>
@@ -107,7 +107,7 @@ std::vector<double> replicate(const std::vector<double>& kernel, int windows = 6
 
 During convolution operations, since the input vector is elongated, the convolution kernel must be duplicated to the same length for multiplication.
 
-* `kernel` (const std::vector\<double>&): Convolution kernel
+* `kernel` (const std::vector\<double\>&): Convolution kernel
 * `windows` (int): The length to be replicated
   <br>
 
