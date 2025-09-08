@@ -4,6 +4,8 @@
 
 ## Introduction
 
+### Framingham Heart Study
+
 **Framingham Heart Study (FHS)** is the longest duration cardiovascular epidemiological study funded by the National Institutes of Health in 1948, aimed at improving understanding of the epidemiology of coronary heart disease in the United States. FHS indicates that cardiovascular disease is closely related to various factors such as age, blood pressure, cholesterol, height, weight, etc. Therefore, these health-related parameters can be used to predict the probability of cardiovascular disease. The following picture illustrates the history of FHS.
 
 
@@ -13,7 +15,7 @@
 
 
 
-## Formula of Cardiovascular Diseases Prediction
+### Formula of Cardiovascular Diseases Prediction
 
 Based on the simplified FHS research dataset, we conclude that cardiovascular disease is closely related to the factor of age, systolic blood pressure (SBP), diastolic blood pressure (DBP), total cholesterol (CHL), height and weight.
 
@@ -32,7 +34,7 @@ $$Pr(CDS) = \frac {e ^ x} {1 + e ^ x}$$
 
 
 
-## Private Cardiovascular Diseases Prediction with FHE
+### Private Cardiovascular Diseases Prediction with FHE
 
 The traditional cardiovascular diseases prediction may reveal the information of the patience. 
 
@@ -63,6 +65,8 @@ The following flowchart illustrate the private prediction process:
 The evaluation of probability of suffering from cardiovascular diseases includes homomorphic addition, homomorphic addition of constant, homomorphic multiplication and rescaling,  where all these homomorphic evaluations are supported in Poseidon library.
 
 <br>
+
+
 
 ## Performance (TBD)
 

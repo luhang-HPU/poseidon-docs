@@ -1,6 +1,10 @@
 # Private Information Retrieval (PIR)
 
+
+
 ## Introduction
+
+### Private Information Retrieval
 
 Private Information Retrieval (PIR), as an extension of Information Retrieval, ensures users submit query requests to the data source without being perceived or leaked. PIR protocol is supposed to meet two demands at the same time:
 

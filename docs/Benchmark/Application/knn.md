@@ -4,6 +4,8 @@
 
 ## Introduction
 
+### KNN
+
 KNN follows the idea of "similar data points cluster together": A new test point’s label (classification) or value (regression) is determined by its *K closest training data points* (neighbors). For classification, it uses the **majority label** of the K neighbors; for regression, it takes the **average value** of the K neighbors.
 
 
@@ -14,7 +16,7 @@ This algorithm aims to accomplish a Top-K similarity query task using homomorphi
 
 
 
-## Process & Parameter Format
+### Target and Process
 
 The aim of our application is to find the nearest 10 vectors to the query vector from 100 vectors.
 
@@ -23,6 +25,8 @@ The aim of our application is to find the nearest 10 vectors to the query vector
 There are three parties in this application -- the query party, the data party and the computing party. The query party owns one query vector. The data party owns the 100 vector. Before the process, both the query party and the data owner party encrypt their data into ciphertexts and sends these ciphertexts to the computing party. After the computing party receives the ciphertexts, it performs homomorphic KNN algorithm and return the result to the query party, where the result contains the nearest 10 vectors to the query vector.
 
 
+
+### Parameter Format
 
 The security parameters of CKKS scheme:
 
