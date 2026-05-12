@@ -205,9 +205,8 @@ int serialize_reply(PirReply &reply, std::stringstream &stream);
 ### System Environment
 
 * System: Ubuntu 20.04.6 LTS
-* CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
-* RAM: 128G
-* HPU: Zhangjiang-1
+* CPU: Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz
+* RAM: 512G
 
 <br>
 
@@ -217,12 +216,4 @@ int serialize_reply(PirReply &reply, std::stringstream &stream);
 
 We compare the performance of PoseidonPIR with [SealPIR](https://github.com/microsoft/SealPIR?tab=readme-ov-file) that is based on the paper [PIR with compressed queries and amortized query processing](https://eprint.iacr.org/2017/1142.pdf) .
 
-
-
-|                     | SealPIR | PoseidonPIR |
-| ------------------- | ------- | ----------- |
-| Pre-processing (ms) | 1033    | 201         |
-| Query (ms)          | 7       | 7           |
-| Reply (ms)          | 1385    | 4257        |
-| Decode (ms)         | 23      | 38          |
-
+![perf](../../Image/Benchmark/PIR (BFV)/plot_3_pir_bfv.png)

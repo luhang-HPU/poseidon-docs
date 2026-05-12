@@ -75,13 +75,11 @@ See [github](https://github.com/luhang-HPU/Trident/blob/main/heartstudy/heartstu
 The environment is as follows:
 
 * System: Ubuntu 20.04.6 LTS
-* CPU: Intel(R) Xeon(R) Platinum 8160 CPU @ 2.10GHz
-* RAM: 128G
-* HPU: ZJ-1
+* CPU: Intel(R) Xeon(R) Platinum 8375C CPU @ 2.90GHz
+* RAM: 512G
 
 <br>
 
-|            | Software | HPU  |
-| ---------- | -------- | ---- |
-| Total Time |          |      |
 
+
+![image3](../../Image/Benchmark/Framingham Heart Study/plot_4_heart_study.png)
