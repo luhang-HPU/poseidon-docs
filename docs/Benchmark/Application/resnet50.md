@@ -1,7 +1,5 @@
 # ResNet-50 Encrypted Inference
 
-**Language:** English | [中文](resnet50.zh.md)
-
 ## Introduction
 
 ### ResNet-50
