@@ -1,6 +1,6 @@
 # Trident Installation
 
-Trident contains multiple applications: PIR, LR_TRAIN, KNN, PSI and Framingham Heart Study.
+Trident contains multiple applications: PIR, LR_TRAIN, KNN, PSI, Framingham Heart Study, MNIST-CNN, ResNet-18 and ResNet-50.
 
 
 ## Step 1: Install poseidon
@@ -19,6 +19,9 @@ Apps in Trident are independent and depend on Poseidon and cmake provides an opt
 | HEARTSTUDY     | bool | Build HEARTSTUDY  | ON      |
 | KNN            | bool | Build KNN         | ON      |
 | APSI           | bool | Build APSI        | ON      |
+| MNIST          | bool | Build MNIST-CNN   | ON      |
+| RESNET18       | bool | Build ResNet-18   | ON      |
+| RESNET50       | bool | Build ResNet-50   | ON      |
 
 ***Only APSI needs to install dependencies. If you don't compile apsi, you can skip this step and use ```cmake .. -DAPSI=OFF``` when generating makefile.***
 ```shell
