@@ -49,3 +49,5 @@
      * [Logistic Regression Train (LR Train)](./Benchmark/Application/LR Train.md)
      * [K-Nearest Neighbor (KNN)](./Benchmark/Application/knn.md)
      * [MNIST-CNN](./Benchmark/Application/MNIST-CNN.md)
+     * ResNet-18 Encrypted Inference: [English](./Benchmark/Application/resnet18.md) | [中文](./Benchmark/Application/resnet18.zh.md)
+     * ResNet-50 Encrypted Inference: [English](./Benchmark/Application/resnet50.md) | [中文](./Benchmark/Application/resnet50.zh.md)

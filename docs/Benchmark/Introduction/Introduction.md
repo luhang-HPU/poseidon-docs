@@ -2,7 +2,7 @@
 
 The **Trident** library is an application repository that matches the **Poseidon** library. 
 
-It provides a variety of powerful FHE-based applications including Private Information Retrieval (PIR), Private Set Intersection (PSI), Logistic Regression Train (LR Train) and K-Nearest Neighbor (KNN). 
+It provides a variety of powerful FHE-based applications, including Private Information Retrieval (PIR), Private Set Intersection (PSI), Logistic Regression Train (LR Train), K-Nearest Neighbor (KNN), MNIST-CNN, ResNet-18 and ResNet-50 encrypted inference.
 
 All the applications in **Trident** are supported by the HPU cards.
 
