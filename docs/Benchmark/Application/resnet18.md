@@ -1,7 +1,5 @@
 # ResNet-18 Encrypted Inference
 
-**Language:** English | [中文](resnet18.zh.md)
-
 ## Introduction
 
 ### ResNet-18
